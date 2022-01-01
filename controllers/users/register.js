@@ -16,11 +16,13 @@ const register = async (req, res) => {
         return
     }
 
-    // if (usersRepository.userExists(user)) {
-    //   res.status(403)
-    //   res.end('User already exists')
-    //   return
-    // }
+    const userExists = await usersRepository.userExists(user)
+
+    if (userExists) {
+      res.status(403)
+      res.end('User already exists')
+      return
+    }
 
     let encryptedPassword
 
