@@ -6,10 +6,8 @@ const app = express()
 
 const { BASE_URL, PORT } = process.env
 
+
 app.use(express.json())
-
-
-
 
 
 app.listen(PORT, () => {

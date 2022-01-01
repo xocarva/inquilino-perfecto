@@ -59,8 +59,8 @@
 
 ### Endpoints de los usuarios
 
--   `POST /users` - Crear un usuario pendiente de activar
-    -   **Cabecera auth:** Sí
+-   `POST /register` - Crear un usuario pendiente de activar
+    -   **Cabecera auth:** No
     -   **Body:**
         -   firstName
         -   lastName
