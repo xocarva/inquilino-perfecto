@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const crypto = require('crypto')
 
-const { usersRepository } = require('../../repository/index')
+const { usersRepository, mailingRepository } = require('../../repository/index')
 const userValidator = require('../../validators/userSchema')
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
 
@@ -16,13 +16,20 @@ const register = async (req, res) => {
         return
     }
 
-    const userExists = await usersRepository.userExists(user)
+    try {
+        const userExists = await usersRepository.userExists(user)
 
-    if (userExists) {
-      res.status(403)
-      res.end('User already exists')
-      return
+        if (userExists) {
+          res.status(403)
+          res.end('User already exists')
+          return
+        }
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
     }
+
 
     let encryptedPassword
 
@@ -34,8 +41,10 @@ const register = async (req, res) => {
         res.end(error.message)
         return
     }
+
     const activationCode = crypto.randomBytes(16).toString('hex')
-   try {
+
+    try {
         await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode })
    } catch (error) {
         res.status(400)
@@ -43,8 +52,16 @@ const register = async (req, res) => {
         return
    }
 
+   try {
+        await mailingRepository.sendValidationEmail({ sendTo: user.email }, activationCode)
+   } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
+
     res.status(200)
-    res.send(`Usuario guardado y pendiente de activar`)
+    res.send(`Unactive user saved & validation email sent`)
 
 }
 
