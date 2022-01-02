@@ -1,4 +1,4 @@
-const usersRepository  = require('./mysql-users-repository/index')
+const usersRepository  = require('./mysql-users-repository')
 
 module.exports = {
     usersRepository

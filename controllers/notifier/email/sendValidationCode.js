@@ -1,7 +1,7 @@
-const transporter = require('./transport')
+const transporter = require('./transporter')
 const { SENDER_EMAIL } = process.env
 
-const sendValidationEmail = async ({ sendTo, code }) => {
+const sendValidationCode = async ({ sendTo, code }) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: sendTo,
@@ -10,4 +10,5 @@ const sendValidationEmail = async ({ sendTo, code }) => {
     })
   }
 
-module.exports = sendValidationEmail
+module.exports = sendValidationCode
+

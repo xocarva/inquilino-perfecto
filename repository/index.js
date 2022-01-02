@@ -1,7 +1,6 @@
-const { usersRepository } = require('./mysql-repository/index')
-const mailingRepository = require('./nodemailer-repository/index')
+const { usersRepository } = require('./mysql-repository')
 
 module.exports = {
-    usersRepository,
-    mailingRepository
+    usersRepository
+
 }
