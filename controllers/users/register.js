@@ -1,8 +1,10 @@
 const bcrypt = require("bcrypt")
 const crypto = require('crypto')
 
-const { usersRepository, mailingRepository } = require('../../repository/index')
-const userValidator = require('../../validators/userSchema')
+const { usersRepository } = require('../../repository/index')
+const { emailNotifier } = require('../../notifier/index')
+const { userValidator } = require('../../validators/index')
+
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
 
 const register = async (req, res) => {
@@ -53,7 +55,7 @@ const register = async (req, res) => {
    }
 
    try {
-        await mailingRepository.sendValidationEmail({ sendTo: user.email }, activationCode)
+        await emailNotifier.sendValidationEmail({ sendTo: user.email }, activationCode)
    } catch (error) {
         res.status(400)
         res.end(error.message)

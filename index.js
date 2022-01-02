@@ -12,6 +12,12 @@ app.use(express.json())
 
 app.post('/register', usersController.register)
 
+//TO-DO
+// create account on sendgrid
+// avatar attachment on register
+// routes for controllers
+// user/validate endpoint
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${BASE_URL}:${PORT}`)
