@@ -1,23 +1,16 @@
 require('dotenv').config()
 const express = require('express')
-const app = express()
-const usersController = require('./controllers/users/index')
-
+const { usersRoutes } = require('./routes/index')
 const { BASE_URL, PORT } = process.env
 
+const app = express()
 
 app.use(express.json())
-
-//users
-
-app.post('/register', usersController.register)
-
+app.use('/users', usersRoutes)
 //TO-DO
 // create account on sendgrid
 // avatar attachment on register
-// routes for controllers
 // user/validate endpoint
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${BASE_URL}:${PORT}`)

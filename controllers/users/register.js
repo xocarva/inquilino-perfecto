@@ -63,7 +63,7 @@ const register = async (req, res) => {
     }
 
     res.status(200)
-    res.send(`Unactive user saved & validation email sent`)
+    res.send(`User registered and validation email sent`)
 
 }
 
