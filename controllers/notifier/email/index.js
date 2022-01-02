@@ -1,3 +1,3 @@
-const sendValidationCode = require('./sendValidationCode')
+const sendActivationCode = require('./sendActivationCode')
 
-module.exports = { sendValidationCode }
+module.exports = { sendActivationCode }

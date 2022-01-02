@@ -10,6 +10,16 @@ const SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
 //TO-DO
 // avatar attachment on register/saveUser
 
+const encryptPassword = async (user) => {
+    const encryptedPassword = await bcrypt.hash(user.password, SALT_ROUNDS)
+    return { ...user, password: encryptedPassword }
+}
+
+const addActivationCode = (user) => {
+    const activationCode = crypto.randomBytes(16).toString('hex')
+    return { ...user, activationCode }
+}
+
 const register = async (req, res) => {
     const user = req.body
 
@@ -22,9 +32,7 @@ const register = async (req, res) => {
     }
 
     try {
-        const userExists = await usersRepository.userExists(user)
-
-        if (userExists) {
+        if (await usersRepository.userExists(user)) {
           res.status(403)
           res.end('User already exists')
           return
@@ -35,38 +43,24 @@ const register = async (req, res) => {
         return
     }
 
-
-    let encryptedPassword
-
     try {
-        encryptedPassword = await bcrypt.hash(user.password, SALT_ROUNDS)
-
+        await usersRepository.saveUser(await (encryptPassword(addActivationCode(user))))
     } catch (error) {
-        res.status(500)
+        res.status(400)
         res.end(error.message)
         return
     }
 
-    const activationCode = crypto.randomBytes(16).toString('hex')
-
     try {
-        await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode })
-   } catch (error) {
-        res.status(400)
-        res.end(error.message)
-        return
-   }
-
-   try {
-        await notifier.sendValidationCode({ sendTo: user.email }, activationCode)
-   } catch (error) {
+        await notifier.sendActivationCode(user)
+    } catch (error) {
         res.status(400)
         res.end(error.message)
         return
     }
 
     res.status(200)
-    res.send(`User registered and validation email sent`)
+    res.send('User registered and validation email sent')
 
 }
 
