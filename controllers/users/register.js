@@ -15,7 +15,7 @@ const register = async (req, res) => {
         await userValidator.validateAsync(user)
     } catch (error) {
         res.status(400)
-        res.end(error.mesage)
+        res.end(error.message)
         return
     }
 
