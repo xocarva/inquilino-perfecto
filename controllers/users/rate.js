@@ -1,4 +1,4 @@
-const { bookingsRepository, ratingsRepository } = require('../../repository')
+const { bookingsRepository, ratingsRepository, usersRepository } = require('../../repository')
 const { ratingValidator } = require('./../../validators')
 
 const rate = async (req, res) => {
@@ -7,8 +7,14 @@ const rate = async (req, res) => {
     const ratingUserId = Number(req.body.ratingUserId)
 
     // TO-DO
-    // const ratingUserId = 'fromAuth'
+    // ratingUserId from authorization:
+    // const { authorization } = req.headers
+    // const decodedToken = jwt.verify(authorization, process.env.SECRET)
+    // const ratingUserId = await usersRepository.getUserId(decodedToken.email)
+
+    // TO-DO
     // separate errors with accurate error status
+
 
     try {
         await ratingValidator.validateAsync({ rating })
