@@ -8,7 +8,7 @@ const sendOfferBookingTenant = async (bookingData) => {
 
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
-        to: email,
+        to: emailTenant,
         subject: "Your booking ins pendding",
         html: `<p>Your booking of ${startDate} at ${endDate} is pendding. Wait for confirmation.</p>`
     })
