@@ -1,9 +1,9 @@
 const sendActivationCode = require('./sendActivationCode')
-const sendBookingOfferPenddingTennant = require('./sendBookingOfferPenddingTenant')
+const sendBookingOfferPenddingTenant = require('./sendBookingOfferPenddingTenant')
 const sendBookingOfferPenddingOwner = require('./sendBookingOfferPenddingOwner')
 
 module.exports = {
     sendActivationCode,
-    sendBookingOfferPenddingTennant,
+    sendBookingOfferPenddingTenant,
     sendBookingOfferPenddingOwner
 }

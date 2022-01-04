@@ -5,7 +5,6 @@ const getEmailTenant = async (tenantId) => {
         "SELECT email FROM users WHERE id = ?",
         [ tenantId ]
   )
-
   return email
 }
 

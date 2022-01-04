@@ -33,9 +33,9 @@ const createBooking = async (req, res) => {
         return
     }
     try {
-        
-        // const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
-        // if(isTenantAndOwner) throw new Error ('You can not rent your house')
+        const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
+        // console.log(isTenantAndOwner)
+        if(isTenantAndOwner) throw new Error ('You can not rent your house')
     } catch (error) {
         res.status(400)
         res.end(error.message)
@@ -52,30 +52,25 @@ const createBooking = async (req, res) => {
         res.status(400)
         res.end(error.message)
     }
-    try {
-        const emailTenant = await bookingsRepository.getEmailTenant(tenantId)
-<<<<<<< HEAD
-        await notifier.sendBookingOfferPenddingTennant({ emailTenant, startDate, endDate })
-=======
-        await notifier.sendOfferBookingTenant({ emailTenant, startDate, endDate})
->>>>>>> b35c53041dada4e763b379221b28a4049c831c65
-    } catch (error) {
-        res.status(400)
-        res.end(error.message)
-    }
-    try {
-        const emailOwner = await bookingsRepository.getEmailOwner(houseId)
-<<<<<<< HEAD
-        await notifier.sendBookingOfferPenddingTennant({ emailOwner, startDate, endDate, tenantId })
-=======
->>>>>>> b35c53041dada4e763b379221b28a4049c831c65
-    } catch (error) {
-        res.status(400)
-        res.end(error.message)
-    }
+    // try {
+    //     const emailTenant = await bookingsRepository.getEmailTenant(tenantId)
+    //     console.log(emailTenant)
+    //     await notifier.sendBookingOfferPenddingTenant({ emailTenant, startDate, endDate })
+    // } catch (error) {
+    //     res.status(400)
+    //     res.end(error.message)
+    // }
+    // try {
+    //     const emailOwner = await bookingsRepository.getEmailOwner(houseId)
+    //     console.log(emailOwner)
+    //     await notifier.sendBookingOfferPenddingOwner({ emailOwner, startDate, endDate, tenantId })
+    // } catch (error) {
+    //     res.status(400)
+    //     res.end(error.message)
+    // }
     
 
     res.status(200)
-    res.send(`Date Booking: ${startDate} at ${endDate}`)
+    res.send('Send mail Ok')
 }
 module.exports = createBooking
