@@ -54,14 +54,21 @@ const createBooking = async (req, res) => {
     }
     try {
         const emailTenant = await bookingsRepository.getEmailTenant(tenantId)
+<<<<<<< HEAD
         await notifier.sendBookingOfferPenddingTennant({ emailTenant, startDate, endDate })
+=======
+        await notifier.sendOfferBookingTenant({ emailTenant, startDate, endDate})
+>>>>>>> b35c53041dada4e763b379221b28a4049c831c65
     } catch (error) {
         res.status(400)
         res.end(error.message)
     }
     try {
         const emailOwner = await bookingsRepository.getEmailOwner(houseId)
+<<<<<<< HEAD
         await notifier.sendBookingOfferPenddingTennant({ emailOwner, startDate, endDate, tenantId })
+=======
+>>>>>>> b35c53041dada4e763b379221b28a4049c831c65
     } catch (error) {
         res.status(400)
         res.end(error.message)

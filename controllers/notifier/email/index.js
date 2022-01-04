@@ -4,7 +4,6 @@ const sendBookingOfferPenddingOwner = require('./sendBookingOfferPenddingOwner')
 
 module.exports = {
     sendActivationCode,
-    sendActivationCode,
     sendBookingOfferPenddingTennant,
     sendBookingOfferPenddingOwner
 }
