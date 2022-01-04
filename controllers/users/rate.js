@@ -3,18 +3,11 @@ const { ratingValidator } = require('./../../validators')
 
 const rate = async (req, res) => {
     const { bookingId } = req.params
+    const ratingUserId = req.user.id
     const rating = Number(req.body.rating)
-    const ratingUserId = Number(req.body.ratingUserId)
-
-    // TO-DO
-    // ratingUserId from authorization:
-    // const { authorization } = req.headers
-    // const decodedToken = jwt.verify(authorization, process.env.SECRET)
-    // const ratingUserId = await usersRepository.getUserId(decodedToken.email)
 
     // TO-DO
     // separate errors with accurate error status
-
 
     try {
         await ratingValidator.validateAsync({ rating })
