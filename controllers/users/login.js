@@ -1,18 +1,18 @@
 const encryptor = require('../../shared/encryptor')
 const { generateToken } = require('../../shared/token')
-// const credentialsSchema = require('../../validationSchemas/credentialsSchema')
+const { credentialsValidator } = require('../../validators')
 const { usersRepository } = require('../../repository/')
 
 const login = async (req, res) => {
   const credentials = req.body
 
-//   try {
-//     await credentialsSchema.validateAsync(credentials)
-//   } catch (error) {
-//     res.status(400)
-//     res.send(error.message)
-//     return
-//   }
+  try {
+    await credentialsValidator.validateAsync(credentials)
+  } catch (error) {
+    res.status(400)
+    res.send(error.message)
+    return
+  }
 
   let user
   try {
