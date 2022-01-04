@@ -1,24 +1,12 @@
-const bcrypt = require("bcrypt")
 const crypto = require('crypto')
-
+const bcrypt = require("bcrypt")
+const encryptor = require('../../shared/encryptor')
 const { userValidator } = require('../../validators')
 const { usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
-const SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
-
 //TO-DO
 // avatar attachment on register/saveUser
-
-const encryptPassword = async (user) => {
-    const encryptedPassword = await bcrypt.hash(user.password, SALT_ROUNDS)
-    return { ...user, password: encryptedPassword }
-}
-
-const addActivationCode = (user) => {
-    const activationCode = crypto.randomBytes(16).toString('hex')
-    return { ...user, activationCode }
-}
 
 const register = async (req, res) => {
     const user = req.body
@@ -31,12 +19,35 @@ const register = async (req, res) => {
         return
     }
 
+    let userExists
     try {
-        if (await usersRepository.userExists(user)) {
-          res.status(403)
-          res.end('User already exists')
-          return
-        }
+        userExists = await usersRepository.userExists(user)
+
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    if (userExists) {
+        res.status(403)
+        res.end('User already exists')
+        return
+      }
+
+    let encryptedPassword
+    try {
+        encryptedPassword = await encryptor.encrypt(user.password)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+    return
+  }
+
+    const activationCode = crypto.randomBytes(40).toString('hex')
+
+    try {
+        await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode })
     } catch (error) {
         res.status(400)
         res.end(error.message)
@@ -44,19 +55,9 @@ const register = async (req, res) => {
     }
 
     try {
-        await usersRepository.saveUser(await (encryptPassword(addActivationCode(user))))
+        await notifier.sendActivationCode({ ...user, activationCode })
     } catch (error) {
-        res.status(400)
         res.end(error.message)
-        return
-    }
-
-    try {
-        await notifier.sendActivationCode(user)
-    } catch (error) {
-        res.status(400)
-        res.end(error.message)
-        return
     }
 
     res.status(200)
