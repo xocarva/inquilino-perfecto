@@ -1,5 +1,9 @@
 const userValidator = require('./userSchema')
+const ratingValidator = require('./ratingSchema')
+const credentialsValidator = require('./credentialsSchema')
 
 module.exports = {
-    userValidator
+    userValidator,
+    ratingValidator,
+    credentialsValidator
 }

@@ -3,7 +3,6 @@ CREATE DATABASE IF NOT EXISTS inquilino_perfecto;
 
 USE inquilino_perfecto;
 
-
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
@@ -31,6 +30,28 @@ CREATE TABLE houses
 	FOREIGN KEY (id_owner) REFERENCES users (id) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS bookings;
+CREATE TABLE bookings
+(
+	id INT (13) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	start_date TIMESTAMP NOT NULL,
+	end_date TIMESTAMP NOT NULL,
+	accepted BOOLEAN,
+	id_house INT (13) UNSIGNED NOT NULL,
+	id_tenant INT (13) UNSIGNED NOT NULL,
+	FOREIGN KEY (id_house) REFERENCES houses (id),
+	FOREIGN KEY (id_tenant) REFERENCES users (id)
+);
+
+DROP TABLE IF EXISTS house_pictures;
+CREATE TABLE house_pictures
+(
+	id INT (13) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	url VARCHAR (255) NOT NULL,
+	id_house INT (13) UNSIGNED NOT NULL,
+	FOREIGN KEY (id_house) REFERENCES houses (id) ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS ratings;
 CREATE TABLE ratings
 (
@@ -44,27 +65,8 @@ CREATE TABLE ratings
 	FOREIGN KEY (id_booking) REFERENCES bookings (id)
 );
 
-DROP TABLE IF EXISTS house_pictures;
-CREATE TABLE house_pictures
-(
-	id INT (13) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	url VARCHAR (255) NOT NULL,
-	id_house INT (13) UNSIGNED NOT NULL,
-	FOREIGN KEY (id_house) REFERENCES houses (id) ON DELETE CASCADE
-);
 
-DROP TABLE IF EXISTS bookings;
-CREATE TABLE bookings
-(
-	id INT (13) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	start_date TIMESTAMP NOT NULL,
-	end_date TIMESTAMP NOT NULL,
-	accepted BOOLEAN,
-	id_house INT (13) UNSIGNED NOT NULL,
-	id_tenant INT (13) UNSIGNED NOT NULL,
-	FOREIGN KEY (id_house) REFERENCES houses (id),
-	FOREIGN KEY (id_tenant) REFERENCES users (id)
-);
+
 
 
 
