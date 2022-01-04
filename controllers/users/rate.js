@@ -1,19 +1,21 @@
-const { bookingsRepository, usersRepository, ratingsRepository } = require('../../repository')
+const { bookingsRepository, ratingsRepository } = require('../../repository')
+const { ratingValidator } = require('./../../validators')
 
 const rate = async (req, res) => {
     const { bookingId } = req.params
-    const { rating } = req.body
+    const rating = Number(req.body.rating)
     const ratingUserId = Number(req.body.ratingUserId)
+
+    // TO-DO
     // const ratingUserId = 'fromAuth'
+    // separate errors with accurate error status
 
     try {
+        await ratingValidator.validateAsync({ rating })
+
         const bookingRatingData = await bookingsRepository.getBookingRatingData(bookingId)
         const { ratedUserRole, ratedUserId } = await ratingsRepository.getRatedUserData({ ...bookingRatingData, ratingUserId })
         const ratingData = { ...bookingRatingData, bookingId, ratedUserRole, ratedUserId, rating }
-
-        // TO-DO
-        // Create validation schema for ratings
-        // Accurate error status
 
         if (!ratingData.accepted) throw new Error('Can not rate a pending or canceled booking')
         if (ratingData.bookingEndDate >= new Date()) throw new Error('Can not rate an open booking')
