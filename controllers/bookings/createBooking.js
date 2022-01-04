@@ -18,7 +18,9 @@ const createBooking = async (req, res) => {
         return
     }
 
-
+    // TO-DO
+    // validaciones (al final si quieres)  Validar que no intentas alquilar tu propia casa ----- me da error aunque funciona
+    // enviar email
 
 
     try {
