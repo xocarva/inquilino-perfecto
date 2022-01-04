@@ -20,7 +20,8 @@ const createBooking = async (req, res) => {
 
     // TO-DO
     // validaciones (al final si quieres)  Validar que no intentas alquilar tu propia casa ----- me da error aunque funciona
-    // enviar email
+    // enviar email Me da error
+
 
 
     try {
@@ -32,14 +33,13 @@ const createBooking = async (req, res) => {
         res.end(error.message)
         return
     }
-    try {
-        const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
-        // console.log(isTenantAndOwner)
-        if(isTenantAndOwner) throw new Error ('You can not rent your house')
-    } catch (error) {
-        res.status(400)
-        res.end(error.message)
-    }
+    // try {
+    //     const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
+    //     if(isTenantAndOwner) throw new Error ('You can not rent your house')
+    // } catch (error) {
+    //     res.status(400)
+    //     res.end(error.message)
+    // }
     try {
         await bookingValidator.validateAsync({  houseId, tenantId, startDate, endDate })
     } catch (error) {

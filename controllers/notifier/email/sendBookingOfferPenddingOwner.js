@@ -1,5 +1,3 @@
-
-const { getEmailOwner } = require('../../../repository/mysql-repository/mysql-bookings-repository')
 const transporter = require('./transporter')
 const { SENDER_EMAIL } = process.env
 

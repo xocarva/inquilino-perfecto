@@ -9,7 +9,7 @@ const checkTenantIdAndOwnerId = async (bookingData) => {
     if(ownerId[0].id_owner == tenantId) {
         return true
     }
-    return ownerId
+    return false
 }
 
 module.exports = checkTenantIdAndOwnerId
