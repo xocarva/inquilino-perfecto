@@ -4,6 +4,7 @@ const getUsersByActivationCode = require('./getUsersByActivationCode')
 const activateUser = require('./activateUser')
 const rateBooking = require('./rateBooking')
 const getUserByEmail = require('./getUserByEmail')
+const getUserById = require('./getUserById')
 
 
 module.exports = {
@@ -12,5 +13,6 @@ module.exports = {
     getUsersByActivationCode,
     activateUser,
     rateBooking,
-    getUserByEmail
+    getUserByEmail,
+    getUserById
 }
