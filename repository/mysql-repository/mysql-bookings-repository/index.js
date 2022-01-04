@@ -1,5 +1,5 @@
-const getRatingData = require('./getRatingData')
+const getBookingRatingData = require('./getBookingRatingData')
 
 module.exports = {
-    getRatingData
+    getBookingRatingData
 }
