@@ -47,7 +47,7 @@ const userValidator = Joi.object().keys({
         .string()
         .required()
         .max(100)
-        .min(10)
+        .min(1)
         .messages({
             'string.empty': '[picture] is required',
             'any.required': '[picture] is required',

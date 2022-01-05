@@ -1,7 +1,8 @@
-const { usersRepository, bookingsRepository, ratingsRepository } = require('./mysql-repository')
+const { usersRepository, bookingsRepository, ratingsRepository, housesRepository } = require('./mysql-repository')
 
 module.exports = {
     usersRepository,
     bookingsRepository,
-    ratingsRepository
+    ratingsRepository,
+    housesRepository
 }
