@@ -4,7 +4,7 @@ const notifier = require('../../controllers/notifier')
 
 
 //   TO DO
-//  Cambiar   ---->   El tenantId no viene el body, hay que cogerlo del token de user log
+//  Cambiar   ---->   El tenantId no viene el body, hay que cogerlo del token de user log, ¿Cambiar funciones de getEmailTenant?
 
 
 
