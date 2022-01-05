@@ -5,6 +5,8 @@ const isHouseAvailable = require('./isHouseAvailable')
 const getEmailTenant = require('./getEmailTenant')
 const getEmailOwner = require('./getEmailOwner')
 const checkTenantIdAndOwnerId = require('./checkTenantIdAndOwnerId')
+const getBookingById = require('./getBookingById')
+const changeStatusConfirmBooking = require('./changeStatusConfirmBooking')
 
 module.exports = {
     getBookingRatingData,
@@ -13,5 +15,7 @@ module.exports = {
     isHouseAvailable,
     getEmailTenant,
     getEmailOwner,
-    checkTenantIdAndOwnerId
+    checkTenantIdAndOwnerId,
+    getBookingById,
+    changeStatusConfirmBooking
 }
