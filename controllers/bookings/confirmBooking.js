@@ -1,15 +1,35 @@
 const { bookingsRepository } = require('../../repository')
-const { bookingValidator } = require('../../validators')
 const notifier = require('../../controllers/notifier')
 
 
 //   TO DO
-//  Cambiar   ---->   El tenantId no viene el body, hay que cogerlo del token de user log, ¿Cambiar funciones de getEmailTenant?
+// Existe reserva?
+// Esta reserva ya está confirmada?
+
+
 
 
 
 
 const confirmBooking = async (req, res) => {
-    console.log('funciona')
+    const bookingId = Number(req.params.bookingId)
+
+    if (!bookingId) {
+        res.status(400)
+        res.end('this booking does not exist')
+        return
+    }
+    try {
+        const bookingExist = await bookingsRepository.getBookingById(bookingId)
+    } catch (error) {
+        res.status(400)
+        res.end('this booking does not exist')
+        return
+    }
+
+
+
+    res.status(200)
+    res.send('Email confirm')
 }
 module.exports = confirmBooking
