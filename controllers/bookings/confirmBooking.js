@@ -16,22 +16,30 @@ const notifier = require('../../controllers/notifier')
 const confirmBooking = async (req, res) => {
     const bookingId = Number(req.params.bookingId)
     const ownerId = req.body.ownerId
-    console.log(ownerId)
 
     if (!bookingId) {
         res.status(400)
         res.end('this booking does not exist')
         return
     }
+    let bookingExist
     try {
-        const bookingExist = await bookingsRepository.getBookingById(bookingId)
+        bookingExist = await bookingsRepository.getBookingById(bookingId)
         if(!bookingExist) throw new Error ('this booking does not exist or it is confirmed')
     } catch (error) {
         res.status(400)
         res.end(error.message)
         return
     }
-    
+    const { id_house } = bookingExist
+    try {
+        const areYouOwner = await bookingsRepository.checkAreYouOwner({ ownerId, id_house })
+        if(areYouOwner != ownerId) throw new Error ('You are not the owner of this property')
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
 
 
 
