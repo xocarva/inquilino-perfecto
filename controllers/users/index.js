@@ -3,6 +3,7 @@ const validate = require('./validate')
 const rate = require('./rate')
 const login = require('./login')
 const profile = require('./profile')
+const getPendingReceivedBookings = require('./getPendingReceivedBookings')
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     validate,
     rate,
     login,
-    profile
+    profile,
+    getPendingReceivedBookings
 }
