@@ -3,13 +3,9 @@ const notifier = require('../../controllers/notifier')
 
 
 //   TO DO
-// Existe reserva? OK
-// Esta reserva ya está confirmada? OK
+
 // Confirmar que eres el casero por el token
-// Confirmar que eres el casero OK
-// Cambia estado accepted a true
-//  manda mail tenant
-//  manda mail owner
+
 
 
 
@@ -34,7 +30,7 @@ const confirmBooking = async (req, res) => {
         res.end(error.message)
         return
     }
-    const { id_house } = bookingExist
+    const { id_house, id_tenant, start_date, end_date} = bookingExist
     try {
         const areYouOwner = await bookingsRepository.checkAreYouOwner({ id_house })
         if(areYouOwner != ownerId) throw new Error ('You are not the owner of this property')
@@ -50,7 +46,22 @@ const confirmBooking = async (req, res) => {
         res.end(error.message)
         return
     }
-
+    try {
+        const emailTenant = await bookingsRepository.getEmailTenant(id_tenant)
+        await notifier.sendConfirmBookingTenant({ emailTenant, id_house, start_date, end_date })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
+    try {
+        const emailOwner = await bookingsRepository.getEmailOwner(id_house)
+        await notifier.sendConfirmBookingOwner({ emailOwner, id_house, start_date, end_date })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
 
 
     res.status(200)
