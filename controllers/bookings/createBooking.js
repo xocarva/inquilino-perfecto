@@ -2,6 +2,13 @@ const { bookingsRepository } = require('../../repository')
 const { bookingValidator } = require('../../validators')
 const notifier = require('../../controllers/notifier')
 
+
+//   TO DO
+//  Cambiar   ---->   El tenantId no viene el body, hay que cogerlo del token de user log
+
+
+
+
 const createBooking = async (req, res) => {
     const { tenantId, startDate, endDate } = req.body
     const { houseId } =  req.params
