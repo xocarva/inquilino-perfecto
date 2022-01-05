@@ -10,3 +10,4 @@ const getBookingsByHouseId = async (houseId) => {
 }
 
 module.exports = getBookingsByHouseId
+

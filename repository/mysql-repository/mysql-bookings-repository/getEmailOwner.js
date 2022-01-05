@@ -5,10 +5,11 @@ const getEmailOwner = async (houseId) => {
         "SELECT id_owner FROM houses WHERE id = ?",
         [ houseId ]
   )
-  const [email] = await connection.query(
+  const [[result]] = await connection.query(
     "SELECT email FROM users WHERE id = ?",
     [ userId[0].id_owner ]
   )
+  email = result.email
   return email
 }
 

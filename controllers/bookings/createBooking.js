@@ -18,12 +18,6 @@ const createBooking = async (req, res) => {
         return
     }
 
-    // TO-DO
-    // validaciones (al final si quieres)  Validar que no intentas alquilar tu propia casa ----- me da error aunque funciona
-    // enviar email Me da error
-
-
-
     try {
         const bookings = await bookingsRepository.getBookingsByHouseId(houseId)
         const available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
@@ -33,44 +27,45 @@ const createBooking = async (req, res) => {
         res.end(error.message)
         return
     }
-    // try {
-    //     const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
-    //     if(isTenantAndOwner) throw new Error ('You can not rent your house')
-    // } catch (error) {
-    //     res.status(400)
-    //     res.end(error.message)
-    // }
+    try {
+        const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
+        if(isTenantAndOwner) throw new Error ('You can not rent your own house')
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
     try {
         await bookingValidator.validateAsync({  houseId, tenantId, startDate, endDate })
     } catch (error) {
         res.status(400)
         res.end(error.message)
+        return
     }
     try {
         await bookingsRepository.saveBooking({  houseId, tenantId, startDate, endDate })
     } catch (error) {
         res.status(400)
         res.end(error.message)
+        return
     }
-    // try {
-    //     const emailTenant = await bookingsRepository.getEmailTenant(tenantId)
-    //     console.log(emailTenant)
-    //     await notifier.sendBookingOfferPenddingTenant({ emailTenant, startDate, endDate })
-    // } catch (error) {
-    //     res.status(400)
-    //     res.end(error.message)
-    // }
-    // try {
-    //     const emailOwner = await bookingsRepository.getEmailOwner(houseId)
-    //     console.log(emailOwner)
-    //     await notifier.sendBookingOfferPenddingOwner({ emailOwner, startDate, endDate, tenantId })
-    // } catch (error) {
-    //     res.status(400)
-    //     res.end(error.message)
-    // }
-    
-
+    try {
+        const emailTenant = await bookingsRepository.getEmailTenant(tenantId)
+        await notifier.sendBookingOfferPenddingTenant({ emailTenant, startDate, endDate })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
+    try {
+        const emailOwner = await bookingsRepository.getEmailOwner(houseId)
+        await notifier.sendBookingOfferPenddingOwner({ emailOwner, startDate, endDate, tenantId })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
     res.status(200)
-    res.send('Send mail Ok')
+    res.send('Email sent successfully')
 }
 module.exports = createBooking

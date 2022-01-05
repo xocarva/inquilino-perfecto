@@ -1,10 +1,11 @@
 const connection = require('../mysqlConnection')
 
 const getEmailTenant = async (tenantId) => {
-  const [email] = await connection.query(
+  const [[result]] = await connection.query(
         "SELECT email FROM users WHERE id = ?",
         [ tenantId ]
   )
+  email = result.email
   return email
 }
 
