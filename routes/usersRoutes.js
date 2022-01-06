@@ -15,7 +15,8 @@ router.get('/validate/:activationCode', validate)
 router.post('/register', register)
 router.post('/login', login)
 router.post('/rate/:bookingId', isAuthorized, rate)
-router.get('./pending-received-bookings', isAuthorized, getPendingReceivedBookings)
+router.get('/pending-received-bookings', isAuthorized, getPendingReceivedBookings)
+
 
 
 module.exports = router
