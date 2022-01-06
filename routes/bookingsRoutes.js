@@ -4,13 +4,13 @@ const { isAuthorized, isActive } = require('../middlewares')
 const {
     createBooking,
     getAcceptedReceivedBookings,
-    getPendingReceivedBookings
+    getPendingReceivedBookings,
+    getPendingMadeBookings
 } = require('../controllers/bookings')
-
 
 router.post('/:houseId', isAuthorized, isActive, createBooking)
 router.get('/received/pending', isAuthorized, getPendingReceivedBookings)
 router.get('/received/accepted', isAuthorized, getAcceptedReceivedBookings)
-
+router.get('/made/pending', isAuthorized, getPendingMadeBookings)
 
 module.exports = router
