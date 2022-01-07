@@ -1,4 +1,4 @@
-const { bookingsRepository, usersRepository } = require('../../repository')
+const { bookingsRepository, usersRepository, housesRepository } = require('../../repository')
 const { bookingValidator } = require('../../validators')
 const notifier = require('../../controllers/notifier')
 
@@ -20,9 +20,8 @@ const createBooking = async (req, res) => {
     }
 
     try {
-        const test = []
         const bookings = await bookingsRepository.getBookingsByHouseId(houseId)
-        const available = await bookingsRepository.isHouseAvailable(test)
+        const available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
         if(!available) throw new Error ('House not available for booking in this dates')
     } catch (error) {
         res.status(400)
@@ -54,7 +53,7 @@ const createBooking = async (req, res) => {
     try {
         const user = await usersRepository.getUserById(tenantId)
         const email = user.email
-        await notifier.sendBookingOfferPenddingTenant({ email, startDate, endDate })
+        // await notifier.sendBookingOfferPendingTenant({ email, startDate, endDate })
     } catch (error) {
         res.status(400)
         res.end(error.message)
@@ -62,7 +61,9 @@ const createBooking = async (req, res) => {
     }
     try {
         const emailOwner = await bookingsRepository.getEmailOwner(houseId)
-        await notifier.sendBookingOfferPenddingOwner({ emailOwner, startDate, endDate, tenantId })
+
+        console.log(houseId)
+        // await notifier.sendBookingOfferPendingOwner({ emailOwner, startDate, endDate, tenantId })
     } catch (error) {
         res.status(400)
         res.end(error.message)
