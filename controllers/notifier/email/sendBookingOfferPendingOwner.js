@@ -1,7 +1,7 @@
 const transporter = require('./transporter')
 const { SENDER_EMAIL } = process.env
 
-const sendBookingOfferPenddingOwner = async (bookingData) => {
+const sendBookingOfferPendingOwner = async (bookingData) => {
   const { emailOwner, startDate, endDate } = bookingData
 
 
@@ -13,4 +13,4 @@ const sendBookingOfferPenddingOwner = async (bookingData) => {
     })
 }
 
-module.exports = sendBookingOfferPenddingOwner
+module.exports = sendBookingOfferPendingOwner
