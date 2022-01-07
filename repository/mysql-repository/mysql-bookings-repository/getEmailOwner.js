@@ -7,7 +7,7 @@ const getEmailOwner = async (houseId) => {
   )
   const [[result]] = await connection.query(
     "SELECT email FROM users WHERE id = ?",
-    [ userId[0].id_owner ]
+    [ userId[0].idOwner ]
   )
   email = result.email
   return email
