@@ -2,9 +2,7 @@ const { bookingsRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
 
-//   TO DO
 
-// Confirmar que eres el casero por el token
 
 
 
@@ -14,7 +12,7 @@ const notifier = require('../../controllers/notifier')
 
 const confirmBooking = async (req, res) => {
     const bookingId = Number(req.params.bookingId)
-    const ownerId = req.body.ownerId
+    const ownerId = req.body.id
 
     if (!bookingId) {
         res.status(400)
@@ -31,14 +29,6 @@ const confirmBooking = async (req, res) => {
         return
     }
     const { id_house, id_tenant, start_date, end_date} = bookingExist
-    try {
-        const areYouOwner = await bookingsRepository.checkAreYouOwner({ id_house })
-        if(areYouOwner != ownerId) throw new Error ('You are not the owner of this property')
-    } catch (error) {
-        res.status(400)
-        res.end(error.message)
-        return
-    }
     try {
         await bookingsRepository.changeStatusConfirmBooking(bookingId)
     } catch (error) {

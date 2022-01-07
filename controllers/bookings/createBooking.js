@@ -10,8 +10,9 @@ const notifier = require('../../controllers/notifier')
 
 
 const createBooking = async (req, res) => {
-    const { tenantId, startDate, endDate } = req.body
+    const { startDate, endDate } = req.body
     const { houseId } =  req.params
+    const tenantId = req.user.id
 
     const actualDate = new Date()
     if (startDate >= endDate) {

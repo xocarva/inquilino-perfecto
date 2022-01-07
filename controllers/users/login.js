@@ -37,6 +37,8 @@ const login = async (req, res) => {
 
   const token = generateToken({ payload: { user: { id: user.id } } })
 
+  console.log(token)
+
   res.status(200)
   res.send({ token })
 }
