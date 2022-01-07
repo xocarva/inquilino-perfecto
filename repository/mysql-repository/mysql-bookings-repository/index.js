@@ -6,6 +6,10 @@ const getEmailTenant = require('./getEmailTenant')
 const getEmailOwner = require('./getEmailOwner')
 const checkTenantIdAndOwnerId = require('./checkTenantIdAndOwnerId')
 const getPendingReceivedBookings = require('./getPendingReceivedBookings')
+const getAcceptedReceivedBookings = require('./getAcceptedReceivedBookings')
+const getPendingMadeBookings = require('./getPendingMadeBookings')
+const getAcceptedMadeBookings = require('./getAcceptedMadeBookings')
+
 
 module.exports = {
     getBookingRatingData,
@@ -15,5 +19,8 @@ module.exports = {
     getEmailTenant,
     getEmailOwner,
     checkTenantIdAndOwnerId,
-    getPendingReceivedBookings
+    getPendingReceivedBookings,
+    getAcceptedReceivedBookings,
+    getPendingMadeBookings,
+    getAcceptedMadeBookings
 }
