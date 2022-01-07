@@ -6,4 +6,3 @@ const getUserByEmail = async (userEmail) => {
   }
 
   module.exports = getUserByEmail
- 
