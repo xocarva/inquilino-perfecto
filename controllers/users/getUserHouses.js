@@ -10,7 +10,9 @@ const getUserHouses = async (req, res) => {
      houses = await housesRepository.getHousesByOwnerId(userId)
 
     } catch (error) {
-        res.send({status: 'error', message: error.message})
+        res.status(400)
+        res.end(error.message)
+        return
     }
     res.status(200)
     res.send(houses)
