@@ -4,9 +4,6 @@ const profile = async (req, res) => {
 
     const userId = req.user.id
 
-    //TO-DO
-    // add accurate error status
-
     try {
         const user = await usersRepository.getUserById(userId)
         if(!user) throw new Error ('User not found')
@@ -15,6 +12,7 @@ const profile = async (req, res) => {
     } catch (error) {
         res.status(400)
         res.end(error.message)
+        return
     }
 }
 

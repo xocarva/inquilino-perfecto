@@ -1,8 +1,6 @@
 const { bookingsRepository, usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
-
-
 const confirmBooking = async (req, res) => {
     const bookingId = Number(req.params.bookingId)
 

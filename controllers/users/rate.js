@@ -6,9 +6,6 @@ const rate = async (req, res) => {
     const ratingUserId = req.user.id
     const rating = Number(req.body.rating)
 
-    // TO-DO
-    // separate errors with accurate error status
-
     try {
         await ratingValidator.validateAsync({ rating })
 

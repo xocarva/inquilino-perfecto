@@ -1,4 +1,6 @@
 const { housesRepository, bookingsRepository } = require('../../repository')
+const { queryValidator } = require('../../validators')
+
 
 const getHousesSearch = async (req, res) => {
     const { city, price, rooms, startDate, endDate } = req.query
@@ -6,6 +8,20 @@ const getHousesSearch = async (req, res) => {
     if(!startDate || !endDate) {
         res.status(400)
         res.end('Booking dates are required')
+    }
+
+    if (startDate > endDate || Date.parse(startDate) < new Date()) {
+        res.status(400)
+        res.end('Invalid date')
+        return
+    }
+
+    try {
+        await queryValidator.validateAsync({  price, rooms, startDate, endDate })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
     }
 
     let resultHouses
