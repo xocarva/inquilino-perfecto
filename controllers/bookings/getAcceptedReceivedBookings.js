@@ -15,12 +15,12 @@ const getAcceptedReceivedBookings = async (req, res) => {
         }))
 
     } catch (error) {
-        res.status(500)
+        res.status(404)
         res.end(error.message)
         return
     }
 
-    res.status(200)
+    res.status(202)
     res.send(bookingsWithRatings)
 }
 

@@ -5,7 +5,7 @@ const confirmBooking = async (req, res) => {
     const bookingId = Number(req.params.bookingId)
 
     if (!bookingId) {
-        res.status(400)
+        res.status(404)
         res.end('this booking does not exist')
         return
     }
@@ -14,7 +14,7 @@ const confirmBooking = async (req, res) => {
         bookingExist = await bookingsRepository.getBookingById(bookingId)
         if(!bookingExist) throw new Error ('this booking does not exist or it is confirmed')
     } catch (error) {
-        res.status(400)
+        res.status(404)
         res.end(error.message)
         return
     }
@@ -23,7 +23,7 @@ const confirmBooking = async (req, res) => {
     try {
         await bookingsRepository.changeStatusConfirmBooking(bookingId)
     } catch (error) {
-        res.status(400)
+        res.status(500)
         res.end(error.message)
         return
     }
@@ -34,7 +34,7 @@ const confirmBooking = async (req, res) => {
         console.log(email)
         await notifier.sendBookingOfferPendingTenant({ email, startDate, endDate })
     } catch (error) {
-        res.status(400)
+        res.status(404)
         res.end(error.message)
         return
     }
@@ -43,7 +43,7 @@ const confirmBooking = async (req, res) => {
         console.log(emailOwner)
         await notifier.sendConfirmBookingOwner({ emailOwner, houseId, startDate, endDate })
     } catch (error) {
-        res.status(400)
+        res.status(404)
         res.end(error.message)
         return
     }

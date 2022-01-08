@@ -6,12 +6,12 @@ const getHousesSearch = async (req, res) => {
     const { city, price, rooms, startDate, endDate } = req.query
 
     if(!startDate || !endDate) {
-        res.status(400)
+        res.status(404)
         res.end('Booking dates are required')
     }
 
     if (startDate > endDate || Date.parse(startDate) < new Date()) {
-        res.status(400)
+        res.status(409)
         res.end('Invalid date')
         return
     }
@@ -19,7 +19,7 @@ const getHousesSearch = async (req, res) => {
     try {
         await queryValidator.validateAsync({  price, rooms, startDate, endDate })
     } catch (error) {
-        res.status(400)
+        res.status(401)
         res.end(error.message)
         return
     }

@@ -15,7 +15,7 @@ const register = async (req, res) => {
         userDataProfile = await usersRepository.getUserById(userId)
         userIdProfile = userDataProfile.id
     } catch (error) {
-        res.status(500)
+        res.status(404)
         res.end(error.message)
         return
     }
@@ -26,14 +26,14 @@ const register = async (req, res) => {
     try {
         if(password) encryptedPassword = await encryptor.encrypt(password)
     } catch (error) {
-        res.status(500)
+        res.status(403)
         res.end(error.message)
         return
     }
     try {
         await editProfileSchema.validateAsync({ firstName, lastName, email, bio, picture, password })
     } catch (error) {
-        res.status(400)
+        res.status(401)
         res.end(error.message)
         return
     }
@@ -91,7 +91,7 @@ const register = async (req, res) => {
         return
     }
 
-    res.status(200)
+    res.status(202)
     res.send('Your profile has been modified correctly')
 
 }

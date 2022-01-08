@@ -9,7 +9,7 @@ const login = async (req, res) => {
   try {
     await credentialsValidator.validateAsync(credentials)
   } catch (error) {
-    res.status(400)
+    res.status(401)
     res.send(error.message)
     return
   }
@@ -30,14 +30,14 @@ const login = async (req, res) => {
   }
 
   if (!await encryptor.compare(credentials.password, user.password)) {
-    res.status(403)
+    res.status(401)
     res.end('Invalid credentials')
     return
   }
 
   const token = generateToken({ payload: { user: { id: user.id } } })
 
-  res.status(200)
+  res.status(201)
   res.send({ token })
 }
 

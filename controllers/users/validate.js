@@ -17,7 +17,7 @@ const validate = async (req, res) => {
         res.end(error.message)
         return
     }
-    res.status(200)
+    res.status(202)
     res.send('User validated')
 }
 
