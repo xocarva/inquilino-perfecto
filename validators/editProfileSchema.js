@@ -3,7 +3,7 @@ const Joi = require('joi')
 const editProfileValidator = Joi.object().keys({
     firstName: Joi
         .string()
-        .max(50)
+        .max(80)
         .min(2)
         .messages({
             'string.empty': '[first_name] is required',
@@ -13,7 +13,7 @@ const editProfileValidator = Joi.object().keys({
         }),
         lastName: Joi
         .string()
-        .max(50)
+        .max(80)
         .min(2)
         .messages({
             'string.empty': '[last_name] is required',
