@@ -11,15 +11,21 @@ const getHousesSearch = async (req, res) => {
     let resultHouses
     try {
         const houses = await housesRepository.getHousesByQuery(city, price, rooms)
-        housesWithBookings = await Promise.all(houses.map(async house =>  {
+        const housesWithBookings = await Promise.all(houses.map(async house =>  {
             const bookings = await bookingsRepository.getBookingsByHouseId(house.id)
             return { ...house, bookings }
         }))
 
-        const availableHouses = await Promise.all(housesWithBookings.filter(async house => {
-            console.log(house.bookings, house.id, startDate, endDate, await bookingsRepository.isHouseAvailable(house.bookings, startDate, endDate))
-            return await bookingsRepository.isHouseAvailable(house.bookings, startDate, endDate)
-        }))
+        const isAvailable = async house => {
+            const bookings = house.bookings
+            const available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
+            return available
+        }
+
+        const datesFilter = async (housesAndBookings, checkDatesFunction) => Promise.all(housesAndBookings.map(checkDatesFunction))
+            .then((results) => housesAndBookings.filter((_v, index) => results[index]))
+
+        const availableHouses = await datesFilter(housesWithBookings, isAvailable)
 
         resultHouses = availableHouses.map(house => {
             const [ housePicture ] = house.pictures
@@ -35,6 +41,7 @@ const getHousesSearch = async (req, res) => {
     } catch (error) {
         res.status(500)
         res.end(error.message)
+        return
     }
 
     res.status(200)
