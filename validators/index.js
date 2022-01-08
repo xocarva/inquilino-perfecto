@@ -4,6 +4,8 @@ const credentialsValidator = require('./credentialsSchema')
 const bookingValidator = require('./bookingSchema')
 const houseSchema = require('./houseSchema')
 const editProfileSchema = require('./editProfileSchema')
+const queryValidator = require('./querySchema')
+
 
 module.exports = {
     userValidator,
@@ -11,5 +13,6 @@ module.exports = {
     credentialsValidator,
     bookingValidator,
     houseSchema,
-    editProfileSchema
+    editProfileSchema,
+    queryValidator
 }

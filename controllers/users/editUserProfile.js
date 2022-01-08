@@ -22,15 +22,13 @@ const register = async (req, res) => {
             if(userId !== userIdProfile) throw new Error('This is not your profile')
             if(!userIdProfile) throw new Error('User profile does not exist')
 
-    // TO DO validateAsync
-
     let encryptedPassword
     try {
         if(password) encryptedPassword = await encryptor.encrypt(password)
     } catch (error) {
         res.status(500)
         res.end(error.message)
-    return
+        return
     }
     try {
         await editProfileSchema.validateAsync({ firstName, lastName, email, bio, picture, password })

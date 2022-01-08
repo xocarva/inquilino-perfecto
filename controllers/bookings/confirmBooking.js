@@ -1,11 +1,8 @@
 const { bookingsRepository, usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
-
-
 const confirmBooking = async (req, res) => {
     const bookingId = Number(req.params.bookingId)
-    const ownerId = req.user.id
 
     if (!bookingId) {
         res.status(400)
@@ -35,7 +32,7 @@ const confirmBooking = async (req, res) => {
         console.log(tenantId)
         const email = user.email
         console.log(email)
-        await notifier.sendBookingOfferPenddingTenant({ email, startDate, endDate })
+        await notifier.sendBookingOfferPendingTenant({ email, startDate, endDate })
     } catch (error) {
         res.status(400)
         res.end(error.message)
