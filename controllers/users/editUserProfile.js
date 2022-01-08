@@ -1,5 +1,4 @@
 
-const bcrypt = require("bcrypt")
 const encryptor = require('../../shared/encryptor')
 const { editProfileSchema } = require('../../validators')
 const { usersRepository } = require('../../repository')
