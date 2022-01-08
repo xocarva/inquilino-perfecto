@@ -1,12 +1,9 @@
 const crypto = require('crypto')
-const bcrypt = require("bcrypt")
 const encryptor = require('../../shared/encryptor')
 const { userValidator } = require('../../validators')
 const { usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
-//TO-DO
-// avatar attachment on register/saveUser
 
 const register = async (req, res) => {
     const user = req.body

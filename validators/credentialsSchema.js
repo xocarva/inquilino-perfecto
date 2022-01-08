@@ -5,11 +5,11 @@ const credentialsSchema = Joi.object({
   email: Joi
     .string()
     .required()
-    .pattern(new RegExp('^(.+)@(\\S+)$'))
+    .email()
     .messages({
       'any.required': '[email] is required',
       'string.empty': '[email] is required',
-      'string.pattern.base': '[email] format is invalid'
+      'string.email': '[email] format is invalid'
     }),
   password: Joi
     .string()
