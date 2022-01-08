@@ -5,6 +5,12 @@ const activateUser = require('./activateUser')
 const rateBooking = require('./rateBooking')
 const getUserByEmail = require('./getUserByEmail')
 const getUserById = require('./getUserById')
+const editFirstNameProfile = require('./editFirstNameProfile')
+const editLastNameProfile = require('./editLastNameProfile')
+const editBioProfile = require('./editBioProfile')
+const editPictureProfile = require('./editPictureProfile')
+const editPasswordProfile = require('./editPasswordProfile')
+const editEmailProfile = require('./editEmailProfile')
 
 module.exports = {
     saveUser,
@@ -13,5 +19,11 @@ module.exports = {
     activateUser,
     rateBooking,
     getUserByEmail,
-    getUserById
+    getUserById,
+    editFirstNameProfile,
+    editLastNameProfile,
+    editBioProfile,
+    editPictureProfile,
+    editPasswordProfile,
+    editEmailProfile
 }

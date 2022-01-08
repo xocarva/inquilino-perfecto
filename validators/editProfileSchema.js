@@ -1,0 +1,65 @@
+const Joi = require('joi')
+
+const editProfileValidator = Joi.object().keys({
+    firstName: Joi
+        .string()
+        .max(50)
+        .min(2)
+        .messages({
+            'string.empty': '[first_name] is required',
+            'any.required': '[first_name] is required',
+            'string.max': '[first_name] must be between 2 and 50 characters',
+            'string.min': '[first_name] must be between 2 and 50 characters'
+        }),
+        lastName: Joi
+        .string()
+        .max(50)
+        .min(2)
+        .messages({
+            'string.empty': '[last_name] is required',
+            'any.required': '[last_name] is required',
+            'string.max': '[last_name] must be between 2 and 50 characters',
+            'string.min': '[last_name] must be between 2 and 50 characters'
+        }),
+        email: Joi
+        .string()
+        .email()
+        .messages({
+            'string.empty': '[email] is required',
+            'any.required': '[email] is required',
+            'string.email': '[email] must be a valid email'
+        }),
+        bio: Joi
+        .string()
+        .max(200)
+        .min(10)
+        .messages({
+            'string.empty': '[bio] is required',
+            'any.required': '[bio] is required',
+            'string.max': '[bio] must be between 10 and 200 characters',
+            'string.min': '[bio] must be between 10 and 200 characters'
+        }),
+        picture: Joi
+        .string()
+        .max(100)
+        .min(1)
+        .messages({
+            'string.empty': '[picture] is required',
+            'any.required': '[picture] is required',
+            'string.max': '[picture] must be between 10 and 100 characters',
+            'string.min': '[picture] must be between 10 and 100 characters'
+        }),
+        password: Joi
+        .string()
+        .max(50)
+        .min(5)
+        .messages({
+            'string.empty': '[password] is required',
+            'any.required': '[password] is required',
+            'string.max': '[password] must be between 5 and 50 characters',
+            'string.min': '[password] must be between 5 and 50 characters'
+        })
+
+})
+
+module.exports = editProfileValidator
