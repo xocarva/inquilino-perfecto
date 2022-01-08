@@ -10,7 +10,7 @@ const createHouses = async (req, res) => {
         await houseSchema.validateAsync(house)
 
     } catch (error) {
-        res.status(400)
+        res.status(404)
         res.end(error.message)
         return
     }
@@ -23,7 +23,7 @@ const createHouses = async (req, res) => {
         res.end(error.message)
         return
     }
-    res.status(200)
+    res.status(201)
     res.send({ insertId })
 }
 

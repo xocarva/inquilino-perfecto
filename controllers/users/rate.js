@@ -19,12 +19,12 @@ const rate = async (req, res) => {
 
         await usersRepository.rateBooking(ratingData)
     } catch (error) {
-        res.status(400)
+        res.status(404)
         res.end(error.message)
         return
     }
 
-    res.status(200)
+    res.status(201)
     res.send('Rating saved')
 }
 

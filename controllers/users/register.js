@@ -14,7 +14,7 @@ const register = async (req, res) => {
     try {
         await userValidator.validateAsync(user)
     } catch (error) {
-        res.status(400)
+        res.status(401)
         res.end(error.message)
         return
     }
@@ -24,7 +24,7 @@ const register = async (req, res) => {
         userExists = await usersRepository.userExists(user)
 
     } catch (error) {
-        res.status(500)
+        res.status(404)
         res.end(error.message)
         return
     }
@@ -39,7 +39,7 @@ const register = async (req, res) => {
     try {
         encryptedPassword = await encryptor.encrypt(user.password)
     } catch (error) {
-        res.status(500)
+        res.status(404)
         res.end(error.message)
     return
   }
@@ -49,7 +49,7 @@ const register = async (req, res) => {
     try {
         await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode })
     } catch (error) {
-        res.status(400)
+        res.status(401)
         res.end(error.message)
         return
     }
@@ -57,11 +57,12 @@ const register = async (req, res) => {
     try {
         await notifier.sendActivationCode({ ...user, activationCode })
     } catch (error) {
+        res.status(500)
         res.end(error.message)
         return
     }
 
-    res.status(200)
+    res.status(201)
     res.send('User registered and validation email sent')
 
 }
