@@ -4,8 +4,6 @@ const { editProfileSchema } = require('../../validators')
 const { usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
-//TO-DO
-// avatar attachment on register/saveUser
 
 const register = async (req, res) => {
     const newUserData = req.body
