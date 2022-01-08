@@ -1,6 +1,7 @@
 
 const bcrypt = require("bcrypt")
 const encryptor = require('../../shared/encryptor')
+const { editProfileSchema } = require('../../validators')
 const { usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
@@ -26,6 +27,21 @@ const register = async (req, res) => {
 
     // TO DO validateAsync
 
+    let encryptedPassword
+    try {
+        if(password) encryptedPassword = await encryptor.encrypt(password)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+    return
+    }
+    try {
+        await editProfileSchema.validateAsync({ firstName, lastName, email, bio, picture, password })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
+        return
+    }
     try {
         const oldFirstName = userDataProfile.firstName
         if(!firstName) firstName = oldFirstName
@@ -70,15 +86,6 @@ const register = async (req, res) => {
         res.status(500)
         res.end(error.message)
         return
-    }
-    let encryptedPassword
-    try {
-        if(password) encryptedPassword = await encryptor.encrypt(password)
-        
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-    return
     }
     try {
         if(!encryptedPassword) encryptedPassword = userDataProfile.password

@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const { editLastNameProfile } = require('../repository/mysql-repository/mysql-users-repository')
 
 const editProfileValidator = Joi.object().keys({
     firstName: Joi
