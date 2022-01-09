@@ -12,13 +12,13 @@ const getHousesByQuery = async (city, price, rooms) => {
     }
 
     if(price) {
-        if (params.length !== 0) query += ' AND'
+        if (params.length > 0) query += ' AND'
         query += ' price <= ?'
         params.push(price)
     }
 
     if(rooms) {
-        if (params.length !== 0) query += ' AND'
+        if (params.length > 0) query += ' AND'
         query += ' rooms >= ?'
         params.push(rooms)
     }
