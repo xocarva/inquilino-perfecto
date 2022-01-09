@@ -1,6 +1,5 @@
 const connection = require('../mysqlConnection')
 
-
 const getHouseById = async (houseId) => {
     const [[ house ]] = await connection.query(
         'SELECT houses.id as id, houses.title AS title, rooms, city, price, description, houses.id_owner AS ownerId FROM houses WHERE houses.id = ?',
@@ -10,7 +9,7 @@ const getHouseById = async (houseId) => {
     if(!house) return
 
     const [ pictures ] = await connection.query(
-        'SELECT id, url FROM house_pictures WHERE id_house = ?',
+        'SELECT url FROM house_pictures WHERE id_house = ?',
         [houseId]
     )
 

@@ -3,11 +3,10 @@ const { ratingsRepository, bookingsRepository } = require('../../repository')
 const getAcceptedReceivedBookings = async (req, res) => {
     const userId = req.user.id
     const role = 'owner'
-
     let bookingsWithRatings
+    let bookings
     try {
-        const bookings = await bookingsRepository.getAcceptedReceivedBookings(userId)
-
+        bookings = await bookingsRepository.getAcceptedReceivedBookings(userId)
         bookingsWithRatings = await Promise.all(bookings.map(async booking => {
             const ratings = await ratingsRepository.getRatings({ ...booking, id: booking.tenantId, role })
             const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating/ratings.length), 0))
@@ -21,7 +20,7 @@ const getAcceptedReceivedBookings = async (req, res) => {
     }
 
     res.status(202)
-    res.send(bookingsWithRatings)
+    res.send(bookings)
 }
 
 module.exports = getAcceptedReceivedBookings

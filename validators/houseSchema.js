@@ -26,10 +26,12 @@ const houseSchema = joi.object({
 
         city: joi
         .string()
-        .max(15)
+        .max(100)
         .min(2)
-        .required()
+        .required(),
 
+        pictures:joi
+        .required()
 })
 
 module.exports = houseSchema

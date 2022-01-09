@@ -1,7 +1,6 @@
 const { housesRepository } = require('../../repository')
 
 const getUserHouses = async (req, res) => {
-
     let houses
     const userId = req.user.id
 
@@ -10,7 +9,7 @@ const getUserHouses = async (req, res) => {
      houses = await housesRepository.getHousesByOwnerId(userId)
 
     } catch (error) {
-        res.status(404)
+        res.status(500)
         res.end(error.message)
         return
     }

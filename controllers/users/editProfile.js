@@ -1,14 +1,51 @@
 
 const encryptor = require('../../shared/encryptor')
-const { editProfileSchema } = require('../../validators')
+const { userSchema } = require('../../validators')
 const { usersRepository } = require('../../repository')
-const notifier = require('../../controllers/notifier')
+const notifier = require('../notifier')
 
 
-const register = async (req, res) => {
+const editProfile = async (req, res) => {
     const newUserData = req.body
-    let { firstName, lastName, email, bio, picture, password} = newUserData
+    let { firstName, lastName, email, bio, picture, password } = newUserData
     userId = req.user.id
+
+    try {
+        await userSchema.validateAsync(newUserData)
+    } catch (error) {
+        res.status(401)
+        res.end(error.message)
+        return
+    }
+
+    let encryptedPassword
+    try {
+        if(password) encryptedPassword = await encryptor.encrypt(password)
+    } catch (error) {
+        res.status(403)
+        res.end(error.message)
+        return
+    }
+
+    try {
+        await usersRepository.saveUser(newUserData)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     let userIdProfile
     let userDataProfile
     try {
@@ -22,21 +59,7 @@ const register = async (req, res) => {
             if(userId !== userIdProfile) throw new Error('This is not your profile')
             if(!userIdProfile) throw new Error('User profile does not exist')
 
-    let encryptedPassword
-    try {
-        if(password) encryptedPassword = await encryptor.encrypt(password)
-    } catch (error) {
-        res.status(403)
-        res.end(error.message)
-        return
-    }
-    try {
-        await editProfileSchema.validateAsync({ firstName, lastName, email, bio, picture, password })
-    } catch (error) {
-        res.status(401)
-        res.end(error.message)
-        return
-    }
+
     try {
         const oldFirstName = userDataProfile.firstName
         if(!firstName) firstName = oldFirstName
@@ -82,19 +105,12 @@ const register = async (req, res) => {
         res.end(error.message)
         return
     }
-    try {
-        if(!encryptedPassword) encryptedPassword = userDataProfile.password
-        await usersRepository.editPasswordProfile({ encryptedPassword, userId })
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
+
 
     res.status(202)
     res.send('Your profile has been modified correctly')
 
 }
 
-module.exports = register
+module.exports = editProfile
 

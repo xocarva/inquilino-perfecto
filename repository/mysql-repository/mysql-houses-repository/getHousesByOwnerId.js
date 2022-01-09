@@ -5,7 +5,7 @@ const getHousesByOwnerId = async (ownerId) => {
     [ownerId])
 
     const housesWithPics = await Promise.all(houses.map(async house => {
-        const [ pictures ] = await connection.query("SELECT * FROM house_pictures WHERE id_house = ?",
+        const [ pictures ] = await connection.query("SELECT url FROM house_pictures WHERE id_house = ?",
             [house.id]
         )
         return { ...house, pictures }

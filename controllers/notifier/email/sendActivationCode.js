@@ -7,7 +7,7 @@ const sendActivationCode = async (user) => {
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: email,
         subject: "Confirm your account",
-        html: `<p>Click <a href="http://localhost:3000/users/validate/${activationCode}=">here</a> to confirm your account</p>`
+        html: `<p>Click <a href="http://localhost:3000/users/validate/${activationCode}=">here</a> to confirm your account.</p>`
     })
   }
 

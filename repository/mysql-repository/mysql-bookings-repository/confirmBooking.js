@@ -1,13 +1,11 @@
 const connection = require('../mysqlConnection')
 
-const changeStatusConfirmBooking = async (bookingId) => {
+const confirmBooking = async (bookingId) => {
     const result = await connection.query("UPDATE bookings SET accepted = true WHERE id = ?",
-    
-    [bookingId]
+        [bookingId]
     )
     return result
-
 }
 
-module.exports = changeStatusConfirmBooking
+module.exports = confirmBooking
 

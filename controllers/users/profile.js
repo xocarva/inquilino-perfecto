@@ -3,13 +3,26 @@ const { usersRepository } = require('../../repository')
 const profile = async (req, res) => {
 
     const userId = req.user.id
+    let user
+    try {
+        user = await usersRepository.getUserById(userId)
+    } catch (error){
+        res.status(500)
+        res.end(error.message)
+        return
+    }
 
     try {
-
-        const user = await usersRepository.getUserById(userId)
         if(!user) throw new Error ('User not found')
         res.status(202)
-        res.send(user)
+        res.send({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            picture: user.picture,
+            bio: user.bio,
+            active: user.active
+        })
 
     } catch (error) {
         res.status(404)

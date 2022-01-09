@@ -1,16 +1,15 @@
 const { houseSchema } = require('../../validators')
 const { housesRepository } = require('../../repository/')
 
-const createHouses = async (req, res) => {
+const createHouse = async (req, res) => {
     let insertId
     const house = req.body
 
     try {
-
         await houseSchema.validateAsync(house)
-
+        if(house.pictures.length < 1) throw new Error ('Must upload at least one picture')
     } catch (error) {
-        res.status(404)
+        res.status(401)
         res.end(error.message)
         return
     }
@@ -24,7 +23,7 @@ const createHouses = async (req, res) => {
         return
     }
     res.status(201)
-    res.send({ insertId })
+    res.send(`Created new house with id ${insertId}`)
 }
 
-module.exports = createHouses
+module.exports = createHouse

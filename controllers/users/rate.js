@@ -24,7 +24,7 @@ const rate = async (req, res) => {
         return
     }
 
-    res.status(201)
+    res.status(202)
     res.send('Rating saved')
 }
 

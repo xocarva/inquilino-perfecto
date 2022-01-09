@@ -39,7 +39,7 @@ const register = async (req, res) => {
         res.status(404)
         res.end(error.message)
     return
-  }
+    }
 
     const activationCode = crypto.randomBytes(40).toString('hex')
 

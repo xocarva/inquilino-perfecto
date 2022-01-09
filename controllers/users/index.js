@@ -5,7 +5,7 @@ const login = require('./login')
 const profile = require('./profile')
 const getRatings = require('./getRatings')
 const getUserHouses = require('./getUserHouses')
-const editUserprofile = require('./editUserProfile')
+const editProfile = require('./editProfile')
 
 
 
@@ -17,5 +17,5 @@ module.exports = {
     profile,
     getRatings,
     getUserHouses,
-    editUserprofile
+    editProfile
 }

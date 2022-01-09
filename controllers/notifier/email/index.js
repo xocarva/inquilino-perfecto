@@ -1,14 +1,16 @@
 const sendActivationCode = require('./sendActivationCode')
-const sendBookingOfferPendingTenant = require('./sendBookingOfferPendingTenant')
-const sendBookingOfferPendingOwner = require('./sendBookingOfferPendingOwner')
-const sendConfirmBookingOwner = require('./sendConfirmBookingOwner')
-const sendConfirmBookingTenant = require('./sendConfirmBookingTenant')
+const sendMadeBookingInfo = require('./sendMadeBookingInfo')
+const sendReceivedBookingInfo = require('./sendReceivedBookingInfo')
+const sendBookingConfirmation = require('./sendBookingConfirmation')
+const sendTenantBookingCancelInfo = require('./sendTenantBookingCancelInfo')
+const sendOwnerBookingCancelInfo = require('./sendOwnerBookingCancelInfo')
 
 
 module.exports = {
     sendActivationCode,
-    sendBookingOfferPendingTenant,
-    sendBookingOfferPendingOwner,
-    sendConfirmBookingTenant,
-    sendConfirmBookingOwner
+    sendMadeBookingInfo,
+    sendReceivedBookingInfo,
+    sendBookingConfirmation,
+    sendTenantBookingCancelInfo,
+    sendOwnerBookingCancelInfo
 }

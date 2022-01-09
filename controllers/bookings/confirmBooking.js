@@ -1,55 +1,61 @@
-const { bookingsRepository, usersRepository } = require('../../repository')
+const { bookingsRepository, usersRepository, housesRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 
 const confirmBooking = async (req, res) => {
+    const userId = req.user.id
     const bookingId = Number(req.params.bookingId)
 
-    if (!bookingId) {
-        res.status(404)
-        res.end('this booking does not exist')
-        return
-    }
-    let bookingExist
+    let booking
     try {
-        bookingExist = await bookingsRepository.getBookingById(bookingId)
-        if(!bookingExist) throw new Error ('this booking does not exist or it is confirmed')
-    } catch (error) {
-        res.status(404)
-        res.end(error.message)
-        return
-    }
-    const { houseId, tenantId, startDate, endDate} = bookingExist
-    console.log(bookingExist)
-    try {
-        await bookingsRepository.changeStatusConfirmBooking(bookingId)
+        booking = await bookingsRepository.getBookingById(bookingId)
     } catch (error) {
         res.status(500)
         res.end(error.message)
         return
     }
-    try {
-        const user = await usersRepository.getUserById(tenantId)
-        console.log(tenantId)
-        const email = user.email
-        console.log(email)
-        await notifier.sendBookingOfferPendingTenant({ email, startDate, endDate })
-    } catch (error) {
+
+    if (!booking || booking.accepted) {
         res.status(404)
-        res.end(error.message)
+        res.end('This booking does not exist or already was confirmed')
         return
     }
+
+    const { houseId, tenantId, startDate, endDate} = booking
+
+    let house
     try {
-        const emailOwner = await bookingsRepository.getEmailOwner(houseId)
-        console.log(emailOwner)
-        await notifier.sendConfirmBookingOwner({ emailOwner, houseId, startDate, endDate })
+        house = await housesRepository.getHouseById(houseId)
     } catch (error) {
-        res.status(404)
+        res.status(500)
         res.end(error.message)
         return
     }
 
+    if(userId !== house.ownerId && userId !== tenantId) {
+        res.status(401)
+        res.end('User not allowed to confim this booking')
+        return
+    }
 
-    res.status(200)
-    res.send('Email confirm')
+    try {
+        await bookingsRepository.confirmBooking(bookingId)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    try {
+        const tenant = await usersRepository.getUserById(tenantId)
+        const tenantEmail = tenant.email
+        await notifier.sendBookingConfirmation({ tenantEmail, house, startDate, endDate })
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    res.status(202)
+    res.send('Booking confirmed')
 }
 module.exports = confirmBooking

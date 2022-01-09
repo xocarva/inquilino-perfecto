@@ -1,6 +1,6 @@
 const connection = require('../mysqlConnection')
 
-const checkTenantIdAndOwnerId = async (bookingData) => {
+const isTenantAndOwner = async (bookingData) => {
     const { houseId, tenantId} = bookingData
     const [ownerId] = await connection.query(
     "SELECT id_owner AS ownerId FROM houses WHERE id = ?",
@@ -13,4 +13,4 @@ const checkTenantIdAndOwnerId = async (bookingData) => {
     return false
 }
 
-module.exports = checkTenantIdAndOwnerId
+module.exports = isTenantAndOwner
