@@ -2,7 +2,7 @@ const { ratingsRepository, bookingsRepository } = require('../../repository')
 
 const getPendingReceivedBookings = async (req, res) => {
     const userId = req.user.id
-    const role = 'owner'
+    const role = 'tenant'
 
     let bookingsWithRatings
     try {

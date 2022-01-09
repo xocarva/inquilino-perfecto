@@ -7,42 +7,52 @@ const createBooking = async (req, res) => {
     const tenantId = Number(req.user.id)
     const { houseId } =  req.params
 
-    const actualDate = new Date()
-    if (startDate >= endDate) {
-        res.status(409)
-        res.end('Invalid date')
+    try {
+        await bookingValidator.validateAsync({  startDate, endDate })
+    } catch (error) {
+        res.status(400)
+        res.end(error.message)
         return
     }
-    if (Date.parse(startDate) < actualDate) {
-        res.status(409)
+
+    const actualDate = new Date()
+    if (startDate >= endDate || Date.parse(startDate) < actualDate) {
+        res.status(400)
         res.end('Invalid date')
         return
     }
 
+    let available
     try {
         const bookings = await bookingsRepository.getBookingsByHouseId(houseId)
-        const available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
-        if(!available) throw new Error ('House not available for booking in this dates')
+        available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
     } catch (error) {
-        res.status(409)
+        res.status(500)
         res.end(error.message)
         return
     }
+
+    if(!available){
+        res.status(400)
+        res.end('House not available for booking in this dates')
+        return
+    }
+
+    let house
     try {
-        const isTenantAndOwner = await bookingsRepository.checkTenantIdAndOwnerId({ tenantId, houseId })
-        if(isTenantAndOwner) throw new Error ('You can not rent your own house')
+        house = await housesRepository.getHouseById(houseId)
     } catch (error) {
-        res.status(409)
+        res.status(500)
         res.end(error.message)
         return
     }
-    try {
-        await bookingValidator.validateAsync({  houseId, tenantId, startDate, endDate })
-    } catch (error) {
-        res.status(401)
-        res.end(error.message)
+
+    if(tenantId === house.ownerId) {
+        res.status(400)
+        res.end('You can not rent your own house')
         return
     }
+
     try {
         await bookingsRepository.saveBooking({  houseId, tenantId, startDate, endDate })
     } catch (error) {
@@ -50,26 +60,27 @@ const createBooking = async (req, res) => {
         res.end(error.message)
         return
     }
+
     try {
         const user = await usersRepository.getUserById(tenantId)
-        const email = user.email
-        // await notifier.sendBookingOfferPendingTenant({ email, startDate, endDate })
+        const tenantEmail = user.email
+        await notifier.sendMadeBookingInfo({ tenantEmail, house, startDate, endDate })
     } catch (error) {
-        res.status(404)
+        res.status(500)
         res.end(error.message)
         return
     }
-    try {
-        const emailOwner = await bookingsRepository.getEmailOwner(houseId)
 
-        console.log(houseId)
-        // await notifier.sendBookingOfferPendingOwner({ emailOwner, startDate, endDate, tenantId })
+    try {
+        const owner = await usersRepository.getUserById(house.ownerId)
+        const ownerEmail = owner.email
+        await notifier.sendReceivedBookingInfo({ ownerEmail, house, startDate, endDate })
     } catch (error) {
-        res.status(404)
+        res.status(500)
         res.end(error.message)
         return
     }
     res.status(201)
-    res.send('Your booking is pending of confirm')
+    res.send('Booking saved, waiting for owner confirmation')
 }
 module.exports = createBooking

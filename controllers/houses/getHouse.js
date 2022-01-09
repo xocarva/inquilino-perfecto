@@ -1,4 +1,4 @@
-const { housesRepository, ratingsRepository, usersRepository } = require('../../repository/')
+const { housesRepository, ratingsRepository, usersRepository } = require('../../repository')
 
 const getHouse = async (req, res) => {
     const { houseId } = req.params
@@ -7,7 +7,7 @@ const getHouse = async (req, res) => {
     try {
         house = await housesRepository.getHouseById(houseId)
     } catch (error) {
-        res.status(404)
+        res.status(500)
         res.end(error.message)
         return
     }

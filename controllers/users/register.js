@@ -18,7 +18,7 @@ const register = async (req, res) => {
 
     let userExists
     try {
-        userExists = await usersRepository.userExists(user)
+        userExists = await usersRepository.getUserByEmail(user.email)
 
     } catch (error) {
         res.status(404)
@@ -39,7 +39,7 @@ const register = async (req, res) => {
         res.status(404)
         res.end(error.message)
     return
-  }
+    }
 
     const activationCode = crypto.randomBytes(40).toString('hex')
 

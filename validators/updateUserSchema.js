@@ -1,6 +1,6 @@
 const Joi = require('joi')
 
-const editProfileValidator = Joi.object().keys({
+const userValidator = Joi.object().keys({
     firstName: Joi
         .string()
         .max(80)
@@ -62,4 +62,4 @@ const editProfileValidator = Joi.object().keys({
 
 })
 
-module.exports = editProfileValidator
+module.exports = userValidator

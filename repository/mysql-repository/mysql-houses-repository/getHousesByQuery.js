@@ -6,7 +6,8 @@ const getHousesByQuery = async (city, price, rooms) => {
     if (city || price || rooms) query += ' WHERE'
 
     if(city) {
-        query += ' city = ?'
+        query += ' city LIKE ?'
+        city += '%'
         params.push(city)
     }
 
@@ -27,7 +28,7 @@ const getHousesByQuery = async (city, price, rooms) => {
     if(!houses) return
 
     const housesWithPics = await Promise.all(houses.map(async house => {
-        const [ pictures ] = await connection.query("SELECT * FROM house_pictures WHERE id_house = ?",
+        const [ pictures ] = await connection.query("SELECT id, url FROM house_pictures WHERE id_house = ?",
             [house.id]
         )
         return { ...house, pictures }

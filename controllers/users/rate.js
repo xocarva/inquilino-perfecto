@@ -1,4 +1,4 @@
-const { bookingsRepository, ratingsRepository, usersRepository } = require('../../repository')
+const { bookingsRepository, ratingsRepository } = require('../../repository')
 const { ratingValidator } = require('./../../validators')
 
 const rate = async (req, res) => {
@@ -8,23 +8,72 @@ const rate = async (req, res) => {
 
     try {
         await ratingValidator.validateAsync({ rating })
-
-        const bookingRatingData = await bookingsRepository.getBookingRatingData(bookingId)
-        const { ratedUserRole, ratedUserId } = await ratingsRepository.getRatedUserData({ ...bookingRatingData, ratingUserId })
-        const ratingData = { ...bookingRatingData, bookingId, ratedUserRole, ratedUserId, rating }
-
-        if (!ratingData.accepted) throw new Error('Can not rate a pending or canceled booking')
-        if (ratingData.bookingEndDate >= new Date()) throw new Error('Can not rate an open booking')
-        if (await ratingsRepository.ratingExists(ratingData)) throw new Error('Booking already rated by this user')
-
-        await usersRepository.rateBooking(ratingData)
     } catch (error) {
-        res.status(404)
+        res.status(401)
         res.end(error.message)
         return
     }
 
-    res.status(201)
+    let bookingRatingData
+    try {
+        bookingRatingData = await bookingsRepository.getBookingRatingData(bookingId)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    if(!!!bookingRatingData){
+        res.status(400)
+        res.end('Booking data could not be retrieved')
+        return
+    }
+
+    let ratingData
+    try {
+        const { ratedUserRole, ratedUserId } = await ratingsRepository.getRatedUserData({ ...bookingRatingData, ratingUserId })
+        ratingData = { ...bookingRatingData, bookingId, ratedUserRole, ratedUserId, rating }
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    if (!ratingData.accepted) {
+        res.status(400)
+        res.end('Can not rate a pending or canceled booking')
+        return
+    }
+
+    if (ratingData.bookingEndDate >= new Date()) {
+        res.status(400)
+        res.end('Can not rate an open booking')
+        return
+    }
+
+    let alreadyRated
+    try {
+        alreadyRated = !!await ratingsRepository.ratingExists(ratingData)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+    if (alreadyRated) {
+        res.status(400)
+        res.end('Booking already rated by this user')
+        return
+    }
+
+    try {
+        await ratingsRepository.rateBooking(ratingData)
+    } catch (error) {
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    res.status(202)
     res.send('Rating saved')
 }
 

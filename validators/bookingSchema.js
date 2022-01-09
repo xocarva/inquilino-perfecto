@@ -1,16 +1,10 @@
 const Joi = require('joi')
 
 const bookingValidator = Joi.object().keys({
-    houseId: Joi
-        .number()
-        .required(),
-        tenantId: Joi
-        .number()
-        .required(),
-        startDate: Joi
+    startDate: Joi
         .date()
         .required(),
-        endDate: Joi
+    endDate: Joi
         .date()
         .required()
 

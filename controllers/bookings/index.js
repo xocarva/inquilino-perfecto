@@ -4,6 +4,7 @@ const getAcceptedReceivedBookings = require('./getAcceptedReceivedBookings')
 const getPendingMadeBookings = require('./getPendingMadeBookings')
 const getAcceptedMadeBookings = require('./getAcceptedMadeBookings')
 const confirmBooking = require('./confirmBooking')
+const cancelBooking = require('./cancelBooking')
 
 
 module.exports = {
@@ -12,5 +13,6 @@ module.exports = {
     getAcceptedReceivedBookings,
     getPendingMadeBookings,
     getAcceptedMadeBookings,
-    confirmBooking
+    confirmBooking,
+    cancelBooking
 }
