@@ -26,7 +26,7 @@ const updateUser = async (req, res) => {
         return
     }
 
-    const reactivationNeeded = newUserData.email && user.email !== newUserData.email
+    const reactivationNeeded = !!newUserData.email
 
     let activationCode
     if (reactivationNeeded) {
