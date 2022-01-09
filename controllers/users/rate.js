@@ -1,4 +1,4 @@
-const { bookingsRepository, ratingsRepository, usersRepository } = require('../../repository')
+const { bookingsRepository, ratingsRepository } = require('../../repository')
 const { ratingValidator } = require('./../../validators')
 
 const rate = async (req, res) => {
@@ -66,7 +66,7 @@ const rate = async (req, res) => {
     }
 
     try {
-        await usersRepository.rateBooking(ratingData)
+        await ratingsRepository.rateBooking(ratingData)
     } catch (error) {
         res.status(500)
         res.end(error.message)
