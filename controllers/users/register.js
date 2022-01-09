@@ -18,7 +18,7 @@ const register = async (req, res) => {
 
     let userExists
     try {
-        userExists = await usersRepository.userExists(user)
+        userExists = await usersRepository.getUserByEmail(user.email)
 
     } catch (error) {
         res.status(404)

@@ -31,7 +31,7 @@ const confirmBooking = async (req, res) => {
         return
     }
 
-    if(userId !== house.ownerId && userId !== tenantId) {
+    if(userId !== house.ownerId) {
         res.status(401)
         res.end('User not allowed to confim this booking')
         return

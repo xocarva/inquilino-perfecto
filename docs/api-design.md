@@ -98,7 +98,7 @@
 
 &nbsp;
 
--   `PUT /users/profile` - Editar el nombre, apellidos, email, bio, foto y password del usuario
+-   `PUT /users/` - Editar el nombre, apellidos, email, bio, foto y password del usuario
 
     -   **Cabecera auth:** Sí
     -   **Body:**
@@ -113,19 +113,11 @@
 &nbsp;
 
 
-- `GET /users/owner-ratings` - Obtener las valoraciones recibidas por un usuario como casero
+- `GET /users/ratings/:role` - Obtener las valoraciones recibidas por un usuario como casero / inquilino
     -   **Cabecera auth:** Sí
     -   **Queryparams:**
-        -   userId
-    -   **Retorna:** Valoraciones ecibidas por un usuario como casero
-
-&nbsp;
-
-- `GET /users/tenant-ratings` - Obtener las valoraciones recibidas por un usuario como inquilino
-    -   **Cabecera auth:** Sí
-    -   **Queryparams:**
-        -   userId
-    -   **Retorna:** Valoraciones recibidas por un usuario como inquilino
+        -   role
+    -   **Retorna:** Valoraciones ecibidas por un usuario como el rol introducido
 
 &nbsp;
 
@@ -135,31 +127,6 @@
     -   **Retorna:** Info de los anuncios de un usuario
 
 &nbsp;
-
--   `GET /users/pending-received-bookings` - Obtener reservas pendientes recibidas por un usuario
-    -   **Cabecera auth:** Sí
-    -   **Retorna:** Info de reservas pendientes recibidas por un usuario
-
-&nbsp;
-
--   `GET /users/pending-made-bookings` - Obtener reservas pendientes solicitadas por un usuario
-    -   **Cabecera auth:** Sí
-    -   **Retorna:** Info de reservas pendientes solicitadas por un usuario
-
-&nbsp;
-
--   `GET /users/accepted-received-bookings` - Obtener reservas recibidas y aceptadas por un usuario
-    -   **Cabecera auth:** Sí
-    -   **Retorna:** Info de reservas recibidas y aceptadas por un usuario
-
-&nbsp;
-
--   `GET /users/accepted-made-bookings` - Obtener reservas solicitadas por un usuario que han sido aceptadas
-    -   **Cabecera auth:** Sí
-    -   **Retorna:** Info de reservas solicitadas por un usuario que han sido aceptadas
-
-&nbsp;
-
 
 -   `POST /users/rate/:bookingId` - Valorar a un usuario con referencia a una estancia
     -   **Cabecera auth:** Sí
@@ -174,7 +141,7 @@
 
 ### Endpoints para los anuncios
 
-- `GET /houses/` - Obtener anuncios filtrados y ordenados
+- `GET /houses/` - Obtener anuncios filtrados
     -   **Cabecera auth:** No
     -   **Querystring:**
         -   city
@@ -182,8 +149,6 @@
         -   rooms
         -   startDate
         -   endDate
-        -   order
-        -   direction
     -   **Retorna:** info de los anuncios filtrados y ordenados
 
 &nbsp;
@@ -213,6 +178,30 @@
 
 
 ### Endpoints para las reservas
+
+-   `GET /bookings/received/pending` - Obtener reservas pendientes recibidas por un usuario
+    -   **Cabecera auth:** Sí
+    -   **Retorna:** Info de reservas pendientes recibidas por un usuario
+
+&nbsp;
+
+-   `GET /bookings/made/pending` - Obtener reservas pendientes solicitadas por un usuario
+    -   **Cabecera auth:** Sí
+    -   **Retorna:** Info de reservas pendientes solicitadas por un usuario
+
+&nbsp;
+
+-   `GET /bookings/received/accepted` - Obtener reservas recibidas y aceptadas por un usuario
+    -   **Cabecera auth:** Sí
+    -   **Retorna:** Info de reservas recibidas y aceptadas por un usuario
+
+&nbsp;
+
+-   `GET /bookings/made/accepted` - Obtener reservas solicitadas por un usuario que han sido aceptadas
+    -   **Cabecera auth:** Sí
+    -   **Retorna:** Info de reservas solicitadas por un usuario que han sido aceptadas
+
+&nbsp;
 
 -   `POST /bookings/:houseId` - Crear una reserva pendiente de confirmar
     -   **Cabecera auth:** Sí

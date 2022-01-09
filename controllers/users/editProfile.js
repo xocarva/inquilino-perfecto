@@ -1,116 +1,72 @@
-
 const encryptor = require('../../shared/encryptor')
-const { userSchema } = require('../../validators')
-const { usersRepository } = require('../../repository')
+const crypto = require('crypto')
 const notifier = require('../notifier')
+const { updateUserValidator } = require('../../validators')
+const { usersRepository } = require('../../repository')
 
 
-const editProfile = async (req, res) => {
-    const newUserData = req.body
-    let { firstName, lastName, email, bio, picture, password } = newUserData
-    userId = req.user.id
+const updateUser = async (req, res) => {
+    let newUserData = req.body
+    const userId = req.user.id
 
     try {
-        await userSchema.validateAsync(newUserData)
+        await updateUserValidator.validateAsync(newUserData)
     } catch (error) {
         res.status(401)
         res.end(error.message)
         return
     }
 
+    let user
+    try {
+        user = await usersRepository.getUserById(userId)
+    } catch (error){
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
+    const reactivationNeeded = newUserData.email && user.email !== newUserData.email
+
+    let activationCode
+    if (reactivationNeeded) {
+        activationCode = crypto.randomBytes(40).toString('hex')
+        newUserData = { ...newUserData, activationCode }
+    }
+
     let encryptedPassword
-    try {
-        if(password) encryptedPassword = await encryptor.encrypt(password)
-    } catch (error) {
-        res.status(403)
-        res.end(error.message)
-        return
+    if(newUserData.password) {
+        try {
+            encryptedPassword = await encryptor.encrypt(newUserData.password)
+       } catch (error) {
+           res.status(403)
+           res.end(error.message)
+           return
+       }
     }
 
     try {
-        await usersRepository.saveUser(newUserData)
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    let userIdProfile
-    let userDataProfile
-    try {
-        userDataProfile = await usersRepository.getUserById(userId)
-        userIdProfile = userDataProfile.id
-    } catch (error) {
-        res.status(404)
-        res.end(error.message)
-        return
-    }
-            if(userId !== userIdProfile) throw new Error('This is not your profile')
-            if(!userIdProfile) throw new Error('User profile does not exist')
-
-
-    try {
-        const oldFirstName = userDataProfile.firstName
-        if(!firstName) firstName = oldFirstName
-        await usersRepository.editFirstNameProfile({ firstName, userId })
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
-    try {
-        const oldLastName = userDataProfile.lastName
-        if(!lastName) lastName = oldLastName
-        await usersRepository.editLastNameProfile({ lastName, userId })
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
-    try {
-        const oldEmail = userDataProfile.email
-        if(!email) email = oldEmail
-        await usersRepository.editEmailProfile({ email, userId })
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
-    try {
-        const oldBio = userDataProfile.bio
-        if(!bio) bio = oldBio
-        await usersRepository.editBioProfile({ bio, userId })
-    } catch (error) {
-        res.status(500)
-        res.end(error.message)
-        return
-    }
-    try {
-        const oldPicture = userDataProfile.picture
-        if(!picture) picture = oldPicture
-        await usersRepository.editPictureProfile({ picture, userId })
+        await usersRepository.updateUser({ ...newUserData, userId, password: encryptedPassword })
     } catch (error) {
         res.status(500)
         res.end(error.message)
         return
     }
 
+    if (reactivationNeeded) {
+        try {
+            await notifier.sendActivationCode(newUserData)
+        } catch (error) {
+            res.status(500)
+            res.end(error.message)
+            return
+        }
+    }
 
     res.status(202)
-    res.send('Your profile has been modified correctly')
+    res.send('User data updated')
 
 }
 
-module.exports = editProfile
+module.exports = updateUser
 
