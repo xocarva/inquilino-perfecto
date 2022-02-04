@@ -9,13 +9,13 @@ const updateUser = async (req, res) => {
     let newUserData = req.body
     const userId = req.user.id
 
-    try {
-        await updateUserValidator.validateAsync(newUserData)
-    } catch (error) {
-        res.status(401)
-        res.end(error.message)
-        return
-    }
+    // try {
+    //     await updateUserValidator.validateAsync(newUserData)
+    // } catch (error) {
+    //     res.status(401)
+    //     res.end(error.message)
+    //     return
+    // }
 
     let user
     try {
