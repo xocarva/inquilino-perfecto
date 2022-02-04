@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import ErrorBoundary from './ErrorBoundary';
+import Header from './Header';
+import Home from './Home';
+import Houses from './houses/Houses';
+import Register from './Register';
+import SearchBar from './SearchBar';
+import User from './user/User';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ErrorBoundary fallback="Una ruta falla desde app">
+          <Header/>
+          <SearchBar/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='user/*' element={<User />}/>
+            <Route path="register" element={<Register />} />
+            <Route path="houses" element={<Houses />} />
+          </Routes>
+        </ErrorBoundary>
     </div>
   );
 }
