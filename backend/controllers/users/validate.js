@@ -8,7 +8,7 @@ const validate = async (req, res) => {
         if(activationCodeMatches.length > 1) throw new Error('Duplicated activation code')
 
         user = activationCodeMatches[0]
-        if (!!!user) throw new Error('Invalid activation code')
+        if (!user) throw new Error('Invalid activation code')
 
         await usersRepository.activateUser(user)
 
@@ -18,7 +18,10 @@ const validate = async (req, res) => {
         return
     }
     res.status(202)
-    res.send('User validated')
+    res.send({
+        message: 'User validated',
+        id: user.id
+    })
 }
 
 module.exports = validate
