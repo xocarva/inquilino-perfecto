@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const fs = require('fs-extra')
 const {MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH} =  process.env
 
 const isValidImageSize = (size) => {
