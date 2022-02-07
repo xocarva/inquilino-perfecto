@@ -86,6 +86,9 @@ const cancelBooking = async (req, res) => {
     }
 
     res.status(202)
-    res.send('Booking canceled')
+    res.send({
+        message: 'Booking canceled',
+        id: bookingId
+    })
 }
 module.exports = cancelBooking

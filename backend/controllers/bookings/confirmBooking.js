@@ -56,6 +56,9 @@ const confirmBooking = async (req, res) => {
     }
 
     res.status(202)
-    res.send('Booking confirmed')
+    res.send({
+        message: 'Booking confirmed',
+        id: bookingId
+    })
 }
 module.exports = confirmBooking
