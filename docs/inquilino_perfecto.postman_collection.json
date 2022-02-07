@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "c27c8d0a-c00e-40d5-8e15-03a5ac6ecbe9",
+		"name": "inquilino_perfecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/users/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/home/xocarva/Descargas/avatar.png"
+						},
+						{
+							"key": "firstName",
+							"value": "Xoán",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Carneiro",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "correo@xoancarneiro.gal",
+							"type": "text"
+						},
+						{
+							"key": "bio",
+							"value": "Bio de Xoán",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/validate/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/validate/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"validate",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"correo@xoancarneiro.gal\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTMyNDg4NiwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTMyNDg4Nn0.N6GI0AEwZDpme8c7XcbmkVpl9FdUcQPFWzjyypCNBqA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0NDIzODU2NCwidXNlciI6eyJpZCI6M30sImlhdCI6MTY0NDIzODU2NH0.TDfuvoTYmhqrhl5feXDxsGBfGo9ooR8H3l_OcvAM2xU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "correo@xoancarneiro.gal",
+							"type": "text"
+						},
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/home/xocarva/Descargas/avatar.png"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/houses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTY2MDI2OCwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTY2MDI2OH0.c5lRerGDuA1Tq5KtUwy1AStHdAYfLh_qlwSZSQG-Ni0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/houses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"houses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/rate/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTMxMjM3OCwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTMxMjM3OH0.MLz72QK2Wh6IyFq8Jaqnwafef36TacFzLagZrbPJ1hk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/rate/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"rate",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/ratings/tenant",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTQ4MTg3MCwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTQ4MTg3MH0.--_X6cZlirRJ_d4iJojVNTrfbnbWlVSpqod-UASqQSM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/ratings/tenant",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"ratings",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/houses",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0NDIyNjU4OCwidXNlciI6eyJpZCI6NH0sImlhdCI6MTY0NDIyNjU4OH0.nuLTR_eU5VM90mZhmRDXsYNvVJEvOCLqTIvz2yMH2hM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Chaletazo",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "rooms",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Por encima de tus posibilidades",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "A Coruña",
+							"type": "text"
+						},
+						{
+							"key": "pictures",
+							"type": "file",
+							"src": [
+								"/home/xocarva/Descargas/chalet2.jpeg",
+								"/home/xocarva/Descargas/chalet1.jpeg"
+							]
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/houses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"houses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/houses/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/houses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"houses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/houses?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/houses?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"houses"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTY2ODEwOCwidXNlciI6eyJpZCI6Mn0sImlhdCI6MTY0MTY2ODEwOH0.OoEmBE20kEpmBeE-OiraRDrDaJX-4F_ZQfo1avbEFSA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startDate\": \"2019-11-01\",\n    \"endDate\": \"2019-11-20\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/confirm/15",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzU0NSwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTcxMzU0NX0.uVhNrLzfy9HGZsishySeQjwaRQlWsk-gTIxbFoW6qRg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/confirm/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"confirm",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/cancel/15",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzU0NSwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTcxMzU0NX0.uVhNrLzfy9HGZsishySeQjwaRQlWsk-gTIxbFoW6qRg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/confirm/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"confirm",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/received/pending",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzk4MSwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTcxMzk4MX0.uGlPcs6jgqSTg53nEm2fjNacghxDKR1cfheakHtBl9o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/received/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"received",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/received/accepted",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzk4MSwidXNlciI6eyJpZCI6MX0sImlhdCI6MTY0MTcxMzk4MX0.uGlPcs6jgqSTg53nEm2fjNacghxDKR1cfheakHtBl9o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/received/accepted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"received",
+						"accepted"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/made/pending",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzczNiwidXNlciI6eyJpZCI6NX0sImlhdCI6MTY0MTcxMzczNn0.a7NtsFCKMBTihFBsZ52KSfrOlM9VQcYVe--VJse8rZs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/made/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"made",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings/made/accepted",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjMwMDAwMTY0MTcxMzczNiwidXNlciI6eyJpZCI6NX0sImlhdCI6MTY0MTcxMzczNn0.a7NtsFCKMBTihFBsZ52KSfrOlM9VQcYVe--VJse8rZs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bookings/made/accepted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"made",
+						"accepted"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

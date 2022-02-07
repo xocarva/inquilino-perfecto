@@ -43,17 +43,6 @@ const userValidator = Joi.object().keys({
             'string.max': '[bio] must be between 10 and 200 characters',
             'string.min': '[bio] must be between 10 and 200 characters'
         }),
-        picture: Joi
-        .string()
-        .required()
-        .max(100)
-        .min(1)
-        .messages({
-            'string.empty': '[picture] is required',
-            'any.required': '[picture] is required',
-            'string.max': '[picture] must be between 10 and 100 characters',
-            'string.min': '[picture] must be between 10 and 100 characters'
-        }),
         password: Joi
         .string()
         .required()

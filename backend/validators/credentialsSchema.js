@@ -14,7 +14,7 @@ const credentialsSchema = Joi.object({
   password: Joi
     .string()
     .required()
-    .min(6)
+    .min(5)
     .max(50)
     .messages({
       'any.required': '[password] is required',

@@ -53,8 +53,9 @@ const createBooking = async (req, res) => {
         return
     }
 
+    let booking
     try {
-        await bookingsRepository.saveBooking({  houseId, tenantId, startDate, endDate })
+        booking = await bookingsRepository.saveBooking({  houseId, tenantId, startDate, endDate })
     } catch (error) {
         res.status(500)
         res.end(error.message)
@@ -81,6 +82,9 @@ const createBooking = async (req, res) => {
         return
     }
     res.status(201)
-    res.send('Booking saved, waiting for owner confirmation')
+    res.send({
+        message: 'Booking saved, waiting for owner confirmation',
+        booking
+    })
 }
 module.exports = createBooking

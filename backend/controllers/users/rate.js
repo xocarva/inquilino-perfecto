@@ -65,8 +65,9 @@ const rate = async (req, res) => {
         return
     }
 
+    let ratingId
     try {
-        await ratingsRepository.rateBooking(ratingData)
+        ratingId = await ratingsRepository.rateBooking(ratingData)
     } catch (error) {
         res.status(500)
         res.end(error.message)
@@ -74,10 +75,10 @@ const rate = async (req, res) => {
     }
 
     res.status(202)
-    res.send('Rating saved')
+    res.send({
+        message: 'Rating saved',
+        id: ratingId
+    })
 }
 
 module.exports = rate
-
-
-

@@ -1,21 +1,23 @@
 const encryptor = require('../../shared/encryptor')
 const crypto = require('crypto')
+const fs = require('fs-extra')
+const uploads = require('../../shared/uploads')
 const notifier = require('../notifier')
 const { updateUserValidator } = require('../../validators')
 const { usersRepository } = require('../../repository')
-
+const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } =  process.env
 
 const updateUser = async (req, res) => {
     let newUserData = req.body
     const userId = req.user.id
 
-    // try {
-    //     await updateUserValidator.validateAsync(newUserData)
-    // } catch (error) {
-    //     res.status(401)
-    //     res.end(error.message)
-    //     return
-    // }
+    try {
+        await updateUserValidator.validateAsync(newUserData)
+    } catch (error) {
+        res.status(401)
+        res.end(error.message)
+        return
+    }
 
     let user
     try {
@@ -45,6 +47,36 @@ const updateUser = async (req, res) => {
        }
     }
 
+    if(req.files && req.files.picture) {
+        const picture = req.files.picture
+
+        if (!uploads.isValidImageSize(picture.size)) {
+            res.status(400)
+            res.end(`Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
+            return
+        }
+
+        if (!uploads.isValidImageMimeType(picture.mimetype)) {
+            res.status(400)
+            res.end(`Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`)
+            return
+        }
+
+        let pictureUrl
+        try {
+            const pictureName = uploads.createImageName(uploads.getExtensionFromMimetype(picture.mimetype))
+            pictureUrl = `/${pictureName}`
+            fs.ensureDir(UPLOADS_PATH)
+            picture.mv(`${UPLOADS_PATH}/${pictureName}`)
+            await uploads.removeFile(user.picture)
+            newUserData = { ...newUserData, picture: pictureUrl }
+        } catch (error) {
+            res.status(500)
+            res.end(error.message)
+            return
+        }
+    }
+
     try {
         await usersRepository.updateUser({ ...newUserData, userId, password: encryptedPassword })
     } catch (error) {
@@ -64,8 +96,7 @@ const updateUser = async (req, res) => {
     }
 
     res.status(202)
-    res.send('User data updated')
-
+    res.send({ message: 'User data updated' })
 }
 
 module.exports = updateUser
