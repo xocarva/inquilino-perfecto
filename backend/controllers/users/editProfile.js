@@ -9,13 +9,13 @@ const updateUser = async (req, res) => {
     let newUserData = req.body
     const userId = req.user.id
 
-    // try {
-    //     await updateUserValidator.validateAsync(newUserData)
-    // } catch (error) {
-    //     res.status(401)
-    //     res.end(error.message)
-    //     return
-    // }
+    try {
+        await updateUserValidator.validateAsync(newUserData)
+    } catch (error) {
+        res.status(401)
+        res.end(error.message)
+        return
+    }
 
     let user
     try {
@@ -45,8 +45,9 @@ const updateUser = async (req, res) => {
        }
     }
 
+    const newUser = { ...newUserData, userId, password: encryptedPassword }
     try {
-        await usersRepository.updateUser({ ...newUserData, userId, password: encryptedPassword })
+        await usersRepository.updateUser(newUser)
     } catch (error) {
         res.status(500)
         res.end(error.message)
@@ -64,9 +65,11 @@ const updateUser = async (req, res) => {
     }
 
     res.status(202)
-    res.send('User data updated')
+    res.send({
+        message: 'User has been updated',
+        id: newUser.id
+    })
 
 }
 
 module.exports = updateUser
-

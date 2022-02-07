@@ -10,6 +10,6 @@ router.post('/register', register)
 router.post('/login', login)
 router.post('/rate/:bookingId', isAuthorized, isActive, rate)
 router.get('/ratings/:role', isAuthorized, getRatings)
-router.put('/', isAuthorized, isActive, editProfile)
+router.patch('/', isAuthorized, editProfile)
 
 module.exports = router

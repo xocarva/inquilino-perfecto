@@ -37,8 +37,11 @@ const login = async (req, res) => {
 
   const token = generateToken({ payload: { user: { id: user.id } } })
 
-  res.status(201)
-  res.send({ ...user, token: token  })
+  res.status(200)
+  res.send({
+    id: user.id,
+    token: token
+  })
 }
 
 module.exports = login
