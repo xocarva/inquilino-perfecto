@@ -29,9 +29,6 @@ const houseSchema = joi.object({
         .max(100)
         .min(2)
         .required(),
-
-        pictures:joi
-        .required()
 })
 
 module.exports = houseSchema
