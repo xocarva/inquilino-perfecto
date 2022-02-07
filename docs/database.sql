@@ -14,7 +14,7 @@ CREATE TABLE users
 	picture VARCHAR (255) NOT NULL,
 	password VARCHAR (255) NOT NULL,
 	active BOOLEAN NOT NULL DEFAULT false,
-	activation_code VARCHAR (255) UNIQUE
+	activation_code VARCHAR (255)
 );
 
 DROP TABLE IF EXISTS houses;
