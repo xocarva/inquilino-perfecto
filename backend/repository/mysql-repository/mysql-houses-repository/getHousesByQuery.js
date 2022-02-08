@@ -1,7 +1,7 @@
 const connection = require('../mysqlConnection')
 
 const getHousesByQuery = async (city, price, rooms) => {
-    let query = 'SELECT id, city, title, price, rooms FROM houses'
+    let query = 'SELECT id, title, city, price, rooms FROM houses'
     const params = []
     if (city || price || rooms) query += ' WHERE'
 
