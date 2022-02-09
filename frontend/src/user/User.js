@@ -1,16 +1,19 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import EditProfile from "./EditProfile"
 import TenantProfile from "./TenantProfile"
 import OwnerProfile from "./OwnerProfile"
 import PendingBookings from "./PendingBookings"
 import NewAd from "./NewAd"
-import ProfileBar from "./ProfileBar"
 import ErrorBoundary from "../ErrorBoundary"
+import { useUser } from "../hooks"
 
 function User() {
+    const user = useUser()
+    if (!user) {
+        return <Navigate to="/" />
+      }
     return (
         <>
-            <ProfileBar />
             <ErrorBoundary fallback="Una ruta falla desde user">
                 <Routes>
                     <Route path="edit-profile" element={<EditProfile />} />
