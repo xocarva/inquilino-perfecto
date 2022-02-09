@@ -6,7 +6,6 @@ import Home from './Home';
 import Houses from './houses/Houses';
 import Register from './Register';
 import SearchBar from './SearchBar';
-import Modal from './Modal'
 import User from './user/User';
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
     <div className="App">
         <ErrorBoundary fallback="Una ruta falla desde app">
           <Header/>
-          <Modal/>
           <SearchBar/>
           <Routes>
             <Route path="/" element={<Home />} />

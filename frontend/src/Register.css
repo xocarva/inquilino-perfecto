@@ -1,63 +1,47 @@
+.titleRegisterPage {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 
 .registerPage {
-    width: 60vw;
-    height: min-content;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    gap: 2rem;
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.picture .preview {
-    width: 100px;
-    height: 100px;
-    background-position: center;
-    background-size: cover;
-    margin: 10px;
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.registerPage div {
-    display: flex;
+    width: 80vw;
+    height: 120vh;
+    margin: auto;
     justify-content: space-between;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 2rem;
-    padding: 20px;
 }
 
-textarea {
-    background-color: lightgray;
-    border-radius: 10px;
-    width: 35vw;
-    height: 15vh;
-    border: none;
+.picRegister {
+    width: 300px;
+    height: 10px;
+    font-size: 3rem;
+    margin-bottom: 2rem;
 }
 
 .uploadButton {
-    width: 131px;
-    height: 131px;
-    background-color: lightgray;
+    display: none;
 }
 
-.registerPage label input {
-    padding: 5px;
-    background-color: lightgray;
-    border-radius: 10px;
-    border: none;
+.registerPage input{
+    border-radius: 7px;
+    width: 80vw;
+    height: 4vh;
+}
+
+.registerPage textarea {
+    border-radius: 7px;
+    width: 80vw;
+    height: 10vh;
 }
 
 .registerButton {
-    height: min-content;
-    width: 120px;
-    padding: 10px;
-    margin: 35px;
-    border-radius: 8px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #c0c3de;
+    width: 50vw;
 }
-
 

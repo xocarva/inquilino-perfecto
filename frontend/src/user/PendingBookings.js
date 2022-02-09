@@ -1,7 +1,7 @@
-function PendingBookings() {
+function TenantProfile() {
     return(
-        <p>Pending Bokkings</p>
+        <p>tenant profile page</p>
     )
 }
 
-export default PendingBookings
+export default TenantProfile
