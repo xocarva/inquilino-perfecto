@@ -1,0 +1,380 @@
+.edit-profile-page {
+    width: 90vw;
+    height: min-content;
+    margin: auto;
+}
+
+
+.input-container-profile {
+    width: 90vw;
+    height: 70vh;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    "dataContainer avatar"
+    "editButtonProfile editButtonProfile"
+    ;
+}
+
+
+.input-container-profile>h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+
+.data-container {
+    width: 67vw;
+    height: 40vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr 1fr;
+    grid-template-areas:
+    "upContainer"
+    "bio"
+    "downContainer"
+    ;
+}
+
+
+.up-container-profile {
+    width: 60vw;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+
+.first-name-profile, .last-name-profile {
+    width: 10vw;
+    font-size: 1.3rem;
+}
+
+
+.first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
+    box-sizing: border-box;
+    width: 10vw;
+    height: 35px;
+    font-size: 1.3rem;
+    background-color: #5d427337;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    color: #2e2e2ed7;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
+}
+
+
+.email-profile, .confirm-email-profile {
+    width: 17vw;
+    font-size: 1.3rem;
+}
+
+
+.email-profile>input, .confirm-email-profile>input {
+    width: 17vw;
+    height: 35px;
+    font-size: 1.2rem;
+}
+
+
+.bio-profile {
+    width: 60vw;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    grid-area: bio;
+}
+
+
+.bio-profile>textarea {
+    width: 60vw;
+    height: 100px;
+}
+
+
+.down-container-profile {
+    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+
+.password-profile {
+    width: 20vw;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+}
+
+
+.password-profile>input {
+    width: 20vw;
+    height: 35px;
+    font-size: 1rem;
+}
+
+
+.confirm-password-profile {
+    width: 20vw;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+}
+
+
+.confirm-password-profile>input {
+    box-sizing: border-box;
+    width: 20vw;
+    height: 35px;
+    font-size: 1.3rem;
+}
+
+
+.avatar-container {
+    font-size: 3rem;
+    width: 20vw;
+    height: 285px;
+    text-align: center;
+    background-color: #5d427337;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
+    border: 3px solid #2e2e2ed7;
+    box-sizing: border-box;
+}
+
+
+.avatar {
+    cursor: pointer;
+    width: 170px;
+    height: 170px;
+    margin-top: 1rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 4px dashed #2e2e2ed7;
+}
+
+
+.camera-button {
+    cursor: pointer;
+    background-color: #c0c3de;
+    width: 100%;
+    height: 70px;
+    border-top: 3px dashed #2e2e2ed7;
+    cursor: pointer;
+}
+
+
+.camera-button:hover {
+    background-color: #898b9f;
+}
+
+
+.upload-avatar {
+    display: none;
+}
+
+
+.edit-button-profile {
+    width: 20vw;
+    height: 40px;
+    border-radius: 7px;
+    font-size: 1.3rem;
+    background-color: #c0c3de;
+    border: none;
+    cursor: pointer;
+    justify-self: center;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
+}
+
+
+.edit-button-profile:hover {
+    background-color: #898b9f;
+}
+
+
+.edit-confirm-message-container {
+    box-sizing: border-box;
+    width: 40vw;
+    height: 35vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+
+.edit-confirm-message-container>span {
+    font-size: 2rem;
+    margin: 0;
+}
+
+
+.edit-confirm-message-container>p {
+    margin: 0;
+}
+
+
+.link-modal-edit-profile {
+    text-decoration: none;
+    color: black;
+    width: 150px;
+    height: 30px;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: #c0c3de;
+    border-radius: 10px;
+}
+
+
+.avatar-preview {
+    width: 40vw;
+    height: 40vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+@media (max-width: 1080px) {
+    .edit-profile-page {
+        width: 90vw;
+        height: 100vh;
+        margin: auto;
+    }
+    .input-container-profile {
+        width: 70vw;
+        height: 100vh;
+    }
+    .data-container {
+        display: flex;
+        flex-direction: column;
+        height: 85vh;
+    }
+    .up-container-profile {
+        width: 70vw;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
+        box-sizing: border-box;
+        width: 65vw;
+        height: 35px;
+        margin-bottom: 1rem;
+    }
+    .email-profile, .confirm-email-profile {
+        width: 60vw;
+    }
+    .password-profile, .confirm-password-profile {
+        width: 60vw;
+    }
+    .down-container-profile {
+        width: 60vw;
+        display: block;
+    }
+    .avatar-container {
+        height: 240px;
+    }
+    .avatar {
+        width: 125px;
+        height: 125px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .input-container-profile {
+        display: flex;
+        flex-direction: column;
+        height: min-content;
+    }
+    .data-container {
+        display: flex;
+        flex-direction: column;
+        height: min-content;
+    }
+    .up-container-profile {
+        width: 90vw;
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+    }
+    .email-profile, .confirm-email-profile {
+        width: 80vw;
+    }
+    .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
+        box-sizing: border-box;
+        width: 90vw;
+        height: 35px;
+        margin-bottom: 1rem;
+    }
+    .bio-profile>textarea {
+        width: 90vw;
+        height: 100px;
+    }
+    .down-container-profile {
+        width: 90vw;
+    }
+    .password-profile {
+        width: 100vw;
+        font-size: 1.3rem;
+    }
+    .password-profile>input {
+        height: 35px;
+        font-size: 1rem;
+    }
+    .confirm-password-profile {
+        font-size: 1.3rem;
+        margin-top: 0.5rem;
+    }
+    .confirm-password-profile>input {
+        box-sizing: border-box;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    .password-profile, .confirm-password-profile {
+        width: 80vw;
+    }
+    .avatar-container {
+        width: 90vw;
+        height: 70px;
+        margin: 0;
+    }
+    .avatar-container {
+        height: 50px;
+        margin: 0;
+    }
+    .avatar {
+        display: none;
+    }
+    .camera-button {
+        width: 90vw;
+        height: 100%;
+        font-size: 2rem;
+        border: none;
+    }
+    .edit-button-profile {
+        margin: auto;
+        margin-bottom: 1rem;
+        width: 90vw;
+        height: 50px;
+    }
+    .edit-confirm-message-container {
+        width: 80vw;
+        height: 50vh;
+        font-size: 1.2rem;
+    }
+}
