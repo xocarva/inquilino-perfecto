@@ -4,13 +4,11 @@ import TenantProfile from "./TenantProfile"
 import OwnerProfile from "./OwnerProfile"
 import PendingBookings from "./PendingBookings"
 import NewAd from "./NewAd"
-import ProfileBar from "./ProfileBar"
 import ErrorBoundary from "../ErrorBoundary"
 
 function User() {
     return (
         <>
-            <ProfileBar />
             <ErrorBoundary fallback="Una ruta falla desde user">
                 <Routes>
                     <Route path="edit-profile" element={<EditProfile />} />
