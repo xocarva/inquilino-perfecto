@@ -1,0 +1,78 @@
+.body-login {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+form.login label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 300px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  form.login p {
+    display: flex;
+    justify-content: center;
+  }
+  
+  form.login input {
+    background-color: transparent;
+    background-color: #a3949580;
+    width: 280px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin: 0 auto;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+  }
+
+  
+  .entrar-button {
+    width: 100px;
+    height: 35px;
+    margin: auto;
+    border: none;
+    background: linear-gradient(to top, rgb(68, 64, 64), transparent);
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 2px 2px 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+  }
+  
+  .entrar-button:hover {
+    background-color: lightgray;
+  }
+  
+  .register-button {
+    text-decoration: none;
+    color: #c4575c;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .register-button:hover {
+    color: #a04e52;
+  }
+
+  @media (max-width:667px) {
+
+    .form.login label {
+      width: 70vw;
+    }
+
+    form.login input {
+      padding: 15px;
+    }
+  }
