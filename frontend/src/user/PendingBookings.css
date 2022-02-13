@@ -1,0 +1,89 @@
+.pending-bookings-page {
+    width: 90vw;
+    margin: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.received-pending-bookings-container {
+    width: 80vw;
+    height: 60vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.received-pending-bookings-container>h3 {
+    width: 80vw;
+}
+
+.card-received-booking {
+    width: 25vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.picture-received-booking {
+    width: 25vw;
+    height: 200px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+
+.title-received-booking {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.tenant-data-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+.tenant-avatar {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+
+.name-tenant {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.rating-tenant {
+    font-size: 1.5rem;
+}
+
+
+.buttons-received-bookings {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.buttons-received-bookings>span {
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.2rem;background-color: #c0c3de;
+}

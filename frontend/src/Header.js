@@ -12,6 +12,7 @@ function Header() {
     const setModal = useSetModal()
     const dispatch = useDispatch()
     const user = useUser()
+    console.log(user)
     return (
         <>
             <header className="header">
