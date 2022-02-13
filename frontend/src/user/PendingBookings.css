@@ -16,8 +16,9 @@
     justify-content: space-between;
 }
 
-.received-pending-bookings-container>h3 {
-    width: 80vw;
+.pending-bookings-page>h3 {
+    width: 90vw;
+    text-align: left;
 }
 
 .card-received-booking {
@@ -81,9 +82,35 @@
 
 
 .buttons-received-bookings>span {
+    cursor: pointer;
     width: 100px;
     height: 25px;
     text-align: center;
     border-radius: 10px;
     font-size: 1.2rem;background-color: #c0c3de;
+}
+
+@media (max-width: 1100px) {
+    .received-pending-bookings-container {
+        height: min-content;
+    }
+    .card-received-booking {
+        width: 30vw;
+    }
+    .picture-received-booking {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 910px) {
+    .received-pending-bookings-container {
+        height: min-content;
+        flex-direction: column;
+    }
+    .card-received-booking {
+        width: 80vw;
+    }
+    .picture-received-booking {
+        width: 80vw;
+    }
 }

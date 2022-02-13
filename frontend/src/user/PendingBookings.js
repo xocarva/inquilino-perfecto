@@ -28,7 +28,6 @@ function PendingBookings() {
     const dataReceivedBookings = useFetch(REACT_APP_BASE_URL + '/bookings/received/pending')
 
     const dataMadeBookings = useFetch(REACT_APP_BASE_URL + '/bookings/made/pending')
-    console.log(dataMadeBookings)
 
     const user = useUser()
     const setModal = useSetModal()
@@ -110,8 +109,8 @@ function PendingBookings() {
 
     return(
         <section className="pending-bookings-page">
+                <h3>Peticiones de alquiler recibidas pendientes</h3>
             <section className="received-pending-bookings-container">
-                <h3>Peticiones de alquiler recividas pendientes</h3>
                 {dataReceivedBookings?.slice(stepReceivedBooking * perPageReceivedBookings, (stepReceivedBooking + 1) * perPageReceivedBookings).map(booking =>
                             <article className='card-received-booking' key={booking.bookingId}>
                                 <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})`}} ></div>
@@ -138,8 +137,8 @@ function PendingBookings() {
                         ➡️
                     </span>
             </section>
-            <section className="received-pending-bookings-container">
                 <h3>Peticiones de alquiler hechas pendientes</h3>
+            <section className="received-pending-bookings-container">
                 {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
                             <article className='card-received-booking' key={booking.bookingId}>
                                 <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.urlPic})`}} ></div>
