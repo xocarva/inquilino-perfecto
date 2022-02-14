@@ -1,0 +1,54 @@
+.pic-upload {
+    padding: 10px;
+    border: 1px solid rgb(156, 148, 148);
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.pic-upload .ad-image {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.pic-upload .preview {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pic-upload .ad-image button {
+  height: 30px;
+  width: 158px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px;
+}
+
+.pic-upload .ad-image button:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+
+  
+.pic-upload .preview.add {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.pic-upload .preview.add::before {
+  content: '+';
+}
+
+.pic-upload .preview.add input {
+  display: none
+}
+  
