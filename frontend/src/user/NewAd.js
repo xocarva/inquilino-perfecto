@@ -1,9 +1,11 @@
 import './NewAd.css'
+import PicUpload from './PicUpload';
 import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import PicUpload from './PicUpload';
+
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function NewAd() {
     const [title, setTitle] = useState('')
@@ -28,7 +30,7 @@ function NewAd() {
         for (const p of pictures) {
             fd.append('pictures', p.file)
         }
-        const res = await fetch('http://localhost:3001/houses/', {
+        const res = await fetch(REACT_APP_BASE_URL +'/houses/', {
             method: 'POST',
             body: fd,
             headers: {
@@ -41,7 +43,7 @@ function NewAd() {
             setModal(true)
             dispatch({
                 type: 'modal',
-                modal: `Has publicado tu anuncio ${title} correctamente`
+                modal: `Has publicado tu anuncio ${title} con exito!!!`
             })
             Navigation('/')
         } else {
