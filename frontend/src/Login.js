@@ -27,7 +27,6 @@ function Login() {
     if (res.ok) {
       setUser(data)
       setModal(false)
-      navigate('/')
     } else {
       setError(data.error)
     }
