@@ -121,6 +121,11 @@
 }
 
 
+.ratings-section-off {
+    display: none;
+}
+
+
 .historic-ratings-container {
     width: 90vw;
     height: 400px;

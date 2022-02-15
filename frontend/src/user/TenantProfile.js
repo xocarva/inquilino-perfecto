@@ -22,7 +22,7 @@ function Puntuacion({ value }) {
 
 function TenantProfile() {
     const bookingsData = useFetch(REACT_APP_BASE_URL + '/bookings/made/accepted')
-    const ratingsData = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant')
+
     let classNameDisplayPage
     let classNameDisplayMessage
     if (bookingsData.length === 0) {
@@ -32,6 +32,11 @@ function TenantProfile() {
         classNameDisplayPage = 'tenant-profile-page-on'
         classNameDisplayMessage = 'tenant-profile-error-message-off'
     }
+
+    const ratingsData = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant')
+
+    let classNameRatingsDisplaySection
+    ratingsData.length === 0 ? classNameRatingsDisplaySection = '-off' : classNameRatingsDisplaySection = '-on'
 
 
     let totalRatings = 0
@@ -91,32 +96,34 @@ function TenantProfile() {
                         ➡️
                     </span>
                 </section>
-                <h2>Valoraciones recibidas como inquilino</h2>
-                <section className="historic-ratings-container">
-                    <div className='ratings-container'>
-                        <section className='cards-ratings-container'>
-                        {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                            <article className='card-historic-rating' key={rating.ratingDate}>
-                                <Puntuacion key={rating.rating} value={rating.rating} />
-                                <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
-                            </article>
-                        )}
+                <section className={'ratings-section' + classNameRatingsDisplaySection}>
+                        <h2>Valoraciones recibidas como inquilino</h2>
+                    <section className="historic-ratings-container">
+                        <div className='ratings-container'>
+                            <section className='cards-ratings-container'>
+                            {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
+                                <article className='card-historic-rating' key={rating.ratingDate}>
+                                    <Puntuacion key={rating.rating} value={rating.rating} />
+                                    <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
+                                </article>
+                            )}
+                            </section>
+                            <section className='button-steps-container-ratings'>
+                                <span onClick={handlePrevRatings}>
+                                    ⬅️
+                                </span>
+                                <span>{stepRating + 1}/{Math.ceil(ratingsData.length / perPageRatings)}</span>
+                                <span onClick={handleNextRatings}>
+                                    ➡️
+                                </span>
+                            </section>
+                        </div>
+                        <section className='average-ratings' style={{ backgroundColor: `${classNameForColorAverageRatings}` }}>
+                            <h3>Media de valoraciones</h3>
+                            <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
+                            <Puntuacion value={averageRatings} />
+                            <span className={classNameForSvgAverageRatings}></span>
                         </section>
-                        <section className='button-steps-container-ratings'>
-                            <span onClick={handlePrevRatings}>
-                                ⬅️
-                            </span>
-                            <span>{stepRating + 1}/{Math.ceil(ratingsData.length / perPageRatings)}</span>
-                            <span onClick={handleNextRatings}>
-                                ➡️
-                            </span>
-                        </section>
-                    </div>
-                    <section className='average-ratings' style={{ backgroundColor: `${classNameForColorAverageRatings}` }}>
-                        <h3>Media de valoraciones</h3>
-                        <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
-                        <Puntuacion value={averageRatings} />
-                        <span className={classNameForSvgAverageRatings}></span>
                     </section>
                 </section>
             </section>

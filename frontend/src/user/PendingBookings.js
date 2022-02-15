@@ -20,14 +20,18 @@ function Puntuacion({ value }) {
 }
 
 
-// TODO
-//  PONER MENSAJE DE ERROR EN EDITPROFILE
 
 function PendingBookings() {
 
     const dataReceivedBookings = useFetch(REACT_APP_BASE_URL + '/bookings/received/pending')
 
+    let classNameReceivedPendingBookingsSection
+    dataReceivedBookings.length === 0 ? classNameReceivedPendingBookingsSection = '-off' : classNameReceivedPendingBookingsSection = '-on'
+
     const dataMadeBookings = useFetch(REACT_APP_BASE_URL + '/bookings/made/pending')
+
+    let classNameMadePendingBookingsSection
+    dataMadeBookings.length === 0 ? classNameMadePendingBookingsSection = '-off' : classNameMadePendingBookingsSection = '-on'
 
     const user = useUser()
     const setModal = useSetModal()
@@ -54,7 +58,6 @@ function PendingBookings() {
     }
 
     const handleCancelReceivedBooking = async e => {
-        console.log(e.target.attributes.bookingId.value)
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
@@ -88,7 +91,6 @@ function PendingBookings() {
     const handleNextMadeBookings = () => setStepMadeBooking((stepMadeBooking + 1) % pagsMadeBookings)
 
     const handleCancelMadeBooking = async e => {
-        console.log(e.target.attributes.bookingId.value)
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
@@ -109,58 +111,62 @@ function PendingBookings() {
 
     return(
         <section className="pending-bookings-page">
+            <section className={'received-pending-bookings-section' + classNameReceivedPendingBookingsSection}>
                 <h3>Peticiones de alquiler recibidas pendientes</h3>
-            <section className="received-pending-bookings-container">
-                {dataReceivedBookings?.slice(stepReceivedBooking * perPageReceivedBookings, (stepReceivedBooking + 1) * perPageReceivedBookings).map(booking =>
-                            <article className='card-received-booking' key={booking.bookingId}>
-                                <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})`}} ></div>
-                                <Link key={booking.title} to={'/houses/' + booking.houseId} className='title-received-booking'>{booking.title}<span> ➕info</span></Link>
-                                <div className='tenant-data-container'>
-                                <div className='tenant-avatar' key={booking.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.tenantPicture})`}} />
-                                <p className='name-tenant' key={booking.tenantFirstName}>{booking.tenantName} {booking.tenantLastName}</p>
-                                <Puntuacion value={booking.ratingAvg} className='rating-tenant' key={booking.ratingAvg}></Puntuacion>
-                                </div>
-                                <p key={booking.startDate} className='date-received-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                                <div className='buttons-received-bookings'>
-                                <span bookingid={Number(booking.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
-                                <span bookingid={Number(booking.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>
-                                </div>
-                            </article>
-                )}
+                <section className='received-pending-bookings-container'>
+                    {dataReceivedBookings?.slice(stepReceivedBooking * perPageReceivedBookings, (stepReceivedBooking + 1) * perPageReceivedBookings).map(booking =>
+                                <article className='card-received-booking' key={booking.bookingId}>
+                                    <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})`}} ></div>
+                                    <Link key={booking.title} to={'/houses/' + booking.houseId} className='title-received-booking'>{booking.title}<span> ➕info</span></Link>
+                                    <div className='tenant-data-container'>
+                                    <div className='tenant-avatar' key={booking.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.tenantPicture})`}} />
+                                    <p className='name-tenant' key={booking.tenantFirstName}>{booking.tenantName} {booking.tenantLastName}</p>
+                                    <Puntuacion value={booking.ratingAvg} className='rating-tenant' key={booking.ratingAvg}></Puntuacion>
+                                    </div>
+                                    <p key={booking.startDate} className='date-received-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                                    <div className='buttons-received-bookings'>
+                                    <span bookingid={Number(booking.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
+                                    <span bookingid={Number(booking.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>
+                                    </div>
+                                </article>
+                    )}
+                </section>
+                <section className='button-steps-container-bookings'>
+                        <span onClick={handlePrevReceivedBookings}>
+                            ⬅️
+                        </span>
+                        <span>{stepReceivedBooking + 1}/{Math.ceil(dataReceivedBookings.length / perPageReceivedBookings)}</span>
+                        <span onClick={handleNextReceivedBookings}>
+                            ➡️
+                        </span>
+                </section>
             </section>
-            <section className='button-steps-container-bookings'>
-                    <span onClick={handlePrevReceivedBookings}>
-                        ⬅️
-                    </span>
-                    <span>{stepReceivedBooking + 1}/{Math.ceil(dataReceivedBookings.length / perPageReceivedBookings)}</span>
-                    <span onClick={handleNextReceivedBookings}>
-                        ➡️
-                    </span>
-            </section>
-                <h3>Peticiones de alquiler hechas pendientes</h3>
-            <section className="received-pending-bookings-container">
-                {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
-                            <article className='card-received-booking' key={booking.bookingId}>
-                                <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.urlPic})`}} ></div>
-                                <Link key={booking.title} to={'/houses/' + booking.houseId} className='title-received-booking'>{booking.title}<span> ➕info</span></Link>
-                                <div className='tenant-data-container'>
-                                <div className='tenant-avatar' key={booking.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.tenantPicture})`}} />
-                                </div>
-                                <p key={booking.startDate} className='date-received-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                                <div className='buttons-received-bookings'>
-                                <span bookingid={Number(booking.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
-                                </div>
-                            </article>
-                )}
-            </section>
-            <section className='button-steps-container-bookings'>
-                    <span onClick={handlePrevMadeBookings}>
-                        ⬅️
-                    </span>
-                    <span>{stepMadeBooking + 1}/{Math.ceil(dataMadeBookings.length / perPageMadeBookings)}</span>
-                    <span onClick={handleNextMadeBookings}>
-                        ➡️
-                    </span>
+            <section className={'made-pending-bookings-section' + classNameMadePendingBookingsSection}>
+                    <h3>Peticiones de alquiler hechas pendientes</h3>
+                <section className="made-pending-bookings-container">
+                    {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
+                                <article className='card-received-booking' key={booking.bookingId}>
+                                    <div key={booking.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.urlPic})`}} ></div>
+                                    <Link key={booking.title} to={'/houses/' + booking.houseId} className='title-received-booking'>{booking.title}<span> ➕info</span></Link>
+                                    <div className='tenant-data-container'>
+                                    <div className='tenant-avatar' key={booking.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.tenantPicture})`}} />
+                                    </div>
+                                    <p key={booking.startDate} className='date-received-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                                    <div className='buttons-received-bookings'>
+                                    <span bookingid={Number(booking.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
+                                    </div>
+                                </article>
+                    )}
+                </section>
+                <section className='button-steps-container-bookings'>
+                        <span onClick={handlePrevMadeBookings}>
+                            ⬅️
+                        </span>
+                        <span>{stepMadeBooking + 1}/{Math.ceil(dataMadeBookings.length / perPageMadeBookings)}</span>
+                        <span onClick={handleNextMadeBookings}>
+                            ➡️
+                        </span>
+                </section>
             </section>
         </section>
     )
