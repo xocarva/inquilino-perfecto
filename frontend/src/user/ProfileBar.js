@@ -12,7 +12,7 @@ function ProfileBar({ userName, userPicture, logoutButton }) {
                 <Link className='dropdown-nav' to="/user/edit-profile">Editar Perfil</Link>
                 <Link className='dropdown-nav' to="/user/tenant-profile">Perfil Inquilino</Link>
                 <Link className='dropdown-nav' to="/user/owner-profile">Perfil Casero</Link>
-                <Link className='dropdown-nav' to="/user/pending-bookings">Recervas pendientes</Link>
+                <Link className='dropdown-nav' to="/user/pending-bookings">Reservas pendientes</Link>
                 <Link className='dropdown-nav' to="/user/new-ad">Publicar anuncio</Link>
                 <div className='dropdown-nav'>{logoutButton}</div>
             </nav>
