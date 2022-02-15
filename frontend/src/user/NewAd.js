@@ -3,7 +3,6 @@ import PicUpload from './PicUpload';
 import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -18,7 +17,6 @@ function NewAd() {
     const user = useUser()
     const Navigation = useNavigate()
     const setModal = useSetModal()
-    const dispatch = useDispatch()
     const handleSubmit = async e => {
         e.preventDefault()
         const fd = new FormData()
@@ -40,11 +38,7 @@ function NewAd() {
         let data = await res.json()
 
         if (res.ok) {
-            setModal(true)
-            dispatch({
-                type: 'modal',
-                modal: `Has publicado tu anuncio ${title} con exito!!!`
-            })
+            setModal(<p>`Has publicado tu anuncio ${title} con exito!!!`</p>)
             Navigation('/')
         } else {
             setError(data.error)

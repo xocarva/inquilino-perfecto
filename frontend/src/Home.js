@@ -1,9 +1,13 @@
 import './Home.css'
 
 function Home() {
-    return(
-        <h1>Hola desde Home</h1>
+    return (
+        <div className='home-contenedor'>
+            <div className='image-home'>
+                <h3 className='title-home' >Hogar, dulce hogar</h3>
+            </div>
+        </div>
     )
 }
 
-export default Home 
+export default Home
