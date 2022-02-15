@@ -1,0 +1,76 @@
+.ad-page {
+    width: 60vw;
+    height: min-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: lightgray;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px;
+    padding: 10px;
+}
+
+.title-ad-page {
+    text-align: start;
+}
+
+.ad-page div {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ad-page input {
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 5px;
+    border: none;
+}
+
+.ad-page textarea {
+    width: 50vw;
+    height: 15vh;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+#ad-button {
+    padding: 10px;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+@media (max-width:667px) {
+
+    .ad-page {
+        width: 90vw;
+    }
+
+    .ad-page div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        gap: 1rem;
+    }
+
+    .ad-page input {
+        padding: 15px;
+        width: 80vw;
+    }
+
+    .ad-page textarea {
+        width: 85vw;
+    }
+
+    #ad-button {
+        width: 80vw;
+        padding: 15px;
+    }
+}
