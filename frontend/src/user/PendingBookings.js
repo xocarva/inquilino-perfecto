@@ -118,7 +118,7 @@ function PendingBookings() {
                                 <div className='tenant-data-container'>
                                 <div className='tenant-avatar' key={booking.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.tenantPicture})`}} />
                                 <p className='name-tenant' key={booking.tenantFirstName}>{booking.tenantName} {booking.tenantLastName}</p>
-                                <Puntuacion className='rating-tenant' key={booking.ratingAvg}>{booking.ratingAvg}</Puntuacion>
+                                <Puntuacion value={booking.ratingAvg} className='rating-tenant' key={booking.ratingAvg}></Puntuacion>
                                 </div>
                                 <p key={booking.startDate} className='date-received-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
                                 <div className='buttons-received-bookings'>
