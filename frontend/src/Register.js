@@ -18,7 +18,6 @@ function Register() {
     const [error, setError] = useState()
     const Navigation = useNavigate()
     const setModal = useSetModal()
-    const dispatch = useDispatch()
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -37,11 +36,7 @@ function Register() {
         let data = await res.json()
 
         if (res.ok) {
-            setModal(true)
-            dispatch({
-                type: 'modal',
-                modal: `Te has registrado correctamente, recibiras un mail de confirmación a ${email}`
-            })
+            setModal(<p>{`Te has registrado correctamente, recibiras un mail de confirmación a ${email}`}</p>)
             Navigation('/')
         } else {
             setError(data.error)
@@ -55,11 +50,11 @@ function Register() {
                 <div>
                     <label>
                         Nombre <br />
-                        <input className='input-register' name='nombre' value={firstName} placeholder='Nombre...' onChange={e => setName(e.target.value)} />
+                        <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' onChange={e => setName(e.target.value)} />
                     </label>
                     <label>
                         Apellido <br />
-                        <input className='input-register' name='apellido' value={lastName} placeholder='Apellido...' onChange={e => setLast(e.target.value)} />
+                        <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' onChange={e => setLast(e.target.value)} />
                     </label>
                     <label>
                         Email <br />
@@ -77,7 +72,7 @@ function Register() {
                         <textarea name='bio' value={bio} placeholder='bio...' onChange={e => setBio(e.target.value)} />
                     </label>
                     <label className='picture'>
-                        <input name='picture' type="file" accept="image/x-png,image/gif,image/jpeg" />
+                        <input name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" />
                     </label>
                 </div>
                 <div id='pass-div'>

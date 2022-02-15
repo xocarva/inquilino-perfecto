@@ -38,7 +38,7 @@ function NewAd() {
         let data = await res.json()
 
         if (res.ok) {
-            setModal(<p>`Has publicado tu anuncio ${title} con exito!!!`</p>)
+            setModal(<p>{`Has publicado tu anuncio ${title} con exito!!!`}</p>)
             Navigation('/')
         } else {
             setError(data.error)
@@ -51,19 +51,19 @@ function NewAd() {
                 <div>
                     <label>
                         Titulo <br/>
-                        <input name='title' value={title} placeholder='Titulo...' onChange={e => setTitle(e.target.value)} />
+                        <input name='title' value={title} type='text' placeholder='Titulo...' onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
                         Precio <br/>
-                        <input name='price' value={price} placeholder='Precio...' onChange={e => setPrice(e.target.value)} />
+                        <input name='price' value={price} type='number' placeholder='Precio...' onChange={e => setPrice(e.target.value)} />
                     </label>
                     <label>
                         Habitaciones <br/>
-                        <input name='rooms' value={rooms} placeholder='Habitaciones...' onChange={e => setRooms(e.target.value)} />
+                        <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' onChange={e => setRooms(e.target.value)} />
                     </label>
                     <label>
                         Ciudad <br/>
-                        <input name='city' value={city} placeholder='Ciudad...' onChange={e => setCity(e.target.value)} />
+                        <input name='city' value={city} type='text' placeholder='Ciudad...' onChange={e => setCity(e.target.value)} />
                     </label>
                 </div>
                 <div className='description-house'>
