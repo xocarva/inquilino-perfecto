@@ -49,15 +49,31 @@ function House() {
 
   return (
     <>
-      {house && <article className="house-card">
+      {house && <section className="house-card">
           <div className='house-picture' style={{backgroundImage:`url("http://localhost:3000${house.pictures[0].url}")`}}></div>
-          <div className='house-info'>
-            <a className='title' href='/'>{house.title}</a>
+            <h1 className='title'>{house.title}</h1>
+            <p className='city'>{house.city}</p>
             <p className='rooms'>{house.rooms} habitaciones</p>
-            <p className='price'>{house.price}€ / día</p>
-          </div>
-          <button className='booking-button'>Reservar</button>
-      </article>}
+            <div>
+              <span>Fecha de entrada</span>
+              <p>{startDate}</p>
+            </div>
+            <div>
+              <span>Fecha de salida</span>
+              <p>{endDate}</p>
+            </div>
+            <section>
+            {house.pictures.map(picture =>
+                    <div key={picture.id} className='small-picture' style={{backgroundImage:`url("http://localhost:3000${picture.url}")`}}>
+                    </div>
+                )}
+            </section>
+            <section>
+              <h3>Descripción</h3>
+              <p>{house.description}</p>
+            </section>
+          <button className='booking-button' onClick={handleBooking}>Reservar</button>
+      </section>}
     </>
   )
 }

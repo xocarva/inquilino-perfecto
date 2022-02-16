@@ -11,7 +11,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function SearchResults() {
     const user = useUser()
-    const modal = useModal ()
+    const modal = useModal()
     const setModal = useSetModal()
     const navigate = useNavigate()
     const query = useQuery()
@@ -57,14 +57,12 @@ function SearchResults() {
                     <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
                 </div>
             )
-            modal(true)
         } else {
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido realizar la reserva.</p>
                 </div>
             )
-            modal(true)
         }
     }
 
