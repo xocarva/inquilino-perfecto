@@ -21,9 +21,11 @@ const createHouse = async (req, res) => {
         return
     }
 
+    const picsArray = Array.isArray(req.files.pictures) ? req.files.pictures : [req.files.pictures]
+
     let pictures
     try {
-        pictures = req.files.pictures.map(picture => {
+        pictures = picsArray.map(picture => {
             if (!uploads.isValidImageSize(picture.size)) {
                 throw new Error(`Picture size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
             }
