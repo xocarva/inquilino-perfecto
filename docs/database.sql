@@ -39,6 +39,8 @@ CREATE TABLE bookings
 	accepted BOOLEAN,
 	id_house INT UNSIGNED NOT NULL,
 	id_tenant INT UNSIGNED NOT NULL,
+	tenant_rating INT UNSIGNED,
+	owner_rating INT UNSIGNED,
 	FOREIGN KEY (id_house) REFERENCES houses (id),
 	FOREIGN KEY (id_tenant) REFERENCES users (id)
 );

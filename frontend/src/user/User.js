@@ -5,12 +5,14 @@ import OwnerProfile from "./OwnerProfile"
 import PendingBookings from "./PendingBookings"
 import NewAd from "./NewAd"
 import ErrorBoundary from "../ErrorBoundary"
+import { useNavigate } from 'react-router-dom'
+import { useUser } from '../hooks'
+
 
 function User() {
+    const navigate = useNavigate()
     const user = useUser()
-    if (!user) {
-        return <Navigate to="/" />
-    }
+    if (!user) navigate('/')
     return (
         <ErrorBoundary fallback="Una ruta falla desde user">
             <Routes>
