@@ -36,11 +36,11 @@ function Login() {
     <div className='body-login'>
     <form className="login" onSubmit={handleSubmit}>
         <label>
-          Emal 
+          Email
           <input name='email' type='email' placeholder='ejemplo@ejemplo.com...'value={email} onChange={e => setEmail(e.target.value)} />
         </label>
         <label>
-          Contraseña 
+          Contraseña
           <input name='contraseña' type='password' placeholder='contraseña...' value={password} onChange={e => setPassword(e.target.value)}/>
         </label>
         <button className='entrar-button'>Login</button>

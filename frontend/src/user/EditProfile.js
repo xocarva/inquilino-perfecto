@@ -1,7 +1,7 @@
 import './EditProfile.css'
 import { Suspense, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useModal, useSetModal, useUser } from '../hooks'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSetModal, useSetUser, useUser } from '../hooks'
 import useFetch from "../useFetch"
 import Loading from '../Loading'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -18,14 +18,16 @@ function EditProfile() {
     const [bio, setBio] = useState('')
 
     const user = useUser()
+    const setUser = useSetUser()
     const setModal = useSetModal()
-    const modal = useModal()
+    // const navigate = useNavigate()
 
     const userData = useFetch(REACT_APP_BASE_URL + '/users/profile', {
         headers: {
             'Authorization': 'Bearer ' + user.token
         }
     })
+
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -37,7 +39,7 @@ function EditProfile() {
         bio && fd.append('bio', bio)
         picture && fd.append('picture', picture)
         password && fd.append('password', password)
-        const res = await fetch(REACT_APP_BASE_URL+ '/users/', {
+        const res = await fetch(REACT_APP_BASE_URL + '/users/', {
             method: 'PATCH',
             body: fd,
             headers: {
@@ -50,16 +52,22 @@ function EditProfile() {
                     <span>✅</span>
                     <p>Tus cambios se guardaron correctamente.</p>
                     <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
-                    <Link className='link-modal-edit-profile' to='/user/edit-profile' onClick={e => modal(false)} >Aceptar</Link>
+                    <Link className='link-modal-edit-profile' to='/user/edit-profile' onClick={e => setModal(false)} >Aceptar</Link>
                 </article>
             )
-            modal(true)
+            let newUserData = { ...user }
+            if(firstName) newUserData = { ...user, firstName}
+            if(lastName) newUserData = { ...user, lastName}
+            if(email) newUserData = { ...user, email}
+            if(bio) newUserData = { ...user, bio}
+            // if(picture) newUserData = { ...user, picture: res.picture}
+            setUser(newUserData)
+            window.location.reload(true)
         }
     }
 
     const handleAvatar = e => {
         setModal(<div className='avatar-preview' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${userData.picture} )`}}/>)
-        modal(true)
     }
 
     return (
