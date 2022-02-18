@@ -1,0 +1,84 @@
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-results .house {
+    display: flex;
+    gap: 1rem;
+    background-color: #eae8e8;
+    padding: 10px;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.search-results .house .house-picture {
+    height: 10rem;
+    width: 25rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+}
+
+.search-results .house .house-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.search-results .house .house-info .price {
+    font-size: 1.5rem;
+}
+
+.search-results .house .house-info .title {
+    font-size: 1.2rem;
+}
+
+.search-results .house .house-info .rooms {
+    font-size: .9rem;
+}
+
+
+.booking-button {
+    padding: 1rem;
+    border-radius: 25px;
+    background-color: #c0c3de;
+    min-width: 8rem;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-button {
+    margin-left: 5px;
+}
+
+.sort-button:hover {
+    cursor: pointer;
+}
+
+.filter {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.remove-filter:hover {
+    cursor: pointer;
+}

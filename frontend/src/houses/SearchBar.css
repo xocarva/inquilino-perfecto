@@ -1,0 +1,42 @@
+.searchForm {
+    margin-bottom: 10px;
+}
+
+.searchForm fieldset {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 20px;
+    justify-content: space-evenly;
+    max-width: 900px;
+    margin: 10px auto;
+}
+
+.searchForm h2 {
+    font-size: large;
+}
+
+.searchForm label {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchForm label input {
+    border-radius: 10px;
+    height: 1.5rem;
+    background-color: rgb(228, 228, 228);
+    max-width: 120px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.button-container input[type = submit], .searchForm input[type = reset] {
+    border-radius: 10px;
+    min-height: 30px;
+    min-width: 100px;
+    background-color: #c0c3de;
+}

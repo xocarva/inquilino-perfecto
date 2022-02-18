@@ -4,11 +4,10 @@ import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 import Modal from './Modal';
 import Home from './Home';
-import Houses from './houses/Houses';
-import Register from './Register';
-import SearchBar from './SearchBar';
 import User from './user/User';
-
+import Register from './Register';
+import Houses from './houses/Houses'
+import SearchBar from './houses/SearchBar'
 
 function App() {
   return (
@@ -16,12 +15,13 @@ function App() {
         <ErrorBoundary fallback="Una ruta falla desde app">
           <Header/>
           <Modal />
-          <SearchBar/>
+          <SearchBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='user/*' element={<User />}/>
             <Route path="register" element={<Register />} />
-            <Route path="houses" element={<Houses />} />
+            <Route path="register" element={<Register />} />
+            <Route path="houses/*" element={<Houses />} />
           </Routes>
         </ErrorBoundary>
     </div>

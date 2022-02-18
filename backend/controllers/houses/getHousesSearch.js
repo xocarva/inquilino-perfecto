@@ -43,6 +43,7 @@ const getHousesSearch = async (req, res) => {
             const [ housePicture ] = house.pictures
             return {
                 id: house.id,
+                title: house.title,
                 city: house.city,
                 price: house.price,
                 rooms: house.rooms,
