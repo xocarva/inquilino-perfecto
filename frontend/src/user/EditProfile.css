@@ -205,7 +205,7 @@
 .edit-confirm-message-container {
     box-sizing: border-box;
     width: 40vw;
-    height: 35vh;
+    height: min-content;
     padding: 2rem;
     display: flex;
     flex-direction: column;

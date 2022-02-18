@@ -4,20 +4,9 @@ import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
+import Puntuacion from '../Puntuacion'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
-
-function Puntuacion({ value }) {
-    return (
-        <span className="puntuacion">
-            {value >= 1 ? '★' : '☆'}
-            {value >= 2 ? '★' : '☆'}
-            {value >= 3 ? '★' : '☆'}
-            {value >= 4 ? '★' : '☆'}
-            {value >= 5 ? '★' : '☆'}
-        </span>
-    )
-}
 
 
 function TenantProfile() {
@@ -83,7 +72,9 @@ function TenantProfile() {
                             <div key={booking.housePicUrl} className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
                             <Link key={booking.houseTitle} to={'/houses/' + booking.houseId} className='title-historic-booking'>{booking.houseTitle}<span> ➕info</span></Link>
                             <p key={booking.startDate} className='date-historic-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                            <p key={booking.endDate} className='state-booking'>{Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingId={booking.bookingId} />}</p>
+                            <div key={booking.endDate} className='state-booking'>
+                                {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }}/>}
+                            </div>
                         </article>
                     )}
                 </section>

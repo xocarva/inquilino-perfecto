@@ -1,7 +1,6 @@
 import './EditProfile.css'
 import { Suspense, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useModal, useSetModal, useUser } from '../hooks'
+import { useSetModal, useSetUser, useUser } from '../hooks'
 import useFetch from "../useFetch"
 import Loading from '../Loading'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -18,14 +17,16 @@ function EditProfile() {
     const [bio, setBio] = useState('')
 
     const user = useUser()
+    const setUser = useSetUser()
     const setModal = useSetModal()
-    const modal = useModal()
+    // const navigate = useNavigate()
 
     const userData = useFetch(REACT_APP_BASE_URL + '/users/profile', {
         headers: {
             'Authorization': 'Bearer ' + user.token
         }
     })
+
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -37,7 +38,7 @@ function EditProfile() {
         bio && fd.append('bio', bio)
         picture && fd.append('picture', picture)
         password && fd.append('password', password)
-        const res = await fetch(REACT_APP_BASE_URL+ '/users/', {
+        const res = await fetch(REACT_APP_BASE_URL + '/users/', {
             method: 'PATCH',
             body: fd,
             headers: {
@@ -45,21 +46,29 @@ function EditProfile() {
             }
         })
         if (res.ok) {
+            let newUserData = { ...user }
+            if(firstName) newUserData = { ...user, firstName}
+            if(lastName) newUserData = { ...user, lastName}
+            if(bio) newUserData = { ...user, bio}
+            // if(picture) newUserData = { ...user, picture: res.picture}
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
                     <p>Tus cambios se guardaron correctamente.</p>
                     <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
-                    <Link className='link-modal-edit-profile' to='/user/edit-profile' onClick={e => modal(false)} >Aceptar</Link>
+                    <Loading />
+                    <p>Cargando nuevos datos...</p>
                 </article>
             )
-            modal(true)
+            setTimeout(() => {
+                setUser(newUserData)
+                window.location.reload(true)
+            }, 4000)
         }
     }
 
     const handleAvatar = e => {
         setModal(<div className='avatar-preview' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${userData.picture} )`}}/>)
-        modal(true)
     }
 
     return (
@@ -83,7 +92,7 @@ function EditProfile() {
                 <label className='confirm-email-profile'>
                     Confirma email:
                     {email === emailConfirm ? '✅' : '❌'}
-                    <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} />
+                    <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
                 </label>
                     </div>
                 <label className='bio-profile'>
@@ -93,12 +102,12 @@ function EditProfile() {
                 <div className='down-container-profile'>
                     <label className='password-profile'>
                     Password:
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" value={password} placeholder='********' onChange={e => setPassword(e.target.value)} />
                 </label>
                 <label className='confirm-password-profile'>
                     Confirma password:
                     {passConfirm === password ? '✅' : '❌'}
-                    <input type="password" value={passConfirm} onChange={e => setPassConfirm(e.target.value)} />
+                    <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                 </label>
                 </div>
                 </div>
