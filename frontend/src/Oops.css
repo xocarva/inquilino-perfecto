@@ -1,0 +1,10 @@
+.body-oops {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.body-oops p{
+    font-size: 4rem;
+}

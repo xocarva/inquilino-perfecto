@@ -7,24 +7,27 @@
 .image-home {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 60vw;
-    height: 60vh;
+    align-items:flex-end;
+    width: 100vw;
+    height: 69vh;
     background-size: cover;
-    background-image: url('https://p0.pikist.com/photos/1/888/field-whitby-black-and-white-cottage-rural-zone-home-village.jpg  ');
-    border-radius: 15px;
-    box-shadow: 1px 1px 10px;
+    background-position: center;
 }
 
 .title-home {
-    font-size: 1.5rem;
-    background: linear-gradient(to top, rgb(235, 231, 231), transparent);
-    color: black;
+    font-size: 4rem;
+    color: rgb(22, 21, 21);
+    padding-bottom: 5rem;
 }
 
-@media (max-width:667px) {
+@media (max-width:768px) {
+    .image-home .title-home {
+        font-size: 2.5rem;
+    }
+}
 
-    .image-home {
-        width: 90vw;
+@media (max-width:480px) {
+    .image-home .title-home {
+        font-size: 2rem;
     }
 }

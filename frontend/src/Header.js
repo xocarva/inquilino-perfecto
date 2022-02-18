@@ -13,34 +13,25 @@ function Header() {
     const dispatch = useDispatch()
     const user = useUser()
     return (
-        <>
-            <header className="header">
-                <div><Link className='title' to="/"><h1>Inquilino perfecto</h1></Link></div>
-                <>
-                    {!user &&
-                        <div className='menu-login-register'>
-                            <div onClick={() => setModal(<Login />)}>Login</div>
-                            <span>/</span>
-                            <Link to="/register"><div>Registro</div></Link>
-                        </div>
-                    }
-                    {user &&
-                        <ProfileBar className='menu-login-register'
-                            userName={user.firstName}
-                            userPicture={<div id="avatar" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${user.picture})` }} />}
-                            logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>logout</span>}
-                        />
-                    }
-                </>
-            </header>
-        </>
+        <header className="header">
+            <Link className='title' to="/">Inquilino Perfecto</Link>
+            <>
+                {!user &&
+                    <div className='menu-login-register'>
+                        <div onClick={() => setModal(<Login />)}>Login</div>
+                        <span>/</span>
+                        <Link to="/register"><div>Registro</div></Link>
+                    </div>
+                }
+                {user &&
+                    <ProfileBar className='menu-login-register'
+                        userName={user.firstName}
+                        userPicture={<div id="avatar" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${user.picture})` }} />}
+                        logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>Cerrar sesión</span>}
+                    />
+                }
+            </>
+        </header>
     )
 }
-
 export default Header
-
-
-
-
-
-
