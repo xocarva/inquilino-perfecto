@@ -43,7 +43,7 @@ const ScoreToOwner = ( { bookingData } ) =>  {
                     <input onChange={e => setRating(e.target.value)} type='number' placeholder='Califica tu estancia' min='0' max='5' />
                     <button>Enviar</button>
                 </form>
-                : <Puntuacion value={bookingData.tenantRating}>Ya has votado</Puntuacion>}
+                : <Puntuacion value={bookingData.tenantRating} />}
         </div>
     )
 }
