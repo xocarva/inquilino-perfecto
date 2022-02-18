@@ -1,6 +1,7 @@
 import './PendingBookings.css'
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
+import Loading from '../Loading';
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
@@ -17,12 +18,15 @@ function CardMadePendingBooking( { bookingData } ) {
         })
         if (res.ok) {
             setModal(
-                <article className='cancel-booking-message-container'>
+                <article className='edit-confirm-message-container'>
                     <span>✅</span>
-                    <p>Reserva cancelada correctamente.</p>
-                    <Link className='link-modal-cancel-booking' to='/user/pending-bookings' onClick={e => setModal(false)} >Aceptar</Link>
+                    <p>Cancelando reserva...</p>
+                    <Loading />
                 </article>
             )
+            setTimeout(() => {
+                window.location.reload(true)
+            }, 2000)
         }
     }
 

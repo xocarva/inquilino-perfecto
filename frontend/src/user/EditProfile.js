@@ -1,6 +1,5 @@
 import './EditProfile.css'
 import { Suspense, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { useSetModal, useSetUser, useUser } from '../hooks'
 import useFetch from "../useFetch"
 import Loading from '../Loading'
@@ -47,22 +46,24 @@ function EditProfile() {
             }
         })
         if (res.ok) {
+            let newUserData = { ...user }
+            if(firstName) newUserData = { ...user, firstName}
+            if(lastName) newUserData = { ...user, lastName}
+            if(bio) newUserData = { ...user, bio}
+            // if(picture) newUserData = { ...user, picture: res.picture}
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
                     <p>Tus cambios se guardaron correctamente.</p>
                     <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
-                    <Link className='link-modal-edit-profile' to='/user/edit-profile' onClick={e => setModal(false)} >Aceptar</Link>
+                    <Loading />
+                    <p>Cargando nuevos datos...</p>
                 </article>
             )
-            let newUserData = { ...user }
-            if(firstName) newUserData = { ...user, firstName}
-            if(lastName) newUserData = { ...user, lastName}
-            if(email) newUserData = { ...user, email}
-            if(bio) newUserData = { ...user, bio}
-            // if(picture) newUserData = { ...user, picture: res.picture}
-            setUser(newUserData)
-            window.location.reload(true)
+            setTimeout(() => {
+                setUser(newUserData)
+                window.location.reload(true)
+            }, 4000)
         }
     }
 
@@ -91,7 +92,7 @@ function EditProfile() {
                 <label className='confirm-email-profile'>
                     Confirma email:
                     {email === emailConfirm ? '✅' : '❌'}
-                    <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} />
+                    <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
                 </label>
                     </div>
                 <label className='bio-profile'>
@@ -101,12 +102,12 @@ function EditProfile() {
                 <div className='down-container-profile'>
                     <label className='password-profile'>
                     Password:
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" value={password} placeholder='********' onChange={e => setPassword(e.target.value)} />
                 </label>
                 <label className='confirm-password-profile'>
                     Confirma password:
                     {passConfirm === password ? '✅' : '❌'}
-                    <input type="password" value={passConfirm} onChange={e => setPassConfirm(e.target.value)} />
+                    <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                 </label>
                 </div>
                 </div>
