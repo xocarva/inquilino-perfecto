@@ -20,7 +20,6 @@ function House() {
   const [stepPic, setStepPic] = useState(0)
 
   const house = useFetch(REACT_APP_BASE_URL + '/houses/' + id)
-  // setMainPic(house.pictures[0].url)
 
   const handleBooking = async e => {
     e.preventDefault()
