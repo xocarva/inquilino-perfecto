@@ -48,7 +48,7 @@ function OwnerProfile() {
                 <article className='article-ads'>
                     {myAds?.slice(house * perPage, (house + 1) * perPage).map(ad =>
                         <div className='body-ads' key={ad.id}>
-                            <Link className='house-title' to={'/houses' + ad.id}>{ad.title}</Link>
+                            <Link className='house-title' to={'/houses/' + ad.id}>{ad.title}</Link>
                             <div className='owner-picture' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${ad.pictures[0].url})` }}></div>
                         </div>
                     )}
@@ -64,7 +64,7 @@ function OwnerProfile() {
                 </article>
             </section>
             <section className='rental-history'>
-
+                        <h3>Historico de alquileres ofertados</h3>
             </section>
             <section className='body-rating'>
                 <h3>Valoraciones recibidas como casero</h3>

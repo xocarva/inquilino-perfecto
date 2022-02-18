@@ -1,6 +1,6 @@
 import './Login.css'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSetModal, useSetUser } from './hooks'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -10,7 +10,6 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-  const navigate = useNavigate()
   const setUser = useSetUser()
   const setModal = useSetModal()
 
