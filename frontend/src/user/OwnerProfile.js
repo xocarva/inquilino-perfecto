@@ -63,6 +63,9 @@ function OwnerProfile() {
                     </section>
                 </article>
             </section>
+            <section className='rental-history'>
+
+            </section>
             <section className='body-rating'>
                 <h3>Valoraciones recibidas como casero</h3>
                 <div className='ratings-container'>
