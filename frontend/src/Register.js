@@ -2,7 +2,6 @@ import './Register.css'
 import { useState } from 'react'
 import { useSetModal } from './hooks'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 

@@ -60,7 +60,7 @@ useEffect(() => {
     <>
       {house && <section className='ad'>
             <section className='ad-info'>
-              <div className='main-picture' style={{backgroundImage:`url("http://localhost:3000${mainPic}")`}}></div>
+              <div className='main-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${mainPic}")`}}></div>
               <div className='main-info'>
                 <h2>{house.title}</h2>
                 <span>{house.city}</span>
