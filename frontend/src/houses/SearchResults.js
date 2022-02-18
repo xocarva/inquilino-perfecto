@@ -100,24 +100,21 @@ function SearchResults() {
                 <div>No se han encontrado resultados</div>
             }
             {results && results.length > 0 && <>
-
-                <div className="search-results">
+                <section className="search-results">
                 {results.slice(stepHouse * perPageHouses, (stepHouse + 1) * perPageHouses).map(house =>
-                    <div key={house.id} className="house">
-                        <article className='house'>
-                            <div className='house-picture' style={{backgroundImage:`url("http://localhost:3000${house.picture.url}")`}}></div>
-                            <div className='house-info'>
-                                <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link>
-                                <p className='rooms'>{house.city}</p>
-                                <p className='rooms'>{house.rooms} habitaciones</p>
-                                <p className='price'>{house.price}€ / día</p>
-                            </div>
-                            <button className='booking-button' data-houseid={house.id} onClick={handleBooking}>Reservar</button>
-                        </article>
-                    </div>
+                    <article key={house.id} className="house">
+                        <div className='house-picture' style={{backgroundImage:`url("http://localhost:3000${house.picture.url}")`}}></div>
+                        <div className='house-info'>
+                            <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link>
+                            <span className='rooms'>{house.city}</span>
+                            <span className='rooms'>{house.rooms} habitaciones</span>
+                            <span className='price'>{house.price}€ / día</span>
+                        </div>
+                        <button className='booking-button' data-houseid={house.id} onClick={handleBooking}>Reservar</button>
+                    </article>
                 )}
-                </div>
-                <section className='button-steps-container-bookings'>
+                </section>
+                <div className='button-steps-container-bookings'>
                     <span onClick={handlePrev}>
                         ⬅️
                     </span>
@@ -125,7 +122,7 @@ function SearchResults() {
                     <span onClick={handleNext}>
                         ➡️
                     </span>
-                </section>
+                </div>
             </>}
         </>
     )

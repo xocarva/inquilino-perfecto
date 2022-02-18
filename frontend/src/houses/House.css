@@ -1,7 +1,82 @@
-.small-picture {
-    height: 8rem;
-    width: 8rem;
-    background-repeat: no-repeat;
+.ad {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.ad-info {
+    display: flex;
+    justify-content:space-around;
+}
+
+.ad-info .main-picture {
+    height: 20rem;
+    width: 20rem;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5%;
+}
+
+.ad-info .main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ad-info .main-info h2 {
+    font-size: 2rem;
+}
+
+.ad-info .main-info .dates {
+    display: flex;
+    gap: 1rem;
+}
+
+.dates .date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.price-container .price {
+    font-size: 2rem;
+}
+
+.price-container .booking-button:hover {
+    cursor: pointer;
+}
+
+.all-pictures {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-pictures .pictures {
+    display: flex;
+    gap: 1rem;
+}
+
+.all-pictures .pictures .small-picture {
+    height: 5rem;
+    width: 5rem;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.all-pictures .pics-steps-buttons .step-button  {
+    cursor: pointer;
 }
