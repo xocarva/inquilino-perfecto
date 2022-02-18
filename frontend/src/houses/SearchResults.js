@@ -25,7 +25,7 @@ function SearchResults() {
     const [stepHouse, setStepHouse] = useState(0)
 
 
-    let fetchUrl = `http://localhost:3000/houses?startDate=${startDate}&endDate=${endDate}`
+    let fetchUrl = `${REACT_APP_BASE_URL}/houses?startDate=${startDate}&endDate=${endDate}`
     if(query.get('city')) fetchUrl += '&city=' + city
     if(rooms) fetchUrl += '&rooms=' + rooms
     if(price) fetchUrl += '&price=' + price
@@ -103,7 +103,7 @@ function SearchResults() {
                 <section className="search-results">
                 {results.slice(stepHouse * perPageHouses, (stepHouse + 1) * perPageHouses).map(house =>
                     <article key={house.id} className="house">
-                        <div className='house-picture' style={{backgroundImage:`url("http://localhost:3000${house.picture.url}")`}}></div>
+                        <div className='house-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.picture.url}")`}}></div>
                         <div className='house-info'>
                             <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link>
                             <span className='rooms'>{house.city}</span>
