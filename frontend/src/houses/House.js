@@ -1,10 +1,8 @@
-import { Suspense, useEffect } from 'react'
-import { useParams } from "react-router-dom"
+import { Suspense, useEffect, useState } from 'react'
+import {useParams, Link, useNavigate } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useModal, useSetModal, useUser } from '../hooks'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import './House.css'
 
 
@@ -13,6 +11,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function House() {
   const { id, startDate, endDate } = useParams()
+  const navigate = useNavigate()
   const user = useUser()
   const modal = useModal()
   const setModal = useSetModal()
@@ -54,7 +53,7 @@ const handleNext = () => setStepPic((stepPic + 1) % pagsPics)
 
 useEffect(() => {
   setMainPic(house.pictures[0].url)
-}, [])
+}, [house.pictures])
 
   return (
     <>
@@ -62,26 +61,24 @@ useEffect(() => {
             <section className='ad-info'>
               <div className='main-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${mainPic}")`}}></div>
               <div className='main-info'>
-                <h2>{house.title}</h2>
-                <span>{house.city}</span>
-                <span>{house.rooms} habitaciones</span>
-                {startDate && endDate &&
-                <div className='dates'>
+                <h2>🏠 {house.title}</h2>
+                <span>🏙️ {house.city}</span>
+                <span>🚪 {house.rooms} habitaciones</span>
+                <span className='price'>🪙 {house.price}€ / Día</span>
+                {startDate && endDate && <div className='dates'>
                   <div className='date'>
-                    <span>Fecha de entrada</span>
+                    <span>📅 Fecha de entrada</span>
                     <span>{startDate}</span>
                   </div>
                   <div className='date'>
-                    <span>Fecha de salida</span>
+                    <span>📅 Fecha de salida</span>
                     <span>{endDate}</span>
                   </div>
-                </div>
-              }
+                </div>}
+                {startDate && endDate &&
+                  <button className='booking-btn' onClick={handleBooking}>Reservar</button>
+                }
               </div>
-              {startDate && endDate &&<div className='price-container'>
-                <span className='price'>{house.price}€ / Día</span>
-                <button className='booking-button' onClick={handleBooking}>Reservar</button>
-              </div>}
             </section>
             <section className='all-pictures'>
               <div className='pictures'>
@@ -104,6 +101,7 @@ useEffect(() => {
               <h3>Descripción</h3>
               <p>{house.description}</p>
             </section>
+            <button className='back-button' onClick={() => navigate(-1)}>Volver</button>
       </section>}
     </>
   )

@@ -34,6 +34,7 @@ function SearchBar () {
         setCity('')
         setPrice('')
         setRooms('')
+        setShowBar(!showBar)
         navigate(url)
     }
 
