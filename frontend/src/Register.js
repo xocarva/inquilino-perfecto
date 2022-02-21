@@ -15,6 +15,7 @@ function Register() {
     const [password, setPass] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
     const [error, setError] = useState()
+    const [picName, setPicName] = useState('No se ha cargado foto')
     const Navigation = useNavigate()
     const setModal = useSetModal()
 
@@ -28,7 +29,7 @@ function Register() {
         fd.append('bio', bio)
         fd.append('picture', picture)
         fd.append('password', password)
-        const res = await fetch(REACT_APP_BASE_URL +'/users/register', {
+        const res = await fetch(REACT_APP_BASE_URL + '/users/register', {
             method: 'POST',
             body: fd
         })
@@ -42,47 +43,51 @@ function Register() {
         }
     }
 
+    const handleProfilePic = e => {
+        setPicName(e.target.files[0].name)
+    }
+
     return (
         <div className='body-register'>
-            <p className='title-register-page'>Formulario de registro</p>
+            <h2 className='title-register-page'>Formulario de registro</h2>
             <form className='register-page' onSubmit={handleSubmit}>
                 <div>
                     <label>
-                        Nombre <br />
+                        Nombre
                         <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' onChange={e => setName(e.target.value)} />
                     </label>
                     <label>
-                        Apellido <br />
+                        Apellido
                         <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' onChange={e => setLast(e.target.value)} />
-                    </label>
-                    <label>
-                        Email <br />
-                        <input className='input-register' name='email' type='email' value={email} placeholder='Email...' onChange={e => setEmail(e.target.value)} />
-                    </label>
-                    <label>
-                        Confirma Email <br />
-                        <input className='input-register' name='email' type='email' value={mailConfirm} placeholder='Confirma email...' onChange={e => setMailConfirm(e.target.value)} />
-                        {email === mailConfirm ? '✅' : '❌'}
                     </label>
                 </div>
                 <div>
                     <label>
-                        Bio <br />
-                        <textarea name='bio' value={bio} placeholder='bio...' onChange={e => setBio(e.target.value)} />
+                        Email
+                        <input className='input-register' name='email' type='email' value={email} placeholder='Email...' onChange={e => setEmail(e.target.value)} />
                     </label>
-                    <label className='picture'>
-                        <input name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" />
+                    <label>
+                        Confirma Email {email ? email === mailConfirm ? '✅' : '❌' : ''}
+                        <input className='input-register' name='email' type='email' value={mailConfirm} placeholder='Confirma email...' onChange={e => setMailConfirm(e.target.value)} />
                     </label>
+                </div>
+                <label className='bio'>
+                    Bio
+                    <textarea name='bio' value={bio} placeholder='bio...' onChange={e => setBio(e.target.value)} />
+                </label>
+                <div className='picture-container'>
+                    <label for='btn-picture' className='picture'>Cargar foto...</label>
+                    <span id='chosen-file'>{picName}</span>
+                    <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
                 </div>
                 <div id='pass-div'>
                     <label>
-                        Contraseña <br />
+                        Contraseña
                         <input className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' onChange={e => setPass(e.target.value)} />
                     </label >
                     <label>
-                        Confirma contraseña <br />
+                        Confirma contraseña {password ? (password === passConfirm) ? '✅' : '❌' : ''}
                         <input className='input-register' name='contraseña' type='password' value={passConfirm} placeholder='Confirma contraseña...' onChange={e => setPassConfirm(e.target.value)} />
-                        {password === passConfirm ? '✅' : '❌'}
                     </label>
                 </div>
                 <div id='register-button'>

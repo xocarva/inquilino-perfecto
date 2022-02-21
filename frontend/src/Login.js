@@ -15,7 +15,7 @@ function Login() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const res = await fetch(REACT_APP_BASE_URL +'/users/login', {
+    const res = await fetch(REACT_APP_BASE_URL + '/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {
@@ -33,20 +33,21 @@ function Login() {
 
   return (
     <div className='body-login'>
-    <form className="login" onSubmit={handleSubmit}>
+      <form className="login" onSubmit={handleSubmit}>
+        <div className='close-container'><span className='btn-close' onClick={() => setModal(false)}>✖️</span></div>
         <label>
           Email
-          <input name='email' type='email' placeholder='ejemplo@ejemplo.com...'value={email} onChange={e => setEmail(e.target.value)} />
+          <input name='email' type='email' placeholder='ejemplo@ejemplo.com...' value={email} onChange={e => setEmail(e.target.value)} />
         </label>
         <label>
           Contraseña
-          <input name='contraseña' type='password' placeholder='contraseña...' value={password} onChange={e => setPassword(e.target.value)}/>
+          <input name='contraseña' type='password' placeholder='contraseña...' value={password} onChange={e => setPassword(e.target.value)} />
         </label>
         <button className='entrar-button'>Login</button>
         {error && <div className="error">{error}</div>}
-        <p>No estas registrado?</p>
-    </form>
-      <Link to="/register" onClick={() => setModal(false)} className='register-button'><span className='register-button'>Regístrate</span></Link>
+      </form>
+      <p>¿No estás registrado?</p>
+      <Link to="/register" onClick={() => setModal(false)} className='register-button'>Regístrate</Link>
     </div>
   )
 }

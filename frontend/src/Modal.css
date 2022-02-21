@@ -9,8 +9,16 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .modal-fg {
-    background-color: white;
+    background-color: #97A97C;
     padding: 20px;
+    border-radius: 20px;
+  }
+
+
+  @media (max-width:480px) {
+    .modal-fg{
+      border-radius: inherit;
+    }
   }

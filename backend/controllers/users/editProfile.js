@@ -10,6 +10,7 @@ const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } =  process.en
 const updateUser = async (req, res) => {
     let newUserData = req.body
     const userId = req.user.id
+    console.log(req.body)
 
     try {
         await updateUserValidator.validateAsync(newUserData)
@@ -96,7 +97,9 @@ const updateUser = async (req, res) => {
     }
 
     res.status(202)
-    res.send({ message: 'User data updated' })
+    res.send({
+        message: 'User data updated'
+    })
 }
 
 module.exports = updateUser

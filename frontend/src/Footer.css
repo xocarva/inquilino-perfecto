@@ -5,13 +5,14 @@
     align-items: center;
     width: 100vw;
     height: 5vh;
-    background-color: #E9F5DB;
-    gap: 2rem;
+    background-color: #CFE1B9;
+    gap: 1rem;
 }
-
 
 .icon {
-    width: 30px;
-    height: 30px;
+    height: 1.5rem;
 }
+
+
+
 
