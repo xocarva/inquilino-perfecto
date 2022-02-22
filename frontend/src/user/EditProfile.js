@@ -15,6 +15,7 @@ function EditProfile() {
     const [password, setPassword] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
     const [bio, setBio] = useState('')
+    const [picName, setPicName] = useState('No se ha cargado foto')
 
     const user = useUser()
     const setUser = useSetUser()
@@ -26,6 +27,9 @@ function EditProfile() {
         }
     })
 
+    const handleProfilePic = e => {
+        setPicName(e.target.files[0].name)
+    }
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -72,37 +76,42 @@ function EditProfile() {
                 <div className='data-container'>
                     <div className='up-container-profile'>
                         <label className='first-name-profile'>
-                    Nombre:
+                    Nombre
                     <input value={firstName} onChange={e => setFirstName(e.target.value)} placeholder={userData.firstName} />
                 </label>
                 <label className='last-name-profile'>
-                    Apellidos:
+                    Apellidos
                     <input value={lastName} onChange={e => setLastName(e.target.value)} placeholder={userData.lastName} />
                 </label>
                 <label className='email-profile'>
-                    Email:
+                    Email
                     <input value={email} onChange={e => setEmail(e.target.value)} placeholder={userData.email} />
                 </label>
                 <label className='confirm-email-profile'>
-                    Confirma email:
-                    {email === emailConfirm ? '✅' : '❌'}
+                    Confirma email
+                    { email ? email === emailConfirm ? '✅' : '❌' : ''}
                     <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
                 </label>
                     </div>
                 <label className='bio-profile'>
-                    Mi Bio:
+                    Mi Bio
                     <textarea value={bio} onChange={e => setBio(e.target.value)} placeholder={userData.bio} />
                 </label>
                 <div className='down-container-profile'>
                     <label className='password-profile'>
-                    Password:
+                    Contraseña
                     <input type="password" value={password} placeholder='********' onChange={e => setPassword(e.target.value)} />
                 </label>
                 <label className='confirm-password-profile'>
-                    Confirma password:
-                    {passConfirm === password ? '✅' : '❌'}
+                    Confirma contraseña
+                    { password ? passConfirm === password ? '✅' : '❌' : ''}
                     <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                 </label>
+                <div className='picture-container'>
+                    <label htmlFor='btn-picture' className='picture'>Editar foto...</label>
+                    <span id='chosen-file'>{picName}</span>
+                    <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
+                </div>
                 </div>
                 </div>
                 <button className='edit-button-profile'>Guardar cambios</button>

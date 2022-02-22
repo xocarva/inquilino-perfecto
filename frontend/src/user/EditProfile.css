@@ -1,5 +1,7 @@
 .edit-profile-page {
     width: 90vw;
+    display: flex;
+    flex-direction: column;
     height: min-content;
     margin: auto;
 }
@@ -10,11 +12,12 @@
     height: 70vh;
     display: grid;
     gap: 2rem;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
-    "dataContainer dataContainer"
-    "editButtonProfile editButtonProfile"
+    "dataContainer"
+    "dataContainer"
+    "editButtonProfile"
     ;
 }
 
@@ -49,14 +52,14 @@
 
 
 .first-name-profile, .last-name-profile {
-    width: 10vw;
+    width: 20vw;
     font-size: 1.3rem;
 }
 
 
 .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 10vw;
+    width: 20vw;
     height: 35px;
     font-size: 1.3rem;
     background-color: #B5C99A;
@@ -69,13 +72,13 @@
 
 
 .email-profile, .confirm-email-profile {
-    width: 17vw;
+    width: 150px;
     font-size: 1.3rem;
 }
 
 
 .email-profile>input, .confirm-email-profile>input {
-    width: 17vw;
+    width: 150px;
     height: 35px;
     font-size: 1.2rem;
 }
@@ -99,26 +102,26 @@
     width: 90vw;
     display: flex;
     justify-content: space-between;
-    gap: 5rem;
+    gap: 3rem;
 }
 
 
 .password-profile {
-    width: 20vw;
+    width: 200px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
 
 
 .password-profile>input {
-    width: 20vw;
+    width: 210px;
     height: 35px;
     font-size: 1rem;
 }
 
 
 .confirm-password-profile {
-    width: 20vw;
+    width: 210px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
@@ -126,29 +129,39 @@
 
 .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 20vw;
+    width: 210px;
     height: 35px;
     font-size: 1.3rem;
 }
 
-
-.camera-button {
-    cursor: pointer;
-    background-color: #c0c3de;
-    width: 100%;
-    height: 70px;
-    border-top: 3px dashed #2e2e2ed7;
-    cursor: pointer;
+.picture-container {
+    display: flex;
+    justify-content: start;
+    gap: 2rem;
+    align-items: center;
 }
 
+.picture-container .picture {
+    gap: 1rem;
+    background-color: #B5C99A;
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px;
+    font-size: 12px;
+}
 
-.camera-button:hover {
-    background-color: #898b9f;
+#chosen-file {
+    font-size: 12px;
 }
 
 
 .edit-button-profile {
-    width: 20vw;
+    width: 180px;
     height: 40px;
     border-radius: 7px;
     font-size: 1.3rem;
@@ -159,10 +172,6 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
 }
 
-
-.edit-button-profile:hover {
-    background-color: #898b9f;
-}
 
 
 .edit-confirm-message-container {
@@ -211,20 +220,21 @@
 }
 
 
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
     .edit-profile-page {
         width: 90vw;
-        height: 100vh;
         margin: auto;
+        height: min-content;
     }
     .input-container-profile {
-        width: 70vw;
-        height: 100vh;
+        width: 97vw;
+        height: 800px;
     }
     .data-container {
         display: flex;
         flex-direction: column;
-        height: 85vh;
+        height: min-content;
+        margin-bottom: 30px;
     }
     .up-container-profile {
         width: 70vw;
@@ -234,9 +244,12 @@
     }
     .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
         box-sizing: border-box;
-        width: 65vw;
+        width: 93vw;
         height: 35px;
         margin-bottom: 1rem;
+    }
+    .bio-profile>textarea {
+        height: 100px;
     }
     .email-profile, .confirm-email-profile {
         width: 60vw;
@@ -255,14 +268,18 @@
         width: 125px;
         height: 125px;
     }
+
+    .edit-button-profile {
+        margin: 0 auto;
+
+    }
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 480px) {
     .input-container-profile {
         display: flex;
         flex-direction: column;
-        height: min-content;
     }
     .data-container {
         display: flex;
@@ -311,30 +328,13 @@
     .password-profile, .confirm-password-profile {
         width: 80vw;
     }
-    .avatar-container {
-        width: 90vw;
-        height: 70px;
-        margin: 0;
-    }
-    .avatar-container {
-        height: 50px;
-        margin: 0;
-    }
-    .avatar {
-        display: none;
-    }
-    .camera-button {
-        width: 90vw;
-        height: 100%;
-        font-size: 2rem;
-        border: none;
-    }
     .edit-button-profile {
-        margin: auto;
-        margin-bottom: 1rem;
+        margin: 0;
+        margin-bottom: 4.5rem;
         width: 90vw;
         height: 50px;
     }
+
     .edit-confirm-message-container {
         width: 80vw;
         height: 50vh;
