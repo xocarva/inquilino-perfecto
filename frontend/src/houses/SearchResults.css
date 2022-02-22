@@ -12,41 +12,59 @@
     align-items: center;
     border-bottom: 1px solid #718355;
     padding-bottom: 1rem;
+    width: 50rem;
+    justify-content: space-around;
 }
 
 .search-results .house .house-picture {
-    height: 10rem;
-    width: 20rem;
+    height: 12rem;
+    width: 25rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     border-radius: 15px;
+    flex-shrink: 0;
 }
 
 .search-results .house .house-info {
     display: flex;
     flex-direction: column;
+    height: 12rem;
+    justify-content: space-around;
+}
+
+.search-results .house .house-info .details-container {
+    display: flex;
     gap: 1rem;
+    flex-grow: 1;
+    justify-content: space-around;
+}
+
+.search-results .house .house-info .details-container .house-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .search-results .house .house-info .title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    width: 20rem;
 }
 
 .search-results .house .house-info .title a{
     color: #718355;
 }
 
-.search-results .house .house-info .price {
+.search-results .house .house-info .details-container .house-details .price {
     font-size: 1rem;
 }
 
-.search-results .house .house-info .city {
+.search-results .house .house-info .details-container .house-details .city {
     font-size: 1rem;
 }
 
-.search-results .house .house-info .rooms {
+.search-results .house .house-info .details-container .house-details .rooms {
     font-size: 1rem;
 }
 
@@ -104,11 +122,29 @@
     }
     .search-results .house {
         flex-direction: column;
+        gap: 2rem;
     }
     .booking-button {
         width: 100%;
     }
     .search-results .house .house-picture {
         width: 80vw;
+    }
+
+    .search-results .house .house-info {
+        gap: 1rem;
+        width: 80vw;
+    }
+
+    .search-results .house .house-info .title {
+        width: 80vw;
+    }
+
+    .search-results .house .house-info .details-container .house-details {
+        gap: 1rem;
+    }
+    .search-results .house .house-info .details-container {
+        flex-direction: column;
+        margin-bottom: 1.2rem;
     }
 }

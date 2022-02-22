@@ -22,7 +22,7 @@ const register = async (req, res) => {
     try {
         await userValidator.validateAsync(user)
     } catch (error) {
-        res.status(401)
+        res.status(400)
         res.end(error.message)
         return
     }
@@ -44,13 +44,13 @@ const register = async (req, res) => {
         userExists = await usersRepository.getUserByEmail(user.email)
 
     } catch (error) {
-        res.status(404)
+        res.status(400)
         res.end(error.message)
         return
     }
 
     if (userExists) {
-        res.status(403)
+        res.status(400)
         res.end('User already exists')
         return
       }
@@ -59,7 +59,7 @@ const register = async (req, res) => {
     try {
         encryptedPassword = await encryptor.encrypt(user.password)
     } catch (error) {
-        res.status(404)
+        res.status(400)
         res.end(error.message)
         return
     }
@@ -83,7 +83,7 @@ const register = async (req, res) => {
     try {
         userId = await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode, picture: pictureUrl  })
     } catch (error) {
-        res.status(401)
+        res.status(400)
         res.end(error.message)
         return
     }

@@ -9,7 +9,7 @@ const rate = async (req, res) => {
     try {
         await ratingValidator.validateAsync({ rating })
     } catch (error) {
-        res.status(401)
+        res.status(400)
         res.end(error.message)
         return
     }

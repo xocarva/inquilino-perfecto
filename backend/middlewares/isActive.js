@@ -12,7 +12,7 @@ const isActive = async (req, res, next) => {
   }
 
   if (!isActive) {
-    res.status(401)
+    res.status(403)
     res.end('Must be an active user to do that')
     return
   }

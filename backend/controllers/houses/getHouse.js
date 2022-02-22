@@ -13,7 +13,7 @@ const getHouse = async (req, res) => {
     }
 
     if(!house) {
-        res.status(404)
+        res.status(400)
         res.end('House not found')
         return
     }

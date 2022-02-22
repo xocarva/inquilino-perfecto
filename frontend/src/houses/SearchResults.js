@@ -57,7 +57,14 @@ function SearchResults() {
                     <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
                 </div>
             )
+        } else if (res.status === 403) {
+            setModal(
+                <div className='modal-container'>
+                    <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>
+                </div>
+            )
         } else {
+            console.log(res)
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido realizar la reserva.</p>
@@ -107,11 +114,15 @@ function SearchResults() {
                         <div className='house-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.picture.url}")`}}></div>
                         <div className='house-info'>
                             <span className='title'>🏠 <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link></span>
-                            <span className='city'>🏙️ {house.city}</span>
-                            <span className='rooms'>🚪 {house.rooms} habitaciones</span>
-                            <span className='price'>🪙 {house.price} €/día</span>
+                            <div className='details-container'>
+                                <div className='house-details'>
+                                    <span className='city'>🏙️ {house.city}</span>
+                                    <span className='rooms'>🚪 {house.rooms} habitaciones</span>
+                                    <span className='price'>🪙 {house.price} €/día</span>
+                                </div>
+                                <button className='booking-button' data-houseid={house.id} onClick={handleBooking}>Reservar</button>
+                            </div>
                         </div>
-                        <button className='booking-button' data-houseid={house.id} onClick={handleBooking}>Reservar</button>
                     </article>
                 )}
                 </section>

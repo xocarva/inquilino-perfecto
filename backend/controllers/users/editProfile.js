@@ -14,7 +14,7 @@ const updateUser = async (req, res) => {
     try {
         await updateUserValidator.validateAsync(newUserData)
     } catch (error) {
-        res.status(401)
+        res.status(400)
         res.end(error.message)
         return
     }
@@ -41,7 +41,7 @@ const updateUser = async (req, res) => {
         try {
             encryptedPassword = await encryptor.encrypt(newUserData.password)
        } catch (error) {
-           res.status(403)
+           res.status(500)
            res.end(error.message)
            return
        }
