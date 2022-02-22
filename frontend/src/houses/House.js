@@ -46,7 +46,7 @@ function House() {
     }
 }
 
-const perPagePics = 6
+const perPagePics = 9
 const pagsPics = Math.ceil(house.pictures?.length / perPagePics)
 const handlePrev = () => setStepPic(stepPic > 0 ? stepPic - 1 : pagsPics - 1)
 const handleNext = () => setStepPic((stepPic + 1) % pagsPics)
