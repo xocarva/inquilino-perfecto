@@ -8,7 +8,7 @@ const getPendingMadeBookings = async (req, res) => {
         bookings = await bookingsRepository.getPendingMadeBookings(userId)
 
     } catch (error) {
-        res.status(404)
+        res.status(400)
         res.end(error.message)
         return
     }

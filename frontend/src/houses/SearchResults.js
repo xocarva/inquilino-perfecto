@@ -57,7 +57,7 @@ function SearchResults() {
                     <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
                 </div>
             )
-        } else if (res.status === 401) {
+        } else if (res.status === 403) {
             setModal(
                 <div className='modal-container'>
                     <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>

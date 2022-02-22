@@ -13,7 +13,7 @@ const validate = async (req, res) => {
         await usersRepository.activateUser(user)
 
     } catch (error) {
-        res.status(401)
+        res.status(400)
         res.end(error.message)
         return
     }

@@ -15,7 +15,7 @@ const confirmBooking = async (req, res) => {
     }
 
     if (!booking || booking.accepted) {
-        res.status(404)
+        res.status(400)
         res.end('This booking does not exist or already was confirmed')
         return
     }
@@ -32,7 +32,7 @@ const confirmBooking = async (req, res) => {
     }
 
     if(userId !== house.ownerId) {
-        res.status(401)
+        res.status(400)
         res.end('User not allowed to confim this booking')
         return
     }

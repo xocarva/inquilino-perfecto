@@ -6,7 +6,7 @@ const isAuthorized = (req, res, next) => {
   const bearerToken = req.headers.authorization
 
   if (!bearerToken) {
-    res.status(403)
+    res.status(401)
     res.end('You are not authorized to do that')
     return
   }
