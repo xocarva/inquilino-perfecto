@@ -24,7 +24,7 @@ const login = async (req, res) => {
   }
 
   if (!user) {
-    res.status(404)
+    res.status(400)
     res.end('User not found')
     return
   }

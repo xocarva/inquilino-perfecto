@@ -41,7 +41,7 @@ const updateUser = async (req, res) => {
         try {
             encryptedPassword = await encryptor.encrypt(newUserData.password)
        } catch (error) {
-           res.status(403)
+           res.status(500)
            res.end(error.message)
            return
        }

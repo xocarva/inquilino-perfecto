@@ -44,13 +44,13 @@ const register = async (req, res) => {
         userExists = await usersRepository.getUserByEmail(user.email)
 
     } catch (error) {
-        res.status(404)
+        res.status(400)
         res.end(error.message)
         return
     }
 
     if (userExists) {
-        res.status(403)
+        res.status(400)
         res.end('User already exists')
         return
       }
