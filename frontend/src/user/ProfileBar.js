@@ -6,7 +6,7 @@ function ProfileBar({ userName, userPicture, logoutButton }) {
     return (
         <div className='wrapper' tabIndex={1}>
             <div className='title-profile'>
-                <div>{userName}<span className='name-profile'>{userPicture}</span></div>
+                <div><span id='name-profile'>{userName}</span><span className='pic-profile'>{userPicture}</span></div>
             </div>
             <nav className='dropdown-profile' onClick={() => document.activeElement.blur('wrapper')}>
                 <Link className='dropdown-nav' to="/user/edit-profile">Editar Perfil</Link>

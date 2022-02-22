@@ -80,6 +80,7 @@ function SearchResults() {
     return(
         <>
             <div className='filters'>
+                <span>📅  Desde el {startDate} al {endDate}</span>
                 <div className='sort-container'>
                     <span>Ordenar por:</span>
                     <select onChange={e => setSortCriterion(e.target.value)}>
@@ -105,21 +106,21 @@ function SearchResults() {
                     <article key={house.id} className="house">
                         <div className='house-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.picture.url}")`}}></div>
                         <div className='house-info'>
-                            <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link>
-                            <span className='rooms'>{house.city}</span>
-                            <span className='rooms'>{house.rooms} habitaciones</span>
-                            <span className='price'>{house.price}€ / día</span>
+                            <span className='title'>🏠 <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link></span>
+                            <span className='city'>🏙️ {house.city}</span>
+                            <span className='rooms'>🚪 {house.rooms} habitaciones</span>
+                            <span className='price'>🪙 {house.price} €/día</span>
                         </div>
                         <button className='booking-button' data-houseid={house.id} onClick={handleBooking}>Reservar</button>
                     </article>
                 )}
                 </section>
                 <div className='button-steps-container-bookings'>
-                    <span onClick={handlePrev}>
+                    <span className='arrow' onClick={handlePrev}>
                         ⬅️
                     </span>
                     <span>{stepHouse + 1}/{Math.ceil(results.length / perPageHouses)}</span>
-                    <span onClick={handleNext}>
+                    <span className='arrow' onClick={handleNext}>
                         ➡️
                     </span>
                 </div>

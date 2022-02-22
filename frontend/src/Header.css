@@ -3,89 +3,80 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 20px;
+    background-color: #CFE1B9;
 }
 
-.header h1 {
-    background-color: lightgray;
-    padding: 10px;
-    width: 50vw;
-    text-align: center;
-    border-radius: 20px;
-    color: black;
-    font-weight: normal;
-    box-shadow: 1px 1px 10px;
-}
-
-.title {
+.header .title {
     text-decoration: none;
+    color: #000000;
+    font-size: 3rem;
+    padding: 1rem;
 }
 
-.menu-login-register {
+.header .menu-login-register {
     display: flex;
-    flex-wrap: wrap;
-    background-color: lightgray;
-    padding: 20px;
-    width: 10vw;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
-    border-radius: 20px;
     cursor: pointer;
-    box-shadow: 1px 1px 10px;
-}   
+}
 
-.menu-login-register div {
+.header .menu-login-register div {
     color: black;
     text-decoration: underline;
 }
 
 
-header #avatar {
+#avatar {
     padding: 0 auto;
     border-radius: 50%;
     height: 50px;
     width: 50px;
     background-size: cover;
-  }
-  
+}
+
 
 .logout-boton {
-    color: red;
+    color: black;
+    font-weight: bold;
 }
 
 .logout-boton:hover {
     text-decoration: underline;
-    color: blueviolet;
     cursor: pointer;
 }
 
 
-@media (max-width:667px) {
+@media (max-width:768px) {
 
     .header {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
-    .header h1 {
-        width: 100vw;
-        margin: 0;
-        padding: 0
+    .header .title {
+        text-decoration: none;
+        color: #000000;
+        font-size: 3rem;
+        text-align: center;
+        padding: 0;
     }
 
-    header #avatar {
-        width: 100px;
-        height: 70px;
-    }
-
-    .menu-login-register  {
+    .header .menu-login-register  {
         display: flex;
         width: 100vw;
         height: min-content;
         margin: 0;
         padding: 0;
-        padding-top: 8px;
         padding-bottom: 8px;
-        margin-top: 10px;
         font-size: 20px;
+    }
+
+    .header .menu-login-register div {
+        margin: 0;
+        padding: 0;
+    }
+
+    #name-profile {
+        display: none;
     }
 }

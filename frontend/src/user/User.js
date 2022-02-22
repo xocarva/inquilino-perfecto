@@ -7,6 +7,7 @@ import NewAd from "./NewAd"
 import ErrorBoundary from "../ErrorBoundary"
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../hooks'
+import NotFound from "../NotFound"
 
 
 function User() {
@@ -14,7 +15,7 @@ function User() {
     const user = useUser()
     if (!user) navigate('/')
     return (
-        <ErrorBoundary fallback="Una ruta falla desde user">
+        <ErrorBoundary fallback={<NotFound />}>
             <Routes>
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="tenant-profile" element={<TenantProfile />} />

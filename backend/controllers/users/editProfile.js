@@ -95,8 +95,27 @@ const updateUser = async (req, res) => {
         }
     }
 
+    let updatedUser
+
+    try {
+        updatedUser = await usersRepository.getUserById(userId)
+    } catch (error){
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
     res.status(202)
-    res.send({ message: 'User data updated' })
+    res.send({
+        message: 'User data updated',
+        user: {
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            picture: updatedUser.picture,
+            bio: updatedUser.bio,
+            email: updatedUser.email
+        }
+    })
 }
 
 module.exports = updateUser

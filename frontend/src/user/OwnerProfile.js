@@ -3,6 +3,7 @@ import { Suspense, useState } from "react"
 import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
+import ScoreToTenant from './ScoreToTenant'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -16,7 +17,7 @@ function Puntuacion({ value }) {
             {value >= 5 ? '★' : '☆'}
         </span>
     )
-}   
+}
 
 
 function OwnerProfile() {
@@ -40,7 +41,12 @@ function OwnerProfile() {
 
     const rentalsOffered = useFetch(REACT_APP_BASE_URL + '/bookings/received/accepted')
     console.log(rentalsOffered)
+    const [stepBooking, setStepBooking] = useState(0)
 
+    const perPageBookings = 2
+    const pagsBookings = Math.ceil(rentalsOffered?.length / perPageBookings)
+    const handlePrevBookings = () => setStepBooking(stepBooking > 0 ? stepBooking - 1 : pagsBookings - 1)
+    const handleNextBookings = () => setStepBooking((stepBooking + 1) % pagsBookings)
     return (
         <div className="body-owner-profile">
             <section>
@@ -64,7 +70,26 @@ function OwnerProfile() {
                 </article>
             </section>
             <section className='rental-history'>
-                        <h3>Historico de alquileres ofertados</h3>
+                <h3>Historico de alquileres ofertados</h3>
+                {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
+                    <article className='card-house-historic-booking' key={booking.houseId}>
+                        <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
+                        <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>{booking.title}</Link>
+                        <p key={booking.startDate} className='date-historic-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                        <div className='state-booking'>
+                        {Date.parse(booking.endDate) < new Date() && <ScoreToTenant bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }}/>}
+                        </div>
+                    </article>
+                )}
+            </section>
+            <section className='button-steps-container-bookings'>
+                <span onClick={handlePrevBookings}>
+                    ⬅️
+                </span>
+                <span>{stepBooking + 1}/{Math.ceil(rentalsOffered.length / perPageBookings)}</span>
+                <span onClick={handleNextBookings}>
+                    ➡️
+                </span>
             </section>
             <section className='body-rating'>
                 <h3>Valoraciones recibidas como casero</h3>
@@ -75,7 +100,7 @@ function OwnerProfile() {
                                 <Puntuacion key={rating.rating} value={rating.rating} />
                                 <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                             </article>
-                        )}  
+                        )}
                     </section>
                     <section id='buttons-owner-rating'>
                         <span onClick={handlePrevRatings}>
