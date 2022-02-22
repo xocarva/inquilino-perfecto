@@ -37,13 +37,20 @@ function House() {
                 <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
             </div>
         )
-    } else {
-        setModal(
-            <div className='modal-container'>
-                <p>No se ha podido realizar la reserva.</p>
-            </div>
-        )
-    }
+    } else if (res.status === 401) {
+      setModal(
+          <div className='modal-container'>
+              <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>
+          </div>
+      )
+  } else {
+      console.log(res)
+      setModal(
+          <div className='modal-container'>
+              <p>No se ha podido realizar la reserva</p>
+          </div>
+      )
+  }
 }
 
 const perPagePics = 9
