@@ -15,7 +15,6 @@ function EditProfile() {
     const [password, setPassword] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
     const [bio, setBio] = useState('')
-    const [picture, setPicture] = useState('')
 
     const user = useUser()
     const setUser = useSetUser()
@@ -29,9 +28,8 @@ function EditProfile() {
 
 
     const handleSubmit = async e => {
-        console.log('voy a enviar')
         e.preventDefault()
-        setPicture(e.target.picture.files[0])
+        const picture = e.target.picture.files[0]
         const fd = new FormData()
         firstName && fd.append('firstName', firstName)
         lastName && fd.append('lastName', lastName)
@@ -39,7 +37,6 @@ function EditProfile() {
         bio && fd.append('bio', bio)
         picture && fd.append('picture', picture)
         password && fd.append('password', password)
-        
         const res = await fetch(REACT_APP_BASE_URL + '/users/', {
             method: 'PATCH',
             body: fd,
@@ -47,32 +44,25 @@ function EditProfile() {
                 'Authorization': 'Bearer ' + user.token
             }
         })
+        const data = await res.json()
+        const newUser = data.user
+
         if (res.ok) {
-            let newUserData = { ...user }
-            if(firstName) newUserData = { ...user, firstName}
-            if(lastName) newUserData = { ...user, lastName}
-            if(bio) newUserData = { ...user, bio}
-            if(picture) newUserData = { ...user, picture}
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
                     <p>Tus cambios se guardaron correctamente.</p>
                     <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
-                    {/* <Loading />
-                    <p>Cargando nuevos datos...</p> */}
                 </article>
             )
-            console.log(newUserData)
-            setUser(newUserData)
-            // setTimeout(() => {
-            //     setUser(newUserData)
-            //     window.location.reload(true)
-            // }, 4000)
+            setUser({
+                token: user.token,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                picture: newUser.picture
+            })
+            window.location.reload(true)
         }
-    }
-
-    const handleAvatar = e => {
-        setModal(<div className='avatar-preview' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${userData.picture} )`}}/>)
     }
 
     return (
@@ -114,13 +104,6 @@ function EditProfile() {
                     <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                 </label>
                 </div>
-                </div>
-                <div className='avatar-container'>
-                    <div onClick={handleAvatar} className='avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${userData.picture} )`}}/>
-                    <label className='camera-button'>
-                        <div>📷</div>
-                        <input className='upload-avatar' name='picture' type='file' accept="image/x-png,image/gif,image/jpeg,image/png" onChange={e => e.preventDefault()}/>
-                    </label>
                 </div>
                 <button className='edit-button-profile'>Guardar cambios</button>
             </form>

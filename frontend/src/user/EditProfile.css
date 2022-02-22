@@ -13,7 +13,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-    "dataContainer avatar"
+    "dataContainer dataContainer"
     "editButtonProfile editButtonProfile"
     ;
 }
@@ -27,7 +27,7 @@
 
 
 .data-container {
-    width: 67vw;
+    width: 90vw;
     height: 40vh;
     display: grid;
     grid-template-columns: 1fr;
@@ -41,7 +41,7 @@
 
 
 .up-container-profile {
-    width: 60vw;
+    width: 90vw;
     display: flex;
     gap: 1rem;
     justify-content: space-between;
@@ -59,13 +59,12 @@
     width: 10vw;
     height: 35px;
     font-size: 1.3rem;
-    background-color: #5d427337;
+    background-color: #B5C99A;
     margin-top: 0.5rem;
     padding-left: 0.5rem;
     border: none;
     border-radius: 5px;
     color: #2e2e2ed7;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
 }
 
 
@@ -91,13 +90,13 @@
 
 
 .bio-profile>textarea {
-    width: 60vw;
+    width: 90vw;
     height: 100px;
 }
 
 
 .down-container-profile {
-    width: 60vw;
+    width: 90vw;
     display: flex;
     justify-content: space-between;
     gap: 5rem;
@@ -133,37 +132,6 @@
 }
 
 
-.avatar-container {
-    font-size: 3rem;
-    width: 20vw;
-    height: 285px;
-    text-align: center;
-    background-color: #5d427337;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
-    border: 3px solid #2e2e2ed7;
-    box-sizing: border-box;
-}
-
-
-.avatar {
-    cursor: pointer;
-    width: 170px;
-    height: 170px;
-    margin-top: 1rem;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-    border: 4px dashed #2e2e2ed7;
-}
-
-
 .camera-button {
     cursor: pointer;
     background-color: #c0c3de;
@@ -179,17 +147,12 @@
 }
 
 
-.upload-avatar {
-    display: none;
-}
-
-
 .edit-button-profile {
     width: 20vw;
     height: 40px;
     border-radius: 7px;
     font-size: 1.3rem;
-    background-color: #c0c3de;
+    background-color: #B5C99A;
     border: none;
     cursor: pointer;
     justify-self: center;

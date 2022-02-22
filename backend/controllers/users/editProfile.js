@@ -10,7 +10,6 @@ const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } =  process.en
 const updateUser = async (req, res) => {
     let newUserData = req.body
     const userId = req.user.id
-    console.log(req.body)
 
     try {
         await updateUserValidator.validateAsync(newUserData)
@@ -96,9 +95,26 @@ const updateUser = async (req, res) => {
         }
     }
 
+    let updatedUser
+
+    try {
+        updatedUser = await usersRepository.getUserById(userId)
+    } catch (error){
+        res.status(500)
+        res.end(error.message)
+        return
+    }
+
     res.status(202)
     res.send({
-        message: 'User data updated'
+        message: 'User data updated',
+        user: {
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            picture: updatedUser.picture,
+            bio: updatedUser.bio,
+            email: updatedUser.email
+        }
     })
 }
 

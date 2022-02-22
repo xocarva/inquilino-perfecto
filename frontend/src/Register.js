@@ -1,6 +1,6 @@
 import './Register.css'
 import { useState } from 'react'
-import { useSetModal } from './hooks'
+import { useSetModal, useUser } from './hooks'
 import { useNavigate } from 'react-router-dom';
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -18,6 +18,11 @@ function Register() {
     const [picName, setPicName] = useState('No se ha cargado foto')
     const Navigation = useNavigate()
     const setModal = useSetModal()
+    const user = useUser()
+
+    if (user) {
+        Navigation('/')
+    }
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -76,7 +81,7 @@ function Register() {
                     <textarea name='bio' value={bio} placeholder='bio...' onChange={e => setBio(e.target.value)} />
                 </label>
                 <div className='picture-container'>
-                    <label for='btn-picture' className='picture'>Cargar foto...</label>
+                    <label htmlFor='btn-picture' className='picture'>Cargar foto...</label>
                     <span id='chosen-file'>{picName}</span>
                     <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
                 </div>

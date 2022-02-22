@@ -26,7 +26,7 @@ function Header() {
                 {user &&
                     <ProfileBar className='menu-login-register'
                         userName={user.firstName}
-                        userPicture={<div id="avatar" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${user.picture})` }} />}
+                        userPicture={<div id="avatar" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${user.picture})` }} />}
                         logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>Cerrar sesión</span>}
                     />
                 }
