@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
-import Loading from '../Loading'
 import Puntuacion from '../Puntuacion'
 import './TenantProfile.css'
 
@@ -26,13 +25,8 @@ const ScoreToOwner = ( { bookingData } ) =>  {
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
                     <p>Tus voto se guardó correctamente.</p>
-                    <Loading />
-                    <p>Cargando tu nuevo voto...</p>
                 </article>
             )
-            setTimeout(() => {
-                window.location.reload(true)
-            }, 2000)
         }
     }
 

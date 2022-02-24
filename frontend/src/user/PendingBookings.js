@@ -1,9 +1,9 @@
 import './PendingBookings.css'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Loading from '../Loading'
-import useFetch from '../useFetch'
 import CardReceivedPendingBooking from './CardReceivedPendingBooking'
 import CardMadePendingBooking from './CardMadePendingBooking'
+import { useUser } from '../hooks'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -11,15 +11,35 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function PendingBookings() {
 
-    const dataReceivedBookings = useFetch(REACT_APP_BASE_URL + '/bookings/received/pending')
+    const user = useUser()
 
-    let classNameReceivedPendingBookingsSection
-    dataReceivedBookings.length === 0 ? classNameReceivedPendingBookingsSection = '-off' : classNameReceivedPendingBookingsSection = '-on'
+    const [dataReceivedBookings, setDataReceivedBookings] = useState(null)
 
-    const dataMadeBookings = useFetch(REACT_APP_BASE_URL + '/bookings/made/pending')
+    useEffect(() => {
+        fetch(REACT_APP_BASE_URL + '/bookings/received/pending', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+        })
+        .then(response => response.json())
+        .then(data => setDataReceivedBookings(data))
+    }, [dataReceivedBookings])
+
+
+    const [dataMadeBookings, setDataMadeBookings] = useState(null)
+
+    useEffect(() => {
+        fetch(REACT_APP_BASE_URL + '/bookings/made/pending', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+        })
+        .then(response => response.json())
+        .then(data => setDataMadeBookings(data))
+    }, [dataMadeBookings])
 
     let classNameMadePendingBookingsSection
-    dataMadeBookings.length === 0 ? classNameMadePendingBookingsSection = '-off' : classNameMadePendingBookingsSection = '-on'
+    dataMadeBookings?.length === 0 ? classNameMadePendingBookingsSection = '-off' : classNameMadePendingBookingsSection = '-on'
 
     const [stepReceivedBooking, setStepReceivedBooking] = useState(0)
 
@@ -39,18 +59,18 @@ function PendingBookings() {
 
     return (
         <section className="pending-bookings-page">
-            <section className={'received-pending-bookings-section' + classNameReceivedPendingBookingsSection}>
+            <section className='received-pending-bookings-section'>
                 <h3>Peticiones de alquiler recibidas pendientes</h3>
                 <section className='received-pending-bookings-container'>
                     {dataReceivedBookings?.slice(stepReceivedBooking * perPageReceivedBookings, (stepReceivedBooking + 1) * perPageReceivedBookings).map(booking =>
-                        <CardReceivedPendingBooking bookingData={booking} />
+                        <CardReceivedPendingBooking  key={booking.bookingId} bookingData={booking} />
                     )}
                 </section>
                 <section className='button-steps-container-bookings'>
                     <span onClick={handlePrevReceivedBookings}>
                         ⬅️
                     </span>
-                    <span>{stepReceivedBooking + 1}/{Math.ceil(dataReceivedBookings.length / perPageReceivedBookings)}</span>
+                    <span>{stepReceivedBooking + 1}/{Math.ceil(dataReceivedBookings?.length / perPageReceivedBookings)}</span>
                     <span onClick={handleNextReceivedBookings}>
                         ➡️
                     </span>
@@ -60,14 +80,14 @@ function PendingBookings() {
                 <h3>Peticiones de alquiler hechas pendientes</h3>
                 <section className="made-pending-bookings-container">
                     {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
-                        <CardMadePendingBooking bookingData={booking} />
+                        <CardMadePendingBooking key={booking.bookingId} bookingData={booking} />
                     )}
                 </section>
                 <section className='button-steps-container-bookings'>
                     <span onClick={handlePrevMadeBookings}>
                         ⬅️
                     </span>
-                    <span>{stepMadeBooking + 1}/{Math.ceil(dataMadeBookings.length / perPageMadeBookings)}</span>
+                    <span>{stepMadeBooking + 1}/{Math.ceil(dataMadeBookings?.length / perPageMadeBookings)}</span>
                     <span onClick={handleNextMadeBookings}>
                         ➡️
                     </span>

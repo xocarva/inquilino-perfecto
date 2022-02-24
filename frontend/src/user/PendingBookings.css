@@ -7,9 +7,6 @@
     align-items: center;
 }
 
-.received-pending-bookings-section-off {
-    display: none;
-}
 
 
 .made-pending-bookings-section-off {
@@ -92,13 +89,16 @@
 
 
 .buttons-received-bookings>span {
-    cursor: pointer;
-    width: 100px;
-    height: 25px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
     border-radius: 10px;
-    font-size: 1.2rem;
-    background-color: #c0c3de;
+    background-color: #B5C99A;
+    box-shadow: 1px 1px 3px;
+    border: none;
+    cursor: pointer;
 }
 
 .confirm-booking-message-container, .cancel-booking-message-container {

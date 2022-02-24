@@ -1,20 +1,32 @@
 import './TenantProfile.css'
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
 import Puntuacion from '../Puntuacion'
+import { useUser } from '../hooks'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 
 function TenantProfile() {
-    const bookingsData = useFetch(REACT_APP_BASE_URL + '/bookings/made/accepted')
-    console.log(bookingsData)
+
+    const user = useUser()
+    const [bookingsData, setBookingsData] = useState(null)
+
+    useEffect(() => {
+        fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+        })
+        .then(response => response.json())
+        .then(data => setBookingsData(data))
+    }, [bookingsData])
     let classNameDisplayPage
     let classNameDisplayMessage
-    if (bookingsData.length === 0) {
+    if (bookingsData?.length === 0) {
         classNameDisplayPage = 'tenant-profile-page-off'
         classNameDisplayMessage = 'tenant-profile-error-message-on'
     } else {
