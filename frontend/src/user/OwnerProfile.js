@@ -50,10 +50,10 @@ function OwnerProfile() {
         <div className="body-owner-profile">
             <section>
                 <h3>Tus anuncios</h3>
-                <article className='article-ads'>
+                <article className='article-announcements'>
                     {myAds.slice(house * perPage, (house + 1) * perPage).map(ad =>
-                        <div className='body-ads' key={ad.id}>
-                            <Link className='house-title' to={'/houses/' + ad.id}>{ad.title} 🏠</Link>
+                        <div className='body-announcements' key={ad.id}>
+                            <Link className='house-title' to={'/houses/' + ad.id}> 🏠 {ad.title}</Link>
                             <div className='owner-picture' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${ad.pictures[0].url})` }}></div>
                         </div>
                     )}
@@ -74,8 +74,8 @@ function OwnerProfile() {
                     <article className='card-offered-booking' key={booking.houseId}>
                         <div className="picture-offered-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} />
                         <div className='info-offered'>
-                            <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>{booking.title} 🏠</Link>
-                            <p key={booking.startDate} className='date-offered-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                            <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
+                            <p key={booking.startDate} className='date-offered-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
                             <div className='state-offered-booking'>
                                 {Date.parse(booking.endDate) < new Date() && <ScoreToTenant bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
                             </div>
@@ -103,7 +103,7 @@ function OwnerProfile() {
                             </article>
                         )}
                     </section>
-                    <section id='buttons-owner'>
+                    <section className='buttons-owner'>
                         <span onClick={handlePrevRatings}>
                             ⬅️
                         </span>
