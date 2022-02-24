@@ -1,19 +1,17 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery }  from '../hooks'
 import './SearchBar.css'
 import { useSetModal } from '../hooks'
 
 
 function SearchBar () {
     const navigate = useNavigate()
-    const query = useQuery()
     const setModal = useSetModal()
     const [city, setCity] = useState('')
     const [price, setPrice] = useState('')
     const [rooms, setRooms] = useState('')
-    const [startDate, setStartDate] = useState(query.get('startDate'))
-    const [endDate, setEndDate] = useState(query.get('endDate'))
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
     const [showBar, setShowBar] = useState(false)
 
     const handleSubmit = async e => {
@@ -34,6 +32,8 @@ function SearchBar () {
         setCity('')
         setPrice('')
         setRooms('')
+        setStartDate('')
+        setEndDate('')
         setShowBar(!showBar)
         navigate(url)
     }
@@ -88,7 +88,6 @@ function SearchBar () {
                 </div>
             </div>}
         </>
-        
     )
 }
 

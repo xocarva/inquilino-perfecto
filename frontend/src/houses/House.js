@@ -1,8 +1,8 @@
 import { Suspense, useEffect, useState } from 'react'
-import {useParams, Link, useNavigate } from "react-router-dom"
+import {useParams, useNavigate } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
-import { useModal, useSetModal, useUser } from '../hooks'
+import { useSetModal, useUser } from '../hooks'
 import './House.css'
 
 
@@ -13,7 +13,6 @@ function House() {
   const { id, startDate, endDate } = useParams()
   const navigate = useNavigate()
   const user = useUser()
-  const modal = useModal()
   const setModal = useSetModal()
   const [mainPic, setMainPic] = useState('')
   const [stepPic, setStepPic] = useState(0)
@@ -33,10 +32,11 @@ function House() {
     if(res.ok) {
         setModal(
             <div className='modal-container'>
-                <p>Reserva confirmada.</p>
-                <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
+                <p>Se ha guardado tu reserva.</p>
             </div>
         )
+        navigate('/user/pending-bookings')
+
     } else if (res.status === 403) {
       setModal(
           <div className='modal-container'>
@@ -44,7 +44,6 @@ function House() {
           </div>
       )
   } else {
-      console.log(res)
       setModal(
           <div className='modal-container'>
               <p>No se ha podido realizar la reserva</p>

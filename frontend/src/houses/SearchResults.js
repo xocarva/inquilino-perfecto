@@ -3,7 +3,7 @@ import { useQuery }  from '../hooks'
 import './SearchResults.css'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState, Suspense } from 'react'
-import { useModal, useSetModal, useUser } from '../hooks'
+import { useSetModal, useUser } from '../hooks'
 import Loading from '../Loading'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -11,7 +11,6 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function SearchResults() {
     const user = useUser()
-    const modal = useModal()
     const setModal = useSetModal()
     const navigate = useNavigate()
     const query = useQuery()
@@ -54,9 +53,9 @@ function SearchResults() {
             setModal(
                 <div className='modal-container'>
                     <p>Reserva confirmada.</p>
-                    <Link className='modal-link' to='/user/pending-bookings' onClick={e => modal(false)} >Continuar</Link>
                 </div>
             )
+            navigate('/user/pending-bookings')
         } else if (res.status === 403) {
             setModal(
                 <div className='modal-container'>
@@ -64,7 +63,6 @@ function SearchResults() {
                 </div>
             )
         } else {
-            console.log(res)
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido realizar la reserva.</p>
@@ -105,7 +103,7 @@ function SearchResults() {
                 {rooms&&<div className='filter' data-remove="rooms">{+query.get('rooms') === 4 ? '+3' : query.get('rooms')} hab<span className='remove-filter' onClick={handleFilter}>❌</span></div>}
             </div>
             {results && results.length < 1 &&
-                <div>No se han encontrado resultados</div>
+                <p className='no-results'>😕 No se han encontrado resultados con estos criterios de búsqueda.</p>
             }
             {results && results.length > 0 && <>
                 <section className="search-results">
@@ -126,14 +124,16 @@ function SearchResults() {
                     </article>
                 )}
                 </section>
-                <div className='button-steps-container-bookings'>
-                    <span className='arrow' onClick={handlePrev}>
-                        ⬅️
-                    </span>
-                    <span>{stepHouse + 1}/{Math.ceil(results.length / perPageHouses)}</span>
-                    <span className='arrow' onClick={handleNext}>
-                        ➡️
-                    </span>
+                <div className='results-buttons-container'>
+                    <div className='steps-container'>
+                        <span className='arrow' onClick={handlePrev}>
+                            ⬅️
+                        </span>
+                        <span>{stepHouse + 1}/{Math.ceil(results.length / perPageHouses)}</span>
+                        <span className='arrow' onClick={handleNext}>
+                            ➡️
+                        </span>
+                    </div>
                 </div>
             </>}
         </>
