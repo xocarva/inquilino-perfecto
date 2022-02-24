@@ -75,6 +75,7 @@
     width: 100px;
     background-color: #B5C99A;
     cursor: pointer;
+    box-shadow: 1px 1px 3px;
 }
 
 .close-icon-container {

@@ -7,7 +7,8 @@
 
 .article-ads {
     padding: 5px;
-    height: 34vh;
+    height: min-content;
+    border-bottom: 1px solid #B5C99A;
 }
 
 .body-ads {
@@ -16,12 +17,12 @@
     padding: 20px;
     align-items: center;
     margin: 10px;
-    width: 50vw; 
+    width: 60vw; 
     border-radius: 20px;
 }
 
 .body-ads .house-title {
-    color: black;
+    color: #465335;
     font-size: 20px;
 }
 
@@ -38,11 +39,54 @@
     cursor: pointer;
 }
 
-.cards-ratings-container {
+.rental-history {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 60vw;
+    border-bottom: 1px solid #B5C99A;
+}
+
+.rental-history .button-owner-offered {
+    display: flex;
+    justify-content: center;
+}
+
+.rental-history .card-offered-booking {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    align-items: center;
+    gap: 2rem;
+}
+
+.rental-history .card-offered-booking .picture-offered-booking {
+    width: 180px;
+    height: 100px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.rental-history .card-offered-booking .info-offered {
+    display: flex;
+    flex-direction: column;
+}
+
+.rental-history .card-offered-booking .title-offered-booking {
+    color: #465335;
+}
+
+.body-rating {
+    height: min-content;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #B5C99A;
+}
+
+.body-rating .cards-ratings-container {
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    width: 50vw;
+    width: 60vw;
 }
 
 .puntuacion {
@@ -57,7 +101,7 @@
     background-color: blue;
 }
 
-#buttons-owner-rating {
+#buttons-owner {
     font-size: 18px;
 }
 
@@ -70,14 +114,26 @@
         gap: 1rem;
         height: min-content;
         width: 80vw;
-        
+        text-align: center;
     }
 
     .article-ads {
-        height: 75vh;
+        height: min-content;
     }
 
     .owner-picture {
+        width: 70vw;
+        height: 20vh;
+    }
+
+    .rental-history .card-offered-booking {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .rental-history .card-offered-booking .picture-offered-booking {
         width: 70vw;
         height: 20vh;
     }
