@@ -11,7 +11,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function TenantProfile() {
     const bookingsData = useFetch(REACT_APP_BASE_URL + '/bookings/made/accepted')
-
+    console.log(bookingsData)
     let classNameDisplayPage
     let classNameDisplayMessage
     if (bookingsData.length === 0) {
@@ -34,8 +34,9 @@ function TenantProfile() {
     )
     let averageRatings = totalRatings / ratingsData?.length
 
-    let classNameForSvgAverageRatings
-    averageRatings >= 2.5 ? classNameForSvgAverageRatings = 'smile-svg' : classNameForSvgAverageRatings = 'sad-svg'
+
+    let emojiRating
+    averageRatings >= 2.5 ? emojiRating = '🙂' : emojiRating = '☹️'
 
     let classNameForColorAverageRatings
     averageRatings >= 2.5 ? classNameForColorAverageRatings = 'rgba(195, 236, 176, 0.259)' : classNameForColorAverageRatings = 'rgba(236, 176, 176, 0.259)'
@@ -68,11 +69,11 @@ function TenantProfile() {
                 <h2>Histórico de alquileres</h2>
                 <section className="historic-bookings-container">
                     {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
-                        <article className='card-house-historic-booking' key={Math.random()}>
-                            <div key={booking.housePicUrl} className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
-                            <Link key={booking.houseTitle} to={'/houses/' + booking.houseId} className='title-historic-booking'>{booking.houseTitle}<span> ➕info</span></Link>
-                            <p key={booking.startDate} className='date-historic-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                            <div key={booking.endDate} className='state-booking'>
+                        <article className='card-house-historic-booking' key={booking.bookingId}>
+                            <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
+                            <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
+                            <p className='date-historic-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                            <div className='state-booking'>
                                 {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }}/>}
                             </div>
                         </article>
@@ -94,8 +95,8 @@ function TenantProfile() {
                             <section className='cards-ratings-container'>
                             {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
                                 <article className='card-historic-rating' key={rating.ratingDate}>
-                                    <Puntuacion key={rating.rating} value={rating.rating} />
-                                    <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
+                                    <Puntuacion value={rating.rating} />
+                                    <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                 </article>
                             )}
                             </section>
@@ -113,7 +114,7 @@ function TenantProfile() {
                             <h3>Media de valoraciones</h3>
                             <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
                             <Puntuacion value={averageRatings} />
-                            <span className={classNameForSvgAverageRatings}></span>
+                            <span className='emoji-rating'>{emojiRating}</span>
                         </section>
                     </section>
                 </section>

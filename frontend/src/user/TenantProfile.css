@@ -2,6 +2,11 @@
     display: none;
 }
 
+
+.tenant-profile-page-on {
+    height: 1600px;
+}
+
 .tenant-profile-error-message-off {
     display: none;
 }
@@ -14,24 +19,24 @@
 
 .tenant-profile-page-on>h2 {
     margin-left: 3rem;
+    margin-top: 3rem;
 }
 
 
 .historic-bookings-container {
-    width: 90vw;
-    height: 95vh;
-    margin: auto;
+    width: 100vw;
+    height: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .historic-bookings-container>h2 {
-    width: 90vw;
+    width: 100vw;
     margin: 0;
     font-size: 1.5rem;
     margin-left: 2rem;
@@ -41,16 +46,15 @@
 
 .card-house-historic-booking {
     box-sizing: border-box;
-    width: min-content;
-    height: 30vh;
-    background-color: #eae8e8;
-    padding: 4rem;
-    border-radius: 15px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
+    width: 100vw;
+    height: 280px;
+    padding: 1rem 4rem;
+    border-bottom: 5px double #718355;
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 1fr);
+    grid-template-rows: 75px 50px 100px;
     grid-template-areas:
     "picture title"
     "picture date"
@@ -61,21 +65,19 @@
 
 .picture-historic-booking {
     box-sizing: border-box;
-    width: 40vw;
-    height: 25vh;
+    width: 550px;
+    height: 250px;
     background-size: cover;
     background-position: center;
     border-radius: 15px;
-    border: 5px double black;
     grid-area: picture;
 }
 
 
 .title-historic-booking {
-    text-decoration: none;
     color: black;
     margin: auto;
-    margin-left: 4rem;
+    margin-left: 2rem;
     font-size: 2rem;
     width: 30vw;
     cursor: pointer;
@@ -83,15 +85,9 @@
 }
 
 
-.title-historic-booking>span {
-    font-size: 1rem;
-    color: red;
-}
-
-
 .date-historic-booking {
     margin: auto;
-    margin-left: 4rem;
+    margin-left: 2rem;
     font-size: 1.2rem;
     width: 30vw;
     grid-area: date;
@@ -100,17 +96,50 @@
 
 .state-booking {
     margin: auto;
-    margin-left: 4rem;
+    margin-left: 2rem;
     font-size: 1.2rem;
     width: 30vw;
     grid-area: stateBooking;
 }
 
+.rating-historic-tenant form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-.button-steps-container-bookings, .button-steps-container-ratings {
+
+.rating-historic-tenant abbr, .rating-historic-tenant span {
+    text-decoration: none;
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.star-for-rating {
+    cursor: pointer;
+}
+
+.button-rating {
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #B5C99A;
+    box-shadow: 1px 1px 3px;
+    border: none;
+    cursor: pointer;
+}
+
+section.button-steps-container-bookings {
+    text-align: center;
+}
+
+
+.button-steps-container-bookings span {
     width: min-content;
-    margin: 2rem auto;
-    font-size: 2rem;
+    margin: auto;
+    font-size: 2.5rem;
     cursor: pointer;
 }
 
@@ -142,16 +171,32 @@
 .ratings-container {
     display: flex;
     flex-direction: column;
+    width: 400px;
     height: 250px;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
 }
 
 
-.cards-ratings-container {
+section.cards-ratings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
     height: 200px;
     margin-top: 3rem;
+}
+
+.card-historic-rating span {
+    font-size: 2.5rem;
+}
+
+.button-steps-container-ratings span {
+    font-size: 2rem;
+}
+
+.ratings-section-on h2 {
+    margin-left: 3rem;
 }
 
 
@@ -162,7 +207,7 @@
 
 .average-ratings {
     box-sizing: border-box;
-    width: 300px;
+    width: 250px;
     height: 325px;
     border-radius: 10px;
     display: flex;
@@ -183,42 +228,32 @@
     font-size: 3rem;
 }
 
-
-.smile-svg {
-    background-image: url('http://localhost:3001/smile-face.svg');
-    width: 70px;
-    height: 70px;
-    background-size: cover;
+.emoji-rating {
+    font-size: 4rem;
 }
 
 
-.sad-svg {
-    background-image: url('http://localhost:3001/sad-face.svg');
-    width: 70px;
-    height: 70px;
-    background-size: cover;
-}
-
-
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+    .tenant-profile-page-on {
+        height: 2100px;
+    }
     .tenant-profile-page-on>h2 {
         margin-left: 1rem;
         text-align: center;
     }
     .historic-bookings-container {
-        width: 90vw;
-        height: 115vh;
+        height: 1500px;
         gap: 0;
+        margin-top: 1rem;
     }
     .card-house-historic-booking {
-        width: 90vw;
-        height: 37vh;
+        height: 450px;
         display: block;
         padding: 0;
     }
     .picture-historic-booking {
         width: 80vw;
-        height: 20vh;
+        height: 250px;
         display: block;
         margin: auto;
         margin-top: 1rem;
@@ -233,6 +268,9 @@
     .title-historic-booking {
         font-size: 1.5rem;
     }
+    div.state-booking {
+        text-align: center;
+    }
     .button-steps-container {
         margin: 1rem auto 0 auto;
     }
@@ -246,12 +284,23 @@
         justify-content: space-around;
         gap: 2rem;
     }
+    .rating-historic-tenant form {
+        justify-content: center;
+        gap: 1rem;
+    }
     .button-steps-container-bookings, .button-steps-container-ratings {
         margin: auto;
     }
     .ratings-container {
         font-size: 2rem;
         height: min-content;
+    }
+    .ratings-section-on {
+        margin-top: 2.5rem;
+    }
+    .ratings-section-on>h2 {
+        width: max-content;
+        margin: auto;
     }
     .average-ratings {
         width: 90vw;
@@ -260,7 +309,7 @@
         justify-content: space-around;
         align-items: flex-end;
     }
-    .average-ratings .puntuacion, .sad-svg, .smile-svg {
+    .average-ratings .puntuacion, .emoji-rating {
         display: none;
     }
     .average-ratings h3 {
