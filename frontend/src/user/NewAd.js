@@ -13,7 +13,6 @@ function NewAd() {
     const [description, setDescription] = useState('')
     const [city, setCity] = useState('')
     const [pictures, setPictures] = useState([])
-    const [error, setError] = useState()
     const user = useUser()
     const Navigation = useNavigate()
     const setModal = useSetModal()
@@ -35,34 +34,35 @@ function NewAd() {
                 'Authorization': 'Bearer ' + user.token
             }
         })
-        let data = await res.json()
 
         if (res.ok) {
             setModal(<p>{`Has publicado tu anuncio ${title} con exito!!!`}</p>)
             Navigation('/')
+        }  else if (res.status === 403) {
+            setModal(<p>Para poder publicar un anuncio debes activar primero tu usuario</p>)
         } else {
-            setError(data.error)
-        }
+            setModal(<p>No se ha podido realizar la publicación</p>)
+        } 
     }
     return (
         <div className='ad-page'>
-            <p className='title-ad-page'>Datos del anuncio</p>
+            <h2 className='title-ad-page'>Datos del anuncio</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>
-                        Titulo <br/>
+                        Titulo
                         <input name='title' value={title} type='text' placeholder='Titulo...' onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
-                        Precio <br/>
+                        Precio 
                         <input name='price' value={price} type='number' placeholder='Precio...' onChange={e => setPrice(e.target.value)} />
                     </label>
                     <label>
-                        Habitaciones <br/>
+                        Habitaciones 
                         <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' onChange={e => setRooms(e.target.value)} />
                     </label>
                     <label>
-                        Ciudad <br/>
+                        Ciudad 
                         <input name='city' value={city} type='text' placeholder='Ciudad...' onChange={e => setCity(e.target.value)} />
                     </label>
                 </div>
@@ -78,7 +78,6 @@ function NewAd() {
                 <button id='ad-button'>
                     Publicar
                 </button>
-                {error && <div className="error">{error}</div>}
             </form>
         </div>
     )

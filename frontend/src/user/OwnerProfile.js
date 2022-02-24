@@ -40,21 +40,20 @@ function OwnerProfile() {
     const handleNextRatings = () => setStepRating((stepRating + 1) % pagsRatings)
 
     const rentalsOffered = useFetch(REACT_APP_BASE_URL + '/bookings/received/accepted')
-    console.log(rentalsOffered)
     const [stepBooking, setStepBooking] = useState(0)
 
     const perPageBookings = 2
     const pagsBookings = Math.ceil(rentalsOffered?.length / perPageBookings)
     const handlePrevBookings = () => setStepBooking(stepBooking > 0 ? stepBooking - 1 : pagsBookings - 1)
     const handleNextBookings = () => setStepBooking((stepBooking + 1) % pagsBookings)
-    return (
+    return rentalsOffered && (
         <div className="body-owner-profile">
             <section>
                 <h3>Tus anuncios</h3>
                 <article className='article-ads'>
-                    {myAds?.slice(house * perPage, (house + 1) * perPage).map(ad =>
+                    {myAds.slice(house * perPage, (house + 1) * perPage).map(ad =>
                         <div className='body-ads' key={ad.id}>
-                            <Link className='house-title' to={'/houses/' + ad.id}>{ad.title}</Link>
+                            <Link className='house-title' to={'/houses/' + ad.id}>{ad.title} 🏠</Link>
                             <div className='owner-picture' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${ad.pictures[0].url})` }}></div>
                         </div>
                     )}
@@ -72,24 +71,26 @@ function OwnerProfile() {
             <section className='rental-history'>
                 <h3>Historico de alquileres ofertados</h3>
                 {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
-                    <article className='card-house-historic-booking' key={booking.houseId}>
-                        <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
-                        <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>{booking.title}</Link>
-                        <p key={booking.startDate} className='date-historic-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                        <div className='state-booking'>
-                        {Date.parse(booking.endDate) < new Date() && <ScoreToTenant bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }}/>}
+                    <article className='card-offered-booking' key={booking.houseId}>
+                        <div className="picture-offered-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} />
+                        <div className='info-offered'>
+                            <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>{booking.title} 🏠</Link>
+                            <p key={booking.startDate} className='date-offered-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                            <div className='state-offered-booking'>
+                                {Date.parse(booking.endDate) < new Date() && <ScoreToTenant bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
+                            </div>
                         </div>
                     </article>
                 )}
-            </section>
-            <section className='button-steps-container-bookings'>
-                <span onClick={handlePrevBookings}>
-                    ⬅️
-                </span>
-                <span>{stepBooking + 1}/{Math.ceil(rentalsOffered.length / perPageBookings)}</span>
-                <span onClick={handleNextBookings}>
-                    ➡️
-                </span>
+                <section className='button-owner-offered'>
+                    <span onClick={handlePrevBookings}>
+                        ⬅️
+                    </span>
+                    <span>{stepBooking + 1}/{Math.ceil(rentalsOffered.length / perPageBookings)}</span>
+                    <span onClick={handleNextBookings}>
+                        ➡️
+                    </span>
+                </section>
             </section>
             <section className='body-rating'>
                 <h3>Valoraciones recibidas como casero</h3>
@@ -102,7 +103,7 @@ function OwnerProfile() {
                             </article>
                         )}
                     </section>
-                    <section id='buttons-owner-rating'>
+                    <section id='buttons-owner'>
                         <span onClick={handlePrevRatings}>
                             ⬅️
                         </span>

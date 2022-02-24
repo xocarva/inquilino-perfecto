@@ -1,13 +1,11 @@
 .ad-page {
-    width: 60vw;
+    width: 80vw;
     height: min-content;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 30px;
     text-align: center;
-    background-color: lightgray;
     border-radius: 15px;
-    box-shadow: 1px 1px 10px;
     padding: 10px;
 }
 
@@ -19,7 +17,15 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
     flex-wrap: wrap;
+    max-width: 70vw;
+}
+
+.ad-page div label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .ad-page input {
@@ -27,26 +33,34 @@
     border-radius: 8px;
     padding: 5px;
     border: none;
+    background-color: #B5C99A;
+}
+
+.ad-page input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 }
 
 .ad-page textarea {
-    width: 50vw;
+    width: 70vw;
     height: 15vh;
     margin-top: 10px;
     border-radius: 8px;
     border: none;
+    background-color: #B5C99A;
 }
 
 #ad-button {
     padding: 10px;
     width: 200px;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    position: relative;
+    background-color: #B5C99A;
+    box-shadow: 1px 1px 3px;
 }
 
-@media (max-width:667px) {
+@media (max-width:768px) {
 
     .ad-page {
         width: 90vw;
@@ -58,6 +72,7 @@
         justify-content: center;
         align-content: center;
         gap: 1rem;
+        max-width: none;
     }
 
     .ad-page input {

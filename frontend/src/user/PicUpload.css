@@ -26,18 +26,18 @@
 .pic-upload .ad-image button {
   height: 30px;
   width: 158px;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 1px 1px 8px;
+  background-color: #B5C99A;  
 }
 
 .pic-upload .ad-image button:hover {
   cursor: pointer;
-  background-color: gray;
 }
 
   
 .pic-upload .preview.add {
-  background-color: white;
+  background-color: #B5C99A;
   display: flex;
   align-items: center;
   justify-content: center;
