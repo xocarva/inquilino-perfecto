@@ -57,6 +57,7 @@
     background-color: #B5C99A;
     border: none;
     cursor: pointer;
+    box-shadow: 1px 1px 3px;
 
 }
 
@@ -85,10 +86,6 @@
 
 .close-bar-icon {
     cursor: pointer;
-}
-
-hr {
-  color: #E9F5DB;  
 }
 
 @media (max-width:965px) {

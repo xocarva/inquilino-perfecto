@@ -12,13 +12,15 @@
     align-items: center;
     border-bottom: 1px solid #718355;
     padding-bottom: 1rem;
-    width: 50rem;
     justify-content: space-around;
+    width: 80vw;
+    max-width: 1200px;
 }
 
 .search-results .house .house-picture {
     height: 12rem;
-    width: 25rem;
+    width: 40vw;
+    max-width: 40rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -111,9 +113,20 @@
     cursor: pointer;
 }
 
-.button-steps-container-bookings {
-    font-size: 1.3rem;
+.results-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 1rem auto;
+}
+
+.results-buttons-container .steps-container {
+    font-size: 1.3rem;
+}
+
+.no-results {
+    margin: 2rem 0;
+    text-align: center;
 }
 
 @media (max-width:768px) {
