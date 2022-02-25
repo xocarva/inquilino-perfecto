@@ -54,7 +54,16 @@ function CardReceivedPendingBooking( { bookingData } ) {
                     <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
                 </div>
             </div>
-            <p className='date-received-booking' >Desde el {bookingData.startDate.slice(0, 10)} hasta el {bookingData.endDate.slice(0, 10)}</p>
+            <div className='date-card-pending-bookings-container'>
+            <div className='date-card-pending-bookings'>
+                <span>📅 Fecha de entrada</span>
+                <p>{bookingData.startDate.slice(0, 10)}</p>
+            </div>
+            <div className='date-card-pending-bookings'>
+                <span>📅 Fecha de salida</span>
+                <p>{bookingData.endDate.slice(0, 10)}</p>
+            </div>
+            </div>
             <div className='buttons-received-bookings'>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>

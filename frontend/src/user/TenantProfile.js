@@ -17,12 +17,12 @@ function TenantProfile() {
 
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
-                headers: {
-                    'Authorization': 'Bearer ' + user.token
-                }
+            headers: {
+                'Authorization': 'Bearer ' + user.token
+            }
         })
-        .then(response => response.json())
-        .then(data => setBookingsData(data))
+            .then(response => response.json())
+            .then(data => setBookingsData(data))
     }, [bookingsData])
     let classNameDisplayPage
     let classNameDisplayMessage
@@ -83,10 +83,19 @@ function TenantProfile() {
                     {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                         <article className='card-house-historic-booking' key={booking.bookingId}>
                             <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
+                            <div className='data-booking-container'>
                             <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
-                            <p className='date-historic-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                            <div className='state-booking'>
-                                {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }}/>}
+                                <div className='date-card-bookings'>
+                                    <span>📅 Fecha de entrada: </span>
+                                    <span>{booking.startDate.slice(0, 10)}</span>
+                                </div>
+                                <div className='date-card-bookings'>
+                                    <span>📅 Fecha de salida: </span>
+                                    <span>{booking.endDate.slice(0, 10)}</span>
+                                </div>
+                                <div className='state-booking'>
+                                {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
+                            </div>
                             </div>
                         </article>
                     )}
@@ -101,16 +110,16 @@ function TenantProfile() {
                     </span>
                 </section>
                 <section className={'ratings-section' + classNameRatingsDisplaySection}>
-                        <h2>Valoraciones recibidas como inquilino</h2>
+                    <h2>Valoraciones recibidas como inquilino</h2>
                     <section className="historic-ratings-container">
                         <div className='ratings-container'>
                             <section className='cards-ratings-container'>
-                            {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                                <article className='card-historic-rating' key={rating.ratingDate}>
-                                    <Puntuacion value={rating.rating} />
-                                    <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
-                                </article>
-                            )}
+                                {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
+                                    <article className='card-historic-rating' key={rating.ratingDate}>
+                                        <Puntuacion value={rating.rating} />
+                                        <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
+                                    </article>
+                                )}
                             </section>
                             <section className='button-steps-container-ratings'>
                                 <span onClick={handlePrevRatings}>
