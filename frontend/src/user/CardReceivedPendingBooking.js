@@ -18,10 +18,16 @@ function CardReceivedPendingBooking( { bookingData } ) {
         })
         if (res.ok) {
             setModal(
-                <article className='edit-confirm-message-container'>
+                <article className='confirm-booking-message-container'>
                     <span>✅</span>
                     <p>Reserva confirmada correctamente</p>
                 </article>
+            )
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido confirmar la reserva</p>
+                </div>
             )
         }
     }
@@ -35,10 +41,16 @@ function CardReceivedPendingBooking( { bookingData } ) {
         })
         if (res.ok) {
             setModal(
-                <article className='edit-confirm-message-container'>
+                <article className='cancel-booking-message-container'>
                     <span>✅</span>
                     <p>Reserva cancelada correctamente</p>
                 </article>
+            )
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido cancelar la reserva</p>
+                </div>
             )
         }
     }
@@ -46,7 +58,7 @@ function CardReceivedPendingBooking( { bookingData } ) {
     return (
         <article className='card-received-booking'>
             <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
-            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>{bookingData.title}</Link>
+            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
             <div className='tenant-data-container'>
                 <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
                 <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>

@@ -22,13 +22,19 @@ function CardMadePendingBooking({ bookingData }) {
                     <p>Reserva cancelada correctamente.</p>
                 </article>
             )
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido cancelar la reserva</p>
+                </div>
+            )
         }
     }
 
     return (
         <article className='card-received-booking card-pending-bookings'>
             <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.urlPic})` }} ></div>
-            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>{bookingData.title}</Link>
+            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
             <div className='date-card-pending-bookings-container'>
             <div className='date-card-pending-bookings'>
                 <span>📅 Fecha de entrada</span>

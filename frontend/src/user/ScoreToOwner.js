@@ -27,6 +27,12 @@ const ScoreToOwner = ( { bookingData } ) =>  {
                     <p>Tus voto se guardó correctamente.</p>
                 </article>
             )
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido guardar tu voto.</p>
+                </div>
+            )
         }
     }
 

@@ -64,7 +64,7 @@ function PendingBookings() {
                         <CardReceivedPendingBooking  key={booking.bookingId} bookingData={booking} />
                     )}
                 </section> : <p className='no-received-bookkings-message'>No tienes ninguna petición de reserva pendiente.</p>}
-                {dataReceivedBookings?.length > 0 && <section className='button-steps-container-bookings'>
+                {dataReceivedBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>
                     <span onClick={handlePrevReceivedBookings}>
                         ⬅️
                     </span>
@@ -81,7 +81,7 @@ function PendingBookings() {
                         <CardMadePendingBooking key={booking.bookingId} bookingData={booking} />
                     )}
                 </section> : <p className='no-received-bookkings-message'>No tienes ninguna reserva pendiente de confirmación.</p>}
-                {dataMadeBookings?.length > 0 && <section className='button-steps-container-bookings'>
+                {dataMadeBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>
                     <span onClick={handlePrevMadeBookings}>
                         ⬅️
                     </span>
