@@ -51,8 +51,6 @@ const rate = async (req, res) => {
         return
     }
 
-    console.log(ratingData.ratedUserRole, ratingData.ratedUserRole === 'tenant', ratingData.tenantRating, ratingData.ratedUserRole === 'owner', ratingData.ownerRating)
-
     if((ratingData.ratedUserRole === 'tenant' && ratingData.ownerRating) || (ratingData.ratedUserRole === 'owner' && ratingData.tenantRating)) {
         res.status(400)
         res.end('Booking already rated by this user')

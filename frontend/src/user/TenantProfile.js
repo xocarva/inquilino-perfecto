@@ -72,8 +72,8 @@ function TenantProfile() {
         <>
 
             <section className={classNameDisplayMessage}>
-                <span>❌ </span>
-                <p>Opps, parece que todavía no reservaste con nosotros. 😞</p>
+                <h2>Histórico de alquileres</h2>
+                <p>Ops, parece que todavía no reservaste con nosotros. 😞</p>
             </section>
 
 
@@ -84,7 +84,7 @@ function TenantProfile() {
                         <article className='card-house-historic-booking' key={booking.bookingId}>
                             <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
                             <div className='data-booking-container'>
-                            <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
+                                <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
                                 <div className='date-card-bookings'>
                                     <span>📅 Fecha de entrada: </span>
                                     <span>{booking.startDate.slice(0, 10)}</span>
@@ -94,8 +94,8 @@ function TenantProfile() {
                                     <span>{booking.endDate.slice(0, 10)}</span>
                                 </div>
                                 <div className='state-booking'>
-                                {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
-                            </div>
+                                    {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
+                                </div>
                             </div>
                         </article>
                     )}
