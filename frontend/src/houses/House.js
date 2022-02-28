@@ -3,6 +3,7 @@ import {useParams, useNavigate } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
+import Login from '../Login'
 import './House.css'
 
 
@@ -21,6 +22,10 @@ function House() {
 
   const handleBooking = async e => {
     e.preventDefault()
+    if(!user) {
+      setModal(<Login />)
+      return
+    }
     const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + id, {
         method: 'POST',
         body: JSON.stringify({startDate, endDate}),
@@ -29,6 +34,7 @@ function House() {
             'Authorization': 'Bearer ' + user.token
         }
     })
+
     if(res.ok) {
         setModal(
             <div className='modal-container'>

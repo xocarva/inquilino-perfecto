@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useState, Suspense } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Loading from '../Loading'
+import Login from '../Login'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -41,6 +42,10 @@ function SearchResults() {
 
     const handleBooking = async e => {
         e.preventDefault()
+        if(!user) {
+            setModal(<Login />)
+            return
+          }
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + e.target.dataset.houseid, {
             method: 'POST',
             body: JSON.stringify({startDate, endDate}),
