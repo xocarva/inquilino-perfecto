@@ -249,8 +249,17 @@ section.cards-ratings-container {
     .ratings-section-on h2 {
         margin: auto;
     }
+    .card-historic-rating {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
     .card-historic-rating span {
         font-size: 1.5rem;
+        margin-left: 0;
+    }
+    .card-historic-rating .puntuacion {
+        width: min-content;
     }
     .average-ratings {
         width: 70vw;
