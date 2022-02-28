@@ -2,7 +2,6 @@ import './PendingBookings.css'
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
 import Puntuacion from "../Puntuacion";
-import Loading from '../Loading';
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
@@ -19,15 +18,17 @@ function CardReceivedPendingBooking( { bookingData } ) {
         })
         if (res.ok) {
             setModal(
-                <article className='edit-confirm-message-container'>
+                <article className='confirm-booking-message-container'>
                     <span>✅</span>
-                    <p>Confirmando reserva...</p>
-                    <Loading />
+                    <p>Reserva confirmada correctamente</p>
                 </article>
             )
-            setTimeout(() => {
-                window.location.reload(true)
-            }, 2000)
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido confirmar la reserva</p>
+                </div>
+            )
         }
     }
 
@@ -40,30 +41,41 @@ function CardReceivedPendingBooking( { bookingData } ) {
         })
         if (res.ok) {
             setModal(
-                <article className='edit-confirm-message-container'>
+                <article className='cancel-booking-message-container'>
                     <span>✅</span>
-                    <p>Cancelando reserva...</p>
-                    <Loading />
+                    <p>Reserva cancelada correctamente</p>
                 </article>
             )
-            setTimeout(() => {
-                window.location.reload(true)
-            }, 2000)
+        } else {
+            setModal(
+                <div className='modal-container'>
+                    <p>No se ha podido cancelar la reserva</p>
+                </div>
+            )
         }
     }
 
     return (
-        <article className='card-received-booking' key={bookingData.bookingId}>
-            <div key={bookingData.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
-            <Link key={bookingData.title} to={'/houses/' + bookingData.houseId} className='title-received-booking'>{bookingData.title}<span> ➕info</span></Link>
+        <article className='card-received-booking'>
+            <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
+            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
             <div className='tenant-data-container'>
-                <div className='tenant-avatar' key={bookingData.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
-                <p className='name-tenant' key={bookingData.tenantFirstName}>{bookingData.tenantName} {bookingData.tenantLastName}</p>
+                <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
+                <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
                 <div className='rating-tenant'>
                     <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
                 </div>
             </div>
-            <p key={bookingData.startDate} className='date-received-booking' >Desde el {bookingData.startDate.slice(0, 10)} hasta el {bookingData.endDate.slice(0, 10)}</p>
+            <div className='date-card-pending-bookings-container'>
+            <div className='date-card-pending-bookings'>
+                <span>📅 Fecha de entrada</span>
+                <p>{bookingData.startDate.slice(0, 10)}</p>
+            </div>
+            <div className='date-card-pending-bookings'>
+                <span>📅 Fecha de salida</span>
+                <p>{bookingData.endDate.slice(0, 10)}</p>
+            </div>
+            </div>
             <div className='buttons-received-bookings'>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>

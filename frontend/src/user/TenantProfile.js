@@ -1,20 +1,32 @@
 import './TenantProfile.css'
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
 import Puntuacion from '../Puntuacion'
+import { useUser } from '../hooks'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 
 function TenantProfile() {
-    const bookingsData = useFetch(REACT_APP_BASE_URL + '/bookings/made/accepted')
-    console.log(bookingsData)
+
+    const user = useUser()
+    const [bookingsData, setBookingsData] = useState(null)
+
+    useEffect(() => {
+        fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
+            headers: {
+                'Authorization': 'Bearer ' + user.token
+            }
+        })
+            .then(response => response.json())
+            .then(data => setBookingsData(data))
+    }, [bookingsData])
     let classNameDisplayPage
     let classNameDisplayMessage
-    if (bookingsData.length === 0) {
+    if (bookingsData?.length === 0) {
         classNameDisplayPage = 'tenant-profile-page-off'
         classNameDisplayMessage = 'tenant-profile-error-message-on'
     } else {
@@ -60,8 +72,8 @@ function TenantProfile() {
         <>
 
             <section className={classNameDisplayMessage}>
-                <span>❌ </span>
-                <p>Opps, parece que todavía no reservaste con nosotros. 😞</p>
+                <h2>Histórico de alquileres</h2>
+                <p>Ops, parece que todavía no reservaste con nosotros. 😞</p>
             </section>
 
 
@@ -71,10 +83,19 @@ function TenantProfile() {
                     {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                         <article className='card-house-historic-booking' key={booking.bookingId}>
                             <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
-                            <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
-                            <p className='date-historic-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                            <div className='state-booking'>
-                                {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }}/>}
+                            <div className='data-booking-container'>
+                                <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
+                                <div className='date-card-bookings'>
+                                    <span>📅 Fecha de entrada: </span>
+                                    <span>{booking.startDate.slice(0, 10)}</span>
+                                </div>
+                                <div className='date-card-bookings'>
+                                    <span>📅 Fecha de salida: </span>
+                                    <span>{booking.endDate.slice(0, 10)}</span>
+                                </div>
+                                <div className='state-booking'>
+                                    {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
+                                </div>
                             </div>
                         </article>
                     )}
@@ -89,16 +110,16 @@ function TenantProfile() {
                     </span>
                 </section>
                 <section className={'ratings-section' + classNameRatingsDisplaySection}>
-                        <h2>Valoraciones recibidas como inquilino</h2>
+                    <h2>Valoraciones recibidas como inquilino</h2>
                     <section className="historic-ratings-container">
                         <div className='ratings-container'>
                             <section className='cards-ratings-container'>
-                            {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                                <article className='card-historic-rating' key={rating.ratingDate}>
-                                    <Puntuacion value={rating.rating} />
-                                    <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
-                                </article>
-                            )}
+                                {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
+                                    <article className='card-historic-rating' key={rating.ratingDate}>
+                                        <Puntuacion value={rating.rating} />
+                                        <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
+                                    </article>
+                                )}
                             </section>
                             <section className='button-steps-container-ratings'>
                                 <span onClick={handlePrevRatings}>

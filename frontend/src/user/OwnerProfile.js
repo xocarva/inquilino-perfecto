@@ -51,7 +51,7 @@ function OwnerProfile() {
             <section>
                 <h3>Tus anuncios</h3>
                 <article className='article-announcements'>
-                    {myAds.slice(house * perPage, (house + 1) * perPage).map(ad =>
+                    {myAds?.slice(house * perPage, (house + 1) * perPage).map(ad =>
                         <div className='body-announcements' key={ad.id}>
                             <Link className='house-title' to={'/houses/' + ad.id}> 🏠 {ad.title}</Link>
                             <div className='owner-picture' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${ad.pictures[0].url})` }}></div>

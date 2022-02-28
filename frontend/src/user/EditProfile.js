@@ -1,12 +1,15 @@
 import './EditProfile.css'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSetModal, useSetUser, useUser } from '../hooks'
-import useFetch from "../useFetch"
 import Loading from '../Loading'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 function EditProfile() {
+    const user = useUser()
+    const setUser = useSetUser()
+    const setModal = useSetModal()
+    const [userData, setUserData] = useState(user)
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -17,15 +20,17 @@ function EditProfile() {
     const [bio, setBio] = useState('')
     const [picName, setPicName] = useState('No se ha cargado foto')
 
-    const user = useUser()
-    const setUser = useSetUser()
-    const setModal = useSetModal()
 
-    const userData = useFetch(REACT_APP_BASE_URL + '/users/profile', {
-        headers: {
-            'Authorization': 'Bearer ' + user.token
-        }
-    })
+    useEffect(() => {
+        fetch(REACT_APP_BASE_URL + '/users/profile', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+        })
+        .then(response => response.json())
+        .then(data => setUserData(data))
+    }, [user])
+
 
     const handleProfilePic = e => {
         setPicName(e.target.files[0].name)
@@ -65,7 +70,14 @@ function EditProfile() {
                 lastName: newUser.lastName,
                 picture: newUser.picture
             })
-            window.location.reload(true)
+            setFirstName('')
+            setLastName('')
+            setEmail('')
+            setEmailConfirm('')
+            setBio('')
+            setPassword('')
+            setPassConfirm('')
+            setPicName('')
         }
     }
 

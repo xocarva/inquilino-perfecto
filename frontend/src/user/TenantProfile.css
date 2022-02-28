@@ -1,154 +1,115 @@
-.tenant-profile-page-off {
-    display: none;
-}
-
-
-.tenant-profile-page-on {
-    height: 1600px;
-}
-
 .tenant-profile-error-message-off {
     display: none;
 }
 
 .tenant-profile-error-message-on {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 70vw;
+    height: 50vh;
     text-align: center;
     margin-top: 5rem;
-    font-size: 2.5rem;
 }
 
-.tenant-profile-page-on>h2 {
+.tenant-profile-error-message-on h2 {
+    text-align: left;
+}
+
+.tenant-profile-error-message-on p {
+    margin: 5rem;
+    font-size: 1.5rem;
+    align-self: center;
+}
+
+.tenant-profile-page-off {
+    display: none;
+}
+
+.tenant-profile-page-on {
+    margin: 0 auto;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tenant-profile-page-on h2 {
+    align-self: flex-start;
     margin-left: 3rem;
     margin-top: 3rem;
 }
 
 
-.historic-bookings-container {
-    width: 100vw;
-    height: 1000px;
+.historic-bookings-container .card-house-historic-booking {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
     gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #718355;
+    padding-bottom: 1rem;
+    justify-content: space-around;
+    width: 80vw;
+    max-width: 1200px;
     margin-top: 1rem;
 }
 
-.historic-bookings-container>h2 {
-    width: 100vw;
-    margin: 0;
-    font-size: 1.5rem;
-    margin-left: 2rem;
-}
-
-
-
-.card-house-historic-booking {
-    box-sizing: border-box;
-    width: 100vw;
-    height: 280px;
-    padding: 1rem 4rem;
-    border-bottom: 5px double #718355;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, 1fr);
-    grid-template-rows: 75px 50px 100px;
-    grid-template-areas:
-    "picture title"
-    "picture date"
-    "picture stateBooking"
-    ;
-}
-
-
-.picture-historic-booking {
-    box-sizing: border-box;
-    width: 550px;
-    height: 250px;
+.card-house-historic-booking .picture-historic-booking {
+    height: 12rem;
+    width: 40vw;
+    max-width: 40rem;
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     border-radius: 15px;
-    grid-area: picture;
+    flex-shrink: 0;
 }
 
+.card-house-historic-booking .data-booking-container {
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    justify-content: space-around;
+}
 
 .title-historic-booking {
-    color: black;
-    margin: auto;
-    margin-left: 2rem;
-    font-size: 2rem;
-    width: 30vw;
-    cursor: pointer;
-    grid-area: title;
+    font-size: 1.5rem;
+    color: #718355;
 }
 
-
-.date-historic-booking {
-    margin: auto;
-    margin-left: 2rem;
-    font-size: 1.2rem;
-    width: 30vw;
-    grid-area: date;
-}
-
-
-.state-booking {
-    margin: auto;
-    margin-left: 2rem;
-    font-size: 1.2rem;
-    width: 30vw;
-    grid-area: stateBooking;
-}
-
-.rating-historic-tenant form {
+.rating-historic-tenant {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
+.rating-historic-tenant span {
+    font-size: xx-large;
 
-.rating-historic-tenant abbr, .rating-historic-tenant span {
-    text-decoration: none;
-    font-size: 2.5rem;
-    margin: 0;
-    padding: 0;
 }
 
-.star-for-rating {
+.for-rating abbr {
+    text-decoration: none;
+    font-size: xx-large;
     cursor: pointer;
 }
 
 .button-rating {
-    width: 150px;
-    height: 50px;
+    padding: 0.7rem;
+    width: 100px;
     border-radius: 10px;
     background-color: #B5C99A;
     box-shadow: 1px 1px 3px;
     border: none;
     cursor: pointer;
+    align-self: flex-end;
 }
 
-section.button-steps-container-bookings {
-    text-align: center;
-}
-
-
-.button-steps-container-bookings span {
-    width: min-content;
-    margin: auto;
-    font-size: 2.5rem;
+.button-steps-container-bookings span, .button-steps-container-ratings span {
+    font-size: 1.5rem;
     cursor: pointer;
 }
-
-
-.button-steps-container-bookings>span {
-    box-sizing: border-box;
-    padding: 0.2rem;
-}
-
 
 .ratings-section-off {
     display: none;
@@ -191,8 +152,9 @@ section.cards-ratings-container {
     font-size: 2.5rem;
 }
 
-.button-steps-container-ratings span {
-    font-size: 2rem;
+
+.ratings-section-on {
+    width: 80vw;
 }
 
 .ratings-section-on h2 {
@@ -234,33 +196,18 @@ section.cards-ratings-container {
 
 
 @media (max-width: 768px) {
-    .tenant-profile-page-on {
-        height: 2100px;
-    }
     .tenant-profile-page-on>h2 {
         margin-left: 1rem;
         text-align: center;
     }
-    .historic-bookings-container {
-        height: 1500px;
-        gap: 0;
-        margin-top: 1rem;
-    }
     .card-house-historic-booking {
-        height: 450px;
-        display: block;
-        padding: 0;
-    }
-    .picture-historic-booking {
-        width: 80vw;
-        height: 250px;
-        display: block;
-        margin: auto;
-        margin-top: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
     }
     .date-historic-booking, .state-booking, .title-historic-booking {
         font-size: 1rem;
-        width: 75vw;
+        width: 80vw;
         display: block;
         margin: 0.5rem auto;
         margin-top: 0.5rem;
@@ -275,8 +222,7 @@ section.cards-ratings-container {
         margin: 1rem auto 0 auto;
     }
     .historic-ratings-container {
-        width: 90vw;
-        height: 250px;
+        width: 80vw;
         margin: auto;
         margin-top: 0;
         display: flex;
@@ -284,7 +230,7 @@ section.cards-ratings-container {
         justify-content: space-around;
         gap: 2rem;
     }
-    .rating-historic-tenant form {
+    .rating-historic-tenant div {
         justify-content: center;
         gap: 1rem;
     }
@@ -292,18 +238,21 @@ section.cards-ratings-container {
         margin: auto;
     }
     .ratings-container {
-        font-size: 2rem;
+        width: 70vw;
+        font-size: 0.5rem;
         height: min-content;
     }
     .ratings-section-on {
         margin-top: 2.5rem;
     }
-    .ratings-section-on>h2 {
-        width: max-content;
+    .ratings-section-on h2 {
         margin: auto;
     }
+    .card-historic-rating span {
+        font-size: 1.5rem;
+    }
     .average-ratings {
-        width: 90vw;
+        width: 70vw;
         height: 60px;
         flex-direction: row;
         justify-content: space-around;
