@@ -1,8 +1,9 @@
 import { Suspense, useEffect, useState } from 'react'
-import {useParams, useNavigate, Link } from "react-router-dom"
+import {useParams, useNavigate } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
+import Login from '../Login'
 import './House.css'
 
 
@@ -22,9 +23,7 @@ function House() {
   const handleBooking = async e => {
     e.preventDefault()
     if(!user) {
-      setModal(
-        <p>Debes estar <Link to="/register" onClick={() => setModal(false)}>registrado</Link> para poder hacer una reserva.</p>
-      )
+      setModal(<Login />)
       return
     }
     const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + id, {
