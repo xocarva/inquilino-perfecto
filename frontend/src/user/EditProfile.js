@@ -36,6 +36,11 @@ function EditProfile() {
         setPicName(e.target.files[0].name)
     }
 
+    let isValidEmailCheck
+    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]{2,3}$/;
+    const isValidEmail = emailPattern.test(email)
+    isValidEmail ? isValidEmailCheck = '✅' : isValidEmailCheck = '❌'
+
     const handleSubmit = async e => {
         e.preventDefault()
         const picture = e.target.picture.files[0]
@@ -57,14 +62,19 @@ function EditProfile() {
             return
         } else if(lastName && isValidLastName) fd.append('lastName', lastName)
 
-        email !== emailConfirm && setModal(<p>El correo no coincide.</p>)
-        let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]{2,3}$/;
-        const isValidEmail = emailPattern.test(email)
+        if(email !== emailConfirm)  {
+            setModal(<p>El correo no coincide.</p>)
+            setEmail('')
+            return
+        }
+
         if(email && !isValidEmail) {
             setModal(<p>Correo no válido.</p>)
             setBio('')
             return
-        } else if(email && isValidEmail) fd.append('email', email)
+        } else if(email && isValidEmail) {
+            fd.append('email', email)
+        }
 
         let bioPattern = /[A-Z]/
         const isValidBio = bioPattern.test(bio)
@@ -74,7 +84,11 @@ function EditProfile() {
 
         picture && fd.append('picture', picture)
 
-        password !== passConfirm && setModal(<p>La contraseña no coincide.</p>)
+        if(password !== passConfirm)  {
+            setModal(<p>La contraseña no coincide.</p>)
+            setPassword('')
+            return
+        }
         if(password && (password.length < 5 || password.length >= 50)) {
             setModal(<p>Tu contraseña debe contener entre 5 y 50 carácteres.</p>)
             setEmail('')
@@ -136,7 +150,7 @@ function EditProfile() {
                 </label>
                 <label className='confirm-email-profile'>
                     Confirma email
-                    { email ? email === emailConfirm ? '✅' : '❌' : ''}
+                    { email ? email === emailConfirm  ? isValidEmailCheck : '❌' : ''}
                     <input  value={emailConfirm}  onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
                 </label>
                     </div>
@@ -151,7 +165,7 @@ function EditProfile() {
                 </label>
                 <label className='confirm-password-profile'>
                     Confirma contraseña
-                    { password ? passConfirm === password ? '✅' : '❌' : ''}
+                    { password ? passConfirm === password ? isValidEmailCheck: '❌' : ''}
                     <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                 </label>
                 <div className='picture-container'>
