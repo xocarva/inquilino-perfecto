@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react'
-import {useParams, useNavigate } from "react-router-dom"
+import {useParams, useNavigate, Link } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
@@ -21,6 +21,12 @@ function House() {
 
   const handleBooking = async e => {
     e.preventDefault()
+    if(!user) {
+      setModal(
+        <p>Debes estar <Link to="/register" onClick={() => setModal(false)}>registrado</Link> para poder hacer una reserva.</p>
+      )
+      return
+    }
     const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + id, {
         method: 'POST',
         body: JSON.stringify({startDate, endDate}),
@@ -29,6 +35,7 @@ function House() {
             'Authorization': 'Bearer ' + user.token
         }
     })
+
     if(res.ok) {
         setModal(
             <div className='modal-container'>

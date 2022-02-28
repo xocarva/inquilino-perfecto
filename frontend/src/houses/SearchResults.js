@@ -41,6 +41,12 @@ function SearchResults() {
 
     const handleBooking = async e => {
         e.preventDefault()
+        if(!user) {
+            setModal(
+                <p>Debes estar <Link to="/register" onClick={() => setModal(false)}>registrado</Link> para poder hacer una reserva.</p>
+            )
+            return
+          }
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + e.target.dataset.houseid, {
             method: 'POST',
             body: JSON.stringify({startDate, endDate}),
