@@ -9,7 +9,7 @@
 
 .input-container-profile {
     width: 90vw;
-    height: 70vh;
+    height: 600px;
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr;
@@ -31,7 +31,6 @@
 
 .data-container {
     width: 90vw;
-    height: 40vh;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 1fr 1fr;
@@ -213,7 +212,6 @@
 
 .avatar-preview {
     width: 40vw;
-    height: 40vh;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
