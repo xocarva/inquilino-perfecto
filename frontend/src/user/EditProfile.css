@@ -72,13 +72,13 @@
 
 
 .email-profile, .confirm-email-profile {
-    width: 150px;
+    width: 170px;
     font-size: 1.3rem;
 }
 
 
 .email-profile>input, .confirm-email-profile>input {
-    width: 150px;
+    width: 170px;
     height: 35px;
     font-size: 1.2rem;
 }
@@ -107,21 +107,21 @@
 
 
 .password-profile {
-    width: 200px;
+    width: 220px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
 
 
 .password-profile>input {
-    width: 210px;
+    width: 220px;
     height: 35px;
     font-size: 1rem;
 }
 
 
 .confirm-password-profile {
-    width: 210px;
+    width: 220px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
@@ -129,14 +129,14 @@
 
 .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 210px;
+    width: 220px;
     height: 35px;
     font-size: 1.3rem;
 }
 
 .picture-container {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 2rem;
     align-items: center;
 }

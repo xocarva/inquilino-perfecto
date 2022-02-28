@@ -43,13 +43,13 @@ function CardReceivedPendingBooking( { bookingData } ) {
             setModal(
                 <article className='cancel-booking-message-container'>
                     <span>✅</span>
-                    <p>Reserva cancelada correctamente</p>
+                    <p>Reserva cancelada correctamente.</p>
                 </article>
             )
         } else {
             setModal(
                 <div className='modal-container'>
-                    <p>No se ha podido cancelar la reserva</p>
+                    <p>No se ha podido cancelar la reserva.</p>
                 </div>
             )
         }
