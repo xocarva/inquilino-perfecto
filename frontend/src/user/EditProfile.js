@@ -10,7 +10,6 @@ function EditProfile() {
     const setUser = useSetUser()
     const setModal = useSetModal()
     const [userData, setUserData] = useState(user)
-
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -19,7 +18,6 @@ function EditProfile() {
     const [passConfirm, setPassConfirm] = useState('')
     const [bio, setBio] = useState('')
     const [picName, setPicName] = useState('No se ha cargado foto')
-
 
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/users/profile', {
@@ -31,13 +29,12 @@ function EditProfile() {
         .then(data => setUserData(data))
     }, [user])
 
-
     const handleProfilePic = e => {
         setPicName(e.target.files[0].name)
     }
 
     let isValidEmailCheck
-    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]{2,3}$/;
+    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]{2,3}$/
     const isValidEmail = emailPattern.test(email)
     isValidEmail ? isValidEmailCheck = '✅' : isValidEmailCheck = '❌'
 
@@ -46,54 +43,59 @@ function EditProfile() {
         const picture = e.target.picture.files[0]
         const fd = new FormData()
 
-        let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
-        const isValidFirstName = firstNamePattern.test(firstName)
-        if(firstName && (!isValidFirstName || firstName.length < 2 || firstName.length > 80)) {
-            setModal(<p>Tu nombre debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
-            setFirstName('')
-            return
-        } else if(firstName && isValidFirstName) fd.append('firstName', firstName)
+    let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
+    const isValidFirstName = firstNamePattern.test(firstName)
 
-        let lastNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
-        const isValidLastName = lastNamePattern.test(lastName)
-        if(lastName && (!isValidLastName || lastName.length < 2 || lastName.length > 80)) {
-            setModal(<p>Tu apellido debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
-            setLastName('')
-            return
-        } else if(lastName && isValidLastName) fd.append('lastName', lastName)
+    let lastNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
+    const isValidLastName = lastNamePattern.test(lastName)
 
-        if(email !== emailConfirm)  {
-            setModal(<p>El correo no coincide.</p>)
-            setEmail('')
-            return
-        }
+    let bioPattern = /^[A-ZÁÉÍÓÚ]/
+    const isValidBio = bioPattern.test(bio)
 
-        if(email && !isValidEmail) {
-            setModal(<p>Correo no válido.</p>)
-            setBio('')
-            return
-        } else if(email && isValidEmail) {
-            fd.append('email', email)
-        }
-
-        let bioPattern = /[A-Z]/
-        const isValidBio = bioPattern.test(bio)
-        if(bio && (!isValidBio || bio.length < 10 || bio.length >= 200)) {
-            setModal(<p>Tu bio debe contener entre 10 y 200 carácteres.</p>)
-        } else if(bio && isValidBio) fd.append('bio', bio)
-
-        picture && fd.append('picture', picture)
-
-        if(password !== passConfirm)  {
-            setModal(<p>La contraseña no coincide.</p>)
-            setPassword('')
-            return
-        }
-        if(password && (password.length < 5 || password.length >= 50)) {
-            setModal(<p>Tu contraseña debe contener entre 5 y 50 carácteres.</p>)
-            setEmail('')
-            return
-        } else if(password) fd.append('password', password)
+    switch (true) {
+      case firstName &&
+        (!isValidFirstName || firstName.length < 2 || firstName.length > 80):
+        setModal(<p>Tu nombre debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
+        setFirstName('')
+        return
+      case lastName &&
+        (!isValidLastName || lastName.length < 2 || lastName.length > 80):
+        setModal(<p>Tu apellido debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
+        setLastName('')
+        return
+      case email !== emailConfirm:
+        setModal(<p>El correo no coincide.</p>)
+        setEmail('')
+        setEmailConfirm('')
+        return
+      case email && !isValidEmail:
+        setModal(<p>Correo no válido.</p>)
+        setEmail('')
+        setEmailConfirm('')
+        return
+      case bio && (!isValidBio || bio.length < 10 || bio.length >= 200):
+        setModal(<p>Tu bio debe contener entre 10 y 200 carácteres.</p>)
+        setBio('')
+        return
+      case password !== passConfirm:
+        setModal(<p>La contraseña no coincide.</p>)
+        setPassword('')
+        setPassConfirm('')
+        return
+      case password && (password.length < 5 || password.length >= 50):
+        setModal(<p>Tu contraseña debe contener entre 5 y 50 carácteres.</p>)
+        setPassword('')
+        setPassConfirm('')
+        return
+      default:
+        break
+    }
+    if (firstName && isValidFirstName) fd.append("firstName", firstName)
+    if (lastName && isValidLastName) fd.append("lastName", lastName)
+    if (email && isValidEmail && email === emailConfirm) fd.append("email", email)
+    if (bio && isValidBio) fd.append("bio", bio)
+    if (password && password === passConfirm) fd.append("password", password)
+    picture && fd.append("picture", picture)
 
         const res = await fetch(REACT_APP_BASE_URL + '/users/', {
             method: 'PATCH',
