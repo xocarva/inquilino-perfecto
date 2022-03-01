@@ -43,7 +43,7 @@ function EditProfile() {
         const picture = e.target.picture.files[0]
         const fd = new FormData()
 
-        let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
+    let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
     const isValidFirstName = firstNamePattern.test(firstName)
 
     let lastNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
@@ -88,7 +88,7 @@ function EditProfile() {
     }
     if (firstName && isValidFirstName) fd.append("firstName", firstName)
     if (lastName && isValidLastName) fd.append("lastName", lastName)
-    if (email && isValidEmail && email === passConfirm) fd.append("email", email)
+    if (email && isValidEmail && email === emailConfirm) fd.append("email", email)
     if (bio && isValidBio) fd.append("bio", bio)
     if (password && password === passConfirm) fd.append("password", password)
     picture && fd.append("picture", picture)
