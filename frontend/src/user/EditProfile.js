@@ -66,9 +66,12 @@ function EditProfile() {
       case email !== emailConfirm:
         setModal(<p>El correo no coincide.</p>)
         setEmail('')
+        setEmailConfirm('')
         return
       case email && !isValidEmail:
         setModal(<p>Correo no válido.</p>)
+        setEmail('')
+        setEmailConfirm('')
         return
       case bio && (!isValidBio || bio.length < 10 || bio.length >= 200):
         setModal(<p>Tu bio debe contener entre 10 y 200 carácteres.</p>)
@@ -81,7 +84,8 @@ function EditProfile() {
         return
       case password && (password.length < 5 || password.length >= 50):
         setModal(<p>Tu contraseña debe contener entre 5 y 50 carácteres.</p>)
-        setEmail('')
+        setPassword('')
+        setPassConfirm('')
         return
       default:
         break
