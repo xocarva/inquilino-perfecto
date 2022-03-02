@@ -88,4 +88,9 @@
         width: 80vw;
         padding: 15px;
     }
+
+    #picture-container {
+        display: flex;
+        flex-direction: row;
+    }
 }

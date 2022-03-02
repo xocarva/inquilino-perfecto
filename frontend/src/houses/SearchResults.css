@@ -124,6 +124,10 @@
     font-size: 1.3rem;
 }
 
+.results-buttons-container .steps-container .arrow {
+    cursor: pointer;
+}
+
 .no-results {
     margin: 2rem 0;
     text-align: center;

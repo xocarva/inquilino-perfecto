@@ -51,28 +51,28 @@ function NewAd() {
                 <div>
                     <label>
                         Titulo
-                        <input name='title' value={title} type='text' placeholder='Titulo...' onChange={e => setTitle(e.target.value)} />
+                        <input name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
                         Precio 
-                        <input name='price' value={price} type='number' placeholder='Precio...' onChange={e => setPrice(e.target.value)} />
+                        <input name='price' value={price} type='number' placeholder='Precio...' required onChange={e => setPrice(e.target.value)} />
                     </label>
                     <label>
                         Habitaciones 
-                        <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' onChange={e => setRooms(e.target.value)} />
+                        <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' required onChange={e => setRooms(e.target.value)} />
                     </label>
                     <label>
                         Ciudad 
-                        <input name='city' value={city} type='text' placeholder='Ciudad...' onChange={e => setCity(e.target.value)} />
+                        <input name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => setCity(e.target.value)} />
                     </label>
                 </div>
                 <div className='description-house'>
                     <label>
                         Descripción <br />
-                        <textarea name='description' value={description} placeholder='Descripción...' onChange={e => setDescription(e.target.value)} />
+                        <textarea name='description' value={description} placeholder='Descripción...' required onChange={e => setDescription(e.target.value)} />
                     </label>
                 </div>
-                <div>
+                <div id='picture-container'>
                     <PicUpload pictures={pictures} onChange={setPictures}/>
                 </div>
                 <button id='ad-button'>
