@@ -1,26 +1,29 @@
 .pic-upload {
     padding: 10px;
-    border: 1px solid rgb(156, 148, 148);
+    border: 2px solid #B5C99A;
     border-radius: 20px;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
   }
   
 .pic-upload .ad-image {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 
 .pic-upload .preview {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-position: center;
     background-size: cover;
     margin: 10px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    box-shadow: 1px 1px 3px;
 }
 
 .pic-upload .ad-image button {
@@ -51,4 +54,5 @@
 .pic-upload .preview.add input {
   display: none
 }
+
   

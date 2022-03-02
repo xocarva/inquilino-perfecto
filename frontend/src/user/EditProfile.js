@@ -34,14 +34,14 @@ function EditProfile() {
     }
 
     let isValidEmailCheck
-    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]{2,3}$/
+    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]$/
     const isValidEmail = emailPattern.test(email)
     isValidEmail ? isValidEmailCheck = '✅' : isValidEmailCheck = '❌'
-
+    
     const handleSubmit = async e => {
         e.preventDefault()
         const picture = e.target.picture.files[0]
-        const fd = new FormData()
+        const fd = new FormData() 
 
     let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
     const isValidFirstName = firstNamePattern.test(firstName)

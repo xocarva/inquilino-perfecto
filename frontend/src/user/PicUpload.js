@@ -24,7 +24,7 @@ function PicUpload({ pictures, onChange }) {
         </div>
       )}
       <label className="preview add">
-        <input type="file" multiple onChange={handleChange} />
+        <input type="file" multiple required onChange={handleChange} />
       </label>
     </div>
   )
