@@ -15,15 +15,15 @@ function TenantProfile() {
     const user = useUser()
     const [bookingsData, setBookingsData] = useState(null)
     const [reload, setReload] = useState(false)
-
+    
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
         })
-            .then(response => response.json())
-            .then(data => setBookingsData(data))
+        .then(response => response.json())
+        .then(data => setBookingsData(data))
     }, [reload, user])
     let classNameDisplayPage
     let classNameDisplayMessage

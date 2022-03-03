@@ -10,7 +10,8 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
     const user = useUser()
     const setModal = useSetModal()
     const [rating, setRating] = useState(null)
-    const handleSubmit = async e => {
+
+    const handleClick = async e => {
         e.preventDefault()
         if(!rating) {
             setModal(<p>No has introducido tu valoración</p>)
@@ -39,7 +40,6 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
             )
         }
         setReload(!reload)
-        console.log('fin de score', reload)
     }
 
     return(
@@ -53,7 +53,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
                     <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(4)}>{rating >= 4 ? '★' : '☆'}</abbr>
                     <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(5)}>{rating >= 5 ? '★' : '☆'}</abbr>
                     </div>
-                    <button className='button-rating' onClick={handleSubmit}>Valorar</button>
+                    <button className='button-rating' onClick={handleClick}>Valorar</button>
             </>
                 : <span className='rating-historic-tenant'><Puntuacion value={bookingData.tenantRating}/></span>}
         </div>
