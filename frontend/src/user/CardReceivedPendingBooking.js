@@ -5,7 +5,7 @@ import Puntuacion from "../Puntuacion";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardReceivedPendingBooking( { bookingData } ) {
+function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadReceived } ) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -30,9 +30,12 @@ function CardReceivedPendingBooking( { bookingData } ) {
                 </div>
             )
         }
+        setReloadReceived(!reloadReceived)
     }
 
     const handleCancelReceivedBooking = async e => {
+        console.log('inicio cancel', reloadReceived)
+
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
@@ -53,6 +56,9 @@ function CardReceivedPendingBooking( { bookingData } ) {
                 </div>
             )
         }
+        setReloadReceived(!reloadReceived)
+        console.log('fin cancel', reloadReceived)
+
     }
 
     return (

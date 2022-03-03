@@ -14,6 +14,7 @@ function TenantProfile() {
 
     const user = useUser()
     const [bookingsData, setBookingsData] = useState(null)
+    const [reload, setReload] = useState(false)
 
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
@@ -23,7 +24,7 @@ function TenantProfile() {
         })
             .then(response => response.json())
             .then(data => setBookingsData(data))
-    }, [bookingsData])
+    }, [reload, user])
     let classNameDisplayPage
     let classNameDisplayMessage
     if (bookingsData?.length === 0) {
@@ -94,7 +95,7 @@ function TenantProfile() {
                                     <span>{booking.endDate.slice(0, 10)}</span>
                                 </div>
                                 <div className='state-booking'>
-                                    {Date.parse(booking.endDate) < new Date() && <ScoreToOwner bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
+                                    {Date.parse(booking.endDate) < new Date() && <ScoreToOwner setReload={setReload} reload={reload} bookingData={{ bookingId: booking.bookingId, tenantRating: booking.tenantRating }} />}
                                 </div>
                             </div>
                         </article>

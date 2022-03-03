@@ -14,6 +14,8 @@ function PendingBookings() {
     const user = useUser()
 
     const [dataReceivedBookings, setDataReceivedBookings] = useState(null)
+    const [reloadReceived, setReloadReceived] = useState(false)
+    const [reloadMade, setReloadMade] = useState(false)
 
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/bookings/received/pending', {
@@ -23,7 +25,7 @@ function PendingBookings() {
         })
         .then(response => response.json())
         .then(data => setDataReceivedBookings(data))
-    }, [dataReceivedBookings])
+    }, [reloadReceived, user])
 
 
     const [dataMadeBookings, setDataMadeBookings] = useState(null)
@@ -36,7 +38,7 @@ function PendingBookings() {
         })
         .then(response => response.json())
         .then(data => setDataMadeBookings(data))
-    }, [dataMadeBookings])
+    }, [reloadMade, user])
 
 
     const [stepReceivedBooking, setStepReceivedBooking] = useState(0)
@@ -61,7 +63,7 @@ function PendingBookings() {
                 <h3>Peticiones de reservas recibidas pendientes</h3>
                 {dataReceivedBookings?.length > 0 ? <section className='received-pending-bookings-container'>
                     {dataReceivedBookings?.slice(stepReceivedBooking * perPageReceivedBookings, (stepReceivedBooking + 1) * perPageReceivedBookings).map(booking =>
-                        <CardReceivedPendingBooking  key={booking.bookingId} bookingData={booking} />
+                        <CardReceivedPendingBooking reloadReceived={reloadReceived} setReloadReceived={setReloadReceived}  key={booking.bookingId} bookingData={booking} />
                     )}
                 </section> : <p className='no-received-bookkings-message'>No tienes ninguna petición de reserva pendiente.</p>}
                 {dataReceivedBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>
@@ -78,7 +80,7 @@ function PendingBookings() {
                 <h3>Peticiones de reservas hechas pendientes</h3>
                 {dataMadeBookings?.length > 0 ? <section className="made-pending-bookings-container">
                     {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
-                        <CardMadePendingBooking key={booking.bookingId} bookingData={booking} />
+                        <CardMadePendingBooking reloadMade={reloadMade} setReloadMade={setReloadMade} key={booking.bookingId} bookingData={booking} />
                     )}
                 </section> : <p className='no-received-bookkings-message'>No tienes ninguna reserva pendiente de confirmación.</p>}
                 {dataMadeBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>

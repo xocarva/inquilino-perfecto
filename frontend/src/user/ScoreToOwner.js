@@ -6,7 +6,7 @@ import './TenantProfile.css'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-const ScoreToOwner = ( { bookingData } ) =>  {
+const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
     const user = useUser()
     const setModal = useSetModal()
     const [rating, setRating] = useState(null)
@@ -34,6 +34,8 @@ const ScoreToOwner = ( { bookingData } ) =>  {
                 </div>
             )
         }
+        setReload(!reload)
+        console.log('fin de score', reload)
     }
 
     return(

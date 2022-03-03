@@ -4,7 +4,7 @@ import { useSetModal, useUser } from "../hooks";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardMadePendingBooking({ bookingData }) {
+function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -29,6 +29,7 @@ function CardMadePendingBooking({ bookingData }) {
                 </div>
             )
         }
+        setReloadMade(!reloadMade)
     }
 
     return (
