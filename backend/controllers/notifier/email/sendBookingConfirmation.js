@@ -6,8 +6,8 @@ const sendBookingConfirmation = async (bookingData) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: tenantEmail,
-        subject: "Booking offer is pendding",
-        html: `<p>Your booking offer for ${house.title} from ${startDate} to ${endDate} has been confirmed.</p>`
+        subject: "Confirmación de reserva",
+        html: `<p>Tu reserva para ${house.title} desde el ${startDate} hasta el ${endDate} ha sido confirmada.</p>`
     })
 
 }

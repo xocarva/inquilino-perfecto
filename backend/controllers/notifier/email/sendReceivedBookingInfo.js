@@ -6,8 +6,8 @@ const sendReceivedBookingInfo = async (bookingData) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: ownerEmail,
-        subject: "You have a new Booking offer",
-        html: `<p>You have received a new booking offer for ${house.title} between ${startDate} and ${endDate}.</p>`
+        subject: "Tienes una nueva petición reserva",
+        html: `<p>Has recibido una nueva petición de reserva para ${house.title} entre el ${startDate} y el ${endDate}.</p>`
     })
 }
 
