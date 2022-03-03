@@ -63,7 +63,7 @@ function TenantProfile() {
     const handlePrevBookings = () => setStepBooking(stepBooking > 0 ? stepBooking - 1 : pagsBookings - 1)
     const handleNextBookings = () => setStepBooking((stepBooking + 1) % pagsBookings)
 
-    const perPageRatings = 4
+    const perPageRatings = 3
     const pagsRatings = Math.ceil(ratingsData?.length / perPageRatings)
     const handlePrevRatings = () => setStepRating(stepRating > 0 ? stepRating - 1 : pagsRatings - 1)
     const handleNextRatings = () => setStepRating((stepRating + 1) % pagsRatings)
