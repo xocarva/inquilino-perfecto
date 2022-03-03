@@ -12,6 +12,10 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
     const [rating, setRating] = useState(null)
     const handleSubmit = async e => {
         e.preventDefault()
+        if(!rating) {
+            setModal(<p>No has introducido tu valoración</p>)
+            return
+        }
         const res = await fetch(REACT_APP_BASE_URL + '/users/rate/' + bookingData.bookingId, {
             method: 'POST',
             body: JSON.stringify({ rating }),
@@ -43,11 +47,11 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
             {!bookingData.tenantRating ?
             <>
                     <div className='for-rating'>
-                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(1)}>{rating >= 1 ? '★' : '☆'}</abbr>
-                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(2)}>{rating >= 2 ? '★' : '☆'}</abbr>
-                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(3)}>{rating >= 3 ? '★' : '☆'}</abbr>
-                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(4)}>{rating >= 4 ? '★' : '☆'}</abbr>
-                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(5)}>{rating >= 5 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(1)}>{rating >= 1 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(2)}>{rating >= 2 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(3)}>{rating >= 3 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(4)}>{rating >= 4 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={() => setRating(5)}>{rating >= 5 ? '★' : '☆'}</abbr>
                     </div>
                     <button className='button-rating' onClick={handleSubmit}>Valorar</button>
             </>

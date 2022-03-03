@@ -34,8 +34,6 @@ function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadRec
     }
 
     const handleCancelReceivedBooking = async e => {
-        console.log('inicio cancel', reloadReceived)
-
         const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
@@ -57,8 +55,6 @@ function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadRec
             )
         }
         setReloadReceived(!reloadReceived)
-        console.log('fin cancel', reloadReceived)
-
     }
 
     return (

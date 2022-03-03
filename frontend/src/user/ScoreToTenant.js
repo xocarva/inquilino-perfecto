@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
-import Loading from '../Loading'
 import Puntuacion from '../Puntuacion'
 import './TenantProfile.css'
 
