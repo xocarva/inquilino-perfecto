@@ -5,7 +5,7 @@ import Puntuacion from "../Puntuacion";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardReceivedPendingBooking( { bookingData } ) {
+function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadReceived } ) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -23,6 +23,8 @@ function CardReceivedPendingBooking( { bookingData } ) {
                     <p>Reserva confirmada correctamente</p>
                 </article>
             )
+        } else if (res.status === 403) {
+            setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -30,6 +32,7 @@ function CardReceivedPendingBooking( { bookingData } ) {
                 </div>
             )
         }
+        setReloadReceived(!reloadReceived)
     }
 
     const handleCancelReceivedBooking = async e => {
@@ -46,6 +49,8 @@ function CardReceivedPendingBooking( { bookingData } ) {
                     <p>Reserva cancelada correctamente.</p>
                 </article>
             )
+        } else if (res.status === 403) {
+            setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -53,6 +58,7 @@ function CardReceivedPendingBooking( { bookingData } ) {
                 </div>
             )
         }
+        setReloadReceived(!reloadReceived)
     }
 
     return (

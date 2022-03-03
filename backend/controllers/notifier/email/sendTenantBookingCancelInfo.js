@@ -6,8 +6,8 @@ const sendTenantBookingCancelInfo = async (bookingData) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: tenantEmail,
-        subject: "Your booking has been canceled",
-        html: `<p>Your booking for ${house.title} from ${startDate} to ${endDate} has been canceled.</p>`
+        subject: "Reserva cancelada",
+        html: `<p>Tu reserva para ${house.title} desde el ${startDate} hasta el ${endDate} ha sido cancelada.</p>`
     })
 
 }

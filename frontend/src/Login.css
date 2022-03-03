@@ -55,6 +55,11 @@
     justify-content: flex-end;
   }
 
+  .body-login .error {
+    color: red;
+    margin-top: 10px;
+    font-size: 25px;
+  }
 
 @media (max-width:480px) {
     .login .btn-close {

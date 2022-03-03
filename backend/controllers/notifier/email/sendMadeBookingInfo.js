@@ -6,8 +6,8 @@ const sendMadeBookingInfo = async (bookingData) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: tenantEmail,
-        subject: "Booking offer is pendding",
-        html: `<p>Your have saved a booking for ${house.title} between ${startDate} and ${endDate}. Must be confirmed by the owner.</p>`
+        subject: "Petición de reserva pendiente",
+        html: `<p>Has hecho una reserva para ${house.title} entre el ${startDate} y el ${endDate}. Debe ser confirmada por el propietario.</p>`
     })
 
 }

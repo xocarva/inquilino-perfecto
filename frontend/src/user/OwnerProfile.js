@@ -5,21 +5,9 @@ import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToTenant from './ScoreToTenant'
 import { useUser } from '../hooks'
+import Puntuacion from '../Puntuacion'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
-
-function Puntuacion({ value, className }) {
-    return (
-        <span className={className}>
-            {value >= 1 ? '★' : '☆'}
-            {value >= 2 ? '★' : '☆'}
-            {value >= 3 ? '★' : '☆'}
-            {value >= 4 ? '★' : '☆'}
-            {value >= 5 ? '★' : '☆'}
-        </span>
-    )
-}
-
 
 function OwnerProfile() {
 
@@ -27,6 +15,7 @@ function OwnerProfile() {
 
     const [house, setHouse] = useState(0)
     const [stepRating, setStepRating] = useState(0)
+    const [reload, setReload] = useState(false)
 
     const perPage = 2
     const pagsHouse = Math.ceil(myAds?.length / perPage)
@@ -34,7 +23,7 @@ function OwnerProfile() {
     const handlePreview = () => setHouse((house + 1) % pagsHouse)
 
     const ratingsData = useFetch(REACT_APP_BASE_URL + '/users/ratings/owner')
-    
+
    const totalRating = ratingsData.reduce((acc, rating) => {
        return acc + rating.rating
    }, 0)
@@ -57,7 +46,7 @@ function OwnerProfile() {
         })
             .then(response => response.json())
             .then(data => setRentalOffered(data))
-    }, [rentalsOffered])
+    }, [reload, user])
 
     const [stepBooking, setStepBooking] = useState(0)
 
@@ -95,13 +84,13 @@ function OwnerProfile() {
             <section>
                 {rentalsOffered.length > 0 ? <div className='rental-history'>
                     {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
-                        <article className='card-offered-booking' key={booking.houseId}>
+                        <article className='card-offered-booking' key={booking.bookingId}>
                             <div className="picture-offered-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} />
                             <div className='info-offered'>
                                 <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
                                 <p key={booking.startDate} className='date-offered-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
                                 <div className='state-offered-booking'>
-                                    {Date.parse(booking.endDate) < new Date() && <ScoreToTenant bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
+                                    {Date.parse(booking.endDate) < new Date() && <ScoreToTenant reload={reload} setReload={setReload} bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
                                 </div>
                             </div>
                         </article>

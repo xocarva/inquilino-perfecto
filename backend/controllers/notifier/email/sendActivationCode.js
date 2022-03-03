@@ -6,8 +6,8 @@ const sendActivationCode = async (user) => {
     await transporter.sendMail({
         from: `${SENDER_EMAIL} <${SENDER_EMAIL}>`,
         to: email,
-        subject: "Confirm your account",
-        html: `<p>Click <a href="http://localhost:3000/users/validate/${activationCode}">here</a> to confirm your account.</p>`
+        subject: "Activa tu usuario",
+        html: `<p>Click <a href="http://localhost:3000/users/validate/${activationCode}">aquí</a> para activar tu usuario.</p>`
     })
   }
 

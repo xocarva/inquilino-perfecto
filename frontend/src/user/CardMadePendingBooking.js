@@ -4,7 +4,7 @@ import { useSetModal, useUser } from "../hooks";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardMadePendingBooking({ bookingData }) {
+function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -22,6 +22,8 @@ function CardMadePendingBooking({ bookingData }) {
                     <p>Reserva cancelada correctamente.</p>
                 </article>
             )
+        } else if (res.status === 403) {
+            setModal(<p>Antes de cancelar debes activar tu usuario.</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -29,6 +31,7 @@ function CardMadePendingBooking({ bookingData }) {
                 </div>
             )
         }
+        setReloadMade(!reloadMade)
     }
 
     return (

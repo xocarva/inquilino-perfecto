@@ -24,32 +24,19 @@ function Register() {
         Navigation('/')
     }
 
-    let isValidEmailCheck
-    let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]$/
-    const isValidEmail = emailPattern.test(email)
-    isValidEmail ? isValidEmailCheck = '✅' : isValidEmailCheck = '❌'
-
     const handleSubmit = async e => {
         e.preventDefault()
         const picture = e.target.picture.files[0]
         const fd = new FormData()
-        let firstNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
-        const isValidFirstName = firstNamePattern.test(firstName)
-
-        let lastNamePattern = /(^[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
-        const isValidLastName = lastNamePattern.test(lastName)
-
-        let bioPattern = /^[A-ZÁÉÍÓÚ]/
-        const isValidBio = bioPattern.test(bio)
 
         switch (true) {
             case firstName &&
-                (!isValidFirstName || firstName.length < 2 || firstName.length > 80):
+                (firstName.length < 2 || firstName.length > 80):
                 setModal(<p>Tu nombre debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
                 setName('')
                 return
             case lastName &&
-                (!isValidLastName || lastName.length < 2 || lastName.length > 80):
+                (lastName.length < 2 || lastName.length > 80):
                 setModal(<p>Tu apellido debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
                 setLastName('')
                 return
@@ -58,12 +45,7 @@ function Register() {
                 setEmail('')
                 setMailConfirm('')
                 return
-            case email && !isValidEmail:
-                setModal(<p>Correo no válido.</p>)
-                setEmail('')
-                setMailConfirm('')
-                return
-            case bio && (!isValidBio || bio.length < 10 || bio.length >= 200):
+            case bio && (bio.length < 10 || bio.length >= 200):
                 setModal(<p>Tu bio debe contener entre 10 y 200 carácteres.</p>)
                 setBio('')
                 return
@@ -124,7 +106,7 @@ function Register() {
                         <input className='input-register' name='email' type='email' value={email} placeholder='Email...' required onChange={e => setEmail(e.target.value)} />
                     </label>
                     <label>
-                        Confirma Email {email ? email === mailConfirm ? isValidEmailCheck : '❌' : ''}
+                        Confirma Email {email ? (email === mailConfirm) ?  '✅' : '❌' : ''}
                         <input className='input-register' name='email' type='email' value={mailConfirm} placeholder='Confirma email...' required onChange={e => setMailConfirm(e.target.value)} />
                     </label>
                 </div>
