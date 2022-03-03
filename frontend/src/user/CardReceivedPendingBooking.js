@@ -23,6 +23,8 @@ function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadRec
                     <p>Reserva confirmada correctamente</p>
                 </article>
             )
+        } else if (res.status === 403) {
+            setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -47,6 +49,8 @@ function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadRec
                     <p>Reserva cancelada correctamente.</p>
                 </article>
             )
+        } else if (res.status === 403) {
+            setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
         } else {
             setModal(
                 <div className='modal-container'>

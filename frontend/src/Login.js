@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSetModal, useSetUser } from './hooks'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const URL = process.env.REACT_APP_BASE_URL
 
 
 function Login() {
@@ -13,28 +13,10 @@ function Login() {
   const setUser = useSetUser()
   const setModal = useSetModal()
 
-  let emailPattern = /^[\w]+@{1}[\w]+\.+[a-z]$/
-  const isValidEmail = emailPattern.test(email)
-
-  let passPattern = /^[@#][A-Za-z0-9]{7,13}$/
-  const isValidPass = passPattern.test(password)
-
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if (email !== isValidEmail) {
-      setModal(<p>Email no válido</p>)
-      setEmail('')
-      setPassword('')
-    }
-
-    if (password !== isValidPass) {
-      setModal(<p>Contraseña no válida</p>)
-      setEmail('')
-      setPassword('')
-    }
-
-    const res = await fetch(REACT_APP_BASE_URL + '/users/login', {
+    const res = await fetch(URL + '/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {

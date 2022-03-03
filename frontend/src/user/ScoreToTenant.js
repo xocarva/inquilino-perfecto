@@ -32,7 +32,10 @@ const ScoreToTenant = ({ bookingData, reload, setReload }) => {
                     <p>Tus voto se guardó correctamente.</p>
                 </article>
             )
-        } else {
+        } else if (res.status === 403) {
+            setModal(<p>Para poder hacer una valoración debes activar primero tu usuario</p>)
+        }
+         else {
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido guardar tu voto.</p>

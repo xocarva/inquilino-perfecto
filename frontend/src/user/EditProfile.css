@@ -71,13 +71,13 @@
 
 
 .email-profile, .confirm-email-profile {
-    width: 170px;
+    width: 20vw;
     font-size: 1.3rem;
 }
 
 
 .email-profile>input, .confirm-email-profile>input {
-    width: 170px;
+    width: 20vw;
     height: 35px;
     font-size: 1.2rem;
 }
