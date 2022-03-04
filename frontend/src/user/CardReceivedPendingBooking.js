@@ -5,7 +5,7 @@ import Puntuacion from "../Puntuacion";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadReceived } ) {
+function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadReceived }) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -64,27 +64,28 @@ function CardReceivedPendingBooking( { bookingData, reloadReceived, setReloadRec
     return (
         <article className='card-received-booking'>
             <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
-            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
-            <div className='tenant-data-container'>
-                <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
-                <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
-                <div className='rating-tenant'>
-                    <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
+            <div className='booking-data-container'>
+                <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
+                <div className='tenant-data'>
+                    <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
+                    <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
+                    <div className='rating-tenant'>
+                        <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
+                    </div></div>
+                <div className='date-card-pending-bookings-container'>
+                    <div className='date-card-pending-bookings'>
+                        <span>📅 Fecha de entrada</span>
+                        <p>{bookingData.startDate.slice(0, 10)}</p>
+                    </div>
+                    <div className='date-card-pending-bookings'>
+                        <span>📅 Fecha de salida</span>
+                        <p>{bookingData.endDate.slice(0, 10)}</p>
+                    </div>
                 </div>
-            </div>
-            <div className='date-card-pending-bookings-container'>
-            <div className='date-card-pending-bookings'>
-                <span>📅 Fecha de entrada</span>
-                <p>{bookingData.startDate.slice(0, 10)}</p>
-            </div>
-            <div className='date-card-pending-bookings'>
-                <span>📅 Fecha de salida</span>
-                <p>{bookingData.endDate.slice(0, 10)}</p>
-            </div>
-            </div>
-            <div className='buttons-received-bookings'>
-                <span bookingid={Number(bookingData.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
-                <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>
+                <div className='buttons-received-bookings'>
+                    <span bookingid={Number(bookingData.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
+                    <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>
+                </div>
             </div>
         </article>
     )
