@@ -42,8 +42,8 @@ const getHousesSearch = async (req, res) => {
         const housesWithRatings = await Promise.all(availableHouses.map(async house => {
             const ratings = await ratingsRepository.getRatings({ id: house.ownerId, role:'owner' })
             const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating/ratings.length), 0))
-            const { picture } = await usersRepository.getUserById(house.ownerId)
-            return { ...house, ratingAvg, ownerPic: picture }
+            const { firstName, lastName, picture } = await usersRepository.getUserById(house.ownerId)
+            return { ...house, ratingAvg, ownerName: `${firstName} ${lastName}`,ownerPic: picture }
         }))
 
         resultHouses = housesWithRatings.map(house => {
@@ -56,6 +56,7 @@ const getHousesSearch = async (req, res) => {
                 rooms: house.rooms,
                 picture: housePicture,
                 ownerPic: house.ownerPic,
+                ownerName: house.ownerName,
                 ownerRating: house.ratingAvg
             }
         })
