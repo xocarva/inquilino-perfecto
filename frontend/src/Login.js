@@ -23,12 +23,26 @@ function Login() {
         'Content-Type': 'application/json'
       }
     })
-    const data = await res.json()
+
     if (res.ok) {
+      const data = await res.json()
       setUser(data)
       setModal(false)
+    } else if (res.status === 404) {
+      setError(<p>Email no registrado</p>)
+      setEmail('')
+    } else if (res.status === 401) {
+      setError(<p>Contraseña inválida</p>)
+      setPassword('')
+    } else if (res.status === 400) {
+      setError(
+        <>
+          <p>Formato de email</p>
+          <p>inválido</p>
+        </>
+      )
     } else {
-      setError(data.error)
+      setError(<p>Error !!!</p>)
     }
   }
 

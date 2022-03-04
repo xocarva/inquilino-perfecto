@@ -1,6 +1,6 @@
-function Puntuacion({ value }) {
+function Puntuacion({ value, className }) {
     return (
-        <span className="puntuacion">
+        <span className={`puntuacion ${className}`}>
             {value >= 1 ? '★' : '☆'}
             {value >= 2 ? '★' : '☆'}
             {value >= 3 ? '★' : '☆'}
