@@ -4,6 +4,7 @@ import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
 import Login from '../Login'
+import Puntuacion from '../Puntuacion'
 import './House.css'
 
 
@@ -74,6 +75,11 @@ useEffect(() => {
               <div className='main-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${mainPic}")`}}></div>
               <div className='main-info'>
                 <h2>🏠 {house.title}</h2>
+                <div className='owner'>
+                  <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
+                  <span className='owner-name'>{house.ownerName}</span>
+                  <Puntuacion value={house.ownerRating} className='rating-tenant' />
+                </div>
                 <span>🏙️ {house.city}</span>
                 <span>🚪 {house.rooms} habitaciones</span>
                 <span className='price'>🪙 {house.price}€ / Día</span>
