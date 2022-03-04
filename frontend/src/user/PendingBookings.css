@@ -43,7 +43,7 @@
 .picture-received-booking {
     height: 14rem;
     width: 30vw;
-    min-width: 500px;
+    min-width: 450px;
     max-width: 40rem;
     background-repeat: no-repeat;
     background-size: cover;
@@ -147,13 +147,21 @@
 }
 
 @media(max-width: 768px) {
+    .pending-bookings-page {
+        width: 100vw;
+    }
     .pending-bookings-page h3 {
         text-align: center;
     }
-    .picture-received-booking {
-        width: 80vw;
+    .received-pending-bookings-section {
+        width: 97vw;
     }
     .card-received-booking {
-        width: 80vw;
+        width: 97vw;
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+    .rating-tenant .puntuacion {
+        width: 100px;
     }
 }
