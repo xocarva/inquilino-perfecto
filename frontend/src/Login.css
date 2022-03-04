@@ -37,6 +37,7 @@
     border-radius: 8px;
     margin-bottom: 0.5rem;
     background-color: #CFE1B9;
+    box-shadow: 1px 1px 3px;
   }
 
   .entrar-button:hover {

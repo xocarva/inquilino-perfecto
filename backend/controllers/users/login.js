@@ -9,8 +9,8 @@ const login = async (req, res) => {
   try {
     await credentialsValidator.validateAsync(credentials)
   } catch (error) {
-    res.status(401)
-    res.send(error.message)
+    res.status(400)
+    res.end(error.message)
     return
   }
 
@@ -24,8 +24,8 @@ const login = async (req, res) => {
   }
 
   if (!user) {
-    res.status(400)
-    res.end('User not found')
+    res.status(404)
+    res.send('user not found')
     return
   }
 
