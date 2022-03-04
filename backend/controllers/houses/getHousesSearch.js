@@ -1,4 +1,4 @@
-const { housesRepository, bookingsRepository } = require('../../repository')
+const { housesRepository, bookingsRepository, ratingsRepository, usersRepository } = require('../../repository')
 const { queryValidator } = require('../../validators')
 
 
@@ -39,7 +39,14 @@ const getHousesSearch = async (req, res) => {
 
         const availableHouses = await datesFilter(housesWithBookings, isAvailable)
 
-        resultHouses = availableHouses.map(house => {
+        const housesWithRatings = await Promise.all(availableHouses.map(async house => {
+            const ratings = await ratingsRepository.getRatings({ id: house.ownerId, role:'owner' })
+            const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating/ratings.length), 0))
+            const { firstName, lastName, picture } = await usersRepository.getUserById(house.ownerId)
+            return { ...house, ratingAvg, ownerName: `${firstName} ${lastName}`,ownerPic: picture }
+        }))
+
+        resultHouses = housesWithRatings.map(house => {
             const [ housePicture ] = house.pictures
             return {
                 id: house.id,
@@ -47,7 +54,10 @@ const getHousesSearch = async (req, res) => {
                 city: house.city,
                 price: house.price,
                 rooms: house.rooms,
-                picture: housePicture
+                picture: housePicture,
+                ownerPic: house.ownerPic,
+                ownerName: house.ownerName,
+                ownerRating: house.ratingAvg
             }
         })
 

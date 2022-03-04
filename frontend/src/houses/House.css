@@ -27,6 +27,30 @@
     justify-content: space-around;
 }
 
+
+
+.ad-info .main-info .owner {
+    display: flex;
+    gap: 1rem;
+}
+
+.ad-info .main-info .owner .owner-pic {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.ad-info .main-info .owner .owner-name {
+    white-space: nowrap;
+}
+
+.ad-info .main-info .owner .puntuacion {
+    margin: 0;
+    width: auto;
+}
+
+
 .ad-info .main-info h2 {
     font-size: 1.6em;
     margin: 0;

@@ -6,6 +6,7 @@ import { useState, Suspense } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Loading from '../Loading'
 import Login from '../Login'
+import Puntuacion from '../Puntuacion'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -119,6 +120,11 @@ function SearchResults() {
                             <span className='title'>🏠 <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link></span>
                             <div className='details-container'>
                                 <div className='house-details'>
+                                    <div className='owner'>
+                                        <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
+                                        <span className='owner-name'>{house.ownerName}</span>
+                                        <Puntuacion value={house.ownerRating} className='rating-tenant' />
+                                    </div>
                                     <span className='city'>🏙️ {house.city}</span>
                                     <span className='rooms'>🚪 {house.rooms} habitaciones</span>
                                     <span className='price'>🪙 {house.price} €/día</span>
