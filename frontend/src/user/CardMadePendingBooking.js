@@ -35,8 +35,9 @@ function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
     }
 
     return (
-        <article className='card-received-booking card-pending-bookings'>
+        <article className='card-received-booking'>
             <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.urlPic})` }} ></div>
+            <div className='booking-data-container booking-made-data'>
             <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
             <div className='date-card-pending-bookings-container'>
             <div className='date-card-pending-bookings'>
@@ -48,8 +49,9 @@ function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
                 <p>{bookingData.endDate.slice(0, 10)}</p>
             </div>
             </div>
-            <div className='buttons-received-bookings'>
+            <div className='buttons-received-bookings button-made-bookings'>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
+            </div>
             </div>
         </article>
     )
