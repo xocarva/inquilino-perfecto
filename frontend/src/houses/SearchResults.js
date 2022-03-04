@@ -123,7 +123,7 @@ function SearchResults() {
                                     <div className='owner'>
                                         <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
                                         <span className='owner-name'>{house.ownerName}</span>
-                                        {house.ownerRating ? <Puntuacion value={house.ownerRating} className='rating-tenant' /> : `(nuev@)`}
+                                        <Puntuacion value={house.ownerRating} className='rating-tenant' />
                                     </div>
                                     <span className='city'>🏙️ {house.city}</span>
                                     <span className='rooms'>🚪 {house.rooms} habitaciones</span>
