@@ -4,11 +4,11 @@ export function validateDataProfile(firstName, lastName, email, emailConfirm, bi
     switch (true) {
         case firstName &&
             (firstName.length < 2 || firstName.length > 80):
-            errorData = { errorTypeValidation: 'firstName', errorTextValidation: 'Tu nombre debe empezar por mayúscula y contener entre 2 y 80 carácteres.'}
+            errorData = { errorTypeValidation: 'firstName', errorTextValidation: 'Tu nombre debe contener entre 2 y 80 carácteres.'}
             return errorData
         case lastName &&
             (lastName.length < 2 || lastName.length > 80):
-            errorData = { errorTypeValidation: 'lastName', errorTextValidation: 'Tu apellido debe empezar por mayúscula y contener entre 2 y 80 carácteres.'}
+            errorData = { errorTypeValidation: 'lastName', errorTextValidation: 'Tu apellido debe contener entre 2 y 80 carácteres.'}
             return errorData
         case email !== emailConfirm:
             errorData = { errorTypeValidation: 'email', errorTextValidation: 'El email no coincide.'}

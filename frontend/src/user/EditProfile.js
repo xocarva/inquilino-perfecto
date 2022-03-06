@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { useSetModal, useSetUser, useUser } from '../hooks'
 import Loading from '../Loading'
 import { validateDataProfile } from '../utils/validateDataProfile'
+import EditPrrofileForm from './EditProfileForm'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
@@ -19,8 +20,12 @@ function EditProfile() {
     const [passConfirm, setPassConfirm] = useState('')
     const [bio, setBio] = useState('')
     const [picName, setPicName] = useState('No se ha cargado foto')
+    const [errorType, setErrorType] = useState('')
+    const [errorText, setErrorText] = useState('')
 
     useEffect(() => {
+        setErrorType('')
+        setErrorText('')
         fetch(REACT_APP_BASE_URL + '/users/profile', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
@@ -28,35 +33,25 @@ function EditProfile() {
         })
             .then(response => response.json())
             .then(data => setUserData(data))
-    }, [user])
+        }, [user])
 
-    const handleProfilePic = e => {
-        setPicName(e.target.files[0].name)
-    }
+        const handleProfilePic = e => {
+            setPicName(e.target.files[0].name)
+        }
 
-    const handleSubmit = async e => {
-        e.preventDefault()
-        const picture = e.target.picture.files[0]
-        const fd = new FormData()
+        const handleSubmit = async e => {
+            e.preventDefault()
+            const picture = e.target.picture.files[0]
+            const fd = new FormData()
+            const getErrorValidateData = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
+            const { errorTypeValidation, errorTextValidation } = getErrorValidateData
 
-        const getErrorValidateData = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
-        const { errorTypeValidation, errorTextValidation } = getErrorValidateData
-        if(getErrorValidateData) {
-            setModal(<p>{errorTextValidation}</p>)
-            errorTypeValidation === 'firstName' && setFirstName('')
-            errorTypeValidation === 'lastName' && setLastName('')
-            errorTypeValidation === 'bio' && setBio('')
-            if(errorTypeValidation === 'email') {
-                setEmail('')
-                setEmailConfirm('')
-            }
-            if(errorTypeValidation === 'password') {
-                setPassword('')
-                setPassConfirm('')
-            }
+            if(getErrorValidateData) {
+            setErrorType(errorTypeValidation)
+            setErrorText(errorTextValidation)
+            document.getElementById(errorTypeValidation).focus()
             return
         }
-        document.getElementById(errorTypeValidation).focus()
 
         if (firstName) {
             fd.append("firstName", firstName)
@@ -120,49 +115,27 @@ function EditProfile() {
     return (
         <div className="edit-profile-page">
             <h3>Edita tus datos:</h3>
-            <form className='input-container-profile' onSubmit={handleSubmit}>
-                <div className='data-container'>
-                    <div className='up-container-profile'>
-                        <label className='first-name-profile'>
-                            Nombre
-                            <input id='firstName' value={firstName} onChange={e => setFirstName(e.target.value)} placeholder={userData.firstName} />
-                        </label>
-                        <label className='last-name-profile'>
-                            Apellidos
-                            <input value={lastName} onChange={e => setLastName(e.target.value)} placeholder={userData.lastName} />
-                        </label>
-                        <label className='email-profile'>
-                            Email
-                            <input value={email} onChange={e => setEmail(e.target.value)} placeholder={userData.email} />
-                        </label>
-                        <label className='confirm-email-profile'>
-                            Confirma email <span className='check-emoji'>{email ? email === emailConfirm ? " ✅ " : '❌' : ''}</span>
-                            <input value={emailConfirm} onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
-                        </label>
-                    </div>
-                    <label className='bio-profile'>
-                        Mi Bio
-                        <textarea value={bio} onChange={e => setBio(e.target.value)} placeholder={userData.bio} />
-                    </label>
-                    <div className='down-container-profile'>
-                        <label className='password-profile'>
-                            Contraseña
-                            <input type="password" value={password} placeholder='********' onChange={e => setPassword(e.target.value)} />
-                        </label>
-                        <label className='confirm-password-profile'>
-                            Confirma contraseña
-                            {password ? passConfirm === password ? " ✅ " : '❌' : ''}
-                            <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
-                        </label>
-                        <div className='picture-container'>
-                            <label htmlFor='btn-picture' className='picture'>Editar foto...</label>
-                            <span id='chosen-file'>{picName}</span>
-                            <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
-                        </div>
-                    </div>
-                </div>
-                <button className='edit-button-profile'>Guardar cambios</button>
-            </form>
+            <EditPrrofileForm
+            handleSubmit={handleSubmit}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            email={email}
+            setEmail={setEmail}
+            emailConfirm={setEmailConfirm}
+            bio={bio}
+            setBio={setBio}
+            password={password}
+            setPassword={setPassword}
+            passConfirm={passConfirm}
+            setPassConfirm={setPassConfirm}
+            picName={picName}
+            handleProfilePic={handleProfilePic}
+            userData={userData}
+            errorType={errorType}
+            errorText={errorText}
+            />
         </div>
     )
 }

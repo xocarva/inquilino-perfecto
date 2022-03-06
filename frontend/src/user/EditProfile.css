@@ -69,6 +69,18 @@
     color: #2e2e2ed7;
 }
 
+.error-text {
+    box-sizing: border-box;
+    font-size: 1rem;
+    position: absolute;
+    background-color: white;
+    color: rgba(255, 0, 0, 0.699);
+    width: 20vw;
+    margin: 0.5rem 0;
+    padding: 0.2rem 1rem 1rem 0.5rem;
+    border-radius: 10px;
+}
+
 
 .email-profile, .confirm-email-profile {
     width: 20vw;
@@ -248,6 +260,10 @@
     }
     .bio-profile>textarea {
         height: 100px;
+    }
+    .error-text {
+        width: 100%;
+        margin: 0;
     }
     .email-profile, .confirm-email-profile {
         width: 60vw;
