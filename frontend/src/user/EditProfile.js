@@ -43,6 +43,7 @@ function EditProfile() {
             e.preventDefault()
             const picture = e.target.picture.files[0]
             const fd = new FormData()
+
             const getErrorValidateData = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
             const { errorTypeValidation, errorTextValidation } = getErrorValidateData
 
@@ -116,25 +117,25 @@ function EditProfile() {
         <div className="edit-profile-page">
             <h3>Edita tus datos:</h3>
             <EditPrrofileForm
-            handleSubmit={handleSubmit}
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            email={email}
-            setEmail={setEmail}
-            emailConfirm={setEmailConfirm}
-            bio={bio}
-            setBio={setBio}
-            password={password}
-            setPassword={setPassword}
-            passConfirm={passConfirm}
-            setPassConfirm={setPassConfirm}
-            picName={picName}
-            handleProfilePic={handleProfilePic}
-            userData={userData}
-            errorType={errorType}
-            errorText={errorText}
+                handleSubmit={handleSubmit}
+                firstName={firstName}
+                setFirstName={setFirstName}
+                lastName={lastName}
+                setLastName={setLastName}
+                email={email}
+                setEmail={setEmail}
+                emailConfirm={setEmailConfirm}
+                bio={bio}
+                setBio={setBio}
+                password={password}
+                setPassword={setPassword}
+                passConfirm={passConfirm}
+                setPassConfirm={setPassConfirm}
+                picName={picName}
+                handleProfilePic={handleProfilePic}
+                userData={userData}
+                errorType={errorType}
+                errorText={errorText}
             />
         </div>
     )

@@ -22,7 +22,7 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                         </label>
                         <label className='confirm-email-profile'>
                             Confirma email <span className='check-emoji'>{email ? email === emailConfirm ? " ✅ " : '❌' : ''}</span>
-                            <input value={emailConfirm} onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
+                            <input value={email} onChange={e => setEmailConfirm(e.target.value)} placeholder={userData.email} />
                         </label>
                     </div>
                     <label className='bio-profile'>
@@ -39,7 +39,7 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                         <label className='confirm-password-profile'>
                             Confirma contraseña
                             {password ? passConfirm === password ? " ✅ " : '❌' : ''}
-                            <input type="password" value={passConfirm} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
+                            <input type="password" value={password} placeholder='********' onChange={e => setPassConfirm(e.target.value)} />
                         </label>
                         <div className='picture-container'>
                             <label htmlFor='btn-picture' className='picture'>Editar foto...</label>
