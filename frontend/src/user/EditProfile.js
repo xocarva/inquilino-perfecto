@@ -124,7 +124,8 @@ function EditProfile() {
                 setLastName={setLastName}
                 email={email}
                 setEmail={setEmail}
-                emailConfirm={setEmailConfirm}
+                emailConfirm={emailConfirm}
+                setEmailConfirm={setEmailConfirm}
                 bio={bio}
                 setBio={setBio}
                 password={password}
@@ -134,6 +135,7 @@ function EditProfile() {
                 picName={picName}
                 handleProfilePic={handleProfilePic}
                 userData={userData}
+                setErrorType={setErrorType}
                 errorType={errorType}
                 errorText={errorText}
             />
