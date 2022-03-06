@@ -268,11 +268,14 @@
         flex-direction: column;
         gap: 0;
     }
-    .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
+    .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>div>input, .confirm-password-profile>input {
         box-sizing: border-box;
         width: 93vw;
         height: 35px;
         margin-bottom: 1rem;
+    }
+    .eye-password {
+        display: none;
     }
     .bio-profile>textarea {
         height: 100px;
