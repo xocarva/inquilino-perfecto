@@ -55,14 +55,11 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                     </label>
                     <div className='down-container-profile'>
                         <label className='password-profile'>
-                            Contraseña
-                            <div>
+                            Contraseña {password && <span className='eye-password' onClick={handlerShowPassword} >👀</span>}
                             <input id='password' type={showPassword ? "text" : "password"} value={password} placeholder='********' onChange={e => {
                                 setPassword(e.target.value)
                                 setErrorType('')
                             }} />
-                            {password && <span className='eye-password' onClick={handlerShowPassword} >{showPassword ? '❌' : '👀'}</span>}
-                            </div>
                             {errorType === 'password' && <p className='error-text'>{errorText}</p>}
                         </label>
                         <label className='confirm-password-profile'>
