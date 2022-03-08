@@ -78,7 +78,8 @@ useEffect(() => {
                 <div className='owner'>
                   <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
                   <span className='owner-name'>{house.ownerName}</span>
-                  <Puntuacion value={house.ownerRating} className='rating-tenant' />
+                   {console.log(house.ownerRating)}
+                  <Puntuacion value={house.rating} className='rating-tenant' />
                 </div>
                 <span>🏙️ {house.city}</span>
                 <span>🚪 {house.rooms} habitaciones</span>
