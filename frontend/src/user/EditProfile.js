@@ -23,6 +23,15 @@ function EditProfile() {
     const [errorType, setErrorType] = useState('')
     const [errorText, setErrorText] = useState('')
 
+    // const [formFields, setFormFields] = useState({});
+
+    // const handleFormField = (e) => {
+    //     setFormFields({
+    //         ...formFields,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
     useEffect(() => {
         setErrorType('')
         setErrorText('')
@@ -33,26 +42,27 @@ function EditProfile() {
         })
             .then(response => response.json())
             .then(data => setUserData(data))
-        }, [user])
+    }, [user])
 
-        const handleProfilePic = e => {
-            setPicName(e.target.files[0].name)
-        }
+    const handleProfilePic = e => {
+        setPicName(e.target.files[0].name)
+    }
 
-        const handleSubmit = async e => {
-            e.preventDefault()
-            const picture = e.target.picture.files[0]
-            const fd = new FormData()
+    const handleSubmit = async e => {
+        e.preventDefault()
 
-            const getErrorValidateData = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
-            const { errorTypeValidation, errorTextValidation } = getErrorValidateData
+        const { errorTypeValidation, errorTextValidation } = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
 
-            if(getErrorValidateData) {
+
+        if (errorTypeValidation) {
             setErrorType(errorTypeValidation)
             setErrorText(errorTextValidation)
             document.getElementById(errorTypeValidation).focus()
             return
         }
+
+        const picture = e.target.picture.files[0]
+        const fd = new FormData()
 
         if (firstName) {
             fd.append("firstName", firstName)
@@ -115,8 +125,9 @@ function EditProfile() {
 
     return (
         <div className="edit-profile-page">
-            <h3>Edita tus datos:</h3>
+            <h1>Edita tus datos</h1>
             <EditPrrofileForm
+                // handleFormField={handleFormField}
                 handleSubmit={handleSubmit}
                 firstName={firstName}
                 setFirstName={setFirstName}

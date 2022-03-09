@@ -27,7 +27,7 @@ function NewAd() {
         for (const p of pictures) {
             fd.append('pictures', p.file)
         }
-        const res = await fetch(REACT_APP_BASE_URL +'/houses/', {
+        const res = await fetch(REACT_APP_BASE_URL + '/houses/', {
             method: 'POST',
             body: fd,
             headers: {
@@ -38,15 +38,15 @@ function NewAd() {
         if (res.ok) {
             setModal(<p>{`Has publicado tu anuncio ${title} con exito!!!`}</p>)
             Navigation('/')
-        }  else if (res.status === 403) {
+        } else if (res.status === 403) {
             setModal(<p>Para poder publicar un anuncio debes activar primero tu usuario</p>)
         } else {
             setModal(<p>No se ha podido realizar la publicación</p>)
-        } 
+        }
     }
     return (
         <div className='ad-page'>
-            <h2 className='title-ad-page'>Datos del anuncio</h2>
+            <h1 className='title-ad-page'>Publica un nuevo anuncio</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>
@@ -54,15 +54,15 @@ function NewAd() {
                         <input name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
-                        Precio 
+                        Precio
                         <input name='price' value={price} type='number' placeholder='Precio...' required onChange={e => setPrice(e.target.value)} />
                     </label>
                     <label>
-                        Habitaciones 
+                        Habitaciones
                         <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' required onChange={e => setRooms(e.target.value)} />
                     </label>
                     <label>
-                        Ciudad 
+                        Ciudad
                         <input name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => setCity(e.target.value)} />
                     </label>
                 </div>
@@ -73,7 +73,7 @@ function NewAd() {
                     </label>
                 </div>
                 <div id='picture-container'>
-                    <PicUpload pictures={pictures} onChange={setPictures}/>
+                    <PicUpload pictures={pictures} onChange={setPictures} />
                 </div>
                 <button id='ad-button'>
                     Publicar

@@ -4,6 +4,7 @@
     align-items: center;
     gap: 0.5rem;
     background-color: #CFE1B9;
+    flex-grow: 0;
 }
 
 .header .title {

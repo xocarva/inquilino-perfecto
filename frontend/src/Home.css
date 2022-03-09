@@ -1,7 +1,8 @@
 .home-contenedor {
     display: flex;
     justify-content: center;
-    height: 70vh;
+    /* height: 100vh; */
+    flex-grow: 1;
 }
 
 .image-home {
@@ -9,7 +10,7 @@
     justify-content: center;
     align-items:flex-end;
     width: 100vw;
-    height: 69vh;
+    /* height: 100vh; */
     background-size: cover;
     background-position: center;
 }

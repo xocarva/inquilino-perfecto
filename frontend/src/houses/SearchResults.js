@@ -77,7 +77,7 @@ function SearchResults() {
         }
     }
 
-    const results = useFetch(fetchUrl)
+    const {data: results} = useFetch(fetchUrl, [])
     if(results &&  results.length > 0 && sortCriterion) {
         if(sortOrder === 'asc') results.sort((house1, house2) => house1[sortCriterion] > house2[sortCriterion] ? 1 : house1[sortCriterion] < house2[sortCriterion] ? -1 : 0)
         else results.sort((house1, house2) => house1[sortCriterion] < house2[sortCriterion] ? 1 : house1[sortCriterion] > house2[sortCriterion] ? -1 : 0)

@@ -11,7 +11,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function OwnerProfile() {
 
-    const myAds = useFetch(REACT_APP_BASE_URL + '/users/houses')
+    const {data: myAds, error, isLoading} = useFetch(REACT_APP_BASE_URL + '/users/houses', [])
 
     const [house, setHouse] = useState(0)
     const [stepRating, setStepRating] = useState(0)
@@ -22,7 +22,7 @@ function OwnerProfile() {
     const handleNext = () => setHouse(house > 0 ? house - 1 : pagsHouse - 1)
     const handlePreview = () => setHouse((house + 1) % pagsHouse)
 
-    const ratingsData = useFetch(REACT_APP_BASE_URL + '/users/ratings/owner')
+    const {data: ratingsData} = useFetch(REACT_APP_BASE_URL + '/users/ratings/owner', [])
 
    const totalRating = ratingsData.reduce((acc, rating) => {
        return acc + rating.rating
@@ -57,7 +57,7 @@ function OwnerProfile() {
     return rentalsOffered && (
         <div className="body-owner-profile">
             <div className='title-container'>
-                <h3 className='title-owner'>Tus anuncios</h3>
+                <h1 className='title-owner'>Tus anuncios</h1>
             </div>
             <section>
                 {myAds.length > 0 ? <article className='article-announcements'>
@@ -79,7 +79,7 @@ function OwnerProfile() {
                 </article> : <div className='there-is-not'>Aun no tienes anuncios publicados 😅</div>}
             </section>
             <div className='title-container'>
-                <h3 className='title-owner'>Historico de alquileres ofertados</h3>
+                <h1 className='title-owner'>Historico de alquileres ofertados</h1>
             </div>
             <section>
                 {rentalsOffered.length > 0 ? <div className='rental-history'>
@@ -107,7 +107,7 @@ function OwnerProfile() {
                 </div> : <div className='there-is-not'>Aun no tienes alquileres ofertados 😅</div>}
             </section>
             <div className='title-container'>
-                <h3 className='title-owner'>Valoraciones recibidas como casero {ratingsData.length > 0 && <span>  (<Puntuacion className='star-ratings' value={averageRatings} />)</span>}</h3>
+                <h1 className='title-owner'>Valoraciones recibidas como casero {ratingsData.length > 0 && <span>  (<Puntuacion className='star-ratings' value={averageRatings} />)</span>}</h1>
             </div>
             <section className='body-rating'>
                 {ratingsData.length > 0 ? <div>

@@ -4,6 +4,7 @@
     margin: 0 auto;
     align-items: center;
     width: 80vw;
+    flex-grow: 1;
 }
 
 .body-register .title-register-page {

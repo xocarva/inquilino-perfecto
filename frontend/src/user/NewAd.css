@@ -7,6 +7,7 @@
     text-align: center;
     border-radius: 15px;
     padding: 10px;
+    flex-grow: 1;
 }
 
 .title-ad-page {
