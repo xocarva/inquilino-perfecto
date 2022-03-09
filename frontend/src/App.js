@@ -7,7 +7,6 @@ import Home from './Home'
 import User from './user/User'
 import Register from './Register'
 import Houses from './houses/Houses'
-import SearchBar from './houses/SearchBar'
 import Oops from './Oops'
 import Footer from './Footer'
 
@@ -17,7 +16,6 @@ function App() {
         <ErrorBoundary fallback={<Oops />}>
           <Header/>
           <Modal />
-          <SearchBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='user/*' element={<User />}/>

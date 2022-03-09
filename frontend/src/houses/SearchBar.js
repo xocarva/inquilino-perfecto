@@ -4,7 +4,7 @@ import './SearchBar.css'
 import { useSetModal } from '../hooks'
 
 
-function SearchBar () {
+function SearchBar({ showBar, setShowBar }) {
     const navigate = useNavigate()
     const setModal = useSetModal()
     const [city, setCity] = useState('')
@@ -12,11 +12,20 @@ function SearchBar () {
     const [rooms, setRooms] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
-    const [showBar, setShowBar] = useState(false)
+
+    const cityRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
 
     const handleSubmit = async e => {
         e.preventDefault()
-        if(startDate >= endDate || new Date (startDate) < new Date()) {
+        if (city !== '' && !cityRegex.test(city)) {
+            setModal(
+                <div className='modal'>
+                    <p>Localidad no válida</p>
+                </div>
+            )
+            return
+        }
+        if (startDate >= endDate || new Date(startDate) < new Date()) {
             setModal(
                 <div className='modal'>
                     <p>Las fechas no son válidas</p>
@@ -26,9 +35,9 @@ function SearchBar () {
         }
 
         let url = '/houses/search/?startDate=' + startDate + '&endDate=' + endDate
-        if(city) url += '&city=' + city
-        if(rooms) url += '&rooms=' + rooms
-        if(price) url += '&price=' + price
+        if (city) url += '&city=' + city
+        if (rooms) url += '&rooms=' + rooms
+        if (price) url += '&price=' + price
         setCity('')
         setPrice('')
         setRooms('')
@@ -40,15 +49,12 @@ function SearchBar () {
 
     return (
         <>
-            {!showBar && <div className='search-icon-container'>
-                <span className='search-icon' onClick={() => setShowBar(!showBar)}>Buscar</span>
-            </div>}
             {showBar && <div className='form-container'>
+                <h2>Encuentra tu vivienda</h2>
                 <form className="searchForm" onSubmit={handleSubmit}>
-                    <h2>Encuentra tu vivienda</h2>
                     <label>
                         Localidad
-                        <input type="text" value={city} onChange={e => setCity(e.target.value)}></input>
+                        <input minLength={2} type="text" value={city} onChange={e => setCity(e.target.value)}></input>
                     </label>
                     <label>
                         Precio
@@ -63,14 +69,17 @@ function SearchBar () {
                             <option value="4">+3</option>
                         </select>
                     </label>
-                    <label>
-                        Fecha entrada
-                        <input type="date" min={(new Date()).toISOString().split('T')[0]} value={startDate} required onChange={e => setStartDate(e.target.value)}></input>
-                    </label>
-                    <label>
-                        Fecha salida
-                        <input type="date" min={(new Date()).toISOString().split('T')[0]} value={endDate} required onChange={e => setEndDate(e.target.value)}></input>
-                    </label>
+                    <div className='date-container'>
+                        <label>
+                            Fecha entrada
+                            <input type="date" min={(new Date()).toISOString().split('T')[0]} value={startDate} required onChange={e => setStartDate(e.target.value)}></input>
+                        </label>
+                        <label>
+                            Fecha salida
+                            <input type="date" min={(new Date()).toISOString().split('T')[0]} value={endDate} required onChange={e => setEndDate(e.target.value)}></input>
+                        </label>
+                    </div>
+
                     <div className='button-container'>
                         <input type="submit" value="Buscar"></input>
                     </div>
@@ -78,7 +87,7 @@ function SearchBar () {
                 <div className='close-icon-container'>
                     <span className='close-bar-icon' onClick={() => setShowBar(!showBar)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-bar-to-up" width="52" height="52" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#718355" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <line x1="12" y1="10" x2="12" y2="20" />
                             <line x1="12" y1="10" x2="16" y2="14" />
                             <line x1="12" y1="10" x2="8" y2="14" />

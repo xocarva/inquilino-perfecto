@@ -1,22 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
 .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
     background-color: #CFE1B9;
     flex-grow: 0;
+    padding: 1.5rem 3rem;
+}
+
+.header .search-user-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .header .title {
     text-decoration: none;
-    color: #000000;
-    font-size: 3rem;
-    padding: 1rem;
+    color: #485336;
+    font-size: 4rem;
+    padding: 0 1rem;
+    font-weight: bold;
+    font-family: 'Alfa Slab One', cursive;
 }
 
 .header .menu-login-register {
     display: flex;
-    gap: 2rem;
+    gap: 0.5rem;
     justify-content: center;
     cursor: pointer;
 }
@@ -24,8 +35,17 @@
 .header .menu-login-register div {
     color: black;
     text-decoration: underline;
+    font-size: 20px;
 }
 
+.search-icon-container .search-icon {
+    border-radius: 15PX;
+    padding: 0.5rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
 
 #avatar {
     padding: 0 auto;
@@ -52,15 +72,29 @@
     .header {
         display: flex;
         flex-direction: column;
+        padding-bottom: 1rem;
+    }
+
+    .header .search-user-container{
+        flex-direction: column-reverse;
+        gap: inherit;
+    }
+
+    .header .search-user-container .search-icon-container {
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        width: 95vw;
+        background-color: #97A97C;
+        box-shadow: 1px 1px 3px;
     }
 
     .header .title {
         text-decoration: none;
-        color: #000000;
-        font-size: 3rem;
+        font-size: 2rem;
         text-align: center;
         padding: 0;
-    }
+    } 
 
     .header .menu-login-register  {
         display: flex;
@@ -79,5 +113,12 @@
 
     #name-profile {
         display: none;
+    }
+}
+
+@media (max-width:480px) {
+    .header .title {
+        font-size: 1.7rem;
+        white-space: nowrap;
     }
 }

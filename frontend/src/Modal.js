@@ -7,7 +7,7 @@ function Modal() {
     const handleClick = () => setModal(null)
     const handlePropagation = e => e.stopPropagation()
     return modal && (
-      <div className='login'>
+      <div>
           <div className="modal-bg" onClick={handleClick}>
             <div className="modal-fg" onClick={handlePropagation}>
               {modal}
@@ -17,4 +17,4 @@ function Modal() {
     )
   }
 
-  export default Modal  
+  export default Modal

@@ -1,5 +1,15 @@
 .form-container {
     border-bottom: 2px solid #718355; ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+.form-container h2 {
+    font-size: 1.5rem;
+    color: #495535;
+    margin: 1rem 0 0 0.3rem;
 }
 
 .searchForm {
@@ -8,15 +18,11 @@
     align-items: center;
     gap: 1.5rem;
     justify-content: space-evenly;
-    width: 70vw;
     max-width: 1200px;
     margin: 10px auto;
     border: 0;
     padding: 0.5rem 0.5rem 0 0.5rem;
-}
-
-.searchForm h2 {
-    font-size: large;
+    flex-wrap: wrap;
 }
 
 .searchForm label {
@@ -41,7 +47,12 @@
     background-color: #E9F5DB;
     border: none;
     height: 1.64rem;
-    max-width: 120px;
+    width: 124px;
+}
+
+.searchForm .date-container {
+    display: flex;
+    gap: 1.5rem;
 }
 
 .button-container {
@@ -61,25 +72,6 @@
 
 }
 
-.search-icon-container {
-    display: flex;
-    justify-content: center;
-    background-color: #CFE1B9;
-    padding-bottom: 1rem;
-    font-size: 1rem;
-    flex-grow: 0;
-}
-
-.search-icon-container .search-icon {
-    padding: 8px;
-    border-radius: 40px;
-    text-align: center;
-    width: 100px;
-    background-color: #B5C99A;
-    cursor: pointer;
-    box-shadow: 1px 1px 3px;
-}
-
 .close-icon-container {
     display: flex;
     justify-content: center;
@@ -89,25 +81,38 @@
     cursor: pointer;
 }
 
-@media (max-width:965px) {
+@media (max-width:768px) {
     .searchForm {
         flex-direction: column;
         text-align: center;
+        gap: 2rem;
+        flex-wrap: nowrap;
+        padding: 0;
+    }
+
+    .searchForm .date-container {
+        flex-direction: column;
         gap: 2rem;
     }
 
     .searchForm label input {
         max-width: none;
-        width: 90vw;
+        width: 100vw;
         height: 2.5rem;
         text-align: center;
+        padding: 0;
     }
 
     .searchForm .rooms-select {
         max-width: none;
-        width: 90vw;
+        width: 100vw;
         height: 2.5rem;
         text-align: center;
+    }
+
+    .search-icon-container {
+        justify-content: center;
+        padding-right: 0;
     }
 
 }

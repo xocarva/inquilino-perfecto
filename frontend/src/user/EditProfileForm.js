@@ -30,7 +30,7 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                     </label>
                     <label className='email-profile'>
                         Email
-                        <input id='email' value={email} onChange={e => {
+                        <input type='email' id='email' value={email} onChange={e => {
                             setEmail(e.target.value)
                             setErrorType('')
                         }} placeholder={userData.email} />
@@ -38,7 +38,7 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                     </label>
                     <label className='confirm-email-profile'>
                         Confirma email <span className='check-emoji'>{email ? email === emailConfirm ? " ✅ " : '❌' : ''}</span>
-                        <input value={emailConfirm} onChange={e => {
+                        <input type='email' value={emailConfirm} onChange={e => {
                             setEmailConfirm(e.target.value)
                             setErrorType('')
                         }} placeholder={userData.email} />

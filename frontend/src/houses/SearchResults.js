@@ -89,7 +89,7 @@ function SearchResults() {
     const handleNext = () => setStepHouse((stepHouse + 1) % pagsHouses)
 
     return(
-        <>
+        <section className='results'>
             <div className='filters'>
                 <span>📅  Desde el {startDate} al {endDate}</span>
                 <div className='sort-container'>
@@ -147,7 +147,7 @@ function SearchResults() {
                     </div>
                 </div>
             </>}
-        </>
+        </section>
     )
 }
 

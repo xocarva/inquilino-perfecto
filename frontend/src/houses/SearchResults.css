@@ -1,3 +1,7 @@
+.results {
+    flex-grow: 1;
+}
+
 .search-results {
     display: flex;
     flex-direction: column;
