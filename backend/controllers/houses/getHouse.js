@@ -12,7 +12,7 @@ const getHouse = async (req, res) => {
         return
     }
 
-    if(!house) {
+    if (!house) {
         res.status(400)
         res.end('House not found')
         return
@@ -21,12 +21,12 @@ const getHouse = async (req, res) => {
     try {
         const owner = await usersRepository.getUserById(house.ownerId)
         const ownerRatings = await ratingsRepository.getRatings({ id: house.ownerId, role: 'owner' })
-        const ownerRatingAvg = Math.round(ownerRatings.reduce((acc, val) => acc + (val.rating/ownerRatings.length), 0))
+        const ownerRatingAvg = Math.round(ownerRatings.reduce((acc, val) => acc + (val.rating / ownerRatings.length), 0))
         house = { ...house, rating: ownerRatingAvg, ownerName: `${owner.firstName} ${owner.lastName}`, ownerPic: owner.picture }
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({ error: error.message })
         return
     }
     res.status(200)
