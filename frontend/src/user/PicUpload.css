@@ -3,14 +3,15 @@
     border: 2px solid #B5C99A;
     border-radius: 20px;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-wrap: wrap;
   }
-  
+
 .pic-upload .ad-image {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 }
 
 
@@ -24,6 +25,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 1px 1px 3px;
+    padding: 0;
 }
 
 .pic-upload .ad-image button {
@@ -31,14 +33,13 @@
   width: 158px;
   border-radius: 10px;
   box-shadow: 1px 1px 8px;
-  background-color: #B5C99A;  
+  background-color: #B5C99A;
 }
 
 .pic-upload .ad-image button:hover {
   cursor: pointer;
 }
 
-  
 .pic-upload .preview.add {
   background-color: #B5C99A;
   display: flex;
@@ -54,5 +55,3 @@
 .pic-upload .preview.add input {
   display: none
 }
-
-  

@@ -3,6 +3,7 @@ import PicUpload from './PicUpload';
 import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
+import { validateData } from '../utils/validateData';
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -13,11 +14,25 @@ function NewAd() {
     const [description, setDescription] = useState('')
     const [city, setCity] = useState('')
     const [pictures, setPictures] = useState([])
+    const [errorType, setErrorType] = useState('')
+    const [errorText, setErrorText] = useState('')
     const user = useUser()
     const Navigation = useNavigate()
     const setModal = useSetModal()
     const handleSubmit = async e => {
         e.preventDefault()
+        const cityRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
+        if(!cityRegex.test(city)) {
+            setErrorType('city')
+            setErrorText('La ciudad solo puede contener letras.')
+            setCity('')
+            document.getElementById('city').focus()
+            return
+        }
+        if (pictures.length < 1) {
+            setModal(<p>Debes añadir al menos una imagen</p>)
+            return
+        }
         const fd = new FormData()
         fd.append('title', title)
         fd.append('price', price)
@@ -47,7 +62,7 @@ function NewAd() {
     return (
         <div className='ad-page'>
             <h1 className='title-ad-page'>Publica un nuevo anuncio</h1>
-            <form onSubmit={handleSubmit}>
+            <form >
                 <div>
                     <label>
                         Titulo
@@ -63,19 +78,23 @@ function NewAd() {
                     </label>
                     <label>
                         Ciudad
-                        <input name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => setCity(e.target.value)} />
+                        <input id='city' name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => {
+                            setCity(e.target.value)
+                            setErrorType('')
+                        }} />
+                        {errorType === 'city' && <p className='error-city'>{errorText}</p>}
                     </label>
                 </div>
                 <div className='description-house'>
                     <label>
-                        Descripción <br />
+                        Descripción
                         <textarea name='description' value={description} placeholder='Descripción...' required onChange={e => setDescription(e.target.value)} />
                     </label>
                 </div>
                 <div id='picture-container'>
                     <PicUpload pictures={pictures} onChange={setPictures} />
                 </div>
-                <button id='ad-button'>
+                <button onClick={handleSubmit} id='ad-button'>
                     Publicar
                 </button>
             </form>

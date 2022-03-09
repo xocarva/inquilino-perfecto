@@ -1,5 +1,5 @@
 
-export function validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm) {
+export function validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm) {
     let errorData = { errorTypeValidation: '', errorTextValidation: ''}
     const nameRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
     switch (true) {

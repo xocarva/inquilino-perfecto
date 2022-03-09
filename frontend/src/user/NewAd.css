@@ -32,9 +32,13 @@
 .ad-page input {
     margin-top: 10px;
     border-radius: 8px;
-    padding: 5px;
+    padding: 0.5rem;
     border: none;
     background-color: #B5C99A;
+}
+
+.error-city {
+    color: red;
 }
 
 .ad-page input[type=number] {
@@ -49,6 +53,7 @@
     border-radius: 8px;
     border: none;
     background-color: #B5C99A;
+    padding: 1rem;
 }
 
 #ad-button {
@@ -69,7 +74,6 @@
 
     .ad-page div {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-content: center;
         gap: 1rem;
@@ -78,7 +82,7 @@
 
     .ad-page input {
         padding: 15px;
-        width: 80vw;
+        width: 85vw;
     }
 
     .ad-page textarea {

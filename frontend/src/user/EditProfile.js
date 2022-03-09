@@ -2,7 +2,7 @@ import './EditProfile.css'
 import { Suspense, useEffect, useState } from 'react'
 import { useSetModal, useSetUser, useUser } from '../hooks'
 import Loading from '../Loading'
-import { validateDataProfile } from '../utils/validateDataProfile'
+import { validateData } from '../utils/validateData'
 import EditPrrofileForm from './EditProfileForm'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -50,8 +50,12 @@ function EditProfile() {
 
     const handleSubmit = async e => {
         e.preventDefault()
+        const picture = e.target.picture.files[0]
+        const fd = new FormData()
 
-        const { errorTypeValidation, errorTextValidation } = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
+        if(!firstName && !lastName && !email && !bio && !password && !picture) return
+
+        const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
 
 
         if (errorTypeValidation) {
@@ -61,8 +65,6 @@ function EditProfile() {
             return
         }
 
-        const picture = e.target.picture.files[0]
-        const fd = new FormData()
 
         if (firstName) {
             fd.append("firstName", firstName)
