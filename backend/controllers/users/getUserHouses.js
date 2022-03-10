@@ -10,7 +10,7 @@ const getUserHouses = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
     res.status(200)

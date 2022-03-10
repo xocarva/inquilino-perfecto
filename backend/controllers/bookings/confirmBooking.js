@@ -10,13 +10,13 @@ const confirmBooking = async (req, res) => {
         booking = await bookingsRepository.getBookingById(bookingId)
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
     if (!booking || booking.accepted) {
         res.status(400)
-        res.end('This booking does not exist or already was confirmed')
+        res.end({error: 'This booking does not exist or already was confirmed'})
         return
     }
 
@@ -27,13 +27,13 @@ const confirmBooking = async (req, res) => {
         house = await housesRepository.getHouseById(houseId)
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
     if(userId !== house.ownerId) {
         res.status(400)
-        res.end('User not allowed to confim this booking')
+        res.end({error: 'User not allowed to confim this booking'})
         return
     }
 
@@ -41,7 +41,7 @@ const confirmBooking = async (req, res) => {
         await bookingsRepository.confirmBooking(bookingId)
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
@@ -51,7 +51,7 @@ const confirmBooking = async (req, res) => {
         await notifier.sendBookingConfirmation({ tenantEmail, house, startDate, endDate })
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 

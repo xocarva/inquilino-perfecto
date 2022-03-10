@@ -23,15 +23,6 @@ function EditProfile() {
     const [errorType, setErrorType] = useState('')
     const [errorText, setErrorText] = useState('')
 
-    // const [formFields, setFormFields] = useState({});
-
-    // const handleFormField = (e) => {
-    //     setFormFields({
-    //         ...formFields,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
     useEffect(() => {
         setErrorType('')
         setErrorText('')

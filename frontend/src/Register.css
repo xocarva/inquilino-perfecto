@@ -31,10 +31,26 @@
     flex-direction: column;
     width: 45%;
     gap: 1rem;
+    position: relative;
+}
+
+.body-register .register-page div label .mail-container input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-page .error-text {
+    color: red;
+    position: absolute;
+    top: 4.2rem;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
 }
 
 .body-register .register-page div label input {
-    padding: 8px;
+    padding: 8px;   
     background-color: #B5C99A;
     border: none;
     border-radius: 10px;
@@ -135,7 +151,6 @@
     .body-register .register-page .picture-container {
         gap: 0.5rem;
     }
-    
 }
 
 

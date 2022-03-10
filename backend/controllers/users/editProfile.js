@@ -15,7 +15,7 @@ const updateUser = async (req, res) => {
         await updateUserValidator.validateAsync(newUserData)
     } catch (error) {
         res.status(400)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
@@ -24,7 +24,7 @@ const updateUser = async (req, res) => {
         user = await usersRepository.getUserById(userId)
     } catch (error){
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
@@ -42,7 +42,7 @@ const updateUser = async (req, res) => {
             encryptedPassword = await encryptor.encrypt(newUserData.password)
        } catch (error) {
            res.status(500)
-           res.end(error.message)
+           res.end({error: error.message})
            return
        }
     }
@@ -52,13 +52,13 @@ const updateUser = async (req, res) => {
 
         if (!uploads.isValidImageSize(picture.size)) {
             res.status(400)
-            res.end(`Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
+            res.end({error: `Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`})
             return
         }
 
         if (!uploads.isValidImageMimeType(picture.mimetype)) {
             res.status(400)
-            res.end(`Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`)
+            res.end({error: `Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`})
             return
         }
 
@@ -72,7 +72,7 @@ const updateUser = async (req, res) => {
             newUserData = { ...newUserData, picture: pictureUrl }
         } catch (error) {
             res.status(500)
-            res.end(error.message)
+            res.end({error: error.message})
             return
         }
     }
@@ -81,7 +81,7 @@ const updateUser = async (req, res) => {
         await usersRepository.updateUser({ ...newUserData, userId, password: encryptedPassword })
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
@@ -90,7 +90,7 @@ const updateUser = async (req, res) => {
             await notifier.sendActivationCode(newUserData)
         } catch (error) {
             res.status(500)
-            res.end(error.message)
+            res.end({error: error.message})
             return
         }
     }
@@ -101,7 +101,7 @@ const updateUser = async (req, res) => {
         updatedUser = await usersRepository.getUserById(userId)
     } catch (error){
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 

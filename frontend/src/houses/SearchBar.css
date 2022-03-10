@@ -82,6 +82,9 @@
 }
 
 @media (max-width:768px) {
+    .form-container h2 {
+        margin-bottom: 1.5rem;
+    }
     .searchForm {
         flex-direction: column;
         text-align: center;
@@ -113,6 +116,14 @@
     .search-icon-container {
         justify-content: center;
         padding-right: 0;
+    }
+
+    .button-container {
+        width: 100%;
+    }
+
+    .button-container input[type = submit] {
+        border-radius: 0;
     }
 
 }

@@ -2,6 +2,7 @@ import './Register.css'
 import { useState } from 'react'
 import { useSetModal, useUser } from './hooks'
 import { useNavigate } from 'react-router-dom';
+import { validateData } from './utils/validateData';
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -14,7 +15,8 @@ function Register() {
     const [bio, setBio] = useState('')
     const [password, setPass] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
-    const [error, setError] = useState()
+    const [errorType, setErrorType] = useState('')
+    const [errorText, setErrorText] = useState('')
     const [picName, setPicName] = useState('No se ha cargado foto')
     const Navigation = useNavigate()
     const setModal = useSetModal()
@@ -29,39 +31,16 @@ function Register() {
         const picture = e.target.picture.files[0]
         const fd = new FormData()
 
-        switch (true) {
-            case firstName &&
-                (firstName.length < 2 || firstName.length > 80):
-                setModal(<p>Tu nombre debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
-                setName('')
-                return
-            case lastName &&
-                (lastName.length < 2 || lastName.length > 80):
-                setModal(<p>Tu apellido debe empezar por mayúscula y contener entre 2 y 80 carácteres.</p>)
-                setLastName('')
-                return
-            case email !== mailConfirm:
-                setModal(<p>El correo no coincide.</p>)
-                setEmail('')
-                setMailConfirm('')
-                return
-            case bio && (bio.length < 10 || bio.length >= 200):
-                setModal(<p>Tu bio debe contener entre 10 y 200 carácteres.</p>)
-                setBio('')
-                return
-            case password !== passConfirm:
-                setModal(<p>La contraseña no coincide.</p>)
-                setPass('')
-                setPassConfirm('')
-                return
-            case password && (password.length < 5 || password.length >= 50):
-                setModal(<p>Tu contraseña debe contener entre 5 y 50 carácteres.</p>)
-                setPass('')
-                setPassConfirm('')
-                return
-            default:
-                break
+        const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, mailConfirm, bio, password, passConfirm)
+
+
+        if (errorTypeValidation) {
+            setErrorType(errorTypeValidation)
+            setErrorText(errorTextValidation)
+            document.getElementById(errorTypeValidation).focus()
+            return
         }
+
         fd.append('firstName', firstName)
         fd.append('lastName', lastName)
         fd.append('email', email)
@@ -72,13 +51,15 @@ function Register() {
             method: 'POST',
             body: fd
         })
-        let data = await res.json()
 
         if (res.ok) {
             setModal(<p>{`Te has registrado correctamente, recibiras un mail de confirmación a ${email}`}</p>)
             Navigation('/')
+        } else if (res.status === 409) {
+            setErrorText('El usuario ya existe')
+            setErrorType('email')
         } else {
-            setError(data.error)
+            setModal(<p>No se ha podido realizar el registro</p>)
         }
     }
 
@@ -94,25 +75,34 @@ function Register() {
                     <label>
                         Nombre
                         <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' required onChange={e => setName(e.target.value)} />
+                        {errorType === 'firstName' && <p className='error-text'>{errorText}</p>}
                     </label>
                     <label>
                         Apellido
                         <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' required onChange={e => setLastName(e.target.value)} />
+                        {errorType === 'lastName' && <p className='error-text'>{errorText}</p>}
                     </label>
                 </div>
                 <div>
                     <label>
                         Email
-                        <input className='input-register' name='email' type='email' value={email} placeholder='Email...' required onChange={e => setEmail(e.target.value)} />
+                        <div className='mail-container'>
+                            <input className='input-register' name='email' type='email' value={email} placeholder='Email...' required onChange={e => {
+                                setEmail(e.target.value)
+                                setErrorText('')
+                            }} />
+                            {errorType === 'email' && <p className='error-text'>{errorText}</p>}
+                        </div>
                     </label>
                     <label>
-                        Confirma Email {email ? (email === mailConfirm) ?  '✅' : '❌' : ''}
+                        Confirma Email {email ? (email === mailConfirm) ? '✅' : '❌' : ''}
                         <input className='input-register' name='email' type='email' value={mailConfirm} placeholder='Confirma email...' required onChange={e => setMailConfirm(e.target.value)} />
                     </label>
                 </div>
                 <label className='bio'>
                     Bio
                     <textarea name='bio' value={bio} placeholder='bio...' required onChange={e => setBio(e.target.value)} />
+                    {errorType === 'bio' && <p className='error-text'>{errorText}</p>}
                 </label>
                 <div className='picture-container'>
                     <label htmlFor='btn-picture' className='picture'>Cargar foto...</label>
@@ -123,6 +113,7 @@ function Register() {
                     <label>
                         Contraseña
                         <input className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' required onChange={e => setPass(e.target.value)} />
+                        {errorType === 'password' && <p className='error-text'>{errorText}</p>}
                     </label >
                     <label>
                         Confirma contraseña {password ? (password === passConfirm) ? '✅' : '❌' : ''}
@@ -134,7 +125,6 @@ function Register() {
                         Registrar
                     </button>
                 </div>
-                {error && <div className="error">{error}</div>}
             </form>
         </div>
     )

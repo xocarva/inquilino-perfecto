@@ -8,7 +8,7 @@ const profile = async (req, res) => {
         user = await usersRepository.getUserById(userId)
     } catch (error){
         res.status(500)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 
@@ -26,7 +26,7 @@ const profile = async (req, res) => {
 
     } catch (error) {
         res.status(400)
-        res.end(error.message)
+        res.end({error: error.message})
         return
     }
 }
