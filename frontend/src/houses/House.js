@@ -47,7 +47,7 @@ function House() {
     if (res.ok) {
       setModal(
         <div className='modal-container'>
-          <p>Se ha guardado tu reserva.</p>
+          <p>Se ha guardado tu reserva</p>
         </div>
       )
       navigate('/user/pending-bookings')
