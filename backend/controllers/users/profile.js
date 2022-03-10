@@ -11,7 +11,7 @@ const profile = async (req, res) => {
         res.send({error: error.message})
         return
     }
-
+ 
     try {
         if(!user) throw new Error ('User not found')
         res.status(202)
@@ -32,3 +32,4 @@ const profile = async (req, res) => {
 }
 
 module.exports = profile
+

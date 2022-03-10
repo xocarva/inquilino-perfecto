@@ -5,7 +5,7 @@ const getRatings = async (req, res) => {
         id: req.user.id,
         role: req.params.role
     }
-
+ 
     let ratings
     try {
         ratings = await ratingsRepository.getRatings(user)

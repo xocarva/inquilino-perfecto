@@ -37,7 +37,7 @@ const createHouse = async (req, res) => {
             const pictureUrl = `/${pictureName}`
             fs.ensureDir(UPLOADS_PATH)
             picture.mv(`${UPLOADS_PATH}/${pictureName}`)
-
+ 
             return pictureUrl
         })
     } catch (error) {

@@ -13,7 +13,7 @@ const rate = async (req, res) => {
         res.send({error: error.message})
         return
     }
-
+ 
     let bookingRatingData
     try {
         bookingRatingData = await bookingsRepository.getBookingRatingData(bookingId)

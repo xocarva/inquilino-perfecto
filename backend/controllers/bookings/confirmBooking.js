@@ -36,7 +36,7 @@ const confirmBooking = async (req, res) => {
         res.send({error: 'User not allowed to confim this booking'})
         return
     }
-
+ 
     try {
         await bookingsRepository.confirmBooking(bookingId)
     } catch (error) {
@@ -62,3 +62,4 @@ const confirmBooking = async (req, res) => {
     })
 }
 module.exports = confirmBooking
+

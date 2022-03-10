@@ -40,11 +40,11 @@ const updateUser = async (req, res) => {
     if(newUserData.password) {
         try {
             encryptedPassword = await encryptor.encrypt(newUserData.password)
-       } catch (error) {
-           res.status(500)
-           res.send({error: error.message})
-           return
-       }
+        } catch (error) {
+            res.status(500)
+            res.send({ error: error.message })
+            return
+        }
     }
 
     if(req.files && req.files.picture) {

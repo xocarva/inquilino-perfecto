@@ -2,11 +2,12 @@ const { usersRepository } = require('../../repository')
 
 const validate = async (req, res) => {
     const { activationCode } = req.params
+
     let user
     try {
         const activationCodeMatches = await usersRepository.getUsersByActivationCode(activationCode)
         if(activationCodeMatches.length > 1) throw new Error('Duplicated activation code')
-
+ 
         user = activationCodeMatches[0]
         if (!user) throw new Error('Invalid activation code')
 

@@ -18,3 +18,4 @@ const getAcceptedMadeBookings = async (req, res) => {
 }
 
 module.exports = getAcceptedMadeBookings
+

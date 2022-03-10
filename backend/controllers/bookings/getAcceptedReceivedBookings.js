@@ -24,3 +24,4 @@ const getAcceptedReceivedBookings = async (req, res) => {
 }
 
 module.exports = getAcceptedReceivedBookings
+

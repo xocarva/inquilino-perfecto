@@ -65,7 +65,7 @@ const register = async (req, res) => {
     }
 
     const activationCode = crypto.randomBytes(40).toString('hex')
-
+ 
     let pictureUrl
     try {
         const pictureName = uploads.createImageName(uploads.getExtensionFromMimetype(picture.mimetype))

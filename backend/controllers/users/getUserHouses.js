@@ -6,7 +6,7 @@ const getUserHouses = async (req, res) => {
 
     try {
 
-     houses = await housesRepository.getHousesByOwnerId(userId)
+        houses = await housesRepository.getHousesByOwnerId(userId)
 
     } catch (error) {
         res.status(500)

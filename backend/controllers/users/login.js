@@ -34,7 +34,7 @@ const login = async (req, res) => {
     res.send({error: 'Invalid credentials'})
     return
   }
-
+ 
   const token = generateToken({ payload: { user: { id: user.id } } })
 
   res.status(200)

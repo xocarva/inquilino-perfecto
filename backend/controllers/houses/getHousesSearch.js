@@ -12,7 +12,7 @@ const getHousesSearch = async (req, res) => {
         res.send({error: error.message})
         return
     }
-
+ 
     if (startDate > endDate || Date.parse(startDate) < new Date()) {
         res.status(409)
         res.send({error: 'Invalid date'})
