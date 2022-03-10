@@ -6,16 +6,16 @@ const profile = async (req, res) => {
     let user
     try {
         user = await usersRepository.getUserById(userId)
-    } catch (error){
+    } catch (error) {
         res.status(500)
         res.end(error.message)
         return
     }
 
     try {
-        if(!user) throw new Error ('User not found')
+        if (!user) throw new Error('User not found')
         res.status(202)
-        res.end({
+        res.send({
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
@@ -26,10 +26,9 @@ const profile = async (req, res) => {
 
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 }
 
 module.exports = profile
-

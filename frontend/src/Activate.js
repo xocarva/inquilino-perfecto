@@ -5,7 +5,7 @@ import useFetch from "./useFetch"
 const URL = process.env.REACT_APP_BASE_URL
 
 function Activate() {
-    
+
     const[validate, setValidate] = useState()
     const { code } = useParams()
 
