@@ -25,26 +25,30 @@ function Register() {
     if (user) {
         Navigation('/')
     }
+    const handleProfilePic = e => {
+        setPicName(e.target.files[0].name)
+        setErrorType('')
+    }
 
     const handleSubmit = async e => {
         e.preventDefault()
-        if(!e.target.files) {
+
+        const picture = e.target.picture.files[0]
+
+        if(!picture) {
             setErrorType('picture')
             setErrorText('Tienes que añadir una foto')
             return
-        }   
-        const picture = e.target.picture.files[0]
+        }
+
         const fd = new FormData()
 
         const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, mailConfirm, bio, password, passConfirm)
 
-
-
-
         if (errorTypeValidation) {
             setErrorType(errorTypeValidation)
             setErrorText(errorTextValidation)
-            document.getElementById(errorTypeValidation).focus()
+            document.getElementById(errorTypeValidation + '-register').focus()
             return
         }
 
@@ -55,6 +59,7 @@ function Register() {
         fd.append('bio', bio)
         fd.append('picture', picture)
         fd.append('password', password)
+
         const res = await fetch(REACT_APP_BASE_URL + '/users/register', {
             method: 'POST',
             body: fd
@@ -71,18 +76,15 @@ function Register() {
         }
     }
 
-    const handleProfilePic = e => {
-        setPicName(e.target.files[0].name)
-    }
 
     return (
         <div className='body-register'>
             <h2 className='title-register-page'>Formulario de registro</h2>
-            <form className='register-page'>
+            <form className='register-page' onSubmit={handleSubmit}>
                 <div>
                     <label>
                         Nombre
-                        <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' required onChange={e => {
+                        <input id='firstName-register' className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' required onChange={e => {
                             setName(e.target.value)
                             setErrorType('')
                         }} />
@@ -125,7 +127,7 @@ function Register() {
                     <label htmlFor='btn-picture' className='picture'>Cargar foto...</label>
                     {errorType === 'picture' && <span style={{ color: 'red' }}>{errorText}</span>}
                     {errorType !== 'picture'&& <span id='chosen-file'>{picName}</span>}
-                    <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" required hidden onChange={handleProfilePic} />
+                    <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
                 </div>
                 <div id='pass-div'>
                     <label>
@@ -142,7 +144,7 @@ function Register() {
                     </label>
                 </div>
                 <div id='register-button'>
-                    <button onClick={handleSubmit}>
+                    <button>
                         Registrar
                     </button>
                 </div>

@@ -1,29 +1,20 @@
-import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import useFetch from "./useFetch"
+import "./Activate.css"
 
 const URL = process.env.REACT_APP_BASE_URL
 
 function Activate() {
 
-    const[validate, setValidate] = useState()
     const { code } = useParams()
-
-    console.log('estoy donde debo')
 
     const res = useFetch(`${URL}/users/validate/${code}`)
 
-    console.log('res.ok', res)
-
-    if (res.ok) {
-        setValidate(true)
-        console.log('ha cambiado el validar')
-    }
     return (
-        <>
-            {validate && <p>Validado</p>}
-            {!validate && <p>No validado</p>}
-        </>
+        <section className="activate">
+            {<p>{res.data ? 'Usuario activado correctamente. 😊' : 'El usuario no ha podido ser validado. 😞'}</p>}
+            <Link className="back-button" to="/">Volver al inicio</Link>
+        </section>
     )
 }
 

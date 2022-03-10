@@ -120,7 +120,6 @@ function EditProfile() {
         <div className="edit-profile-page">
             <h1>Edita tus datos</h1>
             <EditPrrofileForm
-                // handleFormField={handleFormField}
                 handleSubmit={handleSubmit}
                 firstName={firstName}
                 setFirstName={setFirstName}

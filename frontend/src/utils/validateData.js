@@ -1,7 +1,7 @@
 
 export function validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm) {
     let errorData = { errorTypeValidation: '', errorTextValidation: ''}
-    const nameRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
+    const nameRegex = /^[A-Za-zaáÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
     switch (true) {
         case firstName &&
             (firstName.length < 2 || firstName.length > 80 || !nameRegex.test(firstName)):
