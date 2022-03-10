@@ -5,7 +5,7 @@ import Rating from "../Rating";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadReceived, setDataReceivedBookings }) {
+function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -18,13 +18,12 @@ function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadRece
         })
         if (res.ok) {
             setModal(
-                <article className='confirm-booking-message-container'>
-                    <span>✅</span>
+                <article className='edit-confirm-message-container'>
                     <p>Reserva confirmada correctamente</p>
                 </article>
             )
         } else if (res.status === 403) {
-            setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
+            setModal(<p>Antes de confirmar debes activar tu usuario</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -48,7 +47,6 @@ function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadRece
         if (res.ok) {
             setModal(
                 <article className='cancel-booking-message-container'>
-                    <span>✅</span>
                     <p>Reserva cancelada correctamente.</p>
                 </article>
             )
