@@ -1,4 +1,5 @@
 import './PicUpload.css'
+import { nanoid } from 'nanoid'
 
 function PicUpload({ pictures, onChange }) {
   const handleChange = e => {
@@ -18,8 +19,8 @@ function PicUpload({ pictures, onChange }) {
   return (
     <div className="pic-upload">
       {pictures.map(picture =>
-        <div className='ad-image'>
-          <div key={picture.file} className="preview" style={{ backgroundImage: `url(${picture.preview})` }} />
+        <div key={nanoid()} className='ad-image'>
+          <div className="preview" style={{ backgroundImage: `url(${picture.preview})` }} />
           <button type='button' onClick={() => handleRemove(picture.file)}>Eliminar</button>
         </div>
       )}
@@ -31,4 +32,3 @@ function PicUpload({ pictures, onChange }) {
 }
 
 export default PicUpload
-

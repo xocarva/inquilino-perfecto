@@ -35,7 +35,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
         } else if (res.status === 403) {
             setModal(<p>Para poder hacer una valoración debes activar primero tu usuario</p>)
         }
-         else {
+        else {
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido guardar tu voto.</p>

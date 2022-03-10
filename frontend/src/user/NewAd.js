@@ -50,8 +50,8 @@ function NewAd() {
         })
 
         if (res.ok) {
-            setModal(<p>{`Has publicado tu anuncio ${title} con exito!!!`}</p>)
-            Navigation('/')
+            setModal(<p>{`Has publicado tu anuncio '${title}' con exito`}</p>)
+            Navigation('/user/owner-profile')
         } else if (res.status === 403) {
             setModal(<p>Para poder publicar un anuncio debes activar primero tu usuario</p>)
         } else {

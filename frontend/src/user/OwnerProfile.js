@@ -24,6 +24,7 @@ function OwnerProfile() {
 
     const {data: ratingsData} = useFetch(REACT_APP_BASE_URL + '/users/ratings/owner', [])
 
+
    const totalRating = ratingsData.reduce((acc, rating) => {
        return acc + rating.rating
    }, 0)
@@ -114,9 +115,9 @@ function OwnerProfile() {
                     <div className='ratings-container'>
                         <section className='cards-ratings-container'>
                             {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                                <article className='article-rating' key={rating.ratingDate}>
-                                    <Rating className='star-rating' key={rating.rating} value={rating.rating} />
-                                    <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
+                                <article className='article-rating' key={rating.id}>
+                                    <Rating className='star-rating' value={rating.rating} />
+                                    <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                 </article>
                             )}
                         </section>

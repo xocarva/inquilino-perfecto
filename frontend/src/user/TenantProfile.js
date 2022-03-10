@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
 import Rating from '../Rating'
 import { useUser } from '../hooks'
+import { nanoid } from 'nanoid'
+
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
@@ -119,7 +121,7 @@ function TenantProfile() {
                         <div className='ratings-container'>
                             <section className='cards-ratings-container'>
                                 {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                                    <article className='card-historic-rating' key={rating.ratingDate}>
+                                    <article className='card-historic-rating' key={nanoid()}>
                                         <Rating value={rating.rating} />
                                         <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                     </article>
