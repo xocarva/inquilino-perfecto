@@ -4,27 +4,32 @@ import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 import { useUser } from '../hooks'
+import { nanoid } from 'nanoid'
+
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 
 function TenantProfile() {
-
     const user = useUser()
     const [bookingsData, setBookingsData] = useState(null)
+    const [stepBooking, setStepBooking] = useState(0)
+    const [stepRating, setStepRating] = useState(0)
     const [reload, setReload] = useState(false)
-    
+    const [show, setShow] = useState(true)
+
     useEffect(() => {
         fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
         })
-        .then(response => response.json())
-        .then(data => setBookingsData(data))
+            .then(response => response.json())
+            .then(data => setBookingsData(data))
     }, [reload, user])
+
     let classNameDisplayPage
     let classNameDisplayMessage
     if (bookingsData?.length === 0) {
@@ -35,7 +40,7 @@ function TenantProfile() {
         classNameDisplayMessage = 'tenant-profile-error-message-off'
     }
 
-    const ratingsData = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant')
+    const { data: ratingsData } = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant', [])
 
     let classNameRatingsDisplaySection
     ratingsData.length === 0 ? classNameRatingsDisplaySection = '-off' : classNameRatingsDisplaySection = '-on'
@@ -55,8 +60,6 @@ function TenantProfile() {
     averageRatings >= 2.5 ? classNameForColorAverageRatings = 'rgba(195, 236, 176, 0.259)' : classNameForColorAverageRatings = 'rgba(236, 176, 176, 0.259)'
 
 
-    const [stepBooking, setStepBooking] = useState(0)
-    const [stepRating, setStepRating] = useState(0)
 
     const perPageBookings = 3
     const pagsBookings = Math.ceil(bookingsData?.length / perPageBookings)
@@ -79,7 +82,8 @@ function TenantProfile() {
 
 
             <section className={classNameDisplayPage}>
-                <h2>Histórico de alquileres</h2>
+                <h2 onClick={() => setShow(!show)}>Histórico de alquileres</h2>
+                {show && <>
                 <section className="historic-bookings-container">
                     {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                         <article className='card-house-historic-booking' key={booking.bookingId}>
@@ -110,14 +114,15 @@ function TenantProfile() {
                         ➡️
                     </span>
                 </section>
+                </>}
                 <section className={'ratings-section' + classNameRatingsDisplaySection}>
                     <h2>Valoraciones recibidas como inquilino</h2>
                     <section className="historic-ratings-container">
                         <div className='ratings-container'>
                             <section className='cards-ratings-container'>
                                 {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
-                                    <article className='card-historic-rating' key={rating.ratingDate}>
-                                        <Puntuacion value={rating.rating} />
+                                    <article className='card-historic-rating' key={nanoid()}>
+                                        <Rating value={rating.rating} />
                                         <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                     </article>
                                 )}
@@ -135,7 +140,7 @@ function TenantProfile() {
                         <section className='average-ratings' style={{ backgroundColor: `${classNameForColorAverageRatings}` }}>
                             <h3>Media de valoraciones</h3>
                             <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
-                            <Puntuacion value={averageRatings} />
+                            <Rating value={averageRatings} />
                             <span className='emoji-rating'>{emojiRating}</span>
                         </section>
                     </section>

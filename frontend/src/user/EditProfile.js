@@ -2,7 +2,7 @@ import './EditProfile.css'
 import { Suspense, useEffect, useState } from 'react'
 import { useSetModal, useSetUser, useUser } from '../hooks'
 import Loading from '../Loading'
-import { validateDataProfile } from '../utils/validateDataProfile'
+import { validateData } from '../utils/validateData'
 import EditPrrofileForm from './EditProfileForm'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -33,39 +33,38 @@ function EditProfile() {
         })
             .then(response => response.json())
             .then(data => setUserData(data))
-        }, [user])
+    }, [user])
 
-        const handleProfilePic = e => {
-            setPicName(e.target.files[0].name)
-        }
+    const handleProfilePic = e => {
+        setPicName(e.target.files[0].name)
+    }
 
-        const handleSubmit = async e => {
-            e.preventDefault()
-            const picture = e.target.picture.files[0]
-            const fd = new FormData()
+    const handleSubmit = async e => {
+        e.preventDefault()
+        const picture = e.target.picture.files[0]
+        const fd = new FormData()
 
-            const getErrorValidateData = validateDataProfile(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
-            const { errorTypeValidation, errorTextValidation } = getErrorValidateData
+        if(!firstName && !lastName && !email && !bio && !password && !picture) return
 
-            if(getErrorValidateData) {
+        const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
+
+
+        if (errorTypeValidation) {
             setErrorType(errorTypeValidation)
             setErrorText(errorTextValidation)
             document.getElementById(errorTypeValidation).focus()
             return
         }
 
+
         if (firstName) {
             fd.append("firstName", firstName)
-            setFirstName('')
         }
         if (lastName) {
             fd.append("lastName", lastName)
-            setLastName('')
         }
         if (email && email === emailConfirm) {
             fd.append("email", email)
-            setEmail('')
-            setEmailConfirm('')
         }
         if (bio) {
             fd.append("bio", bio)
@@ -73,8 +72,6 @@ function EditProfile() {
         }
         if (password && password === passConfirm) {
             fd.append("password", password)
-            setPassword('')
-            setPassConfirm('')
         }
         picture && fd.append("picture", picture)
 
@@ -85,10 +82,18 @@ function EditProfile() {
                 'Authorization': 'Bearer ' + user.token
             }
         })
-        const data = await res.json()
-        const newUser = data.user
 
         if (res.ok) {
+            const data = await res.json()
+            const newUser = data.user
+            setFirstName('')
+            setLastName('')
+            setEmail('')
+            setEmailConfirm('')
+            setBio('')
+            setPassword('')
+            setPassConfirm('')
+            setPicName('')
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
@@ -102,20 +107,18 @@ function EditProfile() {
                 lastName: newUser.lastName,
                 picture: newUser.picture
             })
-            setFirstName('')
-            setLastName('')
-            setEmail('')
-            setEmailConfirm('')
-            setBio('')
-            setPassword('')
-            setPassConfirm('')
-            setPicName('')
+        } else if (res.status === 409) {
+            setErrorType('email')
+            setErrorText('El email ya está en uso')
+            return
+        } else {
+            setModal(<p>No se ha podido realizar la acción</p>)
         }
     }
 
     return (
         <div className="edit-profile-page">
-            <h3>Edita tus datos:</h3>
+            <h1>Edita tus datos</h1>
             <EditPrrofileForm
                 handleSubmit={handleSubmit}
                 firstName={firstName}

@@ -1,33 +1,34 @@
-.home-contenedor {
-    display: flex;
-    justify-content: center;
-    height: 70vh;
-}
-
 .image-home {
-    display: flex;
-    justify-content: center;
-    align-items:flex-end;
     width: 100vw;
-    height: 69vh;
     background-size: cover;
     background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.title-home {
+.image-home:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom:0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.image-home h2{
+    color: #B5C99A;
     font-size: 4rem;
-    color: rgb(22, 21, 21);
-    padding-bottom: 5rem;
+    position: relative;
+    padding-left: 2rem;
 }
 
-@media (max-width:768px) {
-    .image-home .title-home {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width:480px) {
-    .image-home .title-home {
-        font-size: 2rem;
+@media (max-width: 480px) {
+    .image-home h2{
+        font-size: 3rem;
     }
 }

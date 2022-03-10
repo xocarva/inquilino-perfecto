@@ -1,9 +1,8 @@
 import './Home.css'
 function Home() {
     return (
-        <div className='home-contenedor'>
-            <div className='image-home' style={{backgroundImage:`url("http://localhost:3001/photo-home.jpg")`}}>
-            </div>
+        <div className='image-home' style={{backgroundImage:`url("http://localhost:3001/photo-home.jpg")`}}>
+            <h2>Descubre las mejores estancias</h2>
         </div>
     )
 }

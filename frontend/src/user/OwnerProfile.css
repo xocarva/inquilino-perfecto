@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
 }
 
 .body-owner-profile .title-container {
@@ -38,6 +39,8 @@
 .body-owner-profile .article-announcements .body-announcements .house-title {
     width: 300px;
     font-size: 1.3rem;
+    color: #718355; 
+    font-weight: bold;
 }
 
 .body-owner-profile .article-announcements .body-announcements .owner-picture {
@@ -82,6 +85,8 @@
 
 .body-owner-profile .rental-history .card-offered-booking .title-offered-booking {
     font-size: 1.3rem;
+    color: #718355;
+    font-weight: bold;
 }
 
 .body-owner-profile .rental-history .card-offered-booking .date-offered-booking {

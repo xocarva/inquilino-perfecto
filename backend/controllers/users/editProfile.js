@@ -19,6 +19,24 @@ const updateUser = async (req, res) => {
         return
     }
 
+    let userExists
+    if(newUserData.email) {
+        try {
+            userExists = await usersRepository.getUserByEmail(newUserData.email)
+
+        } catch (error) {
+            res.status(500)
+            res.end(error.message)
+            return
+        }
+
+        if (userExists) {
+            res.status(409)
+            res.end('User already exists')
+            return
+        }
+    }
+
     let user
     try {
         user = await usersRepository.getUserById(userId)
@@ -40,24 +58,24 @@ const updateUser = async (req, res) => {
     if(newUserData.password) {
         try {
             encryptedPassword = await encryptor.encrypt(newUserData.password)
-       } catch (error) {
-           res.status(500)
-           res.end(error.message)
-           return
-       }
+        } catch (error) {
+            res.status(500)
+            res.end(error.message)
+            return
+        }
     }
 
     if(req.files && req.files.picture) {
         const picture = req.files.picture
 
         if (!uploads.isValidImageSize(picture.size)) {
-            res.status(400)
+            res.status(415)
             res.end(`Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
             return
         }
 
         if (!uploads.isValidImageMimeType(picture.mimetype)) {
-            res.status(400)
+            res.status(415)
             res.end(`Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`)
             return
         }

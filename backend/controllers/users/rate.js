@@ -23,8 +23,8 @@ const rate = async (req, res) => {
         return
     }
 
-    if(!bookingRatingData){
-        res.status(400)
+    if (!bookingRatingData) {
+        res.status(500)
         res.end('Booking data could not be retrieved')
         return
     }
@@ -40,19 +40,19 @@ const rate = async (req, res) => {
     }
 
     if (!ratingData.accepted) {
-        res.status(400)
+        res.status(409)
         res.end('Can not rate a pending or canceled booking')
         return
     }
 
     if (ratingData.bookingEndDate >= new Date()) {
-        res.status(400)
+        res.status(409)
         res.end('Can not rate an open booking')
         return
     }
 
-    if((ratingData.ratedUserRole === 'tenant' && ratingData.ownerRating) || (ratingData.ratedUserRole === 'owner' && ratingData.tenantRating)) {
-        res.status(400)
+    if ((ratingData.ratedUserRole === 'tenant' && ratingData.ownerRating) || (ratingData.ratedUserRole === 'owner' && ratingData.tenantRating)) {
+        res.status(403)
         res.end('Booking already rated by this user')
         return
     }

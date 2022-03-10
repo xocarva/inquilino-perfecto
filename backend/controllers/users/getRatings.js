@@ -10,7 +10,7 @@ const getRatings = async (req, res) => {
     try {
         ratings = await ratingsRepository.getRatings(user)
     } catch (error) {
-        res.status(400)
+        res.status(500)
         res.end(error.message)
         return
     }

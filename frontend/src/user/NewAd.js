@@ -13,11 +13,25 @@ function NewAd() {
     const [description, setDescription] = useState('')
     const [city, setCity] = useState('')
     const [pictures, setPictures] = useState([])
+    const [errorType, setErrorType] = useState('')
+    const [errorText, setErrorText] = useState('')
     const user = useUser()
     const Navigation = useNavigate()
     const setModal = useSetModal()
     const handleSubmit = async e => {
         e.preventDefault()
+        const cityRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
+        if(!cityRegex.test(city)) {
+            setErrorType('city')
+            setErrorText('La ciudad solo puede contener letras.')
+            setCity('')
+            document.getElementById('city').focus()
+            return
+        }
+        if (pictures.length < 1) {
+            setModal(<p>Debes añadir al menos una imagen</p>)
+            return
+        }
         const fd = new FormData()
         fd.append('title', title)
         fd.append('price', price)
@@ -27,7 +41,7 @@ function NewAd() {
         for (const p of pictures) {
             fd.append('pictures', p.file)
         }
-        const res = await fetch(REACT_APP_BASE_URL +'/houses/', {
+        const res = await fetch(REACT_APP_BASE_URL + '/houses/', {
             method: 'POST',
             body: fd,
             headers: {
@@ -36,46 +50,50 @@ function NewAd() {
         })
 
         if (res.ok) {
-            setModal(<p>{`Has publicado tu anuncio ${title} con exito!!!`}</p>)
-            Navigation('/')
-        }  else if (res.status === 403) {
+            setModal(<p>{`Has publicado tu anuncio '${title}' con exito`}</p>)
+            Navigation('/user/owner-profile')
+        } else if (res.status === 403) {
             setModal(<p>Para poder publicar un anuncio debes activar primero tu usuario</p>)
         } else {
             setModal(<p>No se ha podido realizar la publicación</p>)
-        } 
+        }
     }
     return (
         <div className='ad-page'>
-            <h2 className='title-ad-page'>Datos del anuncio</h2>
-            <form onSubmit={handleSubmit}>
+            <h1 className='title-ad-page'>Publica un nuevo anuncio</h1>
+            <form >
                 <div>
                     <label>
                         Titulo
-                        <input name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
+                        <input autoFocus name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
-                        Precio 
+                        Precio
                         <input name='price' value={price} type='number' placeholder='Precio...' required onChange={e => setPrice(e.target.value)} />
                     </label>
                     <label>
-                        Habitaciones 
+                        Habitaciones
                         <input name='rooms' value={rooms} type='number' placeholder='Habitaciones...' required onChange={e => setRooms(e.target.value)} />
                     </label>
                     <label>
-                        Ciudad 
-                        <input name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => setCity(e.target.value)} />
+                        Ciudad
+                        <input id='city' name='city' value={city} type='text' placeholder='Ciudad...' required onChange={e => {
+                            setCity(e.target.value)
+                            setErrorType('')
+                        }} />
+                        {errorType === 'city' && <p className='error-city'>{errorText}</p>}
                     </label>
                 </div>
                 <div className='description-house'>
                     <label>
-                        Descripción <br />
+                        Descripción
                         <textarea name='description' value={description} placeholder='Descripción...' required onChange={e => setDescription(e.target.value)} />
                     </label>
                 </div>
                 <div id='picture-container'>
-                    <PicUpload pictures={pictures} onChange={setPictures}/>
+                    <PicUpload pictures={pictures} onChange={setPictures} />
                 </div>
-                <button id='ad-button'>
+                <button onClick={handleSubmit} id='ad-button'>
                     Publicar
                 </button>
             </form>

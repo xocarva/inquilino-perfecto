@@ -4,7 +4,7 @@ import { useSetModal, useUser } from "../hooks";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
-function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
+function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
     const user = useUser()
     const setModal = useSetModal()
 
@@ -19,11 +19,11 @@ function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
-                    <p>Reserva cancelada correctamente.</p>
+                    <p>Reserva cancelada correctamente</p>
                 </article>
             )
         } else if (res.status === 403) {
-            setModal(<p>Antes de cancelar debes activar tu usuario.</p>)
+            setModal(<p>Antes de cancelar debes activar tu usuario</p>)
         } else {
             setModal(
                 <div className='modal-container'>
@@ -31,7 +31,10 @@ function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
                 </div>
             )
         }
-        setReloadMade(!reloadMade)
+
+        setDataMadeBookings(currentList => {
+            return currentList.filter(booking => booking.bookingId !== bookingData.bookingId)
+        })
     }
 
     return (

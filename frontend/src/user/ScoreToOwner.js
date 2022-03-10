@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 import './TenantProfile.css'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -35,7 +35,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
         } else if (res.status === 403) {
             setModal(<p>Para poder hacer una valoración debes activar primero tu usuario</p>)
         }
-         else {
+        else {
             setModal(
                 <div className='modal-container'>
                     <p>No se ha podido guardar tu voto.</p>
@@ -58,7 +58,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
                     </div>
                     <button className='button-rating' onClick={handleClick}>Valorar</button>
             </>
-                : <span className='rating-historic-tenant'><Puntuacion value={bookingData.tenantRating}/></span>}
+                : <span className='rating-historic-tenant'><Rating value={bookingData.tenantRating}/></span>}
         </div>
     )
 }

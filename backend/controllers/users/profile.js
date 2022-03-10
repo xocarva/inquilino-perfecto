@@ -6,14 +6,14 @@ const profile = async (req, res) => {
     let user
     try {
         user = await usersRepository.getUserById(userId)
-    } catch (error){
+    } catch (error) {
         res.status(500)
         res.end(error.message)
         return
     }
 
     try {
-        if(!user) throw new Error ('User not found')
+        if (!user) throw new Error('User not found')
         res.status(202)
         res.send({
             firstName: user.firstName,

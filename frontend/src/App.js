@@ -7,8 +7,8 @@ import Home from './Home'
 import User from './user/User'
 import Register from './Register'
 import Houses from './houses/Houses'
-import SearchBar from './houses/SearchBar'
 import Oops from './Oops'
+import Activate from './Activate'
 import Footer from './Footer'
 
 function App() {
@@ -17,13 +17,13 @@ function App() {
         <ErrorBoundary fallback={<Oops />}>
           <Header/>
           <Modal />
-          <SearchBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='user/*' element={<User />}/>
             <Route path="register" element={<Register />} />
             <Route path="register" element={<Register />} />
             <Route path="houses/*" element={<Houses />} />
+            <Route path="activate/:code" element={<Activate />} />
             <Route path="*" element={<Oops />} />
           </Routes>
         </ErrorBoundary>

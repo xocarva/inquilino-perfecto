@@ -33,7 +33,7 @@ const createBooking = async (req, res) => {
     }
 
     if(!available){
-        res.status(400)
+        res.status(409)
         res.end('House not available for booking in this dates')
         return
     }
@@ -48,7 +48,7 @@ const createBooking = async (req, res) => {
     }
 
     if(tenantId === house.ownerId) {
-        res.status(400)
+        res.status(460)
         res.end('You can not rent your own house')
         return
     }
@@ -88,3 +88,4 @@ const createBooking = async (req, res) => {
     })
 }
 module.exports = createBooking
+

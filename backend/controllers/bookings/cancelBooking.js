@@ -16,12 +16,12 @@ const cancelBooking = async (req, res) => {
     }
 
     if (!booking || booking.accepted) {
-        res.status(400)
+        res.status(404)
         res.end('This booking does not exist or already was confirmed')
         return
     }
 
-    const { houseId, tenantId, startDate, endDate} = booking
+    const { houseId, tenantId, startDate, endDate } = booking
 
     let house
     try {
@@ -33,7 +33,7 @@ const cancelBooking = async (req, res) => {
     }
 
     if(userId !== house.ownerId && userId !== tenantId) {
-        res.status(400)
+        res.status(403)
         res.end('User not allowed to cancel this booking')
         return
     }
@@ -92,3 +92,4 @@ const cancelBooking = async (req, res) => {
     })
 }
 module.exports = cancelBooking
+

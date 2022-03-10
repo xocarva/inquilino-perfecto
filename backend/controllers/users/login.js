@@ -25,7 +25,7 @@ const login = async (req, res) => {
 
   if (!user) {
     res.status(404)
-    res.send('user not found')
+    res.end('User not found')
     return
   }
 
@@ -47,4 +47,3 @@ const login = async (req, res) => {
 }
 
 module.exports = login
-

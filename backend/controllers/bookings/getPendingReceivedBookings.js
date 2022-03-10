@@ -10,12 +10,12 @@ const getPendingReceivedBookings = async (req, res) => {
 
         bookingsWithRatings = await Promise.all(bookings.map(async booking => {
             const ratings = await ratingsRepository.getRatings({ ...booking, id: booking.tenantId, role })
-            const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating/ratings.length), 0))
+            const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating / ratings.length), 0))
             return { ...booking, ratingAvg }
         }))
 
     } catch (error) {
-        res.status(400)
+        res.status(500)
         res.end(error.message)
         return
     }
@@ -25,3 +25,4 @@ const getPendingReceivedBookings = async (req, res) => {
 }
 
 module.exports = getPendingReceivedBookings
+

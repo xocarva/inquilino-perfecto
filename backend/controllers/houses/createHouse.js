@@ -41,7 +41,7 @@ const createHouse = async (req, res) => {
             return pictureUrl
         })
     } catch (error) {
-        res.status(400)
+        res.status(415)
         res.end(error.message)
         return
     }

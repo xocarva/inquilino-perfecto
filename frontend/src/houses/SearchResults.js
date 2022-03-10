@@ -6,7 +6,7 @@ import { useState, Suspense } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Loading from '../Loading'
 import Login from '../Login'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -58,7 +58,7 @@ function SearchResults() {
         if(res.ok) {
             setModal(
                 <div className='modal-container'>
-                    <p>Reserva confirmada.</p>
+                    <p>Reserva confirmada correctamente</p>
                 </div>
             )
             navigate('/user/pending-bookings')
@@ -68,6 +68,18 @@ function SearchResults() {
                     <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>
                 </div>
             )
+        } else if (res.status === 460) {
+            setModal(
+              <div className='modal-container'>
+                <p>No puedes reservar tu propia casa</p>
+              </div>
+          )
+        } else if (res.status === 409) {
+            setModal(
+              <div className='modal-container'>
+                <p>Casa no disponible en estas fechas</p>
+              </div>
+          )
         } else {
             setModal(
                 <div className='modal-container'>
@@ -77,7 +89,7 @@ function SearchResults() {
         }
     }
 
-    const results = useFetch(fetchUrl)
+    const {data: results} = useFetch(fetchUrl, [])
     if(results &&  results.length > 0 && sortCriterion) {
         if(sortOrder === 'asc') results.sort((house1, house2) => house1[sortCriterion] > house2[sortCriterion] ? 1 : house1[sortCriterion] < house2[sortCriterion] ? -1 : 0)
         else results.sort((house1, house2) => house1[sortCriterion] < house2[sortCriterion] ? 1 : house1[sortCriterion] > house2[sortCriterion] ? -1 : 0)
@@ -89,7 +101,7 @@ function SearchResults() {
     const handleNext = () => setStepHouse((stepHouse + 1) % pagsHouses)
 
     return(
-        <>
+        <section className='results'>
             <div className='filters'>
                 <span>📅  Desde el {startDate} al {endDate}</span>
                 <div className='sort-container'>
@@ -123,7 +135,7 @@ function SearchResults() {
                                     <div className='owner'>
                                         <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
                                         <span className='owner-name'>{house.ownerName}</span>
-                                        <Puntuacion value={house.ownerRating} className='rating-tenant' />
+                                        <Rating value={house.ownerRating} className='rating-tenant' />
                                     </div>
                                     <span className='city'>🏙️ {house.city}</span>
                                     <span className='rooms'>🚪 {house.rooms} habitaciones</span>
@@ -147,7 +159,7 @@ function SearchResults() {
                     </div>
                 </div>
             </>}
-        </>
+        </section>
     )
 }
 
