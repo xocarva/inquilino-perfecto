@@ -71,7 +71,7 @@
 
 .body-register .register-page .picture-container {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 2rem;
     align-items: center;
 }

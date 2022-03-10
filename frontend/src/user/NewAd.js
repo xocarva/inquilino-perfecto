@@ -3,7 +3,6 @@ import PicUpload from './PicUpload';
 import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
-import { validateData } from '../utils/validateData';
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -66,7 +65,7 @@ function NewAd() {
                 <div>
                     <label>
                         Titulo
-                        <input name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
+                        <input autoFocus name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
                     </label>
                     <label>
                         Precio
