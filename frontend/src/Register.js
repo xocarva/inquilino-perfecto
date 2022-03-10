@@ -28,10 +28,17 @@ function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault()
+        if(!e.target.files) {
+            setErrorType('picture')
+            setErrorText('Tienes que añadir una foto')
+            return
+        }   
         const picture = e.target.picture.files[0]
         const fd = new FormData()
 
         const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, mailConfirm, bio, password, passConfirm)
+
+
 
 
         if (errorTypeValidation) {
@@ -40,6 +47,7 @@ function Register() {
             document.getElementById(errorTypeValidation).focus()
             return
         }
+
 
         fd.append('firstName', firstName)
         fd.append('lastName', lastName)
@@ -70,16 +78,22 @@ function Register() {
     return (
         <div className='body-register'>
             <h2 className='title-register-page'>Formulario de registro</h2>
-            <form className='register-page' onSubmit={handleSubmit}>
+            <form className='register-page'>
                 <div>
                     <label>
                         Nombre
-                        <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' required onChange={e => setName(e.target.value)} />
+                        <input className='input-register' type='text' name='nombre' value={firstName} placeholder='Nombre...' required onChange={e => {
+                            setName(e.target.value)
+                            setErrorType('')
+                        }} />
                         {errorType === 'firstName' && <p className='error-text'>{errorText}</p>}
                     </label>
                     <label>
                         Apellido
-                        <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' required onChange={e => setLastName(e.target.value)} />
+                        <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' required onChange={e => {
+                            setLastName(e.target.value)
+                            setErrorType('')
+                        }} />
                         {errorType === 'lastName' && <p className='error-text'>{errorText}</p>}
                     </label>
                 </div>
@@ -95,33 +109,40 @@ function Register() {
                         </div>
                     </label>
                     <label>
-                        Confirma Email {email ? (email === mailConfirm) ? '✅' : '❌' : ''}
+                        <span>Confirma Email <span className='check-emoji'>{email ? (email === mailConfirm) ? '✅' : '❌' : ''}</span></span>
                         <input className='input-register' name='email' type='email' value={mailConfirm} placeholder='Confirma email...' required onChange={e => setMailConfirm(e.target.value)} />
                     </label>
                 </div>
                 <label className='bio'>
                     Bio
-                    <textarea name='bio' value={bio} placeholder='bio...' required onChange={e => setBio(e.target.value)} />
+                    <textarea name='bio' value={bio} placeholder='bio...' required onChange={e => {
+                        setBio(e.target.value)
+                        setErrorType('')
+                    }} />
                     {errorType === 'bio' && <p className='error-text'>{errorText}</p>}
                 </label>
                 <div className='picture-container'>
                     <label htmlFor='btn-picture' className='picture'>Cargar foto...</label>
-                    <span id='chosen-file'>{picName}</span>
+                    {errorType === 'picture' && <span style={{ color: 'red' }}>{errorText}</span>}
+                    {errorType !== 'picture'&& <span id='chosen-file'>{picName}</span>}
                     <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" required hidden onChange={handleProfilePic} />
                 </div>
                 <div id='pass-div'>
                     <label>
                         Contraseña
-                        <input className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' required onChange={e => setPass(e.target.value)} />
+                        <input className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' required onChange={e => {
+                            setPass(e.target.value)
+                            setErrorType('')
+                        }} />
                         {errorType === 'password' && <p className='error-text'>{errorText}</p>}
                     </label >
                     <label>
-                        Confirma contraseña {password ? (password === passConfirm) ? '✅' : '❌' : ''}
+                        <span>Confirma contraseña<span className='check-emoji'>{password ? (password === passConfirm) ? '✅' : '❌' : ''}</span></span>
                         <input className='input-register' name='contraseña' type='password' value={passConfirm} placeholder='Confirma contraseña...' required onChange={e => setPassConfirm(e.target.value)} />
                     </label>
                 </div>
                 <div id='register-button'>
-                    <button>
+                    <button onClick={handleSubmit}>
                         Registrar
                     </button>
                 </div>

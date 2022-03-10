@@ -71,6 +71,10 @@
     padding: 1rem;
 }
 
+.register-page .check-emoji {
+    font-size: 12px;
+}
+
 .body-register .register-page .picture-container .picture {
     gap: 1rem;
     background-color: #B5C99A;
