@@ -5,12 +5,10 @@ const getUserHouses = async (req, res) => {
     const userId = req.user.id
 
     try {
-
         houses = await housesRepository.getHousesByOwnerId(userId)
-
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
     res.status(200)

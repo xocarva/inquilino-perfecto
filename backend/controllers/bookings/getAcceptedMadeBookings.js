@@ -9,7 +9,7 @@ const getAcceptedMadeBookings = async (req, res) => {
 
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 

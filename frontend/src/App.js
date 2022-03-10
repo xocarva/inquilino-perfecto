@@ -8,6 +8,7 @@ import User from './user/User'
 import Register from './Register'
 import Houses from './houses/Houses'
 import Oops from './Oops'
+import Activate from './Activate'
 import Footer from './Footer'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="register" element={<Register />} />
             <Route path="houses/*" element={<Houses />} />
+            <Route path="activate/:code" element={<Activate />} />
             <Route path="*" element={<Oops />} />
           </Routes>
         </ErrorBoundary>

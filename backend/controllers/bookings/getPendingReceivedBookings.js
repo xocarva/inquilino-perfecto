@@ -15,8 +15,8 @@ const getPendingReceivedBookings = async (req, res) => {
         }))
 
     } catch (error) {
-        res.status(400)
-        res.send({ error: error.message })
+        res.status(500)
+        res.end(error.message)
         return
     }
 

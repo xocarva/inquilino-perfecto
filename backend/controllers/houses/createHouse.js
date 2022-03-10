@@ -9,7 +9,7 @@ const createHouse = async (req, res) => {
 
     if(!req.files || !req.files.pictures) {
         res.status(400)
-        res.send({error: '[pictures] is required'})
+        res.end('[pictures] is required')
         return
     }
 
@@ -17,7 +17,7 @@ const createHouse = async (req, res) => {
         await houseSchema.validateAsync(house)
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
@@ -37,12 +37,12 @@ const createHouse = async (req, res) => {
             const pictureUrl = `/${pictureName}`
             fs.ensureDir(UPLOADS_PATH)
             picture.mv(`${UPLOADS_PATH}/${pictureName}`)
- 
+
             return pictureUrl
         })
     } catch (error) {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(415)
+        res.end(error.message)
         return
     }
 
@@ -52,7 +52,7 @@ const createHouse = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 

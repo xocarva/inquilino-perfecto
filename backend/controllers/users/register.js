@@ -6,14 +6,14 @@ const { usersRepository } = require('../../repository')
 const notifier = require('../../controllers/notifier')
 const uploads = require('../../shared/uploads')
 
-const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } =  process.env
+const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } = process.env
 
 const register = async (req, res) => {
     const user = req.body
 
-    if(!req.files || !req.files.picture) {
+    if (!req.files || !req.files.picture) {
         res.status(400)
-        res.send({error: '[picture] is required'})
+        res.end('[picture] is required')
         return
     }
 
@@ -23,19 +23,19 @@ const register = async (req, res) => {
         await userValidator.validateAsync(user)
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     if (!uploads.isValidImageSize(picture.size)) {
-        res.status(400)
-        res.send({error: `Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`})
+        res.status(415)
+        res.end(`Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
         return
     }
 
     if (!uploads.isValidImageMimeType(picture.mimetype)) {
-        res.status(400)
-        res.send({error: `Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`})
+        res.status(415)
+        res.end(`Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`)
         return
     }
 
@@ -44,14 +44,14 @@ const register = async (req, res) => {
         userExists = await usersRepository.getUserByEmail(user.email)
 
     } catch (error) {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(500)
+        res.end(error.message)
         return
     }
 
     if (userExists) {
         res.status(409)
-        res.send({ error: 'User already exists' })
+        res.end('User already exists')
         return
     }
 
@@ -59,13 +59,13 @@ const register = async (req, res) => {
     try {
         encryptedPassword = await encryptor.encrypt(user.password)
     } catch (error) {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(500)
+        res.end(error.message)
         return
     }
 
     const activationCode = crypto.randomBytes(40).toString('hex')
- 
+
     let pictureUrl
     try {
         const pictureName = uploads.createImageName(uploads.getExtensionFromMimetype(picture.mimetype))
@@ -73,18 +73,18 @@ const register = async (req, res) => {
         fs.ensureDir(UPLOADS_PATH)
         picture.mv(`${UPLOADS_PATH}/${pictureName}`)
     } catch {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(500)
+        res.end(error.message)
         return
     }
 
 
     let userId
     try {
-        userId = await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode, picture: pictureUrl  })
+        userId = await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode, picture: pictureUrl })
     } catch (error) {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(500)
+        res.end(error.message)
         return
     }
 
@@ -92,7 +92,7 @@ const register = async (req, res) => {
         await notifier.sendActivationCode({ ...user, activationCode })
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 

@@ -8,14 +8,14 @@ const profile = async (req, res) => {
         user = await usersRepository.getUserById(userId)
     } catch (error){
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
- 
+
     try {
         if(!user) throw new Error ('User not found')
         res.status(202)
-        res.send({
+        res.end({
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,

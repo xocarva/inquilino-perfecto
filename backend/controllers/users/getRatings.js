@@ -5,13 +5,13 @@ const getRatings = async (req, res) => {
         id: req.user.id,
         role: req.params.role
     }
- 
+
     let ratings
     try {
         ratings = await ratingsRepository.getRatings(user)
     } catch (error) {
-        res.status(400)
-        res.send({error: error.message})
+        res.status(500)
+        res.end(error.message)
         return
     }
     res.status(200)

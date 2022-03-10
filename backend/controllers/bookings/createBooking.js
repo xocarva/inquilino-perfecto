@@ -11,14 +11,14 @@ const createBooking = async (req, res) => {
         await bookingValidator.validateAsync({  startDate, endDate })
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     const actualDate = new Date()
     if (startDate >= endDate || Date.parse(startDate) < actualDate) {
         res.status(400)
-        res.send({error: 'Invalid date'})
+        res.end('Invalid date')
         return
     }
 
@@ -28,13 +28,13 @@ const createBooking = async (req, res) => {
         available = await bookingsRepository.isHouseAvailable({ bookings, startDate, endDate })
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     if(!available){
-        res.status(400)
-        res.send({error: 'House not available for booking in this dates'})
+        res.status(409)
+        res.end('House not available for booking in this dates')
         return
     }
 
@@ -43,13 +43,13 @@ const createBooking = async (req, res) => {
         house = await housesRepository.getHouseById(houseId)
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     if(tenantId === house.ownerId) {
-        res.status(400)
-        res.send({error: 'You can not rent your own house'})
+        res.status(403)
+        res.end('You can not rent your own house')
         return
     }
 
@@ -58,7 +58,7 @@ const createBooking = async (req, res) => {
         booking = await bookingsRepository.saveBooking({  houseId, tenantId, startDate, endDate })
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
@@ -68,7 +68,7 @@ const createBooking = async (req, res) => {
         await notifier.sendMadeBookingInfo({ tenantEmail, house, startDate, endDate })
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
@@ -78,7 +78,7 @@ const createBooking = async (req, res) => {
         await notifier.sendReceivedBookingInfo({ ownerEmail, house, startDate, endDate })
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
     res.status(201)

@@ -8,13 +8,13 @@ const getHouse = async (req, res) => {
         house = await housesRepository.getHouseById(houseId)
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     if (!house) {
         res.status(400)
-        res.send({error: 'House not found'})
+        res.end('House not found')
         return
     }
 
@@ -26,7 +26,7 @@ const getHouse = async (req, res) => {
  
     } catch (error) {
         res.status(500)
-        res.send({ error: error.message })
+        res.end(error.message)
         return
     }
     res.status(200)

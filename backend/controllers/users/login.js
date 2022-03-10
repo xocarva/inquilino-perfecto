@@ -10,7 +10,7 @@ const login = async (req, res) => {
     await credentialsValidator.validateAsync(credentials)
   } catch (error) {
     res.status(400)
-    res.send({error: error.message})
+    res.end(error.message)
     return
   }
 
@@ -19,22 +19,22 @@ const login = async (req, res) => {
     user = await usersRepository.getUserByEmail(credentials.email)
   } catch (error) {
     res.status(500)
-    res.send({error: 'Database error'})
+    res.end('Database error')
     return
   }
 
   if (!user) {
     res.status(404)
-    res.send({error: 'User not found'})
+    res.end('User not found')
     return
   }
 
   if (!await encryptor.compare(credentials.password, user.password)) {
     res.status(401)
-    res.send({error: 'Invalid credentials'})
+    res.end('Invalid credentials')
     return
   }
- 
+
   const token = generateToken({ payload: { user: { id: user.id } } })
 
   res.status(200)

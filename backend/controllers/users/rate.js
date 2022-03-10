@@ -10,22 +10,22 @@ const rate = async (req, res) => {
         await ratingValidator.validateAsync({ rating })
     } catch (error) {
         res.status(400)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
- 
+
     let bookingRatingData
     try {
         bookingRatingData = await bookingsRepository.getBookingRatingData(bookingId)
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
-    if(!bookingRatingData){
-        res.status(400)
-        res.send({error: 'Booking data could not be retrieved'})
+    if (!bookingRatingData) {
+        res.status(500)
+        res.end('Booking data could not be retrieved')
         return
     }
 
@@ -35,25 +35,25 @@ const rate = async (req, res) => {
         ratingData = { ...bookingRatingData, bookingId, ratedUserRole, ratedUserId, rating }
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
     if (!ratingData.accepted) {
-        res.status(400)
-        res.send({error: 'Can not rate a pending or canceled booking'})
+        res.status(409)
+        res.end('Can not rate a pending or canceled booking')
         return
     }
 
     if (ratingData.bookingEndDate >= new Date()) {
-        res.status(400)
-        res.send({error: 'Can not rate an open booking'})
+        res.status(409)
+        res.end('Can not rate an open booking')
         return
     }
 
-    if((ratingData.ratedUserRole === 'tenant' && ratingData.ownerRating) || (ratingData.ratedUserRole === 'owner' && ratingData.tenantRating)) {
-        res.status(400)
-        res.send({error: 'Booking already rated by this user'})
+    if ((ratingData.ratedUserRole === 'tenant' && ratingData.ownerRating) || (ratingData.ratedUserRole === 'owner' && ratingData.tenantRating)) {
+        res.status(403)
+        res.end('Booking already rated by this user')
         return
     }
 
@@ -62,7 +62,7 @@ const rate = async (req, res) => {
         ratingId = await ratingsRepository.rateBooking(ratingData)
     } catch (error) {
         res.status(500)
-        res.send({error: error.message})
+        res.end(error.message)
         return
     }
 
