@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 import './TenantProfile.css'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -58,7 +58,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
                     </div>
                     <button className='button-rating' onClick={handleClick}>Valorar</button>
             </>
-                : <span className='rating-historic-tenant'><Puntuacion value={bookingData.tenantRating}/></span>}
+                : <span className='rating-historic-tenant'><Rating value={bookingData.tenantRating}/></span>}
         </div>
     )
 }

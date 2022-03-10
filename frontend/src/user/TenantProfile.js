@@ -4,7 +4,7 @@ import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToOwner from './ScoreToOwner'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 import { useUser } from '../hooks'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -120,7 +120,7 @@ function TenantProfile() {
                             <section className='cards-ratings-container'>
                                 {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
                                     <article className='card-historic-rating' key={rating.ratingDate}>
-                                        <Puntuacion value={rating.rating} />
+                                        <Rating value={rating.rating} />
                                         <span className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                     </article>
                                 )}
@@ -138,7 +138,7 @@ function TenantProfile() {
                         <section className='average-ratings' style={{ backgroundColor: `${classNameForColorAverageRatings}` }}>
                             <h3>Media de valoraciones</h3>
                             <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
-                            <Puntuacion value={averageRatings} />
+                            <Rating value={averageRatings} />
                             <span className='emoji-rating'>{emojiRating}</span>
                         </section>
                     </section>

@@ -1,7 +1,7 @@
 import './PendingBookings.css'
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
-import Puntuacion from "../Puntuacion";
+import Rating from "../Rating";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
@@ -76,7 +76,7 @@ function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadRece
                     <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
                     <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
                     <div className='rating-tenant'>
-                        <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
+                        <Rating value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg} />
                     </div></div>
                 <div className='date-card-pending-bookings-container'>
                     <div className='date-card-pending-bookings'>

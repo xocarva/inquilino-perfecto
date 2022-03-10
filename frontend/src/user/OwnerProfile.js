@@ -5,13 +5,13 @@ import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToTenant from './ScoreToTenant'
 import { useUser } from '../hooks'
-import Puntuacion from '../Puntuacion'
+import Rating from '../Rating'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function OwnerProfile() {
 
-    const {data: myAds, error, isLoading} = useFetch(REACT_APP_BASE_URL + '/users/houses', [])
+    const {data: myAds} = useFetch(REACT_APP_BASE_URL + '/users/houses', [])
 
     const [house, setHouse] = useState(0)
     const [stepRating, setStepRating] = useState(0)
@@ -107,7 +107,7 @@ function OwnerProfile() {
                 </div> : <div className='there-is-not'>Aun no tienes alquileres ofertados 😅</div>}
             </section>
             <div className='title-container'>
-                <h1 className='title-owner'>Valoraciones recibidas como casero {ratingsData.length > 0 && <span>  (<Puntuacion className='star-ratings' value={averageRatings} />)</span>}</h1>
+                <h1 className='title-owner'>Valoraciones recibidas como casero {ratingsData.length > 0 && <span>  (<Rating className='star-ratings' value={averageRatings} />)</span>}</h1>
             </div>
             <section className='body-rating'>
                 {ratingsData.length > 0 ? <div>
@@ -115,7 +115,7 @@ function OwnerProfile() {
                         <section className='cards-ratings-container'>
                             {ratingsData?.slice(stepRating * perPageRatings, (stepRating + 1) * perPageRatings).map(rating =>
                                 <article className='article-rating' key={rating.ratingDate}>
-                                    <Puntuacion className='star-rating' key={rating.rating} value={rating.rating} />
+                                    <Rating className='star-rating' key={rating.rating} value={rating.rating} />
                                     <span key={rating.ratingDate} className='date-rating'>{rating.ratingDate.slice(0, 10)}</span>
                                 </article>
                             )}

@@ -1,4 +1,4 @@
-function Puntuacion({ value, className }) {
+function Rating({ value, className }) {
     return (
         <span className={`puntuacion ${className}`}>
             {value >= 1 ? '★' : '☆'}
@@ -10,4 +10,4 @@ function Puntuacion({ value, className }) {
     )
 }
 
-export default Puntuacion
+export default Rating

@@ -4,7 +4,7 @@ import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
 import Login from '../Login'
-import Puntuacion from '../Puntuacion'
+import Puntuacion from '../Rating'
 import './House.css'
 
 
