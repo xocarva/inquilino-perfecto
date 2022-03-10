@@ -13,7 +13,7 @@ function SearchBar({ showBar, setShowBar }) {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
-    const cityRegex = /^[A-Za-zaÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
+    const cityRegex = /^[A-Za-zaáÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
 
     const handleSubmit = async e => {
         e.preventDefault()

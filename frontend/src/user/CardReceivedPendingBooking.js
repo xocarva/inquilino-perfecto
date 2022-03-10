@@ -36,8 +36,6 @@ function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadRece
         setDataReceivedBookings(currentList => {
             return currentList.filter(booking => booking.bookingId !== bookingData.bookingId)
         })
-
-        //setReloadReceived(!reloadReceived)
     }
 
     const handleCancelReceivedBooking = async e => {
@@ -59,7 +57,7 @@ function CardReceivedPendingBooking({ bookingData, reloadReceived, setReloadRece
         } else {
             setModal(
                 <div className='modal-container'>
-                    <p>No se ha podido cancelar la reserva.</p>
+                    <p>No se ha podido cancelar la reserva</p>
                 </div>
             )
         }

@@ -48,7 +48,7 @@ const createBooking = async (req, res) => {
     }
 
     if(tenantId === house.ownerId) {
-        res.status(403)
+        res.status(460)
         res.end('You can not rent your own house')
         return
     }

@@ -19,6 +19,24 @@ const updateUser = async (req, res) => {
         return
     }
 
+    let userExists
+    if(newUserData.email) {
+        try {
+            userExists = await usersRepository.getUserByEmail(newUserData.email)
+
+        } catch (error) {
+            res.status(500)
+            res.end(error.message)
+            return
+        }
+
+        if (userExists) {
+            res.status(409)
+            res.end('User already exists')
+            return
+        }
+    }
+
     let user
     try {
         user = await usersRepository.getUserById(userId)

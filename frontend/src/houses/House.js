@@ -51,19 +51,24 @@ function House() {
         </div>
       )
       navigate('/user/pending-bookings')
-
     } else if (res.status === 403) {
-      setModal(
-        <div className='modal-container'>
-          <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>
-        </div>
+        setModal(
+          <div className='modal-container'>
+            <p>Para poder reservar un alojamiento debes activar primero tu usuario</p>
+          </div>
+        )
+    } else if (res.status === 460) {
+        setModal(
+          <div className='modal-container'>
+            <p>No puedes reservar tu propia casa</p>
+          </div>
       )
     } else {
-      setModal(
-        <div className='modal-container'>
-          <p>No se ha podido realizar la reserva</p>
-        </div>
-      )
+        setModal(
+          <div className='modal-container'>
+            <p>No se ha podido realizar la reserva</p>
+          </div>
+        )
     }
   }
 

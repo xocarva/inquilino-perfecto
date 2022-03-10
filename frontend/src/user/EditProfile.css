@@ -123,14 +123,14 @@
 
 
 .password-profile {
-    width: 220px;
+    width: 225px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
 
 
 .password-profile>input {
-    width: 220px;
+    width: 225px;
     height: 35px;
     font-size: 1rem;
 }
@@ -146,7 +146,7 @@
 
 
 .confirm-password-profile {
-    width: 220px;
+    width: 225px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
@@ -154,7 +154,7 @@
 
 .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 220px;
+    width: 225px;
     height: 35px;
     font-size: 1rem;
 }

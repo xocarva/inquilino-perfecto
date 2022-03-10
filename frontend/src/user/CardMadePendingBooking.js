@@ -23,7 +23,7 @@ function CardMadePendingBooking({ bookingData, reloadMade, setReloadMade }) {
                 </article>
             )
         } else if (res.status === 403) {
-            setModal(<p>Antes de cancelar debes activar tu usuario.</p>)
+            setModal(<p>Antes de cancelar debes activar tu usuario</p>)
         } else {
             setModal(
                 <div className='modal-container'>

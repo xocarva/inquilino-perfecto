@@ -42,7 +42,6 @@ function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, err
                             setEmailConfirm(e.target.value)
                             setErrorType('')
                         }} placeholder={userData.email} />
-                        {errorType === 'email' && <p className='error-text'>{errorText}</p>}
                     </label>
                 </div>
                 <label className='bio-profile'>

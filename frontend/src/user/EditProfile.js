@@ -59,16 +59,12 @@ function EditProfile() {
 
         if (firstName) {
             fd.append("firstName", firstName)
-            setFirstName('')
         }
         if (lastName) {
             fd.append("lastName", lastName)
-            setLastName('')
         }
         if (email && email === emailConfirm) {
             fd.append("email", email)
-            setEmail('')
-            setEmailConfirm('')
         }
         if (bio) {
             fd.append("bio", bio)
@@ -76,8 +72,6 @@ function EditProfile() {
         }
         if (password && password === passConfirm) {
             fd.append("password", password)
-            setPassword('')
-            setPassConfirm('')
         }
         picture && fd.append("picture", picture)
 
@@ -88,10 +82,18 @@ function EditProfile() {
                 'Authorization': 'Bearer ' + user.token
             }
         })
-        const data = await res.json()
-        const newUser = data.user
 
         if (res.ok) {
+            const data = await res.json()
+            const newUser = data.user
+            setFirstName('')
+            setLastName('')
+            setEmail('')
+            setEmailConfirm('')
+            setBio('')
+            setPassword('')
+            setPassConfirm('')
+            setPicName('')
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
@@ -105,14 +107,12 @@ function EditProfile() {
                 lastName: newUser.lastName,
                 picture: newUser.picture
             })
-            setFirstName('')
-            setLastName('')
-            setEmail('')
-            setEmailConfirm('')
-            setBio('')
-            setPassword('')
-            setPassConfirm('')
-            setPicName('')
+        } else if (res.status === 409) {
+            setErrorType('email')
+            setErrorText('El email ya está en uso')
+            return
+        } else {
+            setModal(<p>No se ha podido realizar la acción</p>)
         }
     }
 
