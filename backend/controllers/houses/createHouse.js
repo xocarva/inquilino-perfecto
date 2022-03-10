@@ -9,7 +9,7 @@ const createHouse = async (req, res) => {
 
     if(!req.files || !req.files.pictures) {
         res.status(400)
-        res.end({error: '[pictures] is required'})
+        res.send({error: '[pictures] is required'})
         return
     }
 
@@ -17,7 +17,7 @@ const createHouse = async (req, res) => {
         await houseSchema.validateAsync(house)
     } catch (error) {
         res.status(400)
-        res.end({error: error.message})
+        res.send({error: error.message})
         return
     }
 
@@ -42,7 +42,7 @@ const createHouse = async (req, res) => {
         })
     } catch (error) {
         res.status(400)
-        res.end({error: error.message})
+        res.send({error: error.message})
         return
     }
 
@@ -52,7 +52,7 @@ const createHouse = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end({error: error.message})
+        res.send({error: error.message})
         return
     }
 
