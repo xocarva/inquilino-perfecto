@@ -26,6 +26,7 @@ function OwnerProfile() {
                     <Route path="bookings" element={<OwnerBookings />} />
                     <Route path="pending-bookings" element={<OwnerPendingBookings />} />
                     <Route path="ratings" element={<OwnerRatings />} />
+                    <Route path="*" element={<Oops />} />
                 </Routes>
             </ErrorBoundary>
         </section>

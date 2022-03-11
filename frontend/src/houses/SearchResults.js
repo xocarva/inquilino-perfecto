@@ -8,7 +8,7 @@ import Loading from '../Loading'
 import Login from '../Login'
 import Rating from '../Rating'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 
 function SearchResults() {

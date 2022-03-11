@@ -4,7 +4,7 @@ import { useUser } from '../hooks'
 import './OwnerBookings.css'
 import ScoreToTenant from './ScoreToTenant'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function OwnerBookings() {
     const user = useUser()

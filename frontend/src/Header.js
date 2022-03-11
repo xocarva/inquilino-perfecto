@@ -7,7 +7,7 @@ import Login from './Login'
 import ProfileBar from './user/ProfileBar'
 import SearchBar from './houses/SearchBar'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function Header() {
     const setModal = useSetModal()

@@ -4,7 +4,7 @@ import CardMadePendingBooking from "./CardMadePendingBooking"
 
 import "./TenantPendingBookings.css"
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function TenantPendingBookings() {
     const user = useUser()

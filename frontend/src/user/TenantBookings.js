@@ -5,7 +5,7 @@ import ScoreToOwner from "./ScoreToOwner"
 
 import "./TenantBookings.css"
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function TenantBookings() {
     const user = useUser()

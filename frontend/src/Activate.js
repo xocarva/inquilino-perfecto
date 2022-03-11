@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import useFetch from "./useFetch"
 import "./Activate.css"
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function Activate() {
 

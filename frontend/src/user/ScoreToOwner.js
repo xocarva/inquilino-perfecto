@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Rating from '../Rating'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 
 const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
