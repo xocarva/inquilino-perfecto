@@ -17,8 +17,8 @@ function User() {
         <ErrorBoundary fallback={<Oops />}>
             <Routes>
                 <Route path="edit-profile" element={<EditProfile />} />
-                <Route path="tenant-profile/*" element={<TenantProfile />} />
-                <Route path="owner-profile/*" element={<OwnerProfile />} />
+                <Route path="tenant-profile/*" element={<TenantProfile madePending={user?.madePending}/>} />
+                <Route path="owner-profile/*" element={<OwnerProfile receivedPending={user?.receivedPending}/>} />
                 <Route path="*" element={<Oops />} />
             </Routes>
         </ErrorBoundary>

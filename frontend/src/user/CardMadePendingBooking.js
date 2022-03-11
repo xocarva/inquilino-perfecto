@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useSetModal, useUser } from "../hooks";
+import { useSetModal, useSetUser, useUser } from "../hooks";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
     const user = useUser()
+    const setUser = useSetUser()
     const setModal = useSetModal()
 
     const handleCancelMadeBooking = async e => {
@@ -15,6 +16,7 @@ function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
             }
         })
         if (res.ok) {
+            setUser({ ...user, madePending: user?.madePending > 0 ? user?.madePending - 1 : 0 })
             setModal(
                 <article className='edit-confirm-message-container'>
                     <span>✅</span>
@@ -40,20 +42,20 @@ function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
         <article className='card-made-booking'>
             <div className="picture-made-booking" style={{ backgroundImage: `url(${SERVER_URL}${bookingData.urlPic})` }} ></div>
             <div className='booking-data-container'>
-            <Link to={'/houses/' + bookingData.houseId} className='title-made-booking'>🏠 {bookingData.title}</Link>
-            <div className='date-card-made-bookings-container'>
-            <div className='date-card-made-bookings'>
-                <span>📅 Fecha de entrada</span>
-                <span>{bookingData.startDate.slice(0, 10)}</span>
-            </div>
-            <div className='date-card-made-bookings'>
-                <span>📅 Fecha de salida</span>
-                <span>{bookingData.endDate.slice(0, 10)}</span>
-            </div>
-            </div>
-            <div className='buttons-made-cancel-bookings'>
-                <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
-            </div>
+                <Link to={'/houses/' + bookingData.houseId} className='title-made-booking'>🏠 {bookingData.title}</Link>
+                <div className='date-card-made-bookings-container'>
+                    <div className='date-card-made-bookings'>
+                        <span>📅 Fecha de entrada</span>
+                        <span>{bookingData.startDate.slice(0, 10)}</span>
+                    </div>
+                    <div className='date-card-made-bookings'>
+                        <span>📅 Fecha de salida</span>
+                        <span>{bookingData.endDate.slice(0, 10)}</span>
+                    </div>
+                </div>
+                <div className='buttons-made-cancel-bookings'>
+                    <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
+                </div>
             </div>
         </article>
     )

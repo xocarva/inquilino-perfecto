@@ -5,14 +5,14 @@ import TenantBookings from './TenantBookings'
 import TenantPendingBookings from './TenantPendingBookings'
 import TenantRatings from './TenantRatings'
 
-function TenantProfile() {
+function TenantProfile({ madePending }) {
 
     return (
         <section className='profile-section'>
             <h1 className="profile-title">Perfil de inquilino</h1>
             <nav className="submenu">
                 <Link className={(useLocation().pathname === '/user/tenant-profile/bookings') ? 'active' : ''} to="/user/tenant-profile/bookings">Reservas confirmadas</Link>
-                <Link className={(useLocation().pathname === '/user/tenant-profile/pending-bookings') ? 'active' : ''} to="/user/tenant-profile/pending-bookings">Reservas Pendientes</Link>
+                <Link className={(useLocation().pathname === '/user/tenant-profile/pending-bookings') ? 'active' : ''} to="/user/tenant-profile/pending-bookings">Reservas Pendientes{madePending? ' (' + madePending + ')':''}</Link>
                 <Link className={(useLocation().pathname === '/user/tenant-profile/ratings') ? 'active' : ''} to="/user/tenant-profile/ratings">Valoraciones recibidas</Link>
             </nav>
             <ErrorBoundary fallback={<Oops />}>

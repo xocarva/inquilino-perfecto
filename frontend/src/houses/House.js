@@ -50,7 +50,7 @@ function House() {
           <p>Se ha guardado tu reserva</p>
         </div>
       )
-      navigate('/user/pending-bookings')
+      navigate('/user/tenant-profile/pending-bookings')
     } else if (res.status === 403) {
         setModal(
           <div className='modal-container'>
