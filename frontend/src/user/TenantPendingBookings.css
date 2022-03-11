@@ -1,0 +1,102 @@
+.made-pending-bookings-section {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto 1.5rem auto;
+}
+
+.made-pending-bookings-section h2 {
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 2rem;
+    color: #718355;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+
+.made-pending-bookings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-made-booking {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #718355;
+    padding-bottom: 1rem;
+    justify-content: space-around;
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.picture-made-booking {
+    height: 12rem;
+    width: 40vw;
+    max-width: 40rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+.booking-data-container {
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    justify-content: space-around;
+}
+
+.title-made-booking{
+    font-size: 1.5rem;
+    color: #718355;
+    font-weight: bold;
+}
+
+.date-card-made-bookings {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.buttons-made-cancel-bookings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #B5C99A;
+    box-shadow: 1px 1px 3px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.button-steps-container-pendings-bookings {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@media(max-width: 768px) {
+    .card-made-booking {
+        flex-direction: column;
+    }
+    .picture-made-booking {
+        width: 80vw;
+    }
+    .booking-data-container {
+        width: 100%;
+    }
+    .buttons-made-cancel-bookings {
+        width: 100%;
+        padding: 0.7rem 0;
+    }
+}

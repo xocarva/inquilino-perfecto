@@ -38,21 +38,21 @@ function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
     }
 
     return (
-        <article className='card-received-booking'>
-            <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.urlPic})` }} ></div>
-            <div className='booking-data-container booking-made-data'>
-            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
-            <div className='date-card-pending-bookings-container'>
-            <div className='date-card-pending-bookings'>
+        <article className='card-made-booking'>
+            <div className="picture-made-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.urlPic})` }} ></div>
+            <div className='booking-data-container'>
+            <Link to={'/houses/' + bookingData.houseId} className='title-made-booking'>🏠 {bookingData.title}</Link>
+            <div className='date-card-made-bookings-container'>
+            <div className='date-card-made-bookings'>
                 <span>📅 Fecha de entrada</span>
-                <p>{bookingData.startDate.slice(0, 10)}</p>
+                <span>{bookingData.startDate.slice(0, 10)}</span>
             </div>
-            <div className='date-card-pending-bookings'>
+            <div className='date-card-made-bookings'>
                 <span>📅 Fecha de salida</span>
-                <p>{bookingData.endDate.slice(0, 10)}</p>
+                <span>{bookingData.endDate.slice(0, 10)}</span>
             </div>
             </div>
-            <div className='buttons-received-bookings button-made-bookings'>
+            <div className='buttons-made-cancel-bookings'>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelMadeBooking}>Cancelar</span>
             </div>
             </div>

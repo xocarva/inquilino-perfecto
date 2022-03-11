@@ -1,5 +1,3 @@
-
-
 /* .tenant-profile-page-on {
     margin: 0 auto;
     width: 80vw;
@@ -86,7 +84,7 @@
     cursor: pointer;
 } */
 
-.ratings-section-off {
+/* .ratings-section-off {
     display: none;
 }
 
@@ -167,7 +165,7 @@ section.cards-ratings-container {
 
 .emoji-rating {
     font-size: 4rem;
-}
+} */
 
 
 @media (max-width: 768px) {

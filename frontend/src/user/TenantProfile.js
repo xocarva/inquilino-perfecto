@@ -19,7 +19,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 function TenantProfile() {
 
     return (
-        <>
+        <section className='profile-section'>
             <h1 className="profile-title">Perfil de inquilino</h1>
             <nav className="submenu">
                 <Link className={(useLocation().pathname === '/user/tenant-profile/bookings') ? 'active' : ''} to="/user/tenant-profile/bookings">Reservas confirmadas</Link>
@@ -33,7 +33,7 @@ function TenantProfile() {
                     <Route path="ratings" element={<TenantRatings />} />
                 </Routes>
             </ErrorBoundary>
-        </>
+        </section>
     )
 
 

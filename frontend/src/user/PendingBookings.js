@@ -72,7 +72,7 @@ function PendingBookings() {
                     </span>
                 </section>}
             </section>
-            <section className='made-pending-bookings-section'>
+            {/* <section className='made-pending-bookings-section'>
                 <h3>Peticiones de reservas hechas pendientes</h3>
                 {dataMadeBookings?.length > 0 ? <section className="made-pending-bookings-container">
                     {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
@@ -88,7 +88,7 @@ function PendingBookings() {
                         ➡️
                     </span>
                 </section>}
-            </section>
+            </section> */}
         </section>
     )
 }

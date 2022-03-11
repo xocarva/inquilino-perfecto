@@ -9,7 +9,7 @@
 }
 
 .received-pending-bookings-section {
-    width: 70vw;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -25,7 +25,7 @@
 
 .card-received-booking {
     border-bottom: 1px solid #718355;
-    width: 70vw;
+    width: 80vw;
     height: min-content;
     display: flex;
     justify-content: space-around;
@@ -109,12 +109,12 @@
     align-self: flex-end;
 }
 
-.button-steps-container-pendings-bookings {
+/* .button-steps-container-pendings-bookings {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .button-steps-container-pendings-bookings span {
     font-size: 1.3rem;
@@ -122,7 +122,7 @@
 }
 
 
-.made-pending-bookings-section {
+/* .made-pending-bookings-section {
     width: 70vw;
     display: flex;
     flex-direction: column;
@@ -144,7 +144,7 @@
 
 .button-made-bookings {
     justify-content: center;
-}
+} */
 
 @media(max-width: 768px) {
     .pending-bookings-page {

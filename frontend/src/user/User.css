@@ -37,6 +37,10 @@
     background-color: #97A97C;
 }
 
+.profile-section {
+    flex-grow: 1;
+}
+
 @media (max-width: 768px) {
     .submenu {
         flex-direction: column;
