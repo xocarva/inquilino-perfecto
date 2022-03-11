@@ -4,7 +4,7 @@ import { useSetModal, useUser } from './hooks'
 import { useNavigate } from 'react-router-dom';
 import { validateData } from './utils/validateData';
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 
 function Register() {

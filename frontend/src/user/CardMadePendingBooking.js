@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
     const user = useUser()

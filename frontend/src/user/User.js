@@ -19,6 +19,7 @@ function User() {
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="tenant-profile/*" element={<TenantProfile />} />
                 <Route path="owner-profile/*" element={<OwnerProfile />} />
+                <Route path="*" element={<Oops />} />
             </Routes>
         </ErrorBoundary>
 

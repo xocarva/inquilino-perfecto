@@ -3,7 +3,7 @@ import { useUser } from '../hooks'
 import CardReceivedPendingBooking from './CardReceivedPendingBooking'
 import './OwnerPendingBookings.css'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 
 function OwnerPendingBookings() {

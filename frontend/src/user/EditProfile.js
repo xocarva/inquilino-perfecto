@@ -5,7 +5,7 @@ import Loading from '../Loading'
 import { validateData } from '../utils/validateData'
 import EditPrrofileForm from './EditProfileForm'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function EditProfile() {
     const user = useUser()

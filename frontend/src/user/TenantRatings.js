@@ -4,7 +4,7 @@ import Rating from '../Rating'
 import useFetch from '../useFetch'
 import './TenantRatings.css'
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function TenantRatings() {
     const [stepRating, setStepRating] = useState(0)
