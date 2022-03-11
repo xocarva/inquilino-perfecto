@@ -20,7 +20,7 @@ function User() {
             <Routes>
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="tenant-profile/*" element={<TenantProfile />} />
-                <Route path="owner-profile" element={<OwnerProfile />} />
+                <Route path="owner-profile/*" element={<OwnerProfile />} />
                 <Route path="pending-bookings" element={<PendingBookings />} />
                 <Route path="new-ad" element={<NewAd />} />
             </Routes>

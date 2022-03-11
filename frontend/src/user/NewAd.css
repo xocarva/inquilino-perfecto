@@ -20,7 +20,7 @@
     justify-content: space-between;
     gap: 2rem;
     flex-wrap: wrap;
-    max-width: 70vw;
+    max-width: 80vw;
 }
 
 .ad-page div label {
@@ -47,7 +47,7 @@
 }
 
 .ad-page textarea {
-    width: 70vw;
+    width: 76vw;
     height: 15vh;
     margin-top: 10px;
     border-radius: 8px;
