@@ -14,6 +14,16 @@
     cursor: pointer;
 }
 
+#notifications {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background-color: rgb(199, 109, 109);
+    border-radius: 50%;
+    left: 2rem;
+    top: -0.5rem;
+}
+
 .dropdown-profile {
     background-color: #B5C99A;
     display: none;
@@ -37,7 +47,6 @@
 
 .wrapper .dropdown-profile .dropdown-nav:hover {
     text-decoration: underline;
-    color: blue;
 }
 
 .wrapper:focus-within .dropdown-profile {

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useSetModal, useUser } from "../hooks";
+import { useSetModal, useSetUser, useUser } from "../hooks";
 import Rating from "../Rating";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
     const user = useUser()
+    const setUser = useSetUser()
     const setModal = useSetModal()
 
     const handleConfirmReceivedBooking = async e => {
@@ -16,6 +17,7 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
             }
         })
         if (res.ok) {
+            setUser({...user, receivedPending: user?.receivedPending > 0 ? user?.receivedPending -1 : 0})
             setModal(
                 <article className='edit-confirm-message-container'>
                     <p>Reserva confirmada correctamente</p>
@@ -44,6 +46,7 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
             }
         })
         if (res.ok) {
+            setUser({...user, receivedPending: user?.receivedPending > 0 ? user?.receivedPending -1 : 0})
             setModal(
                 <article className='cancel-booking-message-container'>
                     <p>Reserva cancelada correctamente.</p>

@@ -29,6 +29,8 @@ function Header() {
                     }
                     {user &&
                         <ProfileBar className='menu-login-register'
+                            madePending={user.madePending}
+                            receivedPending={user.receivedPending}
                             userName={user.firstName}
                             userPicture={<div id="avatar" style={{ backgroundImage: `url(${SERVER_URL}${user.picture})` }} />}
                             logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>Cerrar sesión</span>}

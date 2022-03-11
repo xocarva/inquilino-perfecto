@@ -61,7 +61,7 @@ function SearchResults() {
                     <p>Reserva confirmada correctamente</p>
                 </div>
             )
-            navigate('/user/pending-bookings')
+            navigate('/user/tenant-profile/pending-bookings')
         } else if (res.status === 403) {
             setModal(
                 <div className='modal-container'>
