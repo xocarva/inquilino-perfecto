@@ -1,0 +1,50 @@
+.profile-title {
+    text-align: center;
+    color: #718355;
+    font-size:2.5rem;
+}
+
+.submenu {
+    display: flex;
+    width: 100vw;
+    margin: 0 auto;
+}
+
+.submenu .active {
+    background-color: #CFE1B9;
+}
+
+.submenu a {
+    color: black;
+    text-decoration: none;
+    padding: 1rem 0;
+    flex-grow: 1;
+    text-align: center;
+    background-color: #B5C99A;
+    border-left: 1px solid #718355;
+    border-right: 1px solid #718355;
+}
+
+.submenu a:first-child {
+    border-left: none;
+}
+
+.submenu a:last-child {
+    border-right: none;
+}
+
+.submenu a:hover {
+    background-color: #97A97C;
+}
+
+.profile-section {
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .submenu {
+        flex-direction: column;
+        width: 100vw;
+    }
+}
+

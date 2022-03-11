@@ -7,7 +7,7 @@ import Login from './Login'
 import ProfileBar from './user/ProfileBar'
 import SearchBar from './houses/SearchBar'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function Header() {
     const setModal = useSetModal()
@@ -30,7 +30,7 @@ function Header() {
                     {user &&
                         <ProfileBar className='menu-login-register'
                             userName={user.firstName}
-                            userPicture={<div id="avatar" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${user.picture})` }} />}
+                            userPicture={<div id="avatar" style={{ backgroundImage: `url(${SERVER_URL}${user.picture})` }} />}
                             logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>Cerrar sesión</span>}
                         />
                     }

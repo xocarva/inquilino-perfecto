@@ -1,0 +1,94 @@
+.ratings-section {
+    width: 80vw;
+    margin: 0 auto 2rem auto;
+}
+
+.ratings-section h2 {
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 2rem;
+    color: #718355;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+
+.historic-ratings-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+
+.ratings-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section.cards-ratings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.card-historic-rating span {
+    font-size: 2.5rem;
+}
+
+
+.date-rating {
+    margin-left: 3rem;
+}
+
+
+.average-ratings {
+    box-sizing: border-box;
+    width: 250px;
+    height: 325px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.618);
+}
+
+
+.average-ratings-number {
+    font-size: 4rem;
+}
+
+
+.average-ratings .puntuacion {
+    font-size: 3rem;
+}
+
+.emoji-rating {
+    font-size: 4rem;
+}
+
+.button-steps-container-ratings {
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.button-steps-container-ratings .prev-button, .button-steps-container-ratings .next-button {
+    cursor: pointer;
+}
+
+@media(max-width: 768px) {
+    .historic-ratings-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-historic-rating span {
+        font-size: 1.8rem;
+    }
+}

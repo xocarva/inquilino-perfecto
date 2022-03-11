@@ -1,0 +1,144 @@
+.main-section {
+    margin: 0 auto 1rem auto;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.main-section h2 {
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 2rem;
+    color: #718355;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+.main-section .description {
+    width: 80vw;
+    max-width: 1200px;
+    margin-bottom: 1rem;
+}
+
+
+.historic-bookings-container .card-house-historic-booking {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #718355;
+    padding-bottom: 1rem;
+    justify-content: space-around;
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.card-house-historic-booking .picture-historic-booking {
+    height: 12rem;
+    width: 40vw;
+    max-width: 40rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+.card-house-historic-booking .data-booking-container {
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    justify-content: space-around;
+}
+
+.title-historic-booking {
+    font-size: 1.5rem;
+    color: #718355;
+    font-weight: bold;
+}
+
+.rating-historic-tenant {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rating-historic-tenant span {
+    font-size: xx-large;
+
+}
+
+.for-rating abbr {
+    text-decoration: none;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+.button-rating {
+    padding: 0.7rem;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #B5C99A;
+    box-shadow: 1px 1px 3px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.button-steps-container-bookings {
+    margin: 0 auto;
+}
+
+.button-steps-container-bookings {
+    font-size: 1.5rem;
+}
+
+.button-steps-container-bookings .prev-button, .button-steps-container-bookings .next-button {
+    cursor: pointer;
+}
+
+@media(max-width: 768px) {
+    .main-section>h2 {
+        margin-left: 1rem;
+        text-align: center;
+    }
+    .main-section .description {
+        text-align: center;
+    }
+    .card-house-historic-booking {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        height: min-content;
+        margin-bottom: 1.8rem;
+    }
+    .date-card-bookings, .puntuacion, .title-historic-booking {
+        font-size: 1rem;
+        width: 80vw;
+        display: block;
+        margin: 0.5rem auto;
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+    .title-historic-booking {
+        font-size: 1.5rem;
+    }
+    .rating-historic-tenant {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+    }
+    .rating-historic-tenant .button-rating {
+        align-self: inherit;
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+    .button-steps-container {
+        margin: 1rem auto 0 auto;
+    }
+}

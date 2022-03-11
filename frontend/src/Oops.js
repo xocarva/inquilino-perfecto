@@ -5,7 +5,7 @@ function Oops() {
     return(
         <div className='body-oops'>
             <p>Ups! Algo ha ido mal 🙃</p>
-            <Link to='/'>Volver al inicio</Link>
+            <Link className="back-button" to='/'>Volver al inicio</Link>
         </div>
     )
 }

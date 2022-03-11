@@ -1,6 +1,6 @@
 function Rating({ value, className }) {
     return (
-        <span className={`puntuacion ${className}`}>
+        <span className={`puntuacion-${className}`}>
             {value >= 1 ? '★' : '☆'}
             {value >= 2 ? '★' : '☆'}
             {value >= 3 ? '★' : '☆'}

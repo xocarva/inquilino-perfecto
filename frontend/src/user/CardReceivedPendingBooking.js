@@ -1,16 +1,15 @@
-import './PendingBookings.css'
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
 import Rating from "../Rating";
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
+const SERVER_URL = process.env.SERVER_URL
 
 function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
     const user = useUser()
     const setModal = useSetModal()
 
     const handleConfirmReceivedBooking = async e => {
-        const res = await fetch(REACT_APP_BASE_URL + '/bookings/confirm/' + e.target.attributes.bookingId.value, {
+        const res = await fetch(SERVER_URL + '/bookings/confirm/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + user.token
@@ -38,7 +37,7 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
     }
 
     const handleCancelReceivedBooking = async e => {
-        const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
+        const res = await fetch(SERVER_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + user.token
@@ -67,11 +66,11 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
 
     return (
         <article className='card-received-booking'>
-            <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
+            <div className="picture-received-booking" style={{ backgroundImage: `url(${SERVER_URL}${bookingData.housePicUrl})` }} ></div>
             <div className='booking-data-container'>
                 <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
                 <div className='tenant-data'>
-                    <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
+                    <div className='tenant-avatar-received' style={{ backgroundImage: `url(${SERVER_URL}${bookingData.tenantPicture})` }} />
                     <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
                     <div className='rating-tenant'>
                         <Rating value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg} />

@@ -1,0 +1,71 @@
+.owner-houses {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto 1.5rem auto;
+}
+
+.owner-houses h2 {
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 2rem;
+    color: #718355;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+
+.owner-houses .description {
+    width: 80vw;
+    max-width: 1200px;
+    margin-bottom: 1rem;
+}
+
+.article-announcements {
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.article-announcements .body-announcements {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 1rem;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+
+.article-announcements .body-announcements .house-title {
+    font-size: 1.3rem;
+    color: #718355;
+    font-weight: bold;
+}
+
+.article-announcements .body-announcements .owner-picture {
+    min-width: 12rem;
+    max-width: 40rem;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.owner-houses .buttons-owner-houses {
+    margin: 0 auto 20px auto;
+    font-size: 1.5rem;
+}
+
+.buttons-owner-houses .prev-button, .buttons-owner-houses .next-button {
+    cursor: pointer;
+}
+
+.no-houses {
+    text-align: center;
+}
