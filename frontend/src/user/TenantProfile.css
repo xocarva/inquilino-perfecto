@@ -1,32 +1,6 @@
-.tenant-profile-error-message-off {
-    display: none;
-}
 
-.tenant-profile-error-message-on {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 70vw;
-    height: 50vh;
-    text-align: center;
-    margin-top: 5rem;
-}
 
-.tenant-profile-error-message-on h2 {
-    text-align: left;
-}
-
-.tenant-profile-error-message-on p {
-    margin: 5rem;
-    font-size: 1.5rem;
-    align-self: center;
-}
-
-.tenant-profile-page-off {
-    display: none;
-}
-
-.tenant-profile-page-on {
+/* .tenant-profile-page-on {
     margin: 0 auto;
     width: 80vw;
     display: flex;
@@ -110,7 +84,7 @@
 .button-steps-container-bookings span, .button-steps-container-ratings span {
     font-size: 1.5rem;
     cursor: pointer;
-}
+} */
 
 .ratings-section-off {
     display: none;
@@ -197,7 +171,7 @@ section.cards-ratings-container {
 
 
 @media (max-width: 768px) {
-    .tenant-profile-page-on>h2 {
+    /* .tenant-profile-page-on>h2 {
         margin-left: 1rem;
         text-align: center;
     }
@@ -222,7 +196,7 @@ section.cards-ratings-container {
     }
     .button-steps-container {
         margin: 1rem auto 0 auto;
-    }
+    } */
     .historic-ratings-container {
         width: 80vw;
         margin: auto;

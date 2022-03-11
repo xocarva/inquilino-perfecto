@@ -3,7 +3,7 @@ function NotFound(){
         <p>
             404
         </p>
-    )   
+    )
 }
 
 
