@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Rating from '../Rating'
+import './TenantProfile.css'
 
-const SERVER_URL = process.env.SERVER_URL
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
@@ -16,7 +17,7 @@ const ScoreToOwner = ( { bookingData, setReload, reload  } ) =>  {
             setModal(<p>No has introducido tu valoración</p>)
             return
         }
-        const res = await fetch(SERVER_URL + '/users/rate/' + bookingData.bookingId, {
+        const res = await fetch(REACT_APP_BASE_URL + '/users/rate/' + bookingData.bookingId, {
             method: 'POST',
             body: JSON.stringify({ rating }),
             headers: {

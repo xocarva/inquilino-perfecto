@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './EditProfile.css'
 
-function EditProfileForm({ handleSubmit, firstName, setFirstName, userData, errorType, setErrorType, errorText, lastName, setLastName, email, setEmail, emailConfirm, setEmailConfirm, bio, setBio, password, setPassword, passConfirm, setPassConfirm, picName, handleProfilePic }) {
+function EditPrrofileForm({ handleSubmit, firstName, setFirstName, userData, errorType, setErrorType, errorText, lastName, setLastName, email, setEmail, emailConfirm, setEmailConfirm, bio, setBio, password, setPassword, passConfirm, setPassConfirm, picName, handleProfilePic }) {
 
     const [showPassword, setShowPassword] = useState(false)
     const handlerShowPassword = () => {
@@ -80,4 +80,4 @@ function EditProfileForm({ handleSubmit, firstName, setFirstName, userData, erro
     )
 }
 
-export default EditProfileForm
+export default EditPrrofileForm

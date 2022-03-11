@@ -1,34 +1,26 @@
 .ad-page {
     width: 80vw;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 0 auto 1.5rem auto;
+    height: min-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 15px;
+    padding: 10px;
+    flex-grow: 1;
 }
 
-.ad-page h2 {
-    width: 80vw;
-    max-width: 1200px;
-    margin-top: 2rem;
-    color: #718355;
-    font-weight: bold;
-    font-size: 1.7rem;
-    margin-bottom: 0;
+.title-ad-page {
+    text-align: start;
 }
 
-.ad-page .description {
-    width: 80vw;
-    max-width: 1200px;
-    margin-bottom: 1rem;
-}
-
-
-.ad-page .label-container {
+.ad-page div {
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+    max-width: 70vw;
 }
 
 .ad-page div label {
@@ -54,25 +46,14 @@
     -moz-appearance: textfield;
 }
 
-.description-label {
-    width: 100%;
-}
-
-.description-house {
-    margin-bottom: 1rem;
-}
-
 .ad-page textarea {
+    width: 70vw;
     height: 15vh;
     margin-top: 10px;
     border-radius: 8px;
     border: none;
     background-color: #B5C99A;
-    padding: 0.5rem
-}
-
-.button-new-house-container {
-    text-align: center;
+    padding: 1rem;
 }
 
 #ad-button {
@@ -83,14 +64,12 @@
     margin-bottom: 10px;
     background-color: #B5C99A;
     box-shadow: 1px 1px 3px;
-    margin: 0 auto;
-    cursor: pointer;
 }
 
 @media (max-width:768px) {
 
     .ad-page {
-        width: 80vw;
+        width: 90vw;
     }
 
     .ad-page div {
@@ -101,11 +80,17 @@
         max-width: none;
     }
 
-    .ad-page div label {
-        width: 80vw;
+    .ad-page input {
+        padding: 15px;
+        width: 85vw;
+    }
+
+    .ad-page textarea {
+        width: 85vw;
     }
 
     #ad-button {
+        width: 80vw;
         padding: 15px;
     }
 

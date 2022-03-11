@@ -8,7 +8,7 @@ import Puntuacion from '../Rating'
 import './House.css'
 
 
-const SERVER_URL = process.env.SERVER_URL
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 function House() {
@@ -19,7 +19,7 @@ function House() {
   const [mainPic, setMainPic] = useState('')
   const [stepPic, setStepPic] = useState(0)
 
-  const { data: house } = useFetch(SERVER_URL + '/houses/' + id)
+  const { data: house } = useFetch(REACT_APP_BASE_URL + '/houses/' + id)
 
   useEffect(() => {
     if (house?.pictures.length > 0) {
@@ -35,7 +35,7 @@ function House() {
       setModal(<Login />)
       return
     }
-    const res = await fetch(SERVER_URL + '/bookings/' + id, {
+    const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + id, {
       method: 'POST',
       body: JSON.stringify({ startDate, endDate }),
       headers: {
@@ -77,15 +77,17 @@ function House() {
   const handlePrev = () => setStepPic(stepPic > 0 ? stepPic - 1 : pagsPics - 1)
   const handleNext = () => setStepPic((stepPic + 1) % pagsPics)
 
+
+
   return (
     <>
       {house && <section className='ad'>
         <section className='ad-info'>
-          <div className='main-picture' style={{ backgroundImage: `url("${SERVER_URL}${mainPic}")` }}></div>
+          <div className='main-picture' style={{ backgroundImage: `url("${REACT_APP_BASE_URL}${mainPic}")` }}></div>
           <div className='main-info'>
             <h2>🏠 {house.title}</h2>
             <div className='owner'>
-              <div className='owner-pic' style={{ backgroundImage: `url("${SERVER_URL}${house.ownerPic}")` }}></div>
+              <div className='owner-pic' style={{ backgroundImage: `url("${REACT_APP_BASE_URL}${house.ownerPic}")` }}></div>
               <span className='owner-name'>{house.ownerName}</span>
               <Puntuacion value={house.rating} className='rating-tenant' />
             </div>
@@ -110,7 +112,7 @@ function House() {
         <section className='all-pictures'>
           <div className='pictures'>
             {house.pictures?.slice(stepPic * perPagePics, (stepPic + 1) * perPagePics).map(picture =>
-              <div key={picture.url} className='small-picture' onClick={() => setMainPic(picture.url)} style={{ backgroundImage: `url("${SERVER_URL}${picture.url}")` }}>
+              <div key={picture.url} className='small-picture' onClick={() => setMainPic(picture.url)} style={{ backgroundImage: `url("${REACT_APP_BASE_URL}${picture.url}")` }}>
               </div>
             )}
           </div>

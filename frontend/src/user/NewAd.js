@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
 
-const SERVER_URL = process.env.SERVER_URL
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function NewAd() {
     const [title, setTitle] = useState('')
@@ -41,7 +41,7 @@ function NewAd() {
         for (const p of pictures) {
             fd.append('pictures', p.file)
         }
-        const res = await fetch(SERVER_URL + '/houses/', {
+        const res = await fetch(REACT_APP_BASE_URL + '/houses/', {
             method: 'POST',
             body: fd,
             headers: {
@@ -51,7 +51,7 @@ function NewAd() {
 
         if (res.ok) {
             setModal(<p>{`Has publicado tu anuncio '${title}' con exito`}</p>)
-            Navigation('/user/owner-profile/houses')
+            Navigation('/user/owner-profile')
         } else if (res.status === 403) {
             setModal(<p>Para poder publicar un anuncio debes activar primero tu usuario</p>)
         } else {
@@ -60,10 +60,9 @@ function NewAd() {
     }
     return (
         <div className='ad-page'>
-            <h2>Publica un nuevo anuncio</h2>
-            <p className='desciption'>Aquí puedes crear un nuevo anuncio.</p>
+            <h1 className='title-ad-page'>Publica un nuevo anuncio</h1>
             <form >
-                <div className='label-container'>
+                <div>
                     <label>
                         Titulo
                         <input autoFocus name='title' value={title} type='text' placeholder='Titulo...' required onChange={e => setTitle(e.target.value)} />
@@ -86,18 +85,17 @@ function NewAd() {
                     </label>
                 </div>
                 <div className='description-house'>
-                    <label className="description-label">
+                    <label>
                         Descripción
                         <textarea name='description' value={description} placeholder='Descripción...' required onChange={e => setDescription(e.target.value)} />
                     </label>
                 </div>
-                <label>Añadir fotos</label>
-                <PicUpload pictures={pictures} onChange={setPictures} />
-                <div className='button-new-house-container'>
-                    <button onClick={handleSubmit} id='ad-button'>
-                        Publicar
-                    </button>
+                <div id='picture-container'>
+                    <PicUpload pictures={pictures} onChange={setPictures} />
                 </div>
+                <button onClick={handleSubmit} id='ad-button'>
+                    Publicar
+                </button>
             </form>
         </div>
     )

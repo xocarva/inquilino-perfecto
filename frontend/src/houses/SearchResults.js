@@ -8,7 +8,7 @@ import Loading from '../Loading'
 import Login from '../Login'
 import Rating from '../Rating'
 
-const SERVER_URL = process.env.SERVER_URL
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 
 function SearchResults() {
@@ -26,7 +26,7 @@ function SearchResults() {
     const [stepHouse, setStepHouse] = useState(0)
 
 
-    let fetchUrl = `${SERVER_URL}/houses?startDate=${startDate}&endDate=${endDate}`
+    let fetchUrl = `${REACT_APP_BASE_URL}/houses?startDate=${startDate}&endDate=${endDate}`
     if(query.get('city')) fetchUrl += '&city=' + city
     if(rooms) fetchUrl += '&rooms=' + rooms
     if(price) fetchUrl += '&price=' + price
@@ -47,7 +47,7 @@ function SearchResults() {
             setModal(<Login />)
             return
           }
-        const res = await fetch(SERVER_URL + '/bookings/' + e.target.dataset.houseid, {
+        const res = await fetch(REACT_APP_BASE_URL + '/bookings/' + e.target.dataset.houseid, {
             method: 'POST',
             body: JSON.stringify({startDate, endDate}),
             headers: {
@@ -127,13 +127,13 @@ function SearchResults() {
                 <section className="search-results">
                 {results.slice(stepHouse * perPageHouses, (stepHouse + 1) * perPageHouses).map(house =>
                     <article key={house.id} className="house">
-                        <div className='house-picture' style={{backgroundImage:`url("${SERVER_URL}${house.picture.url}")`}}></div>
+                        <div className='house-picture' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.picture.url}")`}}></div>
                         <div className='house-info'>
                             <span className='title'>🏠 <Link to={`/houses/${house.id}/${startDate}/${endDate}`}>{house.title}</Link></span>
                             <div className='details-container'>
                                 <div className='house-details'>
                                     <div className='owner'>
-                                        <div className='owner-pic' style={{backgroundImage:`url("${SERVER_URL}${house.ownerPic}")`}}></div>
+                                        <div className='owner-pic' style={{backgroundImage:`url("${REACT_APP_BASE_URL}${house.ownerPic}")`}}></div>
                                         <span className='owner-name'>{house.ownerName}</span>
                                         <Rating value={house.ownerRating} className='rating-tenant' />
                                     </div>
