@@ -19,7 +19,7 @@ function OwnerHouses() {
     return (
         <section className="owner-houses">
             <h2>Tus anuncios</h2>
-            <p className="description">Aquí puedes ver tus propiedades</p>
+            <p className="description">Aquí puedes ver tus propiedades.</p>
             {myAds.length > 0 ? <article className='article-announcements'>
                 {myAds.slice(house * perPage, (house + 1) * perPage).map(ad =>
                     <div className='body-announcements' key={ad.id}>
