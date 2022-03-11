@@ -30,12 +30,12 @@ function TenantPendingBookings() {
             <section className='made-pending-bookings-section'>
                 <h2>Peticiones pendientes como inquilino</h2>
                 <p className="description">Aquí puedes revisar las reservas que has realizado y todavía no han sido confirmadas.</p>
-                {dataMadeBookings?.length > 0 ? <section className="made-pending-bookings-container">
+                <section className="made-pending-bookings-container">
                     {dataMadeBookings?.slice(stepMadeBooking * perPageMadeBookings, (stepMadeBooking + 1) * perPageMadeBookings).map(booking =>
                         <CardMadePendingBooking key={booking.bookingId} bookingData={booking} setDataMadeBookings={setDataMadeBookings} />
                     )}
-                </section> : <p className='no-received-bookkings-message'>No tienes ninguna reserva pendiente de confirmación.</p>}
-                {dataMadeBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>
+                </section>
+                {dataMadeBookings?.length > 0 ? <section className='button-steps-container-pendings-bookings'>
                     <span onClick={handlePrevMadeBookings}>
                         ⬅️
                     </span>
@@ -43,7 +43,7 @@ function TenantPendingBookings() {
                     <span onClick={handleNextMadeBookings}>
                         ➡️
                     </span>
-                </section>}
+                </section> : <p>No tienes ninguna reserva pendiente de confirmación. 😞</p>}
             </section>
     )
 }

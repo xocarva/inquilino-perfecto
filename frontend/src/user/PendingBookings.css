@@ -1,4 +1,4 @@
-.pending-bookings-page {
+/* .pending-bookings-page {
     width: 80vw;
     display: flex;
     flex-direction: column;
@@ -107,7 +107,7 @@
     border: none;
     cursor: pointer;
     align-self: flex-end;
-}
+} */
 
 /* .button-steps-container-pendings-bookings {
     width: 100%;
@@ -146,7 +146,7 @@
     justify-content: center;
 } */
 
-@media(max-width: 768px) {
+/* @media(max-width: 768px) {
     .pending-bookings-page {
         width: 100vw;
     }
@@ -164,4 +164,4 @@
     .rating-tenant .puntuacion {
         width: 100px;
     }
-}
+} */

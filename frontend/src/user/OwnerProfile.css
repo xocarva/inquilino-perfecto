@@ -61,7 +61,7 @@
 
 /* HISTORICO DE ALQUILERES */
 
-.body-owner-profile .rental-history {
+/* .body-owner-profile .rental-history {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +113,7 @@
 
 /* VALORACIONES */
 
-.body-owner-profile .body-rating {
+/* .body-owner-profile .body-rating {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -150,25 +150,25 @@
 .body-owner-profile .body-rating .buttons-owner {
     cursor: pointer;
     margin-bottom: 20px;
-}
+} */ 
 
 
 @media (max-width:830px) {
 
     /* BODY */
 
-    .body-owner-profile {
+    /* .body-owner-profile {
         width: 95VW;
         align-items: center;
     }
 
     .body-owner-profile .title-container {
         justify-content: center;
-    }
+    } */
 
     /* TUS ANUNCIOS */
 
-    .body-owner-profile .rental-history .card-offered-booking {
+    /* .body-owner-profile .rental-history .card-offered-booking {
         flex-direction: column;
         text-align: center;
     }
@@ -189,11 +189,11 @@
 
     .body-owner-profile .article-announcements .buttons-owner {
         font-size: 30px;
-    }
+    } */
 
     /* HISTORICO DE ALQUILER */
 
-    .body-owner-profile .rental-history .card-offered-booking {
+    /* .body-owner-profile .rental-history .card-offered-booking {
         display: flex;
         margin-bottom: 20px;
     }
@@ -212,19 +212,19 @@
 
     .body-owner-profile .rental-history .button-owner-offered {
         font-size: 30PX;
-    }
+    } */
 
     /* VALORACIONES RECIBIDAS */
 
-    .body-owner-profile .body-rating .buttons-owner {
+    /* .body-owner-profile .body-rating .buttons-owner {
         font-size: 30px;
-    }
+    } */
 
     /* SIN PUBLICACIONES */
 
-    .body-owner-profile .there-is-not {
+    /* .body-owner-profile .there-is-not {
         font-size: 20px;
-    }
+    } */
 
 }
 
@@ -232,18 +232,18 @@
 
     /* BODY */
 
-    .body-owner-profile {
+    /* .body-owner-profile {
         width: 95VW;
         align-items: center;
     }
 
     .body-owner-profile .title-container {
         justify-content: center;
-    }
+    } */
 
     /* TUS ANUNCIOS */
 
-    .body-owner-profile .rental-history .card-offered-booking {
+    /* .body-owner-profile .rental-history .card-offered-booking {
         flex-direction: column;
         text-align: center;
     }
@@ -264,11 +264,11 @@
 
     .body-owner-profile .article-announcements .buttons-owner {
         font-size: 30px;
-    }
+    } */
 
     /* HISTORICO DE ALQUILER */
 
-    .body-owner-profile .rental-history .card-offered-booking {
+    /* .body-owner-profile .rental-history .card-offered-booking {
         display: flex;
         margin-bottom: 20px;
     }
@@ -287,7 +287,7 @@
 
     .body-owner-profile .rental-history .button-owner-offered {
         font-size: 30PX;
-    }
+    } */
 
     /* VALORACIONES RECIBIDAS */
 
@@ -295,8 +295,8 @@
 
     /* SIN PUBLICACIONES */
 
-    .body-owner-profile .there-is-not {
+    /* .body-owner-profile .there-is-not {
         font-size: 20px;
-    }
+    } */
 
 }

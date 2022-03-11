@@ -27,8 +27,8 @@ function OwnerHouses() {
                         <div className='owner-picture' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}/${ad.pictures[0].url})` }}></div>
                     </div>
                 )}
-            </article> : <div className='there-is-not'>Aun no tienes anuncios publicados 😅</div>}
-            <section className='buttons-owner-houses'>
+            </article> : <p className="no-houses">Aun no tienes anuncios publicados 😅</p>}
+        {myAds.length > 0 && <section className='buttons-owner-houses'>
                 <span onClick={handleNext}>
                     ⬅️
                 </span>
@@ -36,7 +36,7 @@ function OwnerHouses() {
                 <span onClick={handlePreview}>
                     ➡️
                 </span>
-            </section>
+            </section>}
         </section>
     )
 }

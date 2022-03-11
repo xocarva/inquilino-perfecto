@@ -54,7 +54,7 @@ function TenantBookings() {
                     </article>
                 )}
             </section>
-            <section className='button-steps-container-bookings'>
+        {bookingsData?.length > 0 ? <section className='button-steps-container-bookings'>
                 <span onClick={handlePrevBookings}>
                     ⬅️
                 </span>
@@ -62,7 +62,7 @@ function TenantBookings() {
                 <span onClick={handleNextBookings}>
                     ➡️
                 </span>
-            </section>
+            </section> : <p>Aún no tienes ningun reserva. 😞</p>}
         </section>
     )
 }

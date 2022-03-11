@@ -71,7 +71,7 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
             <div className='booking-data-container'>
                 <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
                 <div className='tenant-data'>
-                    <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
+                    <div className='tenant-avatar-received' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
                     <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
                     <div className='rating-tenant'>
                         <Rating value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg} />
