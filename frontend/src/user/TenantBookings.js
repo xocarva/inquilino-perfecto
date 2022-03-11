@@ -5,7 +5,7 @@ import ScoreToOwner from "./ScoreToOwner"
 
 import "./TenantBookings.css"
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function TenantBookings() {
     const user = useUser()
@@ -14,7 +14,7 @@ function TenantBookings() {
     const [reload, setReload] = useState(false)
 
     useEffect(() => {
-        fetch(REACT_APP_BASE_URL + '/bookings/made/accepted', {
+        fetch(SERVER_URL + '/bookings/made/accepted', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
@@ -36,7 +36,7 @@ function TenantBookings() {
             <section className="historic-bookings-container">
                 {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                     <article className='card-house-historic-booking' key={booking.bookingId}>
-                        <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
+                        <div className="picture-historic-booking" style={{ backgroundImage: `url(${SERVER_URL}${booking.housePicUrl})` }} ></div>
                         <div className='data-booking-container'>
                             <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>🏠 {booking.houseTitle}</Link>
                             <div className='date-card-bookings'>
@@ -55,14 +55,14 @@ function TenantBookings() {
                 )}
             </section>
         {bookingsData?.length > 0 ? <section className='button-steps-container-bookings'>
-                <span onClick={handlePrevBookings}>
+                <span className="prev-button" onClick={handlePrevBookings}>
                     ⬅️
                 </span>
                 <span>{stepBooking + 1}/{Math.ceil(bookingsData?.length / perPageBookings)}</span>
-                <span onClick={handleNextBookings}>
+                <span className="next-button" onClick={handleNextBookings}>
                     ➡️
                 </span>
-            </section> : <p>Aún no tienes ningun reserva. 😞</p>}
+            </section> : <p>Aún no tienes ninguna reserva. 😞</p>}
         </section>
     )
 }

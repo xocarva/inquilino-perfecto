@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useSetModal, useUser } from '../hooks'
 import { useNavigate } from 'react-router-dom';
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function NewAd() {
     const [title, setTitle] = useState('')
@@ -41,7 +41,7 @@ function NewAd() {
         for (const p of pictures) {
             fd.append('pictures', p.file)
         }
-        const res = await fetch(REACT_APP_BASE_URL + '/houses/', {
+        const res = await fetch(SERVER_URL + '/houses/', {
             method: 'POST',
             body: fd,
             headers: {

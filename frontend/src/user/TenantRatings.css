@@ -76,6 +76,11 @@ section.cards-ratings-container {
 .button-steps-container-ratings {
     margin: 1rem auto;
     text-align: center;
+    font-size: 1.5rem;
+}
+
+.button-steps-container-ratings .prev-button, .button-steps-container-ratings .next-button {
+    cursor: pointer;
 }
 
 @media(max-width: 768px) {

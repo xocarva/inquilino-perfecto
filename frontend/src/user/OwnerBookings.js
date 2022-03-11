@@ -4,7 +4,7 @@ import { useUser } from '../hooks'
 import './OwnerBookings.css'
 import ScoreToTenant from './ScoreToTenant'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function OwnerBookings() {
     const user = useUser()
@@ -19,7 +19,7 @@ function OwnerBookings() {
 
 
     useEffect(() => {
-                fetch(REACT_APP_BASE_URL + '/bookings/received/accepted', {
+                fetch(SERVER_URL + '/bookings/received/accepted', {
                     headers: {
                         'Authorization': 'Bearer ' + user.token
                     }
@@ -36,7 +36,7 @@ function OwnerBookings() {
                     {rentalsOffered?.length > 0 ? <div className='rental-history'>
                         {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                             <article className='card-offered-booking' key={booking.bookingId}>
-                                <div className="picture-offered-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} />
+                                <div className="picture-offered-booking" style={{ backgroundImage: `url(${SERVER_URL}${booking.housePicUrl})` }} />
                                 <div className='info-offered'>
                                     <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
                                     <p key={booking.startDate} className='date-offered-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
@@ -47,11 +47,11 @@ function OwnerBookings() {
                             </article>
                         )}
                         <section className='button-owner-offered'>
-                            <span onClick={handlePrevBookings}>
+                            <span className='prev-button' onClick={handlePrevBookings}>
                                 ⬅️
                             </span>
                             <span>{stepBooking + 1}/{Math.ceil(rentalsOffered?.length / perPageBookings)}</span>
-                            <span onClick={handleNextBookings}>
+                            <span className='prev-button' onClick={handleNextBookings}>
                                 ➡️
                             </span>
                         </section>

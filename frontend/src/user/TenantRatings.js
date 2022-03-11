@@ -1,15 +1,14 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
-import { useUser } from '../hooks'
 import Rating from '../Rating'
 import useFetch from '../useFetch'
 import './TenantRatings.css'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function TenantRatings() {
     const [stepRating, setStepRating] = useState(0)
-    const { data: ratingsData } = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant', [])
+    const { data: ratingsData } = useFetch(SERVER_URL + '/users/ratings/tenant', [])
 
     let totalRatings = 0
     ratingsData?.map(rating =>
@@ -38,11 +37,11 @@ function TenantRatings() {
                         )}
                     </section>
                     {ratingsData?.length > 0 ? <section className='button-steps-container-ratings'>
-                        <span onClick={handlePrevRatings}>
+                        <span className='prev-button' onClick={handlePrevRatings}>
                             ⬅️
                         </span>
                         <span>{stepRating + 1}/{Math.ceil(ratingsData.length / perPageRatings)}</span>
-                        <span onClick={handleNextRatings}>
+                        <span className='next-button' onClick={handleNextRatings}>
                             ➡️
                         </span>
                     </section> : <p>Aún no tienes valoraciones como inquilino. 😞</p>}

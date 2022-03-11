@@ -4,11 +4,11 @@ import Rating from '../Rating'
 import useFetch from '../useFetch'
 import './OwnerRatings.css'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function OwnerRatings() {
     const [stepRating, setStepRating] = useState(0)
-    const { data: ratingsData } = useFetch(REACT_APP_BASE_URL + '/users/ratings/owner', [])
+    const { data: ratingsData } = useFetch(SERVER_URL + '/users/ratings/owner', [])
 
     let totalRatings = 0
     ratingsData?.map(rating =>
@@ -37,11 +37,11 @@ function OwnerRatings() {
                         )}
                     </section>
                     {ratingsData?.length > 0 ? <section className='button-steps-container-ratings'>
-                        <span onClick={handlePrevRatings}>
+                        <span className='prev-button' onClick={handlePrevRatings}>
                             ⬅️
                         </span>
                         <span>{stepRating + 1}/{Math.ceil(ratingsData.length / perPageRatings)}</span>
-                        <span onClick={handleNextRatings}>
+                        <span className='next-button' onClick={handleNextRatings}>
                             ➡️
                         </span>
                     </section> : <p>Aún no tienes valoraciones como casero. 😞</p>}

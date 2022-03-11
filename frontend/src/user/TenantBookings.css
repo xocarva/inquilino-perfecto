@@ -93,8 +93,11 @@
     margin: 0 auto;
 }
 
-.button-steps-container-bookings span, .button-steps-container-ratings span {
+.button-steps-container-bookings {
     font-size: 1.5rem;
+}
+
+.button-steps-container-bookings .prev-button, .button-steps-container-bookings .next-button {
     cursor: pointer;
 }
 

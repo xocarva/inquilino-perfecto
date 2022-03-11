@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .loading:before {
     content: '';
     width: 48px;
@@ -15,7 +15,7 @@
     box-sizing: border-box;
     animation: rotation 1s linear infinite, fadein 0.3s linear 0.3s both;
   }
-  
+
   @keyframes rotation {
     0% { transform: rotate(0deg) }
     100% { transform: rotate(360deg) }

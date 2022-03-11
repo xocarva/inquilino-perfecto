@@ -4,7 +4,7 @@ import { useSetModal, useUser } from './hooks'
 import { useNavigate } from 'react-router-dom';
 import { validateData } from './utils/validateData';
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 
 function Register() {
@@ -60,7 +60,7 @@ function Register() {
         fd.append('picture', picture)
         fd.append('password', password)
 
-        const res = await fetch(REACT_APP_BASE_URL + '/users/register', {
+        const res = await fetch(SERVER_URL + '/users/register', {
             method: 'POST',
             body: fd
         })

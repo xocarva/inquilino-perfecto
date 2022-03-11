@@ -59,8 +59,11 @@
 
 .owner-houses .buttons-owner-houses {
     margin: 0 auto 20px auto;
-    cursor: pointer;
     font-size: 1.5rem;
+}
+
+.buttons-owner-houses .prev-button, .buttons-owner-houses .next-button {
+    cursor: pointer;
 }
 
 .no-houses {

@@ -4,7 +4,7 @@ import CardMadePendingBooking from "./CardMadePendingBooking"
 
 import "./TenantPendingBookings.css"
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function TenantPendingBookings() {
     const user = useUser()
@@ -12,7 +12,7 @@ function TenantPendingBookings() {
     const [stepMadeBooking, setStepMadeBooking] = useState(0)
 
     useEffect(() => {
-        fetch(REACT_APP_BASE_URL + '/bookings/made/pending', {
+        fetch(SERVER_URL + '/bookings/made/pending', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
@@ -36,11 +36,11 @@ function TenantPendingBookings() {
                     )}
                 </section>
                 {dataMadeBookings?.length > 0 ? <section className='button-steps-container-pendings-bookings'>
-                    <span onClick={handlePrevMadeBookings}>
+                    <span className="prev-button" onClick={handlePrevMadeBookings}>
                         ⬅️
                     </span>
                     <span>{stepMadeBooking + 1}/{Math.ceil(dataMadeBookings?.length / perPageMadeBookings)}</span>
-                    <span onClick={handleNextMadeBookings}>
+                    <span className="next-button" onClick={handleNextMadeBookings}>
                         ➡️
                     </span>
                 </section> : <p>No tienes ninguna reserva pendiente de confirmación. 😞</p>}

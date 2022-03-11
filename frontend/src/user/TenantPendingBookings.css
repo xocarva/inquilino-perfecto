@@ -85,6 +85,10 @@
     text-align: center;
 }
 
+.button-steps-container-pendings-bookings .prev-button, .button-steps-container-pendings-bookings .next-button {
+    cursor: pointer;
+}
+
 .ratings-container p {
     font-size: 1rem;
 }

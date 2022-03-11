@@ -3,7 +3,7 @@ import { useUser } from '../hooks'
 import CardReceivedPendingBooking from './CardReceivedPendingBooking'
 import './OwnerPendingBookings.css'
 
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 
 function OwnerPendingBookings() {
@@ -13,7 +13,7 @@ function OwnerPendingBookings() {
 
 
     useEffect(() => {
-        fetch(REACT_APP_BASE_URL + '/bookings/received/pending', {
+        fetch(SERVER_URL + '/bookings/received/pending', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
@@ -40,11 +40,11 @@ function OwnerPendingBookings() {
                 </section> : <p className='no-received-bookkings-message'>No tienes ninguna petición de reserva pendiente. 😅</p>}
             </section>
             {dataReceivedBookings?.length > 0 && <section className='button-steps-container-pendings-bookings'>
-                    <span onClick={handlePrevReceivedBookings}>
+                    <span className='prev-button' onClick={handlePrevReceivedBookings}>
                         ⬅️
                     </span>
                     <span>{stepReceivedBooking + 1}/{Math.ceil(dataReceivedBookings?.length / perPageReceivedBookings)}</span>
-                    <span onClick={handleNextReceivedBookings}>
+                    <span className='next-button' onClick={handleNextReceivedBookings}>
                         ➡️
                     </span>
                 </section>}

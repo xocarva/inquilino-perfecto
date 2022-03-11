@@ -78,19 +78,15 @@
     align-self: flex-end;
 }
 
-.button-steps-container-bookings {
-    margin: 0 auto;
-}
-
-.button-steps-container-bookings span, .button-steps-container-ratings span {
-    font-size: 1.5rem;
-    cursor: pointer;
-}
 
 .button-owner-offered {
     text-align: center;
     font-size: 1.5rem;
     margin-top: 1rem;
+}
+
+.button-owner-offered .next-button, .button-owner-offered .prev-button {
+    cursor: pointer;
 }
 
 @media(max-width: 768px) {

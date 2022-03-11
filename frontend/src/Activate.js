@@ -2,13 +2,13 @@ import { Link, useParams } from "react-router-dom"
 import useFetch from "./useFetch"
 import "./Activate.css"
 
-const URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 function Activate() {
 
     const { code } = useParams()
 
-    const res = useFetch(`${URL}/users/validate/${code}`)
+    const res = useFetch(`${SERVER_URL}/users/validate/${code}`)
 
     return (
         <section className="activate">

@@ -4,8 +4,8 @@ import { useSetModal, useSetUser, useUser } from '../hooks'
 import Loading from '../Loading'
 import { validateData } from '../utils/validateData'
 import EditPrrofileForm from './EditProfileForm'
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
+const SERVER_URL = process.env.SERVER_URL
 
 function EditProfile() {
     const user = useUser()
@@ -26,7 +26,7 @@ function EditProfile() {
     useEffect(() => {
         setErrorType('')
         setErrorText('')
-        fetch(REACT_APP_BASE_URL + '/users/profile', {
+        fetch(SERVER_URL + '/users/profile', {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
@@ -75,7 +75,7 @@ function EditProfile() {
         }
         picture && fd.append("picture", picture)
 
-        const res = await fetch(REACT_APP_BASE_URL + '/users/', {
+        const res = await fetch(SERVER_URL + '/users/', {
             method: 'PATCH',
             body: fd,
             headers: {

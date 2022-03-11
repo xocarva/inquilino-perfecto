@@ -78,6 +78,10 @@ section.cards-ratings-container {
     text-align: center;
 }
 
+.button-steps-container-ratings .prev-button, .button-steps-container-ratings .next-button {
+    cursor: pointer;
+}
+
 @media(max-width: 768px) {
     .historic-ratings-container {
         flex-direction: column-reverse;

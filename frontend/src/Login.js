@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSetModal, useSetUser } from './hooks'
 
-const URL = process.env.REACT_APP_BASE_URL
+const SERVER_URL = process.env.SERVER_URL
 
 
 function Login() {
@@ -16,7 +16,7 @@ function Login() {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    const res = await fetch(URL + '/users/login', {
+    const res = await fetch(SERVER_URL + '/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {

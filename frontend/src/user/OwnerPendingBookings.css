@@ -98,6 +98,11 @@
 .button-steps-container-pendings-bookings {
     margin-top: 1rem;
     text-align: center;
+    font-size: 1.5rem;
+}
+
+.button-steps-container-pendings-bookings .prev-button, .button-steps-container-pendings-bookings .next-button {
+    cursor: pointer;
 }
 
 @media(max-width: 768px) {

@@ -1,15 +1,14 @@
-import './PendingBookings.css'
 import { Link } from "react-router-dom";
 import { useSetModal, useUser } from "../hooks";
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
+const SERVER_URL = process.env.SERVER_URL
 
 function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
     const user = useUser()
     const setModal = useSetModal()
 
     const handleCancelMadeBooking = async e => {
-        const res = await fetch(REACT_APP_BASE_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
+        const res = await fetch(SERVER_URL + '/bookings/cancel/' + e.target.attributes.bookingId.value, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + user.token
@@ -39,7 +38,7 @@ function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
 
     return (
         <article className='card-made-booking'>
-            <div className="picture-made-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.urlPic})` }} ></div>
+            <div className="picture-made-booking" style={{ backgroundImage: `url(${SERVER_URL}${bookingData.urlPic})` }} ></div>
             <div className='booking-data-container'>
             <Link to={'/houses/' + bookingData.houseId} className='title-made-booking'>🏠 {bookingData.title}</Link>
             <div className='date-card-made-bookings-container'>
