@@ -8,7 +8,6 @@ import './TenantRatings.css'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
 function TenantRatings() {
-    const user = useUser()
     const [stepRating, setStepRating] = useState(0)
     const { data: ratingsData } = useFetch(REACT_APP_BASE_URL + '/users/ratings/tenant', [])
 
