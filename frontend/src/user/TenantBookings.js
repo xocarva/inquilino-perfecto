@@ -33,6 +33,7 @@ function TenantBookings() {
         <section className="main-section">
             <h2>Tu histórico de estancias</h2>
             <p className="description">Aquí puedes revisar tus reservas confirmadas y valorar las finalizadas.</p>
+            {bookingsData < 1 && <p>Aún no tienes ninguna reserva. 😞</p>}
             <section className="historic-bookings-container">
                 {bookingsData?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                     <article className='card-house-historic-booking' key={booking.bookingId}>
@@ -54,7 +55,7 @@ function TenantBookings() {
                     </article>
                 )}
             </section>
-        {bookingsData?.length > 0 ? <section className='button-steps-container-bookings'>
+        {bookingsData?.length > 0 && <section className='button-steps-container-bookings'>
                 <span className="prev-button" onClick={handlePrevBookings}>
                     ⬅️
                 </span>
@@ -62,7 +63,7 @@ function TenantBookings() {
                 <span className="next-button" onClick={handleNextBookings}>
                     ➡️
                 </span>
-            </section> : <p>Aún no tienes ninguna reserva. 😞</p>}
+            </section>}
         </section>
     )
 }
