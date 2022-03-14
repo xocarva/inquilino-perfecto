@@ -10,7 +10,6 @@ function EditProfileForm({ handleSubmit, firstName, setFirstName, userData, erro
 
     return (
         <form className='input-container-profile' onSubmit={handleSubmit}>
-            <div className='data-container'>
                 <div className='up-container-profile'>
                     <label className='first-name-profile'>
                         Nombre
@@ -53,6 +52,7 @@ function EditProfileForm({ handleSubmit, firstName, setFirstName, userData, erro
                     {errorType === 'bio' && <p className='error-text'>{errorText}</p>}
                 </label>
                 <div className='down-container-profile'>
+                    <div className='pass-container'>
                     <label className='password-profile'>
                         Contraseña {password && <span className='eye-password' onClick={handlerShowPassword} >👀</span>}
                         <input id='password' type={showPassword ? "text" : "password"} value={password} placeholder='********' onChange={e => {
@@ -68,12 +68,12 @@ function EditProfileForm({ handleSubmit, firstName, setFirstName, userData, erro
                             setErrorType('')
                         }} />
                     </label>
+                    </div>
                     <div className='picture-container'>
                         <label htmlFor='btn-picture' className='picture'>Editar foto...</label>
                         <span id='chosen-file'>{picName}</span>
                         <input id='btn-picture' name='picture' type="file" accept="image/x-png,image/gif,image/jpeg,image/png" hidden onChange={handleProfilePic} />
                     </div>
-                </div>
             </div>
             <button className='edit-button-profile'>Guardar cambios</button>
         </form>

@@ -1,63 +1,47 @@
 .edit-profile-page {
-    width: 90vw;
-    display: flex;
-    flex-direction: column;
+    width: 60vw;
     flex-grow: 1;
-    margin: auto;
+    align-self: center;
 }
 
 
 .input-container-profile {
-    width: 90vw;
-    height: 600px;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-    "dataContainer"
-    "dataContainer"
-    "editButtonProfile"
-    ;
-}
-
-
-.edit-profile-page>h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 2rem;
-    margin-bottom: rem;
+    gap: 4rem;
 }
 
 
-.data-container {
-    width: 90vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr 1fr 1fr;
-    grid-template-areas:
-    "upContainer"
-    "bio"
-    "downContainer"
-    ;
+.edit-profile-page>h2 {
+    width: 80vw;
+    max-width: 1200px;
+    margin-top: 2rem;
+    color: #718355;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin-bottom: 0;
 }
 
 
 .up-container-profile {
-    width: 90vw;
     display: flex;
     gap: 1rem;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 
 .first-name-profile, .last-name-profile {
-    width: 20vw;
+    width: 220px;
     font-size: 1.3rem;
 }
 
 
 .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 20vw;
+    width: 220px;
     height: 35px;
     font-size: 1.3rem;
     background-color: #B5C99A;
@@ -70,25 +54,29 @@
 
 .error-text {
     box-sizing: border-box;
+    width: 220px;
     font-size: 1rem;
     position: absolute;
     background-color: white;
     color: rgba(255, 0, 0, 0.699);
-    width: 20vw;
     margin: 0.5rem 0;
     padding: 0.2rem 1rem 1rem 0.5rem;
     border-radius: 10px;
 }
 
+.bio-profile .error-text {
+    width: 100%;
+}
+
 
 .email-profile, .confirm-email-profile {
-    width: 20vw;
+    width: 220px;
     font-size: 1.3rem;
 }
 
 
 .email-profile>input, .confirm-email-profile>input {
-    width: 20vw;
+    width: 220px;
     height: 35px;
     font-size: 1.2rem;
 }
@@ -100,37 +88,44 @@
 
 
 .bio-profile {
-    width: 60vw;
     font-size: 1.3rem;
     margin-top: 0.5rem;
-    grid-area: bio;
 }
 
 
 .bio-profile>textarea {
-    width: 90vw;
+    width: 100%;
     height: 100px;
 }
 
 
 .down-container-profile {
-    width: 90vw;
     display: flex;
-    justify-content: space-between;
-    gap: 3rem;
+    gap: 2rem;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 
+.pass-container {
+    width: min-content;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
 .password-profile {
-    width: 225px;
+    width: 220px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
 .password-profile>input {
-    width: 225px;
+    width: 220px;
     height: 35px;
     font-size: 1rem;
 }
@@ -139,14 +134,13 @@
     font-size: 1rem;
     box-sizing: border-box;
     width: 30px;
-    height: 35px;
-    margin-left: 0 0 0 0.3rem;
+    margin-left: 10px;
     cursor: pointer;
 }
 
 
 .confirm-password-profile {
-    width: 225px;
+    width: 220px;
     font-size: 1.3rem;
     margin-top: 0.5rem;
 }
@@ -154,15 +148,16 @@
 
 .confirm-password-profile>input {
     box-sizing: border-box;
-    width: 225px;
+    width: 220px;
     height: 35px;
     font-size: 1rem;
 }
 
 .picture-container {
     display: flex;
-    justify-content: flex-start;
+    flex-grow: 1;
     gap: 2rem;
+    justify-content: center;
     align-items: flex-end;
 }
 
@@ -186,6 +181,7 @@
 
 
 .edit-button-profile {
+    margin: 2rem auto;
     width: 180px;
     height: 40px;
     border-radius: 7px;
@@ -198,174 +194,55 @@
 }
 
 
-
-.edit-confirm-message-container {
-    box-sizing: border-box;
-    width: 40vw;
-    height: min-content;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.2rem;
-}
-
-
-.edit-confirm-message-container>span {
-    font-size: 2rem;
-    margin: 0;
-}
-
-
-.edit-confirm-message-container>p {
-    margin: 0;
-}
-
-
-.link-modal-edit-profile {
-    text-decoration: none;
-    color: black;
-    width: 150px;
-    height: 30px;
-    padding: 0.5rem;
-    text-align: center;
-    background-color: #c0c3de;
-    border-radius: 10px;
-}
-
-
-.avatar-preview {
-    width: 40vw;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-
 @media (max-width: 768px) {
     .edit-profile-page {
-        width: 90vw;
-        margin: auto;
-        height: min-content;
+        margin-bottom: 1rem;
+        width: 90%;
+        gap: 0;
     }
     .input-container-profile {
-        width: 97vw;
-        height: 800px;
-    }
-    .data-container {
-        display: flex;
-        flex-direction: column;
-        height: min-content;
-        margin-bottom: 30px;
+        gap: 0;
     }
     .up-container-profile {
-        width: 70vw;
         display: flex;
         flex-direction: column;
         gap: 0;
     }
+    .up-container-profile label {
+        width: 100%;
+    }
     .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
         box-sizing: border-box;
-        width: 93vw;
-        height: 35px;
+        width: 100%;
         margin-bottom: 1rem;
-    }
-    .bio-profile>textarea {
-        height: 100px;
     }
     .error-text {
         width: 100%;
         margin: 0;
     }
     .email-profile, .confirm-email-profile {
-        width: 60vw;
+        width: 100%;
+    }
+    .pass-container {
+        width: 100%;
+        flex-direction: column;
     }
     .password-profile, .confirm-password-profile {
-        width: 60vw;
+        width: 100%;
     }
     .down-container-profile {
-        width: 60vw;
-        display: block;
+        width: 100%;
     }
-    .avatar-container {
-        height: 240px;
+    .picture-container {
+        flex-direction: column;
     }
-    .avatar {
-        width: 125px;
-        height: 125px;
-    }
-
-    .edit-button-profile {
+    #chosen-file {
         margin: 0 auto;
-
     }
-}
-
-
-@media (max-width: 480px) {
-    .input-container-profile {
-        display: flex;
-        flex-direction: column;
-    }
-    .data-container {
-        display: flex;
-        flex-direction: column;
-        height: min-content;
-    }
-    .up-container-profile {
-        width: 90vw;
-        height: min-content;
-        display: flex;
-        flex-direction: column;
-    }
-    .email-profile, .confirm-email-profile {
-        width: 80vw;
-    }
-    .first-name-profile>input, .last-name-profile>input, .bio-profile>textarea, .email-profile>input, .confirm-email-profile>input, .password-profile>input, .confirm-password-profile>input {
-        box-sizing: border-box;
-        width: 90vw;
-        height: 35px;
-        margin-bottom: 1rem;
-    }
-    .bio-profile>textarea {
-        width: 90vw;
-        height: 100px;
-    }
-    .down-container-profile {
-        width: 90vw;
-    }
-    .password-profile {
-        width: 100vw;
-        font-size: 1.3rem;
-    }
-    .password-profile>input {
-        height: 35px;
-        font-size: 1rem;
-    }
-    .confirm-password-profile {
-        font-size: 1.3rem;
-        margin-top: 0.5rem;
-    }
-    .confirm-password-profile>input {
-        box-sizing: border-box;
-        height: 35px;
-        font-size: 1.3rem;
-    }
-    .password-profile, .confirm-password-profile {
-        width: 80vw;
+    .picture-container .picture{
+        width: 100%;
     }
     .edit-button-profile {
-        margin: 0;
-        margin-bottom: 4.5rem;
-        width: 90vw;
-        height: 50px;
-    }
-
-    .edit-confirm-message-container {
-        width: 80vw;
-        height: 50vh;
-        font-size: 1.2rem;
+        width: 100%;
     }
 }

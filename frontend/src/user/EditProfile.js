@@ -118,7 +118,8 @@ function EditProfile() {
 
     return (
         <div className="edit-profile-page">
-            <h1>Edita tus datos</h1>
+            <h2>Edita tus datos</h2>
+            <p>Aquí puedes editar tus datos de perfil.</p>
             <EditPrrofileForm
                 handleSubmit={handleSubmit}
                 firstName={firstName}

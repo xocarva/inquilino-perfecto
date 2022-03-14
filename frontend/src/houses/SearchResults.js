@@ -89,7 +89,7 @@ function SearchResults() {
         }
     }
 
-    const {data: results} = useFetch(fetchUrl, [])
+    const {data: results, isLoading} = useFetch(fetchUrl, [])
     if(results &&  results.length > 0 && sortCriterion) {
         if(sortOrder === 'asc') results.sort((house1, house2) => house1[sortCriterion] > house2[sortCriterion] ? 1 : house1[sortCriterion] < house2[sortCriterion] ? -1 : 0)
         else results.sort((house1, house2) => house1[sortCriterion] < house2[sortCriterion] ? 1 : house1[sortCriterion] > house2[sortCriterion] ? -1 : 0)
@@ -120,7 +120,8 @@ function SearchResults() {
                 {price&&<div className='filter' data-remove="price">{price}€<span className='remove-filter' onClick={handleFilter}>❌</span></div>}
                 {rooms&&<div className='filter' data-remove="rooms">{+query.get('rooms') === 4 ? '+3' : query.get('rooms')} hab<span className='remove-filter' onClick={handleFilter}>❌</span></div>}
             </div>
-            {results && results.length < 1 &&
+            {isLoading && <Loading />}
+            {!isLoading && results && results.length < 1 &&
                 <p className='no-results'>😕 No se han encontrado resultados con estos criterios de búsqueda.</p>
             }
             {results && results.length > 0 && <>
@@ -163,9 +164,4 @@ function SearchResults() {
     )
 }
 
-const SearchResultsWrapper = () =>
-    <Suspense fallback={<Loading className="search-results-page" />}>
-        <SearchResults />
-    </Suspense>
-
-export default SearchResultsWrapper
+export default SearchResults

@@ -17,6 +17,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -67,6 +68,10 @@ section.cards-ratings-container {
 
 .average-ratings .puntuacion {
     font-size: 3rem;
+}
+
+.puntuacion-card-rating {
+    font-size: 2rem;
 }
 
 .emoji-rating {

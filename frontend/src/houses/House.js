@@ -1,10 +1,10 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import useFetch from '../useFetch'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
 import Login from '../Login'
-import Puntuacion from '../Rating'
+import Rating from '../Rating'
 import './House.css'
 
 
@@ -19,7 +19,7 @@ function House() {
   const [mainPic, setMainPic] = useState('')
   const [stepPic, setStepPic] = useState(0)
 
-  const { data: house } = useFetch(SERVER_URL + '/houses/' + id)
+  const { data: house, isLoading } = useFetch(SERVER_URL + '/houses/' + id)
 
   useEffect(() => {
     if (house?.pictures.length > 0) {
@@ -27,7 +27,7 @@ function House() {
     }
   }, [house])
 
-  if (!house) return <p>Cargando...</p>;
+  if (!house) return <Loading />;
 
   const handleBooking = async e => {
     e.preventDefault()
@@ -79,7 +79,8 @@ function House() {
 
   return (
     <>
-      {house && <section className='ad'>
+      {isLoading && <Loading />}
+      {!isLoading && house && <section className='ad'>
         <section className='ad-info'>
           <div className='main-picture' style={{ backgroundImage: `url("${SERVER_URL}${mainPic}")` }}></div>
           <div className='main-info'>
@@ -87,7 +88,7 @@ function House() {
             <div className='owner'>
               <div className='owner-pic' style={{ backgroundImage: `url("${SERVER_URL}${house.ownerPic}")` }}></div>
               <span className='owner-name'>{house.ownerName}</span>
-              <Puntuacion value={house.rating} className='rating-tenant' />
+              <Rating value={house.rating} className='rating-tenant' />
             </div>
             <span>🏙️ {house.city}</span>
             <span>🚪 {house.rooms} habitaciones</span>
@@ -134,9 +135,4 @@ function House() {
   )
 }
 
-const HouseWrapper = () =>
-  <Suspense fallback={<Loading className="page" />}>
-    <House />
-  </Suspense>
-
-export default HouseWrapper
+export default House

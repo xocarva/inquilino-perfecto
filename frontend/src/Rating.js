@@ -1,6 +1,6 @@
-function Rating({ value, className }) {
+function Rating({ value, varClass }) {
     return (
-        <span className={`puntuacion-${className}`}>
+        <span className={`puntuacion-${varClass}`}>
             {value >= 1 ? '★' : '☆'}
             {value >= 2 ? '★' : '☆'}
             {value >= 3 ? '★' : '☆'}

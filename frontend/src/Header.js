@@ -14,6 +14,7 @@ function Header() {
     const dispatch = useDispatch()
     const user = useUser()
     const [showBar, setShowBar] = useState(useLocation().pathname === '/')
+
     return (
         <>
             <header className="header">
@@ -37,7 +38,6 @@ function Header() {
                         />
                     }
                 </div>
-
             </header>
             <SearchBar showBar={showBar} setShowBar={setShowBar} />
         </>
