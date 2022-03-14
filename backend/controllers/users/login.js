@@ -35,16 +35,6 @@ const login = async (req, res) => {
     return
   }
 
-  let madePending
-  try {
-     const madePendingBookings= await bookingsRepository.getPendingMadeBookings(user.id)
-     madePending = madePendingBookings.length
-  } catch (error) {
-    res.status(500)
-    res.end('Database error')
-    return
-  }
-
   let receivedPending
   try {
      const receivedPendingBookings= await bookingsRepository.getPendingReceivedBookings(user.id)
@@ -63,7 +53,6 @@ const login = async (req, res) => {
     lastName: user.lastName,
     picture: user.picture,
     token: token,
-    madePending,
     receivedPending
   })
 }

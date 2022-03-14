@@ -61,6 +61,13 @@
     font-weight: bold;
 }
 
+.tenant-avatar {
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
 .for-rating abbr {
     text-decoration: none;
     font-size: xx-large;

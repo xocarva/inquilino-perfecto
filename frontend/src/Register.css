@@ -25,12 +25,15 @@
     flex-wrap: wrap;
 }
 
-
 .body-register .register-page div label {
     display: flex;
     flex-direction: column;
     width: 45%;
     gap: 1rem;
+    position: relative;
+}
+
+.body-register .register-page div label .mail-container {
     position: relative;
 }
 
@@ -43,7 +46,7 @@
 .register-page .error-text {
     color: red;
     position: absolute;
-    top: 4.2rem;
+    bottom: -3rem;
     width: 100%;
     background-color: white;
     z-index: 1;
@@ -61,6 +64,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
 }
 
 .body-register .register-page .bio textarea {

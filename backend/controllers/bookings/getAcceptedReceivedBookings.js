@@ -1,4 +1,4 @@
-const { ratingsRepository, bookingsRepository } = require('../../repository')
+const { ratingsRepository, bookingsRepository, usersRepository } = require('../../repository')
 
 const getAcceptedReceivedBookings = async (req, res) => {
     const userId = req.user.id
@@ -9,8 +9,9 @@ const getAcceptedReceivedBookings = async (req, res) => {
         const bookings = await bookingsRepository.getAcceptedReceivedBookings(userId)
         bookingsWithRatings = await Promise.all(bookings.map(async booking => {
             const ratings = await ratingsRepository.getRatings({ ...booking, id: booking.tenantId, role })
+            const tenant = await usersRepository.getUserById(booking.tenantId)
             const ratingAvg = Math.round(ratings.reduce((acc, val) => acc + (val.rating/ratings.length), 0))
-            return { ...booking, ratingAvg }
+            return { ...booking, tenantName: tenant.firstName, tenantPicture: tenant.picture, ratingAvg }
         }))
 
     } catch (error) {

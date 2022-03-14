@@ -40,6 +40,10 @@ function OwnerBookings() {
                                 <div className='info-offered'>
                                     <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
                                     <p key={booking.startDate} className='date-offered-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
+                                    <div className='tenant-data'>
+                                        <div className='tenant-avatar' style={{ backgroundImage: `url(${SERVER_URL}${booking.tenantPicture})` }}></div>
+                                        <p>{booking?.tenantName}</p>
+                                    </div>
                                     <div className='state-offered-booking'>
                                         {Date.parse(booking.endDate) < new Date() && <ScoreToTenant reload={reload} setReload={setReload} bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
                                     </div>

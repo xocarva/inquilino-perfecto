@@ -22,6 +22,7 @@ function TenantRatings() {
     const handleNextRatings = () => setStepRating((stepRating + 1) % pagsRatings)
 
 
+
     return (
         <section className='ratings-section'>
             <h2>Valoraciones recibidas como inquilino</h2>
@@ -46,10 +47,11 @@ function TenantRatings() {
                         </span>
                     </section> : <p>Aún no tienes valoraciones como inquilino. 😞</p>}
                 </div>
-                {ratingsData?.length > 0 && <section className='average-ratings'>
+                {ratingsData?.length > 0 && <section style={averageRatings >= 2.5 ? {backgroundColor: 'rgb(220, 241, 220)'} : {backgroundColor: 'rgb(253, 222, 222)'}} className='average-ratings'>
                     <h3>Media de valoraciones</h3>
                     <span className='average-ratings-number'>{averageRatings.toFixed(1)}</span>
-                    <Rating value={averageRatings} />
+                    <Rating value={averageRatings}  varClass={'card-rating'}/>
+                    <span className='emoji-rating'>{averageRatings >= 2.5 ? '😊' : '☹️'}</span>
                 </section>}
             </section>
         </section>
