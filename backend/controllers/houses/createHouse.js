@@ -2,14 +2,14 @@ const fs = require('fs-extra')
 const { houseSchema } = require('../../validators')
 const { housesRepository } = require('../../repository/')
 const uploads = require('../../shared/uploads')
-const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } =  process.env
+const { MAX_IMAGE_SIZE_IN_BYTES, ALLOWED_MIMETYPES, UPLOADS_PATH } = process.env
 
 const createHouse = async (req, res) => {
     const house = req.body
 
-    if(!req.files || !req.files.pictures) {
+    if (!req.files || !req.files.pictures) {
         res.status(400)
-        res.end('[pictures] is required')
+        res.send({ error: '[pictures] is required' })
         return
     }
 
@@ -17,7 +17,7 @@ const createHouse = async (req, res) => {
         await houseSchema.validateAsync(house)
     } catch (error) {
         res.status(400)
-        res.end(error.message)
+        res.send({ error: error.message })
         return
     }
 
@@ -42,7 +42,7 @@ const createHouse = async (req, res) => {
         })
     } catch (error) {
         res.status(415)
-        res.end(error.message)
+        res.send({ error: error.message })
         return
     }
 
@@ -52,16 +52,15 @@ const createHouse = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({ error: error.message })
         return
     }
 
     res.status(201)
     res.send({
-        message: `House add has been created`,
+        message: `House ad has been created`,
         id: insertId
     })
 }
 
 module.exports = createHouse
-

@@ -9,16 +9,15 @@ const getHousesSearch = async (req, res) => {
         await queryValidator.validateAsync({  price, rooms, startDate, endDate })
     } catch (error) {
         res.status(401)
-        res.end(error.message)
-        return
-    }
- 
-    if (startDate > endDate || Date.parse(startDate) < new Date()) {
-        res.status(409)
-        res.end('Invalid date')
+        res.send({error: error.message})
         return
     }
 
+    if (startDate > endDate || Date.parse(startDate) < new Date()) {
+        res.status(409)
+        res.send({error: 'Invalid date'})
+        return
+    }
 
     let resultHouses
     try {
@@ -63,7 +62,7 @@ const getHousesSearch = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 

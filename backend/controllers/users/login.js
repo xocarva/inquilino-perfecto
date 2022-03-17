@@ -10,7 +10,7 @@ const login = async (req, res) => {
     await credentialsValidator.validateAsync(credentials)
   } catch (error) {
     res.status(400)
-    res.end(error.message)
+    res.send({error: error.message})
     return
   }
 
@@ -19,19 +19,19 @@ const login = async (req, res) => {
     user = await usersRepository.getUserByEmail(credentials.email)
   } catch (error) {
     res.status(500)
-    res.end('Database error')
+    res.send({error: 'Database error'})
     return
   }
 
   if (!user) {
     res.status(404)
-    res.end('User not found')
+    res.send({error: 'User not found'})
     return
   }
 
   if (!await encryptor.compare(credentials.password, user.password)) {
     res.status(401)
-    res.end('Invalid credentials')
+    res.send({error: 'Invalid credentials'})
     return
   }
 
@@ -41,7 +41,7 @@ const login = async (req, res) => {
      receivedPending = receivedPendingBookings.length
   } catch (error) {
     res.status(500)
-    res.end('Database error')
+    res.send({error: 'Database error'})
     return
   }
 

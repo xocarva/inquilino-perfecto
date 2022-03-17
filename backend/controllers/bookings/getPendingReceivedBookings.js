@@ -16,7 +16,7 @@ const getPendingReceivedBookings = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
@@ -25,4 +25,3 @@ const getPendingReceivedBookings = async (req, res) => {
 }
 
 module.exports = getPendingReceivedBookings
-
