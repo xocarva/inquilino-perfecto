@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useUser } from "../hooks"
+import Loading from "../Loading"
+import Oops from "../Oops"
 import ScoreToOwner from "./ScoreToOwner"
 
 import "./TenantBookings.css"
@@ -12,16 +14,28 @@ function TenantBookings() {
     const [bookingsData, setBookingsData] = useState(null)
     const [stepBooking, setStepBooking] = useState(0)
     const [reload, setReload] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetch(SERVER_URL + '/bookings/made/accepted', {
-            headers: {
-                'Authorization': 'Bearer ' + user.token
+        const loadData = async () => {
+            try {
+                const response = await fetch(SERVER_URL + '/bookings/made/accepted', {
+                    headers: {
+                        'Authorization': 'Bearer ' + user.token
+                    }
+                })
+                const data = await response.json()
+                setBookingsData(data)
+                setError(null)
+            } catch (error) {
+                setError(error)
             }
-        })
-            .then(response => response.json())
-            .then(data => setBookingsData(data))
+        }
+        loadData()
     }, [reload, user])
+
+    if(error) return <Oops />
+    if(!bookingsData) return <Loading />
 
     const perPageBookings = 3
     const pagsBookings = Math.ceil(bookingsData?.length / perPageBookings)

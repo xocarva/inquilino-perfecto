@@ -1,9 +1,10 @@
 import './EditProfile.css'
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSetModal, useSetUser, useUser } from '../hooks'
 import Loading from '../Loading'
 import { validateData } from '../utils/validateData'
 import EditPrrofileForm from './EditProfileForm'
+import Oops from '../Oops'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
@@ -22,18 +23,31 @@ function EditProfile() {
     const [picName, setPicName] = useState('No se ha cargado foto')
     const [errorType, setErrorType] = useState('')
     const [errorText, setErrorText] = useState('')
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         setErrorType('')
         setErrorText('')
-        fetch(SERVER_URL + '/users/profile', {
-            headers: {
-                'Authorization': 'Bearer ' + user.token
+        const loadData = async () => {
+            try {
+                const response = await fetch(SERVER_URL + '/users/profile', {
+                    headers: {
+                        'Authorization': 'Bearer ' + user.token
+                    }
+                })
+                const data = await response.json()
+                setUserData(data)
+                setError(null)
+            } catch(error) {
+                setError(error)
             }
-        })
-            .then(response => response.json())
-            .then(data => setUserData(data))
+
+            }
+            loadData()
     }, [user])
+
+    if(error) return <Oops />
+    if(!userData) return <Loading />
 
     const handleProfilePic = e => {
         setPicName(e.target.files[0].name)
@@ -47,7 +61,6 @@ function EditProfile() {
         if(!firstName && !lastName && !email && !bio && !password && !picture) return
 
         const { errorTypeValidation, errorTextValidation } = validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm)
-
 
         if (errorTypeValidation) {
             setErrorType(errorTypeValidation)
@@ -147,10 +160,4 @@ function EditProfile() {
     )
 }
 
-
-const ProfileWrapper = () =>
-    <Suspense fallback={<Loading className="edit-profile-page" />}>
-        <EditProfile />
-    </Suspense>
-
-export default ProfileWrapper
+export default EditProfile

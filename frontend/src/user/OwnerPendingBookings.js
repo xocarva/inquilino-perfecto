@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useUser } from '../hooks'
+import Loading from '../Loading'
 import CardReceivedPendingBooking from './CardReceivedPendingBooking'
+import Oops from '../Oops'
 import './OwnerPendingBookings.css'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
@@ -11,26 +13,26 @@ function OwnerPendingBookings() {
     const [dataReceivedBookings, setDataReceivedBookings] = useState(null)
     const [stepReceivedBooking, setStepReceivedBooking] = useState(0)
 
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null)
 
 
     useEffect(() => {
 
         const loadData = async () => {
             try {
-
                 const response = await fetch(SERVER_URL + '/bookings/received/pending', {
                     headers: {
                         'Authorization': 'Bearer ' + user.token
                     }
                 })
 
-                const data = await response.json();
+                const data = await response.json()
 
                 if (response.ok) {
-                    setDataReceivedBookings(data);
+                    setDataReceivedBookings(data)
+                    setError(null)
                 } else {
-                    setError(data.error);
+                    setError(data.error)
                 }
             }
             catch (error) {
@@ -38,7 +40,7 @@ function OwnerPendingBookings() {
             }
         }
 
-        loadData();
+        loadData()
     }, [user])
 
 
@@ -47,8 +49,8 @@ function OwnerPendingBookings() {
     const handlePrevReceivedBookings = () => setStepReceivedBooking(stepReceivedBooking > 0 ? stepReceivedBooking - 1 : pagsReceivedBookings - 1)
     const handleNextReceivedBookings = () => setStepReceivedBooking((stepReceivedBooking + 1) % pagsReceivedBookings)
 
-    if (!dataReceivedBookings) return <p>Cargando...</p>
-    if (error) return <p>{error}</p>
+    if(error) return <Oops />
+    if (!dataReceivedBookings) return <Loading />
 
     return (
         <section className="pending-bookings-page">

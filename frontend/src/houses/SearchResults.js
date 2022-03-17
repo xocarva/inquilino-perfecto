@@ -1,8 +1,7 @@
-import useFetch  from '../useFetch'
-import { useQuery }  from '../hooks'
+import { useQuery, useFetch }  from '../hooks'
 import './SearchResults.css'
 import { useNavigate, Link } from 'react-router-dom'
-import { useState, Suspense } from 'react'
+import { useState } from 'react'
 import { useSetModal, useUser } from '../hooks'
 import Loading from '../Loading'
 import Login from '../Login'
@@ -47,7 +46,7 @@ function SearchResults() {
             setModal(<Login />)
             return
           }
-        const res = await fetch(SERVER_URL + '/bookings/' + e.target.dataset.houseid, {
+          const res = await fetch(SERVER_URL + '/bookings/' + e.target.dataset.houseid, {
             method: 'POST',
             body: JSON.stringify({startDate, endDate}),
             headers: {

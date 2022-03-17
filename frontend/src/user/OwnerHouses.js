@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import Loading from "../Loading"
-import useFetch from "../useFetch"
+import { useFetch } from "../hooks"
 
 import "./OwnerHouses.css"
 

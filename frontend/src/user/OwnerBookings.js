@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../hooks'
+import Loading from '../Loading'
+import Oops from '../Oops'
 import './OwnerBookings.css'
 import ScoreToTenant from './ScoreToTenant'
 
@@ -11,6 +13,7 @@ function OwnerBookings() {
     const [rentalsOffered, setRentalOffered] = useState(null)
     const [reload, setReload] = useState(false)
     const [stepBooking, setStepBooking] = useState(0)
+    const [error, setError] = useState(null)
 
     const perPageBookings = 3
     const pagsBookings = Math.ceil(rentalsOffered?.length / perPageBookings)
@@ -19,20 +22,33 @@ function OwnerBookings() {
 
 
     useEffect(() => {
-                fetch(SERVER_URL + '/bookings/received/accepted', {
+        const loadData = async () => {
+            try {
+                const response = await fetch(SERVER_URL + '/bookings/received/accepted', {
                     headers: {
                         'Authorization': 'Bearer ' + user.token
                     }
                 })
-                    .then(response => response.json())
-                    .then(data => setRentalOffered(data))
-            }, [reload, user])
+                const data = await response.json()
+                setRentalOffered(data)
+                setError(null)
+            }catch(error) {
+                setError(error)
+            }
+        }
+
+        loadData()
+
+    }, [reload, user])
+
+    if(error)return <Oops />
 
     return (
         <section className="main-section">
             <h2>Reservas recibidas que has confirmado</h2>
             <p className="description">Aquí puedes revisar el histórico de reservas en tus propiedades y valorar a los inquilinos de aquellas que ya hayan finalizado.</p>
-            <section>
+            {!rentalsOffered && <Loading />}
+            {rentalsOffered && <section>
                     {rentalsOffered?.length > 0 ? <div className='rental-history'>
                         {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
                             <article className='card-offered-booking' key={booking.bookingId}>
@@ -60,7 +76,7 @@ function OwnerBookings() {
                             </span>
                         </section>
                     </div> : <div className='there-is-not'>Aun no tienes alquileres ofertados 😅</div>}
-                </section>
+                </section>}
         </section>
     )
 }
