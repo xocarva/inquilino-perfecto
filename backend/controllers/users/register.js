@@ -13,7 +13,7 @@ const register = async (req, res) => {
 
     if (!req.files || !req.files.picture) {
         res.status(400)
-        res.end('[picture] is required')
+        res.send({error: '[picture] is required'})
         return
     }
 
@@ -23,19 +23,19 @@ const register = async (req, res) => {
         await userValidator.validateAsync(user)
     } catch (error) {
         res.status(400)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
     if (!uploads.isValidImageSize(picture.size)) {
         res.status(415)
-        res.end(`Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`)
+        res.send({error: `Avatar size should be less than ${MAX_IMAGE_SIZE_IN_BYTES / 1000000} Mb`})
         return
     }
 
     if (!uploads.isValidImageMimeType(picture.mimetype)) {
         res.status(415)
-        res.end(`Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`)
+        res.send({error: `Avatar should be ${ALLOWED_MIMETYPES.map(getExtensionFromMimetype).join(', ')}`})
         return
     }
 
@@ -45,13 +45,13 @@ const register = async (req, res) => {
 
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
     if (userExists) {
         res.status(409)
-        res.end('User already exists')
+        res.send({error: 'User already exists'})
         return
     }
 
@@ -60,7 +60,7 @@ const register = async (req, res) => {
         encryptedPassword = await encryptor.encrypt(user.password)
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
@@ -74,7 +74,7 @@ const register = async (req, res) => {
         picture.mv(`${UPLOADS_PATH}/${pictureName}`)
     } catch {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
@@ -84,7 +84,7 @@ const register = async (req, res) => {
         userId = await usersRepository.saveUser({ ...user, password: encryptedPassword, activationCode, picture: pictureUrl })
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 
@@ -92,7 +92,7 @@ const register = async (req, res) => {
         await notifier.sendActivationCode({ ...user, activationCode })
     } catch (error) {
         res.status(500)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
 

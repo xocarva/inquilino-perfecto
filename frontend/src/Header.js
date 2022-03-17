@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Header.css'
 import { useSetModal, useUser } from './hooks'
@@ -13,7 +13,44 @@ function Header() {
     const setModal = useSetModal()
     const dispatch = useDispatch()
     const user = useUser()
-    const [showBar, setShowBar] = useState(useLocation().pathname === '/')
+    const pathName = useLocation().pathname
+    const [showBar, setShowBar] = useState(pathName === '/')
+
+    const [pendingBookings, setPendingBookings] = useState(0)
+
+    useEffect(() => {
+        if (pathName === '/') {
+            setShowBar(true)
+        }
+    }, [pathName])
+
+    useEffect(() => {
+        const loadBookings = async () => {
+
+            const response = await fetch(SERVER_URL + '/bookings/received/pending-amount', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+            })
+
+            const { pendingBookings } = await response.json()
+
+            if (response.ok) {
+                setPendingBookings(pendingBookings)
+            }
+        }
+
+        let refreshInterval;
+
+        if (user) {
+            refreshInterval = setInterval(() => loadBookings(), 10000)
+            loadBookings()
+        }
+
+        return () => clearInterval(refreshInterval)
+
+
+    }, [user])
 
     return (
         <>
@@ -31,7 +68,7 @@ function Header() {
                     {user &&
                         <ProfileBar className='menu-login-register'
                             madePending={user.madePending}
-                            receivedPending={user.receivedPending}
+                            receivedPending={pendingBookings}
                             userName={user.firstName}
                             userPicture={<div id="avatar" style={{ backgroundImage: `url(${SERVER_URL}${user.picture})` }} />}
                             logoutButton={<span className='logout-boton' onClick={() => dispatch({ type: 'logout' })}>Cerrar sesión</span>}

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
 import Rating from '../Rating'
-import useFetch from '../useFetch'
+import { useFetch } from '../hooks'
 import './OwnerRatings.css'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL

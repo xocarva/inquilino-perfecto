@@ -6,15 +6,14 @@ const getAcceptedMadeBookings = async (req, res) => {
     let bookings
     try {
         bookings = await bookingsRepository.getAcceptedMadeBookings(userId)
+        res.status(202)
+        res.send(bookings)
 
     } catch (error) {
         res.status(400)
-        res.end(error.message)
+        res.send({error: error.message})
         return
     }
-
-    res.status(202)
-    res.send(bookings)
 }
 
 module.exports = getAcceptedMadeBookings

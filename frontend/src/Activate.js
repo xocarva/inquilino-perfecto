@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import useFetch from "./useFetch"
+import { useFetch } from "./hooks"
 import "./Activate.css"
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL

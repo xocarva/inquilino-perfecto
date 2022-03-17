@@ -5,7 +5,7 @@ const getPendingMadeBookings = require('./getPendingMadeBookings')
 const getAcceptedMadeBookings = require('./getAcceptedMadeBookings')
 const confirmBooking = require('./confirmBooking')
 const cancelBooking = require('./cancelBooking')
-
+const getPendingBookingsAmount = require('./getPendingBookingsAmount')
 
 module.exports = {
     createBooking,
@@ -14,5 +14,6 @@ module.exports = {
     getPendingMadeBookings,
     getAcceptedMadeBookings,
     confirmBooking,
-    cancelBooking
+    cancelBooking,
+    getPendingBookingsAmount
 }

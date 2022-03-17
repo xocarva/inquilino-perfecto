@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
-import useFetch from '../useFetch'
+import { useFetch } from '../hooks'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
 import Login from '../Login'
 import Rating from '../Rating'
 import './House.css'
+import Oops from '../Oops'
 
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
@@ -19,7 +20,7 @@ function House() {
   const [mainPic, setMainPic] = useState('')
   const [stepPic, setStepPic] = useState(0)
 
-  const { data: house, isLoading } = useFetch(SERVER_URL + '/houses/' + id)
+  const { data: house } = useFetch(SERVER_URL + '/houses/' + id)
 
   useEffect(() => {
     if (house?.pictures.length > 0) {
@@ -27,7 +28,7 @@ function House() {
     }
   }, [house])
 
-  if (!house) return <Loading />;
+  if (!house) return <Loading />
 
   const handleBooking = async e => {
     e.preventDefault()
@@ -79,8 +80,7 @@ function House() {
 
   return (
     <>
-      {isLoading && <Loading />}
-      {!isLoading && house && <section className='ad'>
+      {house && <section className='ad'>
         <section className='ad-info'>
           <div className='main-picture' style={{ backgroundImage: `url("${SERVER_URL}${mainPic}")` }}></div>
           <div className='main-info'>

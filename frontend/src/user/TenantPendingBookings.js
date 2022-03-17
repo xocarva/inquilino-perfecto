@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useUser } from "../hooks"
+import Loading from "../Loading"
+import Oops from "../Oops"
 import CardMadePendingBooking from "./CardMadePendingBooking"
 
 import "./TenantPendingBookings.css"
@@ -10,16 +12,30 @@ function TenantPendingBookings() {
     const user = useUser()
     const [dataMadeBookings, setDataMadeBookings] = useState(null)
     const [stepMadeBooking, setStepMadeBooking] = useState(0)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetch(SERVER_URL + '/bookings/made/pending', {
-            headers: {
-                'Authorization': 'Bearer ' + user.token
+        const loadData = async () => {
+            try {
+                const response = await fetch(SERVER_URL + '/bookings/made/pending', {
+                headers: {
+                    'Authorization': 'Bearer ' + user.token
+                }
+            })
+            const data = await response.json()
+            setDataMadeBookings(data)
+            setError(null)
+            } catch(error) {
+                setError(error)
             }
-        })
-            .then(response => response.json())
-            .then(data => setDataMadeBookings(data))
+        }
+
+        loadData()
+
     }, [user])
+
+    if(error) return <Oops />
+    if(!dataMadeBookings) return <Loading />
 
     const perPageMadeBookings = 3
     const pagsMadeBookings = Math.ceil(dataMadeBookings?.length / perPageMadeBookings)

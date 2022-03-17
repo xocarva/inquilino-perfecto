@@ -5,14 +5,16 @@ const {
     createBooking,
     getAcceptedReceivedBookings,
     getPendingReceivedBookings,
+    getPendingBookingsAmount,
     getPendingMadeBookings,
     getAcceptedMadeBookings,
     confirmBooking,
     cancelBooking
- } = require('../controllers/bookings')
+} = require('../controllers/bookings')
 
 router.post('/:houseId', isAuthorized, isActive, createBooking)
 router.get('/received/pending', isAuthorized, getPendingReceivedBookings)
+router.get('/received/pending-amount', isAuthorized, getPendingBookingsAmount)
 router.get('/received/accepted', isAuthorized, getAcceptedReceivedBookings)
 router.get('/made/pending', isAuthorized, getPendingMadeBookings)
 router.get('/made/accepted', isAuthorized, getAcceptedMadeBookings)
