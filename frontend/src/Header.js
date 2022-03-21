@@ -9,14 +9,12 @@ import SearchBar from './houses/SearchBar'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
-function Header() {
+function Header({ pendingBookings, setPendingBookings }) {
     const setModal = useSetModal()
     const dispatch = useDispatch()
     const user = useUser()
     const pathName = useLocation().pathname
     const [showBar, setShowBar] = useState(pathName === '/')
-
-    const [pendingBookings, setPendingBookings] = useState(0)
 
     useEffect(() => {
         if (pathName === '/') {
@@ -50,7 +48,7 @@ function Header() {
         return () => clearInterval(refreshInterval)
 
 
-    }, [user])
+    }, [user, setPendingBookings])
 
     return (
         <>
