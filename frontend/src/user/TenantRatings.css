@@ -48,6 +48,8 @@ section.cards-ratings-container {
 
 
 .average-ratings {
+    align-self: flex-start;
+    margin-top: 1rem;
     box-sizing: border-box;
     width: 250px;
     height: 325px;
@@ -96,5 +98,8 @@ section.cards-ratings-container {
     }
     .card-historic-rating span {
         font-size: 1.8rem;
+    }
+    .average-ratings {
+        align-self: center;
     }
 }

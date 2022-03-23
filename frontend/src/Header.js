@@ -55,7 +55,7 @@ function Header({ pendingBookings, setPendingBookings }) {
             <header className="header">
                 <Link className='title' to="/">Inquilino Perfecto</Link>
                 <div className='search-user-container'>
-                    {!showBar && <div className='search-icon-container'><img className='search-icon' onClick={() => setShowBar(!showBar)} src="/house-search.png" title="Buscador" alt="search-icon" /></div>}
+                    {!showBar && <div className='search-icon-container' onClick={() => setShowBar(!showBar)}><img className='search-icon' src="/house-search.png" title="Buscador" alt="search-icon" /></div>}
                     {!user &&
                         <div className='menu-login-register'>
                             <div onClick={() => setModal(<Login />)}>Login</div>

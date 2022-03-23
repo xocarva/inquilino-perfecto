@@ -90,7 +90,7 @@
 @media (max-width:768px) {
 
     .ad-page {
-        width: 80vw;
+        width: 97vw;
     }
 
     .ad-page div {
@@ -102,10 +102,11 @@
     }
 
     .ad-page div label {
-        width: 80vw;
+        width: 100%;
     }
 
     #ad-button {
+        width: 100%;
         padding: 15px;
     }
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { useFetch } from '../hooks'
 import Loading from '../Loading'
 import { useSetModal, useUser } from '../hooks'
@@ -64,7 +64,13 @@ function House() {
             <p>No puedes reservar tu propia casa</p>
           </div>
       )
-    } else {
+    } else if(res.status === 550) {
+      setModal(
+          <div>
+              <p>Oops parece que tenemos un problema con el envío de correo. Pero tu reserva se produjo correctamente. </p>
+          </div>
+      )
+  } else {
         setModal(
           <div className='modal-container'>
             <p>No se ha podido realizar la reserva</p>

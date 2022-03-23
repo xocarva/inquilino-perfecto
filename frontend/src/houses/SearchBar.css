@@ -111,6 +111,7 @@
         width: 100vw;
         height: 2.5rem;
         text-align: center;
+        border-radius: 0;
     }
 
     .search-icon-container {
@@ -121,8 +122,9 @@
     .button-container {
         width: 100%;
     }
-
+    
     .button-container input[type = submit] {
+        height: 50px;
         border-radius: 0;
     }
 

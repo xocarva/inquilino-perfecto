@@ -67,7 +67,7 @@ const createBooking = async (req, res) => {
         const tenantEmail = user.email
         await notifier.sendMadeBookingInfo({ tenantEmail, house, startDate, endDate })
     } catch (error) {
-        res.status(500)
+        res.status(550)
         res.send({error: error.message})
         return
     }
@@ -77,7 +77,7 @@ const createBooking = async (req, res) => {
         const ownerEmail = owner.email
         await notifier.sendReceivedBookingInfo({ ownerEmail, house, startDate, endDate })
     } catch (error) {
-        res.status(500)
+        res.status(550)
         res.send({error: error.message})
         return
     }

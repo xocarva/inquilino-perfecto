@@ -63,6 +63,7 @@
 
 .search-results .house .house-info .details-container .house-details .owner {
     display: flex;
+    align-items: center;
     gap: 1rem;
 }
 

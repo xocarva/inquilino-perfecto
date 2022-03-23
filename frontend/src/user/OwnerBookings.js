@@ -32,7 +32,7 @@ function OwnerBookings() {
                 const data = await response.json()
                 setRentalOffered(data)
                 setError(null)
-            }catch(error) {
+            } catch (error) {
                 setError(error)
             }
         }
@@ -41,7 +41,7 @@ function OwnerBookings() {
 
     }, [reload, user])
 
-    if(error)return <Oops />
+    if (error) return <Oops />
 
     return (
         <section className="main-section">
@@ -49,34 +49,41 @@ function OwnerBookings() {
             <p className="description">Aquí puedes revisar el histórico de reservas en tus propiedades y valorar a los inquilinos de aquellas que ya hayan finalizado.</p>
             {!rentalsOffered && <Loading />}
             {rentalsOffered && <section>
-                    {rentalsOffered?.length > 0 ? <div className='rental-history'>
-                        {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
-                            <article className='card-offered-booking' key={booking.bookingId}>
-                                <div className="picture-offered-booking" style={{ backgroundImage: `url(${SERVER_URL}${booking.housePicUrl})` }} />
-                                <div className='info-offered'>
-                                    <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
-                                    <p key={booking.startDate} className='date-offered-booking' >📅 Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
-                                    <div className='tenant-data'>
-                                        <div className='tenant-avatar' style={{ backgroundImage: `url(${SERVER_URL}${booking.tenantPicture})` }}></div>
-                                        <p>{booking?.tenantName}</p>
-                                    </div>
-                                    <div className='state-offered-booking'>
-                                        {Date.parse(booking.endDate) < new Date() && <ScoreToTenant reload={reload} setReload={setReload} bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
-                                    </div>
+                {rentalsOffered?.length > 0 ? <div className='rental-history'>
+                    {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
+                        <article className='card-offered-booking' key={booking.bookingId}>
+                            <div className="picture-offered-booking" style={{ backgroundImage: `url(${SERVER_URL}${booking.housePicUrl})` }} />
+                            <div className='info-offered'>
+                                <Link to={'/houses/' + booking.houseId} className='title-offered-booking'>🏠 {booking.title}</Link>
+                                <div className='date-offered-bookings'>
+                                    <span>📅 Fecha de entrada: </span>
+                                    <span>{booking.startDate.slice(0, 10)}</span>
                                 </div>
-                            </article>
-                        )}
-                        <section className='button-owner-offered'>
-                            <span className='prev-button' onClick={handlePrevBookings}>
-                                ⬅️
-                            </span>
-                            <span>{stepBooking + 1}/{Math.ceil(rentalsOffered?.length / perPageBookings)}</span>
-                            <span className='prev-button' onClick={handleNextBookings}>
-                                ➡️
-                            </span>
-                        </section>
-                    </div> : <div className='there-is-not'>Aun no tienes alquileres ofertados 😅</div>}
-                </section>}
+                                <div className='date-offered-booking'>
+                                    <span>📅 Fecha de salida: </span>
+                                    <span>{booking.endDate.slice(0, 10)}</span>
+                                </div>
+                                <div className='tenant-data'>
+                                    <div className='tenant-avatar' style={{ backgroundImage: `url(${SERVER_URL}${booking.tenantPicture})` }}></div>
+                                    <p>{booking?.tenantName}</p>
+                                </div>
+                                <div className='state-offered-booking'>
+                                    {Date.parse(booking.endDate) < new Date() && <ScoreToTenant reload={reload} setReload={setReload} bookingData={{ bookingId: booking.bookingId, ownerRating: booking.ownerRating }} />}
+                                </div>
+                            </div>
+                        </article>
+                    )}
+                    <section className='button-owner-offered'>
+                        <span className='prev-button' onClick={handlePrevBookings}>
+                            ⬅️
+                        </span>
+                        <span>{stepBooking + 1}/{Math.ceil(rentalsOffered?.length / perPageBookings)}</span>
+                        <span className='prev-button' onClick={handleNextBookings}>
+                            ➡️
+                        </span>
+                    </section>
+                </div> : <div className='there-is-not'>Aun no tienes alquileres ofertados 😅</div>}
+            </section>}
         </section>
     )
 }

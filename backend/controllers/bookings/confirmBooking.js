@@ -50,7 +50,7 @@ const confirmBooking = async (req, res) => {
         const tenantEmail = tenant.email
         await notifier.sendBookingConfirmation({ tenantEmail, house, startDate, endDate })
     } catch (error) {
-        res.status(500)
+        res.status(550)
         res.send({error: error.message})
         return
     }

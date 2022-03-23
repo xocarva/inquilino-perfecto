@@ -79,7 +79,7 @@ const cancelBooking = async (req, res) => {
             const ownerEmail = owner.email
             await notifier.sendOwnerBookingCancelInfo({ ownerEmail, house, startDate, endDate })
         } catch (error) {
-            res.status(400)
+            res.status(550)
             res.send({error: error.message})
             return
         }
