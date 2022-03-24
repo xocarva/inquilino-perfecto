@@ -53,6 +53,8 @@
     flex-direction: column;
     height: 12rem;
     justify-content: space-around;
+    flex-grow: 1;
+    gap: 0.5rem;
 }
 
 .title-offered-booking {
@@ -70,8 +72,9 @@
 
 .owner-rating-tenant {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 1.5rem;
 }
 
 .for-rating abbr {
@@ -102,6 +105,11 @@
     cursor: pointer;
 }
 
+.tenant-data p {
+    margin: 0;
+    padding: 0;
+}
+
 @media(max-width: 768px) {
     .main-section>h2 {
         margin-left: 1rem;
@@ -115,8 +123,6 @@
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
-        height: min-content;
-        margin-bottom: 1.8rem;
     }
     .card-offered-booking .picture-offered-booking {
         width: 80vw;
@@ -135,11 +141,14 @@
     }
     .owner-rating-tenant {
         flex-direction: column;
+        gap: 0;
     }
 
     .button-rating {
         align-self: inherit;
         width: 100%;
-        margin-bottom: 0.2rem;
+    }
+    .info-offered {
+        height: auto;
     }
 }

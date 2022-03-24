@@ -13,7 +13,7 @@
 .search-results .house {
     display: flex;
     justify-content: space-around;
-    gap: 0.5rem;
+    gap: 2rem;
     align-items: center;
     border-bottom: 1px solid #718355;
     padding-bottom: 1rem;
@@ -37,12 +37,13 @@
     flex-direction: column;
     height: 12rem;
     justify-content: space-around;
+    flex-grow:1;
 }
 
 .search-results .house .house-info .details-container {
     display: flex;
     flex-grow: 1;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .search-results .house .house-info .details-container .house-details {
