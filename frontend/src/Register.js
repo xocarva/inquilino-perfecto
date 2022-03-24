@@ -99,7 +99,7 @@ function Register() {
                     </label>
                     <label>
                         Apellido
-                        <input className='input-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' required onChange={e => {
+                        <input className='input-register' id='lastName-register' type='text' name='apellido' value={lastName} placeholder='Apellido...' required onChange={e => {
                             setLastName(e.target.value)
                             setErrorType('')
                         }} />
@@ -110,7 +110,7 @@ function Register() {
                     <label>
                         Email
                         <div className='mail-container'>
-                            <input className='input-register' name='email' type='email' value={email} placeholder='Email...' required onChange={e => {
+                            <input className='input-register' id='email-register' name='email' type='email' value={email} placeholder='Email...' required onChange={e => {
                                 setEmail(e.target.value)
                                 setErrorText('')
                             }} />
@@ -124,7 +124,7 @@ function Register() {
                 </div>
                 <label className='bio'>
                     Bio
-                    <textarea name='bio' value={bio} placeholder='bio...' required onChange={e => {
+                    <textarea id='bio-register' name='bio' value={bio} placeholder='bio...' required onChange={e => {
                         setBio(e.target.value)
                         setErrorType('')
                     }} />
@@ -139,7 +139,7 @@ function Register() {
                 <div id='pass-div'>
                     <label>
                         Contraseña
-                        <input className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' required onChange={e => {
+                        <input id='password-register' className='input-register' name='contraseña' type='password' value={password} placeholder='Contraseña...' required onChange={e => {
                             setPass(e.target.value)
                             setErrorType('')
                         }} />

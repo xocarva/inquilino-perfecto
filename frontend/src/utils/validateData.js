@@ -2,6 +2,7 @@
 export function validateData(firstName, lastName, email, emailConfirm, bio, password, passConfirm) {
     let errorData = { errorTypeValidation: '', errorTextValidation: ''}
     const nameRegex = /^[A-Za-zaáÁéÉíÍóÓúÚ\u00f1\u00d1]+$/
+    const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
     switch (true) {
         case firstName &&
             (firstName.length < 2 || firstName.length > 80 || !nameRegex.test(firstName)):
@@ -10,6 +11,9 @@ export function validateData(firstName, lastName, email, emailConfirm, bio, pass
         case lastName &&
             (lastName.length < 2 || lastName.length > 80 || !nameRegex.test(lastName)):
             errorData = { errorTypeValidation: 'lastName', errorTextValidation: 'Tu apellido debe contener entre 2 y 80 letras.'}
+            return errorData
+        case !emailRegex.test(email):
+            errorData = { errorTypeValidation: 'email', errorTextValidation: 'Email no válido.'}
             return errorData
         case email !== emailConfirm:
             errorData = { errorTypeValidation: 'email', errorTextValidation: 'El email no coincide.'}
