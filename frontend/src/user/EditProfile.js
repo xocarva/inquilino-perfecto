@@ -109,9 +109,7 @@ function EditProfile() {
             setPicName('')
             setModal(
                 <article className='edit-confirm-message-container'>
-                    <span>✅</span>
-                    <p>Tus cambios se guardaron correctamente.</p>
-                    <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
+                    <p>Tus cambios se guardaron correctamente. Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
                 </article>
             )
             setUser({

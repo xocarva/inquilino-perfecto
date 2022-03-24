@@ -12,7 +12,8 @@ export function validateData(firstName, lastName, email, emailConfirm, bio, pass
             (lastName.length < 2 || lastName.length > 80 || !nameRegex.test(lastName)):
             errorData = { errorTypeValidation: 'lastName', errorTextValidation: 'Tu apellido debe contener entre 2 y 80 letras.'}
             return errorData
-        case !emailRegex.test(email):
+        case email &&
+            !emailRegex.test(email):
             errorData = { errorTypeValidation: 'email', errorTextValidation: 'Email no válido.'}
             return errorData
         case email !== emailConfirm:
