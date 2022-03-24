@@ -25,6 +25,12 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
             )
         } else if (res.status === 403) {
             setModal(<p>Antes de confirmar debes activar tu usuario</p>)
+        } else if(res.status === 550) {
+            setModal(
+                <div>
+                    <p>Oops parece que tenemos un problema con el envío de correo. Pero tu reserva se confirmó correctamente. </p>
+                </div>
+            )
         } else {
             setModal(
                 <div className='modal-container'>
@@ -54,6 +60,12 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
             )
         } else if (res.status === 403) {
             setModal(<p>Antes de confirmar debes activar tu usuario.</p>)
+        } else if(res.status === 550) {
+            setModal(
+                <div>
+                    <p>Oops parece que tenemos un problema con el envío de correo. Pero tu reserva se canceló correctamente. </p>
+                </div>
+            )
         } else {
             setModal(
                 <div className='modal-container'>
@@ -74,18 +86,16 @@ function CardReceivedPendingBooking({ bookingData, setDataReceivedBookings }) {
                 <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>🏠 {bookingData.title}</Link>
                 <div className='tenant-data'>
                     <div className='tenant-avatar-received' style={{ backgroundImage: `url(${SERVER_URL}${bookingData.tenantPicture})` }} />
-                    <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
+                    <p className='name-tenant'>{bookingData.tenantName}</p>
                     <div className='rating-tenant'>
-                        <Rating value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg} />
+                        <Rating value={bookingData.ratingAvg} className='rating-tenant' />
                     </div></div>
                 <div className='date-card-pending-bookings-container'>
                     <div className='date-card-pending-bookings'>
-                        <span>📅 Fecha de entrada</span>
-                        <p>{bookingData.startDate.slice(0, 10)}</p>
+                        <span>📅 Fecha de entrada: {bookingData.startDate.slice(0, 10)}</span>
                     </div>
                     <div className='date-card-pending-bookings'>
-                        <span>📅 Fecha de salida</span>
-                        <p>{bookingData.endDate.slice(0, 10)}</p>
+                        <span>📅 Fecha de salida: {bookingData.endDate.slice(0, 10)}</span>
                     </div>
                 </div>
                 <div className='buttons-received-bookings'>

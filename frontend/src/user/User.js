@@ -9,7 +9,7 @@ import Oops from "../Oops"
 import './User.css'
 
 
-function User() {
+function User({ pendingBookings }) {
     const navigate = useNavigate()
     const user = useUser()
     if (!user) navigate('/')
@@ -18,7 +18,7 @@ function User() {
             <Routes>
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="tenant-profile/*" element={<TenantProfile />} />
-                <Route path="owner-profile/*" element={<OwnerProfile receivedPending={user?.receivedPending}/>} />
+                <Route path="owner-profile/*" element={<OwnerProfile pendingBookings={pendingBookings}/>} />
                 <Route path="*" element={<Oops />} />
             </Routes>
         </ErrorBoundary>

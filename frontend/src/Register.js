@@ -1,7 +1,7 @@
 import './Register.css'
 import { useState } from 'react'
 import { useSetModal, useUser } from './hooks'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateData } from './utils/validateData';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
@@ -71,6 +71,13 @@ function Register() {
         } else if (res.status === 409) {
             setErrorText('El usuario ya existe')
             setErrorType('email')
+        } else if(res.status === 550) {
+            setModal(
+                <div>
+                    <p>Oops parece que tenemos un problema con el envío del código de activación. Contacta con nosotros. </p>
+                    <Link to='/'>Volver</Link>
+                </div>
+            )
         } else {
             setModal(<p>No se ha podido realizar el registro</p>)
         }

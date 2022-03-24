@@ -48,7 +48,7 @@
     flex-shrink: 0;
 }
 
-.card-offerred-booking .info-offered {
+.info-offered {
     display: flex;
     flex-direction: column;
     height: 12rem;
@@ -66,6 +66,12 @@
     height: 25px;
     background-size: cover;
     border-radius: 50%;
+}
+
+.owner-rating-tenant {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .for-rating abbr {
@@ -126,6 +132,9 @@
     }
     .for-rating {
         text-align: center;
+    }
+    .owner-rating-tenant {
+        flex-direction: column;
     }
 
     .button-rating {

@@ -7,7 +7,7 @@ import OwnerBookings from './OwnerBookings'
 import OwnerPendingBookings from './OwnerPendingBookings'
 import OwnerRatings from './OwnerRatings'
 
-function OwnerProfile({ receivedPending }) {
+function OwnerProfile({ pendingBookings }) {
 
     return (
         <section className='profile-section'>
@@ -16,7 +16,7 @@ function OwnerProfile({ receivedPending }) {
                 <Link className={(useLocation().pathname === '/user/owner-profile/houses') ? 'active' : ''} to="/user/owner-profile/houses">Tus anuncios</Link>
                 <Link className={(useLocation().pathname === '/user/owner-profile/new-house') ? 'active' : ''} to="/user/owner-profile/new-house">Publicar un anuncio</Link>
                 <Link className={(useLocation().pathname === '/user/owner-profile/bookings') ? 'active' : ''} to="/user/owner-profile/bookings">Reservas confirmadas</Link>
-                <Link className={(useLocation().pathname === '/user/owner-profile/pending-bookings') ? 'active' : ''} to="/user/owner-profile/pending-bookings">Reservas Pendientes{receivedPending ? ' (' + receivedPending + ')' : ''}</Link>
+                <Link className={(useLocation().pathname === '/user/owner-profile/pending-bookings') ? 'active' : ''} to="/user/owner-profile/pending-bookings">Reservas Pendientes{pendingBookings ? ' (' + pendingBookings + ')' : ''}</Link>
                 <Link className={(useLocation().pathname === '/user/owner-profile/ratings') ? 'active' : ''} to="/user/owner-profile/ratings">Valoraciones recibidas</Link>
             </nav>
             <ErrorBoundary fallback={<Oops />}>

@@ -91,7 +91,7 @@ const register = async (req, res) => {
     try {
         await notifier.sendActivationCode({ ...user, activationCode })
     } catch (error) {
-        res.status(500)
+        res.status(550)
         res.send({error: error.message})
         return
     }

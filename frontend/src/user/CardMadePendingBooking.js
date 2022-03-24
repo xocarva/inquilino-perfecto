@@ -19,12 +19,17 @@ function CardMadePendingBooking({ bookingData, setDataMadeBookings }) {
             setUser({ ...user, madePending: user?.madePending > 0 ? user?.madePending - 1 : 0 })
             setModal(
                 <article className='edit-confirm-message-container'>
-                    <span>✅</span>
                     <p>Reserva cancelada correctamente</p>
                 </article>
             )
         } else if (res.status === 403) {
             setModal(<p>Antes de cancelar debes activar tu usuario</p>)
+        } else if(res.status === 550) {
+            setModal(
+                <div>
+                    <p>Oops parece que tenemos un problema con el envío de correo. Pero tu reserva se canceló correctamente. </p>
+                </div>
+            )
         } else {
             setModal(
                 <div className='modal-container'>

@@ -49,7 +49,6 @@ function Login() {
   return (
     <div className='body-login'>
       <form className="login" onSubmit={handleSubmit}>
-        <div className='close-container'><span className='btn-close' onClick={() => setModal(false)}>✖️</span></div>
         <label>
           Email
           <input name='email' type='email' placeholder='ejemplo@ejemplo.com...' value={email} onChange={e => setEmail(e.target.value)} />

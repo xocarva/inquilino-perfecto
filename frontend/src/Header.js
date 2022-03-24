@@ -9,14 +9,12 @@ import SearchBar from './houses/SearchBar'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
-function Header() {
+function Header({ pendingBookings, setPendingBookings }) {
     const setModal = useSetModal()
     const dispatch = useDispatch()
     const user = useUser()
     const pathName = useLocation().pathname
     const [showBar, setShowBar] = useState(pathName === '/')
-
-    const [pendingBookings, setPendingBookings] = useState(0)
 
     useEffect(() => {
         if (pathName === '/') {
@@ -50,14 +48,14 @@ function Header() {
         return () => clearInterval(refreshInterval)
 
 
-    }, [user])
+    }, [user, setPendingBookings])
 
     return (
         <>
             <header className="header">
                 <Link className='title' to="/">Inquilino Perfecto</Link>
                 <div className='search-user-container'>
-                    {!showBar && <div className='search-icon-container'><img className='search-icon' onClick={() => setShowBar(!showBar)} src="/house-search.png" title="Buscador" alt="search-icon" /></div>}
+                    {!showBar && <div className='search-icon-container' onClick={() => setShowBar(!showBar)}><img className='search-icon' src="/house-search.png" title="Buscador" alt="search-icon" /></div>}
                     {!user &&
                         <div className='menu-login-register'>
                             <div onClick={() => setModal(<Login />)}>Login</div>

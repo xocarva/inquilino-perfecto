@@ -25,7 +25,7 @@
 
 .card-made-booking {
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
     align-items: center;
     border-bottom: 1px solid #718355;
     padding-bottom: 1rem;
@@ -49,6 +49,7 @@
 .booking-data-container {
     display: flex;
     flex-direction: column;
+    width: 30%;
     height: 12rem;
     justify-content: space-around;
 }
